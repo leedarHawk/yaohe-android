@@ -59,7 +59,7 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 	public static final String ACTION_LOGOUT = "com.yuntongxun.ECDemo_logout";
 	/** 是否是同步消息 */
 	private boolean isFirstSync = false;
-
+    // test git
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
