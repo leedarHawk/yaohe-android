@@ -40,7 +40,7 @@ import com.yuntongxun.ecsdk.im.group.ECGroupNoticeMessage;
  */
 @SuppressLint("ShowToast")
 public class ChattingActivity extends BaseActivity implements OnClickListener {
-
+	private String gittest;
 	private ListView lv_chatting;
 	private Button btn_send;
 	private EditText et_message;
