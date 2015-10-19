@@ -1,0 +1,330 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_fhyk_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:splitMotionEvents="false"
+    tools:context=".BusinessFHYKActivity"
+    tools:ignore="HardcodedText,PxUsage,ContentDescription,UnusedAttribute,NestedScrolling" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_fhyk_back_title_send"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_send_top" />
+
+    <!-- 标题 -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/in_fhyk_back_title_send" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rl_fhyk_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhyk_title_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|left"
+                    android:text="标    题 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入标题 -->
+
+                <EditText
+                    android:id="@+id/edt_fhyk_bt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="90px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhyk_title_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left|center"
+                    android:hint="诱人的名称可以吸引用户吆!"
+                    android:padding="15px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- 折扣 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_zk"
+                android:layout_width="fill_parent"
+                android:layout_height="80px"
+                android:layout_below="@id/rl_fhyk_title"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px" >
+
+                <TextView
+                    android:id="@+id/tv_fhyk_zk_show"
+                    android:layout_width="120px"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|left"
+                    android:text="折    扣 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edt_fhyk_zk"
+                    android:layout_width="150px"
+                    android:layout_height="75px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_fhyk_zk_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:digits="0123456789."
+                    android:gravity="center|left"
+                    android:hint="7"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_fhyk_z"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@id/edt_fhyk_zk"
+                    android:text="折,"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/im_fhyk_hyzx"
+                    android:layout_width="130px"
+                    android:layout_height="50px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@id/tv_fhyk_z"
+                    android:src="@drawable/hyzx" />
+            </RelativeLayout>
+
+            <!-- 使用范围 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhyk_fw"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fq_zk"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left|center" >
+
+                <TextView
+                    android:id="@+id/tv_fhyk_fw_show"
+                    android:layout_width="120px"
+                    android:layout_height="180px"
+                    android:gravity="left|center"
+                    android:text="使    用\n\n范    围 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入范围 -->
+
+                <EditText
+                    android:id="@+id/edt_fhyk_fw"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_fhyk_fw_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left"
+                    android:hint="清晰阐述您的会员卡使用范围!"
+                    android:minHeight="190px"
+                    android:padding="15px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+            <!-- 有效期 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_huiyuanka_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_fhyk_fw"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left|center" >
+
+                <TextView
+                    android:id="@+id/tv_huiyuanka_yxq_show"
+                    android:layout_width="120px"
+                    android:layout_height="180px"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center"
+                    android:text="有效期 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 起止日期 -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_huiyuanka_yxq_show"
+                    android:orientation="vertical" >
+
+                    <!-- 从 -->
+
+                    <TextView
+                        android:id="@+id/edt_huiyuanka_cong"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="center_vertical"
+                        android:hint="从 : 2015-01-01"
+                        android:paddingLeft="15px"
+                        android:paddingRight="15px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <!-- 到 -->
+
+                    <TextView
+                        android:id="@+id/edt_huiyuanka_dao"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90px"
+                        android:layout_marginTop="15px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="center_vertical"
+                        android:hint="到 : 2015-12-31"
+                        android:paddingLeft="15px"
+                        android:paddingRight="15px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 6张图片 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhyk_sixpic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_huiyuanka_time"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhyk_sixpic_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center"
+                    android:maxLines="2"
+                    android:text="图   片\n1/6  : "
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhyk_sixpic_show"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <GridView
+                        android:id="@+id/huiyuanka_noScrollgridview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:horizontalSpacing="3dp"
+                        android:minHeight="140px"
+                        android:numColumns="3"
+                        android:scrollbars="none"
+                        android:verticalSpacing="6dp" >
+                    </GridView>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 发行量 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhyk_fxl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fhyk_sixpic"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="center|left" >
+
+                <TextView
+                    android:id="@+id/tv_fhyk_fxl_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|left"
+                    android:text="发行量 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入发行量 -->
+
+                <EditText
+                    android:id="@+id/edt_fhyk_fxl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="90px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhyk_fxl_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left|center"
+                    android:hint="请输入发行量"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="40px"
+                android:layout_below="@+id/rl_fhyk_fxl" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

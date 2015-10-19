@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_item_fujin_business_shop_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText,ObsoleteLayoutParam,UnknownIdInLayout" >
+
+    <!-- 图片 和 说明文字 -->
+
+    <RelativeLayout
+        android:id="@+id/ll_item_fujin_image_content"
+        android:layout_width="match_parent"
+        android:layout_height="180px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/iv_item_fujin_shop_image"
+            android:layout_width="140px"
+            android:layout_height="140px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:background="@drawable/icon_yaohe_default_logo"
+            android:contentDescription="@string/app_name" />
+
+        <RelativeLayout
+            android:id="@+id/rl_fujin_item_text_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20px"
+            android:layout_marginLeft="15px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/iv_item_fujin_shop_image" >
+
+            <!-- 商圈名称 和 活动类型 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_item_fujin_shop_name_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_shop_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/ll_item_fujin_shop_tags"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_item_fujin_shop_tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_item_fujin_shop_type_quan"
+                        android:layout_width="28px"
+                        android:layout_height="35px"
+                        android:visibility="gone"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5px"
+                        android:background="@drawable/icon_fujin_type_quan"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_item_fujin_shop_type_ka"
+                        android:layout_width="28px"
+                        android:layout_height="35px"
+                        android:layout_marginRight="5px"
+                        android:visibility="gone"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_fujin_type_card"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_item_fujin_shop_type_xinpin"
+                        android:layout_width="28px"
+                        android:layout_height="35px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5px"
+                        android:visibility="gone"
+                        android:background="@drawable/icon_fujin_type_new"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_item_fujin_shop_type_cu"
+                        android:layout_width="28px"
+                        android:layout_height="35px"
+                        android:visibility="gone"
+                        android:background="@drawable/icon_fujin_type_cu"
+                        android:gravity="center" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 评价 和 粉丝数 -->
+
+            <LinearLayout
+                android:id="@+id/ll_item_fujin_shop_fans_pingjia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/rl_item_fujin_shop_name_type"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10px"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pingjia1"
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:background="@drawable/icon_rate_star_on"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pingjia2"
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:background="@drawable/icon_rate_star_on"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pingjia3"
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:background="@drawable/icon_rate_star_on"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pingjia4"
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:background="@drawable/icon_rate_star_off"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pingjia5"
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:background="@drawable/icon_rate_star_off"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_shop_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center"
+                    android:text="0粉丝"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <!-- 商圈地址和距离数据 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_item_fujin_shop_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" >
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_shop_location_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/tv_item_fujin_shop_location_juli"
+                    android:singleLine="true"
+                    android:text=" "
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_shop_location_juli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/item_content_diviler_2"
+        android:layout_width="match_parent"
+        android:layout_height="6px"
+        android:layout_below="@+id/ll_item_fujin_image_content"
+        android:background="@color/diliver_out_gray" />
+
+</LinearLayout>

@@ -1,0 +1,237 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_business_service_manager_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".BusinessFWGLActivity"
+    tools:ignore="HardcodedText,PxUsage,ObsoleteLayoutParam" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_business_fwgl_guanli"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_send_top" />
+
+    <LinearLayout
+        android:id="@+id/ll_details_fujin_fuwu_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20px" >
+
+        <!-- 新品 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_business_xinpin"
+            android:layout_width="280px"
+            android:layout_height="110px"
+            android:clickable="true" >
+
+            <TextView
+                android:id="@+id/tv_business_xinpin_img"
+                android:layout_width="200px"
+                android:layout_height="110px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_shop_base_xinpin" />
+
+            <TextView
+                android:id="@+id/tv_business_xinpin_count"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_alignEnd="@+id/tv_business_xinpin_img"
+                android:layout_alignRight="@+id/tv_business_xinpin_img"
+                android:layout_alignTop="@+id/tv_business_xinpin_img"
+                android:layout_marginRight="-6px"
+                android:adjustViewBounds="true"
+                android:background="@drawable/icon_business_service_circle"
+                android:gravity="center"
+                android:padding="1dp"
+                android:singleLine="true"
+                android:text="0"
+                android:textColor="@color/yaohe_business_service_xinpin"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_business_xinpin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_business_xinpin_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:text="新品"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <!-- 活动 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_business_huodong"
+            android:layout_width="280px"
+            android:layout_height="110px"
+            android:layout_marginLeft="20px"
+            android:clickable="true" >
+
+            <TextView
+                android:id="@+id/tv_business_huodong_img"
+                android:layout_width="200px"
+                android:layout_height="110px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_shop_base_huodong" />
+
+            <TextView
+                android:id="@+id/tv_business_huodong_count"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_alignEnd="@+id/tv_business_huodong_img"
+                android:layout_alignRight="@+id/tv_business_huodong_img"
+                android:layout_alignTop="@+id/tv_business_huodong_img"
+                android:layout_marginRight="-6px"
+                android:adjustViewBounds="true"
+                android:background="@drawable/icon_business_service_circle"
+                android:gravity="center"
+                android:maxHeight="16px"
+                android:maxWidth="16px"
+                android:padding="1dp"
+                android:singleLine="true"
+                android:text="0"
+                android:textColor="@color/yaohe_business_service_huodong"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_business_huodong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_business_huodong_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:text="活动"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_details_fujin_fuwu_layout_2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20px" >
+
+        <!-- 会员卡 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_business_card"
+            android:layout_width="280px"
+            android:layout_height="110px"
+            android:clickable="true" >
+
+            <TextView
+                android:id="@+id/tv_business_card_img"
+                android:layout_width="200px"
+                android:layout_height="110px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_shop_base_huiyuanka" />
+
+            <TextView
+                android:id="@+id/tv_business_card_count"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_alignEnd="@+id/tv_business_card_img"
+                android:layout_alignRight="@+id/tv_business_card_img"
+                android:layout_alignTop="@+id/tv_business_card_img"
+                android:layout_marginRight="-6px"
+                android:adjustViewBounds="true"
+                android:background="@drawable/icon_business_service_circle"
+                android:gravity="center"
+                android:maxHeight="16px"
+                android:maxWidth="16px"
+                android:padding="1dp"
+                android:singleLine="true"
+                android:text="0"
+                android:textColor="@color/yaohe_business_service_huiyuanka"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_business_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_business_card_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:text="会员卡"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <!-- 优惠券 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_business_youhuiquan"
+            android:layout_width="280px"
+            android:layout_height="110px"
+            android:layout_marginLeft="20px"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tv_business_youhuiquan_img"
+                android:layout_width="200px"
+                android:layout_height="110px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_shop_base_youhuiquan"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_business_youhuiquan_count"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_alignEnd="@+id/tv_business_youhuiquan_img"
+                android:layout_alignRight="@+id/tv_business_youhuiquan_img"
+                android:layout_alignTop="@+id/tv_business_youhuiquan_img"
+                android:layout_marginRight="-6px"
+                android:adjustViewBounds="true"
+                android:background="@drawable/icon_business_service_circle"
+                android:gravity="center"
+                android:maxHeight="16px"
+                android:maxWidth="16px"
+                android:padding="1dp"
+                android:singleLine="true"
+                android:text="0"
+                android:visibility="gone"
+                android:textColor="@color/yaohe_business_service_youhuiquan"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_business_youhuiquan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_business_youhuiquan_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:text="优惠券"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_activity_details_call_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_call_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <include layout="@layout/common_back_text_title" />
+    </RelativeLayout>
+
+    <!-- 吆喝 内容列表 -->
+
+    <com.collcloud.yaohe.ui.view.SingleLayoutListView
+        android:id="@+id/lv_business_call_info"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"/>
+
+</LinearLayout>

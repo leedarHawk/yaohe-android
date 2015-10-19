@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_timer_pick"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/editext_gray_stroke"
+    android:orientation="vertical"
+    android:padding="15dp" >
+
+    <TimePicker
+        android:id="@+id/timePic_yysj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_time_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timePic_yysj"
+        android:layout_marginTop="20px"
+        android:text="确  定"
+        android:textColor="@color/common_home_text_color_title" />
+
+</RelativeLayout>

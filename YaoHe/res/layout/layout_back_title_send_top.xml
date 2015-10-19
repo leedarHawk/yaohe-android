@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="90px"
+    android:background="#f95339"
+    android:orientation="horizontal"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <LinearLayout
+        android:id="@+id/ll_common_top_back"
+        android:layout_width="110px"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="34px"
+            android:layout_height="36px"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/top_back_btn"
+            android:text="" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="回复评论"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_tv_do"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="30px"
+        android:paddingLeft="40px"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_do"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

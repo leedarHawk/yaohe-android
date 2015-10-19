@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_shop_comment_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription,UnusedAttribute" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_shop_comment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_back_text_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_dianping_niming_fabu"
+        android:layout_below="@+id/rl_shop_comment_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RelativeLayout
+                android:id="@+id/rl_comment_ratingbar_viewgroup"
+                android:layout_width="match_parent"
+                android:layout_height="140px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="30px"
+                android:paddingRight="30px"
+                android:visibility="gone" >
+
+                <RatingBar
+                    android:id="@+id/ratingBar_new_pinlun"
+                    style="@style/roomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1" >
+                </RatingBar>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/et_add_pinglun_content"
+                android:layout_width="match_parent"
+                android:layout_height="270px"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/editext_gray_stroke"
+                android:gravity="top|left"
+                android:hint="我也要评论"
+                android:padding="15px"
+                android:textColor="@color/common_home_text_color_title"
+                android:textColorHint="@color/common_home_text_color_fans_time"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="@color/white"
+                android:minHeight="340px"
+                android:orientation="vertical"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:splitMotionEvents="false"
+                android:visibility="gone" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20px"
+                    android:paddingTop="20px"
+                    android:splitMotionEvents="false" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加照片"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_add_pinglun_img_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15px"
+                        android:text="0/6"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/diliver_out_gray" />
+
+                <ImageView
+                    android:id="@+id/iv_add_pinglun_img_add"
+                    android:layout_width="150px"
+                    android:layout_height="150px"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/icon_fujin_pinlun_add_img" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_dianping_niming_fabu"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_bottom_details_grey_pressed"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:paddingRight="30px" >
+
+        <CheckBox
+            android:id="@+id/cb_shop_dianping_niming_tag"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/common_shop_comment_niming_selecter"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/tv_shop_dianping_niming_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@+id/cb_shop_dianping_niming_tag"
+            android:padding="10px"
+            android:text="匿名点评"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_shop_dianpin_fabu"
+            android:layout_width="120px"
+            android:layout_height="55px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="3px"
+            android:background="@drawable/icon_pinglun_fabu"
+            android:text="" />
+    </RelativeLayout>
+
+</RelativeLayout>

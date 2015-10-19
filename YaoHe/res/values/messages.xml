@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="network_not_connected">网络连接失败，请检查网络设置</string>
+    <string name="xml_parser_failed">数据解析异常</string>
+    <string name="io_exception_error">文件流异常</string>
+    <string name="http_status_code_error">网络异常，错误码：%d</string>
+    <string name="http_exception_error">网络异常，请求超时</string>
+    <string name="socket_exception_error">网络异常，读取数据超时</string>
+    <string name="app_run_code_error">应用程序运行时异常</string>
+    <string name="app_menu_surelogout">确定退出程序吗？</string>
+    <string name="sure">确定</string>
+    <string name="cancle">取消</string>
+    <string name="app_error">应用程序错误</string>
+    <string name="app_error_message">很抱歉，操作出现异常,请重新登陆！</string>
+    <string name="submit_report">提交报告</string>
+    <string name="load_more">更多</string>
+    <string name="load_ing">加载中···</string>
+    <string name="load_full">已加载全部</string>
+    <string name="load_empty">暂无数据</string>
+    <string name="load_error">加载数据出错</string>
+    <string name="new_data_toast_message">有 %d 条更新</string>
+    <string name="new_data_toast_none">没有新更新</string>
+    <string name="select">选择</string>
+    <string name="share">分享</string>
+    <string name="sharing">分享中...</string>
+    <string name="publishing">发布中...</string>
+    <string name="choose_image">请选择图片文件！</string>
+    <string name="delete_image">确定删除该图片吗？</string>
+    <string name="delete_tweet">确定删除该动弹吗？</string>
+    <string name="delete_blog">确定删除该博客吗？</string>
+    <string name="republish_tweet">网络超时，是否重新发布动弹？</string>
+    <string name="clearwords">清除文字吗？</string>
+    <string name="msg_load_is_null">读取失败，可能已被删除</string>
+    <string name="msg_login_email_error">无效的邮箱地址</string>
+    <string name="msg_login_email_null">请输入金卡卡号</string>
+    <string name="msg_login_pwd_null">请输入密码</string>
+    <string name="msg_login_success">登录成功</string>
+    <string name="msg_login_fail">登录失败</string>
+    <string name="msg_login_error">用户未登录 或 密码错误</string>
+    <string name="msg_load_userface_fail">用户头像加载失败</string>
+    <string name="msg_load_image_fail">图片加载失败</string>
+    <string name="msg_read_detail_fail">无法获取文章信息</string>
+    <string name="msg_noaccess_delete">您没有删除权限</string>
+
+    <!-- LoginSina -->
+    <string name="sinalogin_check_account">账号不能为空</string>
+    <string name="sinalogin_check_pass">密码不能为空</string>
+    <string name="sinalogin_check_server">服务器验证中...</string>
+
+    <!-- API请求错误列表 -->
+    <string name="api_input_error_exception">输入内容有误，请重新输入。</string>
+    <string name="api_request_timeout_exception">网络异常，请求超时。</string>
+    <string name="api_url_invaild_exception">URL无效，请重新检查。</string>
+
+    <!-- sina share message -->
+    <string name="OAUTH_ERROR">服务器验证失败</string>
+    <string name="OAUTH_RequestToken_ACCESS">第三方应用验证成功</string>
+    <string name="OAUTH_RequestToken_ERROR">第三方应用验证失败</string>
+    <string name="OAUTH_AccessToken_ACCESS">用户授权登录成功</string>
+    <string name="OAUTH_AccessToken_ERROR">用户授权登录失败</string>
+    <string name="OAUTH_AccessToken_SXPIRED">授权已过期，请重新授权登录</string>
+    <string name="Weibo_Message_NULL">分享数据不能为空</string>
+    <string name="Weibo_Message_LONG">已超出140个字</string>
+    <string name="Weibo_Share_Success">微博分享成功</string>
+    <string name="Weibo_Share_Error">微博分享失败</string>
+    <string name="Weibo_Share_Repeat">已经分享过了</string>
+
+    <!-- 地图 用到的文言 -->
+    <string name="error_network">搜索失败,请检查网络连接！</string>
+    <string name="error_key">key验证无效！</string>
+    <string name="error_other">未知错误，请稍后重试!错误码为</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
+
+    <!-- 刷新组件文言 -->
+    <string name="p2refresh_head_load_more">加载更多</string>
+    <string name="p2refresh_end_load_more">更    多</string>
+    <string name="p2refresh_end_click_load_more">点击加载</string>
+    <string name="p2refresh_release_refresh">松开刷新</string>
+    <string name="p2refresh_pull_to_refresh">下拉刷新</string>
+    <string name="p2refresh_doing_head_refresh">正在刷新&#8230;</string>
+    <string name="p2refresh_doing_end_refresh">加载中&#8230;</string>
+    <string name="p2refresh_refresh_lasttime">最近更新&#160;&#058;&#160;</string>
+    <string name="image_desc">图片</string>
+    <string name="search_list_no_data">抱歉，没有找到相关的结果 \n\n建议您\n\n1.重新检查一下关键词是否有误，尽量保证输入有效的字符\n\n2.生僻的药品名称可试试拼音首字母，如恩瑞特 可输入 ert</string>
+    <!-- <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开后刷新</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新\u2026</string> -->
+    <string name="pull_to_refresh_footer_release_label">松开后加载</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+    <!-- 图片浏览 -->
+    <string name="only_choose_num">超出可选图片张数</string>
+    <string name="finish">完成</string>
+    <string name="invalidSD">sdcard无效或没有插入！</string>
+    <string name="photo">选择相册</string>
+    <string name="album">相册</string>
+    <string name="preview">预览</string>
+    <string name="unfinished">完成</string>
+    <string name="camera_cancel">取消</string>
+    <string name="no_photo">相册没有图片</string>
+
+</resources>

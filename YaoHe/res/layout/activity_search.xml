@@ -1,0 +1,210 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_activity_search_root_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText,ContentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_search_title"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/diliver_in_gray"
+        android:gravity="center_vertical"
+        android:splitMotionEvents="false" >
+
+        <EditText
+            android:id="@+id/et_activity_search_view"
+            android:layout_width="fill_parent"
+            android:layout_height="80px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_toLeftOf="@+id/tv_search_cancel_text"
+            android:background="@drawable/bg_search_bar_white"
+            android:drawablePadding="10px"
+            android:gravity="center_vertical"
+            android:hint="请输入完整的商家名称或吆喝"
+            android:paddingLeft="15px"
+            android:paddingRight="15px"
+            android:singleLine="true"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="13sp" />
+        <!-- android:drawableRight="@drawable/icon_search_bar_clear" -->
+
+        <TextView
+            android:id="@+id/tv_search_cancel_text"
+            android:layout_width="90px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_activity_search" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/ll_search_business_shop_viewgroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_search_type_title_shop"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70px"
+                    android:gravity="left|center"
+                    android:paddingLeft="20px"
+                    android:text="商家"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/common_yaohe_content_dark_grey" />
+
+                <com.collcloud.yaohe.ui.view.MyListView
+                    android:id="@+id/lv_search_type_shop_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/icon_list_driver_white"
+                    android:fadingEdge="none" >
+                </com.collcloud.yaohe.ui.view.MyListView>
+
+                <LinearLayout
+                    android:id="@+id/ll_search_shop_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="140px"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="20px"
+                        android:gravity="center"
+                        android:text="没有匹配到相关的商家信息。"
+                        android:textColor="@color/common_home_text_color_fans_time"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_activity_search_shop_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="70px"
+                    android:gravity="center_vertical"
+                    android:splitMotionEvents="false"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/tv_search_shop_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center"
+                        android:text="查看更多"
+                        android:textColor="@color/common_home_title_bg"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tv_search_shop_more_arrow"
+                        android:layout_width="13px"
+                        android:layout_height="22px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:background="@drawable/icon_search_red_right_arrow"
+                        android:gravity="center" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="10px"
+                    android:background="@color/common_yaohe_content_dark_grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search_business_yaohe_viewgroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_search_type_shop_about_yaohe"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70px"
+                    android:gravity="left|center"
+                    android:paddingLeft="20px"
+                    android:text="相关吆喝"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/common_yaohe_content_dark_grey" />
+
+                <com.collcloud.yaohe.ui.view.MyListView
+                    android:id="@+id/lv_search_type_call_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/icon_list_driver_white"
+                    android:fadingEdge="none" >
+                </com.collcloud.yaohe.ui.view.MyListView>
+
+                <LinearLayout
+                    android:id="@+id/ll_search_yaohe_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="140px"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="20px"
+                        android:gravity="center"
+                        android:text="附近没有相关的吆喝信息。"
+                        android:textColor="@color/common_home_text_color_fans_time"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 搜索默认提示的文字信息 -->
+            <TextView
+                android:id="@+id/tv_search_default_tips"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80px"
+                android:gravity="center"
+                android:text="您可以搜索到商家、吆喝内容信息"
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

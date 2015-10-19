@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="HardcodedText,PxUsage,DisableBaselineAlignment" >
+
+    <com.collcloud.swipe.SwipeLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/ll_menu_yaohe"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/common_text_color_chengse"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/trash"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/trash" />
+
+            <TextView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15px"
+                android:paddingBottom="20px"
+                android:splitMotionEvents="false" >
+
+                <!-- 图片 和 说明文字 -->
+
+                <RelativeLayout
+                    android:id="@+id/ll_item_myh_image_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="160px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="20px"
+                    android:gravity="center_vertical" >
+
+                    <FrameLayout
+                        android:id="@+id/fl_item_myh_shop_image"
+                        android:layout_width="200px"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true" >
+
+                        <ImageView
+                            android:id="@+id/iv_item_myh_shop_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="7px"
+                            android:background="@drawable/icon_yaohe_loading_default"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitXY" />
+
+                        <ImageView
+                            android:id="@+id/iv_item_myh_shop_image_tags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36px"
+                            android:contentDescription="@string/app_name" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tv_item_myh_shop_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_above="@+id/tv_item_myh_shop_time"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="15px"
+                        android:layout_toRightOf="@+id/fl_item_myh_shop_image"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:paddingBottom="10px"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_item_myh_shop_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@+id/fl_item_myh_shop_image"
+                        android:gravity="right"
+                        android:text="11:23"
+                        android:textColor="@color/common_home_text_color_fans_time"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/item_myh_content_diviler_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/ll_item_myh_image_content"
+                    android:layout_marginTop="15px"
+                    android:background="@drawable/icon_details_fenge_line" />
+
+                <!-- 点赞  &  收藏  &  评论 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_item_myh_zan_pinlun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_myh_content_diviler_2"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="15px"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_item_myh_zan_img"
+                            android:layout_width="33px"
+                            android:layout_height="34px"
+                            android:layout_marginLeft="40px"
+                            android:background="@drawable/icon_home_item_zan_off"
+                            android:gravity="left|center"
+                            android:text=""
+                            android:textColor="@android:color/transparent" />
+
+                        <TextView
+                            android:id="@+id/tv_item_myh_zan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20px"
+                            android:gravity="left|center"
+                            android:text="0"
+                            android:textColor="@color/common_home_text_color_fans_time"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:minHeight="34px"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_item_myh_zan_"
+                            android:layout_width="28px"
+                            android:layout_height="27px"
+                            android:background="@drawable/icon_home_item_liuyan_off"
+                            android:text=""
+                            android:textColor="@android:color/transparent" />
+
+                        <TextView
+                            android:id="@+id/tv_item_myh_pinlun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="20px"
+                            android:text="0"
+                            android:textColor="@color/common_home_text_color_fans_time"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_item_myh_shoucang_img"
+                            android:layout_width="33px"
+                            android:layout_height="34px"
+                            android:layout_marginRight="20px"
+                            android:background="@drawable/icon_home_item_shoucang_off"
+                            android:gravity="left|center"
+                            android:text=""
+                            android:textColor="@android:color/transparent" />
+
+                        <TextView
+                            android:id="@+id/tv_item_myh_shoucang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="40px"
+                            android:text="0"
+                            android:textColor="@color/common_home_text_color_fans_time"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </com.collcloud.swipe.SwipeLayout>
+
+</LinearLayout>

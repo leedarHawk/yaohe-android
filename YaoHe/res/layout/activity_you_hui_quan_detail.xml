@@ -1,0 +1,223 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_yhq_detail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".YouHuiQuanDetailActivity"
+    tools:ignore="HardcodedText,PxUsage,UseCompoundDrawables" >
+
+    <!-- 返回 标题 -->
+
+    <include
+        android:id="@+id/in_yhq_back_title"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_share_shoucang" />
+
+    <!-- 店铺名称 -->
+
+    <TextView
+        android:id="@+id/tv_yhq_shop_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/in_yhq_back_title"
+        android:padding="20px"
+        android:text="1号店木槿花1号店木槿花紫菜包饭(望京路店)1号店木槿花紫菜包饭(望京路店)紫菜包饭(望京路店)"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="15sp" />
+
+    <!-- 灰色底线 -->
+
+    <ImageView
+        android:id="@+id/im_yhq_"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_yhq_shop_name"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_list_driver_white" />
+
+    <RelativeLayout
+        android:id="@+id/rl_yhq_photo_name_yhm"
+        android:layout_width="fill_parent"
+        android:layout_height="150px"
+        android:layout_below="@id/im_yhq_"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/bg_gray_yhq" >
+
+        <!-- 店铺图片 -->
+
+        <ImageView
+            android:id="@+id/im_yhq_shop_photo"
+            android:layout_width="150px"
+            android:layout_height="130px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15px"
+            android:background="@drawable/ic_launcher"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <!-- 优惠信息  优惠码 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="20px"
+            android:layout_toRightOf="@id/im_yhq_shop_photo"
+            android:orientation="vertical" >
+
+            <!-- 优惠信息 -->
+
+            <TextView
+                android:id="@+id/tv_yhq_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="满200酒满200酒水免费满200酒水免费水免费"
+                android:textColor="@color/common_home_title_bg"
+                android:textSize="14sp" />
+
+            <!-- 优惠码  优惠码串码 -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="20px" >
+
+                <!-- 优惠码 -->
+
+                <TextView
+                    android:id="@+id/tv_yhq_world"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="优惠码:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <!-- 优惠码串码 -->
+
+                <TextView
+                    android:id="@+id/tv_yhq_yhm_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15px"
+                    android:singleLine="true"
+                    android:text="784758909"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 有效期  备注 -->
+
+    <LinearLayout
+        android:id="@+id/ll_yhq_yxq_yxqz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_yhq_photo_name_yhm"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal" >
+
+        <!-- 有效期至 -->
+
+        <TextView
+            android:id="@+id/tv_yhq_yxq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="有效期至:"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+
+        <!-- 时间 -->
+
+        <TextView
+            android:id="@+id/tv_yhq_yxq_times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10px"
+            android:singleLine="true"
+            android:text="2014-09-31"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 备注 -->
+
+    <TextView
+        android:id="@+id/tv_yhq_bz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_yhq_yxq_yxqz"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="15px"
+        android:singleLine="true"
+        android:text="注:消费前请出示此优惠券，即可享受优惠"
+        android:textColor="@color/common_home_title_bg"
+        android:textSize="14sp" />
+
+    <!-- 灰色底线 -->
+
+    <ImageView
+        android:id="@+id/im_yhq_bottom_line"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_yhq_bz"
+        android:layout_marginTop="20px"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_list_driver_white" />
+
+    <!-- 最近5次使用时间 -->
+
+    <LinearLayout
+        android:id="@+id/ll_time_world"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/im_yhq_bottom_line"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal" >
+
+        <!-- 竖条 -->
+
+        <ImageView
+            android:id="@+id/im_yhq_time_line"
+            android:layout_width="20px"
+            android:layout_height="80px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/big_sight" />
+
+        <!-- 您已使用5次，最近日期如下: -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="您的优惠已使用"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_usetime_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_time_world"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lv_usetime_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

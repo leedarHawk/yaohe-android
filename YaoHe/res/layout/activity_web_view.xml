@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_webview_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".WebViewActivity" >
+    
+    <include
+        android:id="@+id/in_webview" 
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        layout="@layout/layout_backandtitle_top"/>
+
+    <WebView
+        android:id="@+id/webView_"
+        android:layout_below="@id/in_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

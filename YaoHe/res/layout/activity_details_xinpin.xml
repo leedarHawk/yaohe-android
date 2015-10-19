@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_details_xinpin_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_xinpin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_yaohe_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_details_xinpin_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <!-- 新品推荐标题文字 , 优惠类型，时间信息等 -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="145px" >
+
+                <!-- 新品推荐标题文字 -->
+
+                <LinearLayout
+                    android:id="@+id/tv_details_type_title_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ll_details_type_img"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_details_type_xinpin_title"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="15px"
+                        android:layout_marginTop="20px"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_details_type_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginTop="15px"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_fans_time"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_details_type_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10px"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/iv_details_type_img"
+                        android:layout_width="180px"
+                        android:layout_height="141px"
+                        android:background="@drawable/icon_home_details_xinpin"
+                        android:gravity="center" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30px"
+                android:background="@drawable/icon_details_bolang_line" />
+
+            <!-- 详情简介 -->
+
+            <TextView
+                android:id="@+id/tv_details_xinpin_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:text=""
+                android:visibility="gone"
+                android:paddingTop="20px"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <!-- 新品详情图片 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_xinpin_page_adapter_pic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20px" >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_xinpin_page_adapter_pic"
+                    android:layout_width="fill_parent"
+                    android:layout_height="400px"
+                    android:clickable="true"
+                    android:fadingEdge="none"
+                    android:focusable="true"
+                    android:overScrollMode="always" />
+
+                <LinearLayout
+                    android:id="@+id/ll_v_page_adapter_circle_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30px"
+                    android:layout_alignBottom="@id/vp_xinpin_page_adapter_pic"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 新品推荐时间 信息 -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_details_xinpin_yushou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="预售："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_xinpin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15px"
+                    android:layout_toRightOf="@+id/tv_details_xinpin_yushou"
+                    android:text=""
+                    android:textColor="@color/common_home_title_bg"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_xinpin_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="15px"
+                android:background="@color/diliver_out_gray" />
+
+            <!-- 活动详情页面推荐的店铺信息 -->
+
+            <LinearLayout
+                android:id="@+id/rl_details_huodong_bottom_tujian_shop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <include layout="@layout/common_bottom_details_tuijian_shop" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 包含新品推荐页面底部的 评论，点赞 ，收藏功能 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_xinpin_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:visibility="gone" >
+
+        <include layout="@layout/common_bottom_details_info" />
+    </RelativeLayout>
+
+</RelativeLayout>

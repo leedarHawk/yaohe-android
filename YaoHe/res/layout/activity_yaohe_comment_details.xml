@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_details_yaohe_comment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_details_yaohe_dianpin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_back_text_title" />
+    </RelativeLayout>
+    <!-- 吆喝 内容列表 -->
+
+    <com.collcloud.yaohe.ui.view.SingleLayoutListView
+        android:id="@+id/lv_activity_yaohe_dianpin"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rl_activity_details_call_send"
+        android:layout_below="@+id/rl_activity_details_yaohe_dianpin_title"
+        android:background="@color/white" />
+    <!-- 数据为空显示 -->
+
+    <LinearLayout
+        android:id="@+id/ll_activity_yaohe_comment_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rl_activity_details_call_send"
+        android:layout_below="@+id/rl_activity_details_yaohe_dianpin_title"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/item_yaohe_no_data_default" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_details_call_send"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical" >
+
+        <EditText
+            android:id="@+id/et_activity_call_pinglun_"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/editext_gray_stroke"
+            android:hint="您的点评看法"
+            android:paddingLeft="10px"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_activity_yaohe_pinglun_send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="我要点评"
+            android:background="@color/common_home_title_bg"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

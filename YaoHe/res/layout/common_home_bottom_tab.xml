@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tb_common_home_bottom_tabs"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,PxUsage" >
+
+    <RadioGroup
+        android:id="@+id/rg_common_tab_bottom_"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10px"
+        android:layout_gravity="bottom"
+        android:background="@drawable/icon_bottom_tabhost_def"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rbtn_tab_bottom_zhuye"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="0sp"
+            android:button="@null"
+            android:drawableTop="@drawable/bottom_home_tab_selecter"
+            android:padding="8px"
+            android:duplicateParentState="true" />
+
+        <RadioButton
+            android:id="@+id/rbtn_tab_bottom_fujin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="0sp"
+            android:padding="8px"
+            android:drawableTop="@drawable/bottom_fujin_tab_selecter"
+            android:duplicateParentState="true"/>
+
+        <RadioButton
+            android:id="@+id/rbtn_tab_bottom_haowan"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:padding="8px"
+            android:textSize="0sp"
+            android:drawableTop="@drawable/bottom_haowan_tab_selecter"
+            android:duplicateParentState="true" />
+
+        <RadioButton
+            android:id="@+id/rbtn_tab_bottom_wode"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:textSize="0sp"
+            android:padding="6px"
+            android:button="@null"
+            android:drawableTop="@drawable/bottom_mine_tab_selecter"
+            android:duplicateParentState="true"/>
+    </RadioGroup>
+
+</LinearLayout>

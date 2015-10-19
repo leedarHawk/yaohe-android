@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mysc_rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaebed"
+    tools:context=".PersonShouCangActivity"
+    tools:ignore="PxUsage" >
+
+    <!-- 返回  标题 -->
+
+    <include
+        android:id="@+id/in_shoucang_top"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_backandtitle_top" />
+
+    <!-- 列表 -->
+
+<!--     <com.collcloud.swipe.view.XListView
+        android:id="@+id/xlv_sc_business_"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/in_shoucang_top"
+        android:cacheColorHint="#00000000" >
+    </com.collcloud.swipe.view.XListView> -->
+    
+    <cn.swu.pulltorefreshswipemenulistviewsample.PullToRefreshSwipeMenuListView
+        android:id="@+id/xlv_sc_business_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_below="@id/in_shoucang_top"
+        android:cacheColorHint="#00000000"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_person_shoucang_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/in_shoucang_top"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/item_yaohe_no_data_default" />
+    </LinearLayout>
+
+</RelativeLayout>

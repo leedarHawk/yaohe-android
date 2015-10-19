@@ -1,0 +1,202 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_fxp_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".BusinessFXPActivity"
+    tools:ignore="HardcodedText,ObsoleteLayoutParam,PxUsage,ContentDescription" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_fxp_back_title_send"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_send_top" />
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_fxp_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/in_fxp_back_title_send"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:gravity="left" >
+
+        <TextView
+            android:id="@+id/tv_fxp_title_show"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="标 题 :"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+
+        <!-- 输入标题 -->
+
+        <EditText
+            android:id="@+id/edt_fxp_bt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_fxp_title_show"
+            android:background="@drawable/editext_gray_stroke"
+            android:gravity="left|center"
+            android:hint="诱人的名称可以吸引用户吆!"
+            android:minHeight="80px"
+            android:padding="15px"
+            android:text=""
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <!-- 6张图片 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_fxp_sixpic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_fxp_title"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:gravity="left" >
+
+        <TextView
+            android:id="@+id/tv_fxp_sixpic_show"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxLines="2"
+            android:text="图  片\n1/6 :"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_fxp_sixpic_show"
+            android:orientation="horizontal" >
+
+            <GridView
+                android:id="@+id/xinpin_noScrollgridview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="3dp"
+                android:minHeight="140px"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:verticalSpacing="6dp" >
+            </GridView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 价格 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_fxp_jg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_fxp_sixpic"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:gravity="left" >
+
+        <TextView
+            android:id="@+id/tv_fxp_jg_show"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="价  格 :"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/edt_fxp_jg"
+            android:layout_width="260px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_fxp_jg_show"
+            android:background="@drawable/editext_gray_stroke"
+            android:digits="0123456789."
+            android:gravity="center"
+            android:hint="100"
+            android:inputType="number"
+            android:maxLength="6"
+            android:minHeight="80px"
+            android:paddingLeft="15px"
+            android:paddingRight="15px"
+            android:singleLine="true"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_light_grey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_fxp_y"
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:layout_marginLeft="10px"
+            android:layout_toRightOf="@id/edt_fxp_jg"
+            android:gravity="center"
+            android:text="元"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <!-- 日期 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_fxp_rq"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_fxp_jg"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:gravity="left" >
+
+        <TextView
+            android:id="@+id/tv_fxp_rq_show"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="日  期 :"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/edt_fxp_rq"
+            android:layout_width="260px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_fxp_rq_show"
+            android:background="@drawable/editext_gray_stroke"
+            android:gravity="center"
+            android:hint="2015-01-01"
+            android:minHeight="80px"
+            android:singleLine="true"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_light_grey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_fxp_xpss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
+            android:layout_toRightOf="@id/edt_fxp_rq"
+            android:text="新品上市"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_item_person_zan_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText,UseCompoundDrawables,UselessParent,ObsoleteLayoutParam,SmallSp,DisableBaselineAlignment,RtlHardcoded" >
+
+    <!-- android:descendantFocusability="blocksDescendants"android:focusable="false" -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:splitMotionEvents="false" >
+
+        <!-- 图片 和 说明文字 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_item_home_call_comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                android:id="@+id/iv_yaohe_zan_face"
+                android:layout_width="160px"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="7px"
+                android:background="@drawable/icon_yaohe_loading_default"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/iv_yaohe_zan_face" >
+
+                <TextView
+                    android:id="@+id/tv_yaohe_zan_face_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15px"
+                    android:layout_marginTop="10px"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/common_text_color_chengse"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_yaohe_zan_addtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15px"
+                    android:ellipsize="end"
+                    android:paddingBottom="10px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_yaohe_zan_con"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_item_home_call_comment_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_yaohe_zan_con"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5px"
+                android:singleLine="true"
+                android:text="赞了这条动态！"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="22px"
+                android:layout_height="24px"
+                android:background="@drawable/red_zan" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_yaohe_zan_con_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_yaohe_zan_con"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="20px"
+            android:background="@color/diliver_out_gray"
+            android:orientation="horizontal"
+            android:padding="10px" >
+
+            <ImageView
+                android:id="@+id/iv_yaohe_zan_service_img"
+                android:layout_width="160px"
+                android:layout_height="120px"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_yaohe_loading_default"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_yaohe_zan_content_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:maxLines="3"
+                android:layout_marginLeft="10px"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/item_item_home_call_comment_time_diviler"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_below="@+id/ll_yaohe_zan_con_service"
+            android:layout_marginTop="20px"
+            android:background="@color/diliver_in_gray" />
+    </RelativeLayout>
+
+</LinearLayout>

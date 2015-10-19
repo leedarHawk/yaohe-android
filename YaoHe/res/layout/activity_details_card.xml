@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_details_card_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_card_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_yaohe_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_details_card_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:splitMotionEvents="false" >
+
+                <!-- 会员卡图片 -->
+
+                <RelativeLayout
+                    android:id="@+id/rl_card_page_adapter_pic"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20px" >
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_card_page_adapter_pic"
+                        android:layout_width="fill_parent"
+                        android:layout_height="320px"
+                        android:clickable="true"
+                        android:fadingEdge="none"
+                        android:focusable="true"
+                        android:overScrollMode="always" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_v_page_adapter_circle_img"
+                        android:layout_width="fill_parent"
+                        android:layout_height="30px"
+                        android:layout_alignBottom="@id/vp_card_page_adapter_pic"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_details_card_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="380px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/icon_yaohe_loading_default"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30px"
+                    android:background="@drawable/icon_details_bolang_line" />
+
+                <!-- 发行量 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="20px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发行量："
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_card_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15px"
+                        android:text="10张"
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="20px"
+                    android:background="@color/line2" />
+
+                <!-- 使用范围 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="30px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="110px"
+                        android:text="使用范围 ："
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_shiyong_fanwei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- 有效期 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="10px"
+                    android:paddingBottom="20px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="110px"
+                        android:text="有效期："
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_card_youxiaoqi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!-- 预约时间 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="110px"
+                        android:text="预约时间："
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_card_yuyue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="如使用包厢请提前一天预约，其余情况无需预约。"
+                        android:textColor="@color/common_home_text_color_jianjie"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!-- 规则提醒 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:visibility="gone"
+                    android:layout_marginTop="10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="110px"
+                        android:text="规则提醒 ："
+                        android:textColor="@color/text_light_gray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_card_guize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="可累积使用，不兑现，不找零"
+                        android:textColor="@color/text_light_gray"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 获取会员卡 -->
+
+            <LinearLayout
+                android:id="@+id/ll_details_get_vip_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/diliver_out_gray"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="30px" >
+
+                <Button
+                    android:id="@+id/btn_details_get_vip_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:background="@drawable/common_btn_white_grey_selecter"
+                    android:text="获取会员卡"
+                    android:textColor="@color/common_text_color_chengse"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_activity_vipcard_yihuoqu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15px"
+                    android:gravity="center"
+                    android:paddingBottom="30px"
+                    android:text="已获取0次"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <!-- 活动详情页面推荐的店铺信息 -->
+
+            <LinearLayout
+                android:id="@+id/rl_details_huodong_bottom_tujian_shop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <include layout="@layout/common_bottom_details_tuijian_shop" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 包含活动页面底部的 评论，点赞 ，收藏功能 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_card_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_bottom_details_info" />
+    </RelativeLayout>
+
+</RelativeLayout>

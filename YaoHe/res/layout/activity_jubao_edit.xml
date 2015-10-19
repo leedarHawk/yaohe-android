@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_activity_jubao_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_in_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,TextFields,HardcodedText" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <include layout="@layout/common_title_back_sub" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_activity_jubao_con"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical"
+            android:text="请选择举报原因"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_jubao_check_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="20px"
+            android:background="@color/white" >
+
+            <RadioButton
+                android:id="@+id/rbtn_jubao_check_reason_1"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:button="@drawable/common_rbtn_selector"
+                android:checked="true"
+                android:paddingLeft="15px"
+                android:text="色情"
+                android:textColor="@color/common_home_text_color_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RadioButton
+                android:id="@+id/rbtn_jubao_check_reason_2"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:button="@drawable/common_rbtn_selector"
+                android:paddingLeft="15px"
+                android:text="谣言"
+                android:textColor="@color/common_home_text_color_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RadioButton
+                android:id="@+id/rbtn_jubao_check_reason_3"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:button="@drawable/common_rbtn_selector"
+                android:paddingLeft="15px"
+                android:text="政治"
+                android:textColor="@color/common_home_text_color_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RadioButton
+                android:id="@+id/rbtn_jubao_check_reason_4"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:button="@drawable/common_rbtn_selector"
+                android:paddingLeft="15px"
+                android:text="网站钓鱼"
+                android:textColor="@color/common_home_text_color_title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RadioButton
+                android:id="@+id/rbtn_jubao_check_reason_5"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:button="@drawable/common_rbtn_selector"
+                android:paddingLeft="15px"
+                android:text="诱导分享"
+                android:textColor="@color/common_home_text_color_title" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical"
+            android:text="补充说明（选填）"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_add_jubao_content"
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="10px"
+            android:background="@drawable/editext_gray_stroke"
+            android:gravity="top|left"
+            android:padding="15px"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_activity_jubao_success"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190px"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tv_activity_jubao_suceesss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/yaohe_jubao_success"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_activity_suceesss_infomation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80px"
+            android:gravity="center"
+            android:text="@string/yaohe_jubao_success_content"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

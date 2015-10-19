@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_item_top_text_viewgroup"
+    android:layout_width="wrap_content"
+    android:layout_height="71px"
+    android:clickable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage" >
+
+    <LinearLayout
+        android:layout_width="159px"
+        android:layout_height="70px"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:splitMotionEvents="false" >
+
+        <RadioButton
+            android:id="@+id/rbtn_top_item_text"
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_top_item_text"
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text=""
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_top_item_text_diliver"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginBottom="15px"
+            android:layout_marginTop="15px"
+            android:background="#e5e5e5"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:background="@drawable/icon_list_driver_white" />
+
+</LinearLayout>

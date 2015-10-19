@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_up_nickname_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaebed"
+    tools:context=".UpNicknameActivity"
+    tools:ignore="PxUsage,HardcodedText,TextFields,ContentDescription" >
+
+    <!-- 头部菜单 -->
+
+    <include
+        android:id="@+id/in_up_title_top"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        layout="@layout/my_login_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_below="@id/in_up_title_top"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/editext_gray_stroke" >
+
+        <EditText
+            android:id="@+id/edt_newnickname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/editext_gray_stroke"
+            android:hint="请输入昵称"
+            android:maxLength="16"
+            android:paddingLeft="15px"
+            android:singleLine="true"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="14sp" >
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/imbt_clern"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20px"
+            android:background="@drawable/icon_search_bar_clear" />
+    </RelativeLayout>
+
+</RelativeLayout>

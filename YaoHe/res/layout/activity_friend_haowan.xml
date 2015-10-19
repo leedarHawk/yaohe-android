@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_haowan_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="HardcodedText,PxUsage" >
+
+    <!-- 头部 附近名称，地图定位 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_haowan_title"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:background="@color/common_home_title_bg"
+        android:gravity="center_vertical"
+        android:splitMotionEvents="false" >
+
+        <TextView
+            android:id="@+id/tv_activity_haowan_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="好玩"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_activity_haowan_location"
+            android:layout_width="35px"
+            android:layout_height="40px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/top_back_btn"
+            android:contentDescription="@string/app_name"
+            android:padding="8px"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_haowan_screen_touch"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ll_haowan_bottom_root"
+        android:layout_below="@id/rl_activity_haowan_title"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/rl_haowan_animation_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bg_yaohe_haowan_00" >
+
+                <ImageView
+                    android:id="@+id/iv_haowan_animation_container"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/app_name" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_haowan_qiqiu"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/bg_yaohe_haowan_09"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_activity_haowan_commit"
+                android:layout_width="fill_parent"
+                android:layout_height="140px"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="60px"
+                android:background="@null"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_haowan_bottom_root"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+ 
+        <include
+            android:id="@+id/ll_bottom_haowan_normal_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/yaohe_footer_no" />
+       
+    </LinearLayout>
+
+</RelativeLayout>

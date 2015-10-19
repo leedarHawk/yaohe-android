@@ -1,0 +1,620 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_sqwsj_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:splitMotionEvents="false"
+    tools:context=".BusnissInfoDetailsActivity"
+    tools:ignore="HardcodedText,PxUsage,TextFields" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_sqwsj_top"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_backandtitle_top" />
+
+    <!-- 滑动信息 -->
+
+    <ScrollView
+        android:id="@+id/sv_sqwsj_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/in_sqwsj_top" >
+
+        <!-- 基本资料  资质信息 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <!-- 基本资料 -->
+
+            <TextView
+                android:id="@+id/tv_sqwsj_base_info"
+                android:layout_width="fill_parent"
+                android:layout_height="60px"
+                android:layout_gravity="center_vertical"
+                android:background="@color/diliver_out_gray"
+                android:gravity="center_vertical"
+                android:paddingLeft="15px"
+                android:text="基本资料"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+
+            <!-- 城市 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_city"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="城       市"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/edt_sqwsj_city"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_city"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="选择店铺所在城市"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 店铺名称 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_name"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="店铺名称"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/edt_sqwsj_shop_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_name"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="最多输入18个字"
+                    android:maxLength="18"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 行业分类 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_type"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="行业分类"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/edt_sqwsj_shop_hy"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_type"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="选择商家分类"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 所属商圈 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_shangquan"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="所属商圈"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/edt_sqwsj_shop_sq_"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_shangquan"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="选择所属商圈"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+            <!-- 详细地址 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="90px" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_address"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="详细地址"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/edt_sqwsj_shop_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_address"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入商家详细地址"
+                    android:paddingBottom="10px"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:paddingTop="10px"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+            <!-- 营业时间 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_time"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="营业时间"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/edt_sqwsj_shop_yytime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_time"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_time1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="center"
+                        android:hint="09:00"
+                        android:minWidth="130px"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/ui_btn_color_gray_nromal"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60px"
+                        android:gravity="center"
+                        android:hint="到"
+                        android:paddingLeft="5px"
+                        android:paddingRight="5px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_time2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="center"
+                        android:hint="23:00"
+                        android:minWidth="130px"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/ui_btn_color_gray_nromal"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 预约电话 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_phone"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/xinghao"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="预约电话"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/edt_sqwsj_shop_yyphone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_phone"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="例 010-51455730"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 店铺介绍 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="90px" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_Introduction"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16px"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="店铺介绍"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/edt_sqwsj_shop_js"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_Introduction"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请把您的店铺介绍给大家"
+                    android:paddingBottom="10px"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:paddingTop="10px"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <!-- 资质信息 -->
+
+            <TextView
+                android:id="@+id/tv_sqwsj_zizhi_base_info"
+                android:layout_width="fill_parent"
+                android:layout_height="60px"
+                android:layout_gravity="center_vertical"
+                android:background="@color/diliver_out_gray"
+                android:gravity="center_vertical"
+                android:paddingLeft="15px"
+                android:text="资质信息"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+
+            <!-- 店主姓名 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90px"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_hostname"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_marginLeft="16px"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="店主姓名"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/edt_sqwsj_shop_host_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_hostname"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="输入真实姓名"
+                    android:maxLength="16"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+            <!-- 法人信息 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="15px"
+                android:paddingTop="15px" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_legalperson"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16px"
+                    android:gravity="center"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:text="法人信息"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/im_sqwsj_frxx"
+                    android:layout_width="100px"
+                    android:layout_height="100px"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="15px"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_legalperson"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/photo" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 营业执照 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="15px"
+                android:paddingTop="15px" >
+
+                <TextView
+                    android:id="@+id/tv_sqwsj_baseinfo_businesslicense"
+                    android:layout_width="175px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_marginLeft="16px"
+                    android:paddingLeft="10px"
+                    android:text="营业执照"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/ui_btn_color_gray_nromal"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/im_sqwsj_yyzz"
+                    android:layout_width="100px"
+                    android:layout_height="100px"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="15px"
+                    android:layout_toRightOf="@id/tv_sqwsj_baseinfo_businesslicense"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/photo" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <Button
+                android:id="@+id/my_sqwsj_businessinfo_submit"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:layout_marginBottom="40px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="40px"
+                android:background="@drawable/common_yaohe_red_btn_click"
+                android:text="确认并提交"
+                android:textColor="#ffffffff"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

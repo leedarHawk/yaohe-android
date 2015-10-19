@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_details_fujin_fuwu_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_fujin_fuwu_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_back_text_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/sv_business_info_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_details_fujin_bottom_xiaoxi"
+        android:layout_below="@+id/rl_details_fujin_fuwu_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <!-- 标题文字 , 优惠类型，时间信息,粉丝等 -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="260px"
+                android:background="@drawable/business_details_info_bg"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:id="@+id/iv_details_fujin_fuwu_tuijian_img"
+                    android:layout_width="140px"
+                    android:layout_height="140px"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20px"
+                    android:background="@drawable/icon_yaohe_default_logo"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15px"
+                    android:layout_marginRight="15px"
+                    android:layout_toLeftOf="@+id/rl_details_tuijian_fuwu_guanzhu"
+                    android:layout_toRightOf="@+id/iv_details_fujin_fuwu_tuijian_img" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_details_tuijian_fuwu_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15px"
+                            android:maxLines="3"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_item_fujin_fuwu_pingjia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/tv_item_fujin_fuwu_pingjia1"
+                                android:layout_width="25px"
+                                android:layout_height="25px"
+                                android:background="@drawable/icon_fujin_xing_gray"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:id="@+id/tv_item_fujin_fuwu_pingjia2"
+                                android:layout_width="25px"
+                                android:layout_height="25px"
+                                android:layout_marginLeft="3px"
+                                android:background="@drawable/icon_fujin_xing_gray"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:id="@+id/tv_item_fujin_fuwu_pingjia3"
+                                android:layout_width="25px"
+                                android:layout_height="25px"
+                                android:layout_marginLeft="3px"
+                                android:background="@drawable/icon_fujin_xing_gray"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:id="@+id/tv_item_fujin_fuwu_pingjia4"
+                                android:layout_width="25px"
+                                android:layout_height="25px"
+                                android:layout_marginLeft="3px"
+                                android:background="@drawable/icon_fujin_xing_gray"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:id="@+id/tv_item_fujin_fuwu_pingjia5"
+                                android:layout_width="25px"
+                                android:layout_height="25px"
+                                android:layout_marginLeft="3px"
+                                android:background="@drawable/icon_fujin_xing_gray"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:id="@+id/tv_details_tuijian_fuwu_fans"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="30px"
+                                android:text="0 粉丝"
+                                android:paddingRight="15px"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_details_tuijian_fuwu_meishi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15px"
+                            android:text="美食"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_details_tuijian_fuwu_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px" >
+
+                    <TextView
+                        android:id="@+id/tv_details_tuijian_fuwu_guanzhu"
+                        android:layout_width="100px"
+                        android:layout_height="45px"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/icon_fujin_jiaguanzhu"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/transparent" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_details_fujin_fuwu_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <!-- 服务 -->
+
+                <TextView
+                    android:id="@+id/tv_details_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="70px"
+                    android:background="@color/common_yaohe_content_main_grey"
+                    android:gravity="center|left"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:text="服务"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+                <!-- 服务信息列表 -->
+                <!-- 优惠券、会员卡、活动、新品 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_details_service_"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:padding="20px" >
+
+                    <TextView
+                        android:id="@+id/tv_business_service_xinpin_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100px"
+                        android:layout_weight="1"
+                        android:background="@drawable/icon_shop_base_xinpin" />
+
+                    <TextView
+                        android:id="@+id/tv_business_service_huodong_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100px"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:background="@drawable/icon_shop_base_huodong" />
+
+                    <TextView
+                        android:id="@+id/tv_business_service_card_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100px"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:background="@drawable/icon_shop_base_huiyuanka" />
+
+                    <TextView
+                        android:id="@+id/tv_business_service_youhuiquan_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100px"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:background="@drawable/icon_shop_base_youhuiquan"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_details_fujin_fuwu_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:padding="20px" >
+
+                    <!-- 新品 -->
+
+                    <RelativeLayout
+                        android:id="@+id/rl_business_xinpin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true" >
+
+                        <TextView
+                            android:id="@+id/tv_business_xinpin_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/icon_shop_base_xinpin" />
+
+                        <TextView
+                            android:id="@+id/tv_business_xinpin_count"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:layout_alignEnd="@+id/tv_business_xinpin_img"
+                            android:layout_alignRight="@+id/tv_business_xinpin_img"
+                            android:layout_alignTop="@+id/tv_business_xinpin_img"
+                            android:layout_marginRight="-6px"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/icon_business_service_circle"
+                            android:gravity="center"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/yaohe_business_service_xinpin"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_business_xinpin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_business_xinpin_img"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10px"
+                            android:gravity="center"
+                            android:text="新品"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                    <!-- 活动 -->
+
+                    <RelativeLayout
+                        android:id="@+id/rl_business_huodong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:clickable="true" >
+
+                        <TextView
+                            android:id="@+id/tv_business_huodong_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/icon_shop_base_huodong" />
+
+                        <TextView
+                            android:id="@+id/tv_business_huodong_count"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:layout_alignEnd="@+id/tv_business_huodong_img"
+                            android:layout_alignRight="@+id/tv_business_huodong_img"
+                            android:layout_alignTop="@+id/tv_business_huodong_img"
+                            android:layout_marginRight="-6px"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/icon_business_service_circle"
+                            android:gravity="center"
+                            android:maxHeight="16px"
+                            android:maxWidth="16px"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/yaohe_business_service_huodong"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_business_huodong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_business_huodong_img"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10px"
+                            android:gravity="center"
+                            android:text="活动"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <!-- 会员卡 -->
+
+                    <RelativeLayout
+                        android:id="@+id/rl_business_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:clickable="true" >
+
+                        <TextView
+                            android:id="@+id/tv_business_card_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/icon_shop_base_huiyuanka" />
+
+                        <TextView
+                            android:id="@+id/tv_business_card_count"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:layout_alignEnd="@+id/tv_business_card_img"
+                            android:layout_alignRight="@+id/tv_business_card_img"
+                            android:layout_alignTop="@+id/tv_business_card_img"
+                            android:layout_marginRight="-6px"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/icon_business_service_circle"
+                            android:gravity="center"
+                            android:maxHeight="16px"
+                            android:maxWidth="16px"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/yaohe_business_service_huiyuanka"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_business_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_business_card_img"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10px"
+                            android:gravity="center"
+                            android:text="会员卡"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                    <!-- 优惠券 -->
+
+                    <RelativeLayout
+                        android:id="@+id/rl_business_youhuiquan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center" >
+
+                        <TextView
+                            android:id="@+id/tv_business_youhuiquan_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/icon_shop_base_youhuiquan"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:id="@+id/tv_business_youhuiquan_count"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:layout_alignEnd="@+id/tv_business_youhuiquan_img"
+                            android:layout_alignRight="@+id/tv_business_youhuiquan_img"
+                            android:layout_alignTop="@+id/tv_business_youhuiquan_img"
+                            android:layout_marginRight="-6px"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/icon_business_service_circle"
+                            android:gravity="center"
+                            android:maxHeight="16px"
+                            android:maxWidth="16px"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/yaohe_business_service_youhuiquan"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_business_youhuiquan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_business_youhuiquan_img"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10px"
+                            android:gravity="center"
+                            android:text="优惠券"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 吆喝 -->
+
+            <LinearLayout
+                android:id="@+id/ll_details_yaohe_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_details_yaohe_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="70px"
+                    android:background="@color/common_yaohe_content_main_grey"
+                    android:gravity="center|left"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:text="吆喝 "
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+                <!-- 吆喝信息列表 -->
+
+                <com.collcloud.yaohe.ui.view.MyListView
+                    android:id="@+id/lv_details_fujin_yaohe_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white"
+                    android:divider="@color/white"
+                    android:dividerHeight="0dp" />
+
+                <Button
+                    android:id="@+id/btn_details_yaohe_content_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="更多吆喝"
+                    android:textColor="@color/common_text_color_chengse"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- 店铺简介，地址，电话，营业时间 信息 -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20px"
+                android:background="@color/diliver_in_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店铺简介："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_shop_descri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="center_vertical"
+                android:minHeight="30px"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_dizhi_dec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:text="店铺地址："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_dizhi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15px"
+                    android:layout_toRightOf="@+id/tv_details_fujin_dizhi_dec"
+                    android:ellipsize="end"
+                    android:maxWidth="370px"
+                    android:paddingRight="20px"
+                    android:singleLine="true"
+                    android:text=" "
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_dizhi_img"
+                    android:layout_width="26px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_details_fujin_dizhi"
+                    android:background="@drawable/icon_fujin_fuwu_shop_dizhi"
+                    android:text="" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="center_vertical"
+                android:minHeight="30px"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="联系电话："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_tel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_tel_img"
+                    android:layout_width="33px"
+                    android:layout_height="29px"
+                    android:layout_marginLeft="20px"
+                    android:background="@drawable/icon_fujin_fuwu_shop_tel"
+                    android:text="" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="center_vertical"
+                android:minHeight="30px"
+                android:orientation="horizontal"
+                android:paddingBottom="20px" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="营业时间："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_fujin_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15px"
+                    android:text=" "
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 活动详情页面推荐的店铺信息 -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 包含页面底部的消息，评论功能 -->
+
+    <LinearLayout
+        android:id="@+id/ll_details_fujin_bottom_xiaoxi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_bottom_details_fujin_pinglun" />
+    </LinearLayout>
+
+</RelativeLayout>

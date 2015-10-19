@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- 用户头像 名称 时间 回复 -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:orientation="horizontal">
+        <!-- 用户头像-->
+        <ImageView
+            android:id="@+id/im_per_shopdianping_item_photo"
+            android:layout_width="45px"
+            android:layout_height="45px"
+            android:layout_marginTop="22px"
+            android:layout_marginLeft="10px"
+            android:src="@drawable/trash" 
+            android:contentDescription="@string/app_name"/>
+        <!-- 名称 时间-->
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22px"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@id/im_per_shopdianping_item_photo">
+            <!-- 名称 -->
+            <TextView
+              android:id="@+id/tv_per_item_shopdianping_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:singleLine="true" 
+              android:text="乐乐"
+              android:textSize="18sp"
+              android:textColor="@color/tv_gray"/>
+            <!-- 时间-->
+            <TextView
+               android:layout_below="@id/tv_per_item_shopdianping_name"
+               android:id="@+id/tv_per_item_shopdianping_time"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:singleLine="true" 
+               android:text="刚刚"
+               android:textSize="14sp"
+               android:textColor="#878787"/>            
+        </RelativeLayout>
+        <!-- 回复-->
+        <Button 
+            android:id="@+id/bt_per_item_shopdianping_huifu"
+            android:layout_width="100px"
+	        android:layout_height="32px"
+	        android:layout_marginRight="10px"
+	        android:layout_marginTop="29px"
+	        android:layout_marginBottom="29px"
+	        android:layout_alignParentRight="true"
+	        android:background="@drawable/btn_red_normal" 
+	        android:text="回复"
+	        android:textColor="@color/white"/>
+    </RelativeLayout>
+    <!-- 灰色底线 -->
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_list_driver_white"
+            android:contentDescription="@string/app_name"/>
+    <!-- 回复内容 店铺信息 -->
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- 星级评论  -->
+        <include 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="10px"
+            layout="@layout/five_star"/>
+        <!-- 回复内容  -->
+ 	    <TextView
+          android:id="@+id/tv_per_item_shopdianping_newmsg"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" 
+          android:layout_marginLeft="10px"
+          android:paddingTop="10px"
+          android:drawableLeft="@drawable/pinglun_left"
+          android:singleLine="true"
+          android:text="楼主真棒"
+          android:textSize="16sp"
+          android:textColor="@color/tv_gray"/>
+ 	    <!--店铺信息 -->
+ 	    <RelativeLayout 
+ 	        android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10px"
+            android:paddingBottom="10px"
+            android:layout_marginLeft="10px"
+            android:layout_marginBottom="10px"
+            android:layout_marginRight="10px"
+            android:background="#f7f7f7">
+	        <!--店铺图片 -->   
+	        <ImageView
+	            android:id="@+id/im_per_shopdianping_item_shop_photo"
+	            android:layout_width="80px"
+	            android:layout_height="80px"
+	            android:src="@drawable/women"
+	            android:contentDescription="@string/app_name"/>
+	        <!--店铺名  所发文字 -->  
+	        <LinearLayout
+	            android:layout_toRightOf="@id/im_per_shopdianping_item_shop_photo" 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20px"
+	            android:orientation="vertical">
+	            <!-- 店铺名 -->
+		 	    <TextView
+		            android:id="@+id/tv_per_item_shopdianping_shop_name"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" 
+		            android:singleLine="true"
+		            android:text="阿甘"
+		            android:textColor="@color/tv_gray"
+		            android:textSize="18sp"/> 	
+		        <!-- 文字 -->
+		 	    <TextView
+		            android:id="@+id/tv_per_item_shopdianping_shop_word"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" 
+		            android:singleLine="true"
+		            android:text="发送了一张照片"
+		            android:textColor="@color/tv_gray"
+		            android:textSize="16sp"/>
+	        </LinearLayout>
+ 	        
+ 	    </RelativeLayout>
+ 	    
+    </LinearLayout>
+
+</LinearLayout>

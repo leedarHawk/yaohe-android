@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">一起吆喝</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="common_title_help">帮助</string>
+    <string name="common_title_home">主页</string>
+    <string name="common_title_logout">注销</string>
+    <string name="app_back">返回</string>
+    <string name="app_stop">停止</string>
+    <string name="app_next">下一步</string>
+    <string name="common_application_exit_message"></string>
+    <string name="common_application_logout_message"></string>
+    <string name="common_dialog_btn_ok_txt">确认</string>
+    <string name="common_dialog_btn_cancel_txt">取消</string>
+    <string name="common_dialog_btn_close_txt">关闭</string>
+    <string name="common_usb_debug_enabled">很抱歉，本程序运行时不允许开启usb调试模式，请关闭usb调试。</string>
+    <string name="common_root_enabled">很抱歉，检测到您的手机已root，暂时无法使用本程序。</string>
+    <string name="edittext_password_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+
+    <!-- 共通 -->
+    <string name="network_disabled">网络状况异常，请仔细检查网络。</string>
+    <string name="response_data_invalid">数据信息异常，请重新尝试。</string>
+    <string name="api_value_error">数据信息异常。</string>
+    <string name="network_request_disabled">网络状况异常，请仔细检查网络。</string>
+    <string name="title_activity_t">TActivity</string>
+    <string name="title_activity_capture">CaptureActivity</string>
+    <string name="title_activity_my">MyActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_business">BusinessActivity</string>
+    <string name="title_activity_person">PersonActivity</string>
+    <string name="title_activity_update_password">UpdatePasswordActivity</string>
+    <string name="title_activity_business_info">BusinessInfoActivity</string>
+    <string name="title_activity_busniss_info_details">BusnissInfoDetailsActivity</string>
+    <string name="title_activity_person_msg">PersonMsgActivity</string>
+    <!-- 上下拉刷新 -->
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="title_activity_person_ping_lun">PersonPingLunActivity</string>
+    <string name="title_activity_per_shop_dian_ping">PerShopDianPingActivity</string>
+    <string name="title_activity_input_ping_lun">InputPingLunActivity</string>
+    <string name="title_activity_person_zan">PersonZanActivity</string>
+    <string name="title_activity_guan_zhu_business">GuanZhuBusinessActivity</string>
+    <string name="title_activity_person_youhui">PersonYouhuiActivity</string>
+    <string name="title_activity_used_you_hui_quan">UsedYouHuiQuanActivity</string>
+    <string name="title_activity_usable_you_hui_quan">UsableYouHuiQuanActivity</string>
+    <string name="title_activity_you_hui_quan_detail">YouHuiQuanDetailActivity</string>
+    <string name="title_activity_person_shou_cang">PersonShouCangActivity</string>
+    <string name="title_activity_person_scbusiness">PersonSCBusinessActivity</string>
+    <string name="title_activity_user_feed_back">UserFeedBackActivity</string>
+    <string name="title_activity_person_setting">PersonSettingActivity</string>
+    <string name="service_phone">010-51455730</string>
+    <string name="title_activity_about_yao_he">AboutYaoHeActivity</string>
+    <string name="title_activity_my_yao_he">MyYaoHeActivity</string>
+    <string name="title_activity_business_fa_yao_he">BusinessFaYaoHeActivity</string>
+    <string name="title_activity_business_fq">BusinessFQActivity</string>
+    <string name="title_activity_business_fhyk">BusinessFHYKActivity</string>
+    <string name="title_activity_business_fxp">BusinessFXPActivity</string>
+    <string name="title_activity_business_fhd">BusinessFHDActivity</string>
+    <string name="title_activity_business_my_fans">BusinessMyFansActivity</string>
+    <string name="title_activity_business_fwgl">BusinessFWGLActivity</string>
+    <string name="title_activity_business_create_service">BusinessCreateServiceActivity</string>
+    <string name="title_activity_business_my_msg">BusinessMyMsgActivity</string>
+    <string name="title_activity_award">AwardActivity</string>
+    <!-- 吆喝页面用到的文言信息 -->
+    <string name="yaohe_jubao_success">感谢您的举报！</string>
+    <string name="yaohe_jubao_success_content">我们坚决反对色情，侵权信息，\n您的意见我们会认真处理，\n共同维护绿色健康的网络环境！</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="title_activity_forget_password">ForgetPasswordActivity</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="title_activity_shen_qing_wei_sj">ShenQingWeiSJActivity</string>
+    <string name="title_activity_business_service">BusinessServiceActivity</string>
+    <string name="title_activity_person_hyk">PersonHYKActivity</string>
+    <string name="title_activity_person_hykdetail">PersonHYKDetailActivity</string>
+    <string name="title_activity_up_nickname">UpNicknameActivity</string>
+    <string name="yaohe_fujin_no_shop_">附近没有商家发布吆喝</string>
+    <string name="yaohe_fujin_district_no_shop_">该区域的商户已返回母星\n\n请尝试其他区域</string>
+
+</resources>

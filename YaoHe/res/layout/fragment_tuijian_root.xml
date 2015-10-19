@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.collcloud.frame.layout.CommonFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/ll_home_fragment_tuijian"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <com.collcloud.frame.xlistview.XListView
+            android:id="@+id/lv_home_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+        <LinearLayout
+            android:id="@+id/ll_home_fragment_empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <include layout="@layout/fragment_home_extra" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_home_net_error"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60px"
+            android:gravity="center"
+            android:text="@string/network_not_connected"
+            android:textColor="@color/common_home_text_color_fans_time"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</com.collcloud.frame.layout.CommonFrameLayout>

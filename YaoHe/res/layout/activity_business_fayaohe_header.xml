@@ -1,0 +1,302 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <!-- 吆喝 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="15px"
+        android:layout_marginTop="10px"
+        android:text="吆喝:"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="15sp" />
+
+    <!-- 吆喝内容 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10px" >
+
+        <EditText
+            android:id="@+id/edt_input_yhmsg"
+            android:layout_width="fill_parent"
+            android:layout_height="210px"
+            android:background="@drawable/input_"
+            android:gravity="left"
+            android:hint="大声说出您最有创意的招揽顾客的话吧!\n\n “磨剪子嘞戗菜刀”"
+            android:padding="15px"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <!-- 图片 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="15px"
+        android:layout_marginTop="10px"
+        android:text="图片 1/6:"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="15px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:paddingTop="15px" >
+
+        <ImageView
+            android:id="@+id/im_fyh_pic_1"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:background="@drawable/camera"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/im_fyh_pic_2"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:background="@drawable/camera"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/im_fyh_pic_3"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:background="@drawable/camera"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/im_fyh_pic_4"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:background="@drawable/camera"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/im_fyh_pic_5"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:background="@drawable/camera"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/im_fyh_pic_6"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:background="@drawable/camera"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <!-- 应用内容 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="15px"
+        android:layout_marginTop="10px"
+        android:text="引用内容:"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="15sp" />
+
+    <!-- 发券     发会员卡    新品     发活动 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_no_service"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="10px"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/tv_fyh_cs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:layout_marginTop="10px"
+            android:gravity="center"
+            android:text="您还没有服务，点击创建。"
+            android:textColor="@color/common_home_text_color_fans_time"
+            android:textSize="14sp" />
+
+        <!-- 发券 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fyh_fq"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_below="@id/tv_fyh_cs"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="5px"
+            android:layout_marginTop="10px"
+            android:layout_toLeftOf="@+id/tv_center_port"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fyh_pic_quan"
+                android:layout_width="45px"
+                android:layout_height="35px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/youhuiquan" />
+
+            <TextView
+                android:id="@+id/tv_fyh_fq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@id/im_fyh_pic_quan"
+                android:text="发券"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <!-- 第一个中心点 -->
+
+        <TextView
+            android:id="@+id/tv_center_port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_fyh_cs"
+            android:layout_centerHorizontal="true"
+            android:text="" />
+
+        <!-- 发会员卡 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fyh_fhyk"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_below="@id/tv_fyh_cs"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@id/tv_center_port"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fyh_pic_hyk"
+                android:layout_width="45px"
+                android:layout_height="35px"
+                android:background="@drawable/huiyuanka" />
+
+            <TextView
+                android:id="@+id/tv_fyh_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@id/im_fyh_pic_hyk"
+                android:text="会员卡"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <!-- 新品 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fyh_xp"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_below="@id/rl_fyh_fq"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="5px"
+            android:layout_toLeftOf="@+id/tv_center_port2"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fyh_pic_xp"
+                android:layout_width="44px"
+                android:layout_height="44px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/new_brand" />
+
+            <TextView
+                android:id="@+id/tv_fyh_fxp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@id/im_fyh_pic_xp"
+                android:text="新品"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <!-- 第二个中心点 -->
+
+        <TextView
+            android:id="@+id/tv_center_port2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_center_port"
+            android:layout_centerHorizontal="true"
+            android:text="" />
+
+        <!-- 发活动 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fyh_fhd"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_below="@id/rl_fyh_fhyk"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="5px"
+            android:layout_toRightOf="@id/tv_center_port2"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fyh_pic_hd"
+                android:layout_width="44px"
+                android:layout_height="44px"
+                android:src="@drawable/send_activity" />
+
+            <TextView
+                android:id="@+id/tv_fyh_hd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_toRightOf="@id/im_fyh_pic_hd"
+                android:text="发活动"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

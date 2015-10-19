@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_details_yaohela_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_yaohela_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_yaohe_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_details_yaohela_bottom_menu"
+        android:layout_below="@+id/rl_details_yaohela_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <!-- 吆喝活动标题文字 , 优惠类型，时间信息等 -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="145px" >
+
+                <LinearLayout
+                    android:id="@+id/ll_details_type_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/iv_details_type_img"
+                        android:layout_width="170px"
+                        android:layout_height="151px"
+                        android:background="@drawable/icon_home_details_yaohela"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <!-- 吆喝活动标题文字 -->
+
+                    <LinearLayout
+                        android:id="@+id/tv_details_type_title_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_details_type_huodong_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="20px"
+                            android:layout_marginRight="15px"
+                            android:layout_marginTop="25px"
+                            android:text="吆喝啦！ 吆喝啦！ "
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_details_type_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="20px"
+                            android:layout_marginTop="15px"
+                            android:textColor="@color/common_home_text_color_fans_time"
+                            android:textSize="14sp" />
+                        <!-- 详情简介 -->
+
+                        <TextView
+                            android:id="@+id/tv_details_content"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20px"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <!-- 吆喝活动地点 信息 -->
+
+            <LinearLayout
+                android:id="@+id/ll_activity_details_yaohe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <com.collcloud.yaohe.ui.view.MyGridView
+                    android:id="@+id/gv_activity_details_yaohe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:horizontalSpacing="15px"
+                    android:numColumns="3"
+                    android:verticalSpacing="20px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_yaohela_fuwu_image_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="30px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="引用服务："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140px"
+                    android:layout_marginTop="20px"
+                    android:background="@color/diliver_in_gray"
+                    android:gravity="center_vertical" >
+
+                    <FrameLayout
+                        android:id="@+id/fv_details_yaohele_fuwu_image"
+                        android:layout_width="180px"
+                        android:layout_height="140px"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true" >
+
+                        <ImageView
+                            android:id="@+id/iv_details_yaohele_fuwu_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="140px"
+                            android:layout_marginLeft="7px"
+                            android:background="@drawable/icon_yaohe_loading_default"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitXY" />
+
+                        <ImageView
+                            android:id="@+id/iv_details_yaohele_fuwu_image_tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36px"
+                            android:background="@drawable/icon_home_type_huiyuanka"
+                            android:contentDescription="@string/app_name" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tv_details_yaohele_fuwu_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/fv_details_yaohele_fuwu_image"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:paddingTop="10px"
+                        android:text=""
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="15px"
+                android:background="@color/diliver_out_gray" />
+
+            <!-- 吆喝活动详情页面推荐的店铺信息 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <include layout="@layout/common_bottom_details_tuijian_shop" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 包含吆喝活动页面底部的 评论，点赞 ，收藏功能 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_yaohela_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_bottom_details_info" />
+    </RelativeLayout>
+
+</RelativeLayout>

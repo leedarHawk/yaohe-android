@@ -1,0 +1,135 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_hykdetail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PersonHYKDetailActivity"
+    tools:ignore="UseCompoundDrawables,HardcodedText,PxUsage" >
+
+    <!-- 返回 标题 -->
+
+    <include
+        android:id="@+id/in_hyk_back_title"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_share_shoucang" />
+
+    <RelativeLayout
+        android:id="@+id/rl_hyk_photo_name_yhm"
+        android:layout_width="fill_parent"
+        android:layout_height="320px"
+        android:layout_below="@id/in_hyk_back_title"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/test_hyk"
+        android:gravity="bottom|right" >
+
+        <!-- 优惠码  优惠码串码 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35px"
+            android:layout_marginLeft="35px"
+            android:layout_marginRight="35px"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingTop="10px" >
+
+            <!-- 优惠码 -->
+
+            <TextView
+                android:id="@+id/tv_hyk_detail_world"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/common_text_color_chengse"
+                android:textSize="20sp" />
+
+            <!-- 优惠码串码 -->
+
+            <TextView
+                android:id="@+id/tv_hyk_yhm_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:singleLine="true"
+                android:text="NO.000 000 000"
+                android:textColor="@color/common_text_color_chengse"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 备注 -->
+
+    <TextView
+        android:id="@+id/tv_hyk_bz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_hyk_photo_name_yhm"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="20px"
+        android:singleLine="true"
+        android:text="注:消费前请出示此会员卡，即可享受优惠"
+        android:textColor="@color/common_text_color_chengse"
+        android:textSize="14sp" />
+
+    <!-- 灰色底线 -->
+
+    <ImageView
+        android:id="@+id/im_hyk_bottom_line"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hyk_bz"
+        android:layout_marginTop="20px"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_list_driver_white" />
+    <!-- 最近5次使用时间 -->
+
+    <LinearLayout
+        android:id="@+id/ll_hyktime_world"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/im_hyk_bottom_line"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal" >
+
+        <!-- 竖条 -->
+
+        <ImageView
+            android:id="@+id/im_hyk_time_line"
+            android:layout_width="20px"
+            android:layout_height="80px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/big_sight" />
+
+        <!-- 您已使用5次，最近日期如下: -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="您已使用0次"
+            android:textColor="@color/text_gray"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <!-- 最近5次使用时间 -->
+
+    <LinearLayout
+        android:id="@+id/ll_time_sv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_hyktime_world"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lv_hykusetime_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

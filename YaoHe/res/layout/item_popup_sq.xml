@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_shangquan_viewgroup"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="PxUsage" >
+
+    <TextView
+        android:id="@+id/groupItem_sq"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="left"
+        android:paddingBottom="20px"
+        android:paddingLeft="20px"
+        android:paddingTop="20px"
+        android:text=""
+        android:textColor="@color/my_textcolor"
+        android:textSize="14sp" />
+
+</LinearLayout>

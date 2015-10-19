@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv_setting_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaebed"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,PxUsage,ScrollViewSize" >
+
+    <!-- 内容 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <!-- 头部标题 -->
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="90px"
+            layout="@layout/layout_backandtitle_top" />
+
+        <!-- 仅在wifi下显示图片 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_marginTop="20px"
+            android:background="@drawable/line_suround_white"
+            android:paddingLeft="15px"
+            android:paddingRight="15px" >
+
+            <TextView
+                android:id="@+id/tv_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="仅在wifi下显示图片"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/cb_image_Control"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:button="@drawable/selector_checkbox"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <!-- 消息提醒 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@drawable/line_left_right_bottom_white"
+            android:paddingLeft="15px"
+            android:paddingRight="15px" >
+
+            <TextView
+                android:id="@+id/tv_msg_ts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="消息提醒"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/cb_message_Control"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:checked="true" 
+                android:button="@drawable/selector_checkbox"
+                android:text="" />
+        </RelativeLayout>
+
+        <!-- 清空缓存 -->
+
+        <RelativeLayout
+            android:id="@+id/cachLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@drawable/line_left_right_bottom_white"
+            android:clickable="true" >
+
+            <TextView
+                android:id="@+id/tv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="15px"
+                android:text="清空緩存"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/cach_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="15px"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"/>
+        </RelativeLayout>
+
+        <!-- 检查更新 -->
+
+        <RelativeLayout
+            android:id="@+id/version_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@drawable/line_left_right_bottom_white"
+            android:clickable="true" >
+
+            <TextView
+                android:id="@+id/version_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="right"
+                android:paddingRight="15px"
+                android:text="当前版本：v1.0"
+                android:textColor="@color/common_home_text_color_title" />
+
+            <TextView
+                android:id="@+id/check_Version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:paddingLeft="15px"
+                android:text="检查更新"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <!-- 关注我们的微信 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_gzwx"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@drawable/line_left_right_bottom_white" >
+
+            <TextView
+                android:id="@+id/attentionWeixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="关注我们的微信 "
+                android:paddingLeft="15px"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/Weixinnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="right"
+                android:paddingRight="15px"
+                android:text="loveinTai"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <!-- 客服电话 -->
+
+        <RelativeLayout
+            android:id="@+id/telLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@drawable/line_left_right_bottom_white"
+            android:clickable="true" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="15px"
+                android:text="客服电话（8:00-22:00）"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_callphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="right"
+                android:textColor="@color/common_home_text_color_title"
+                android:paddingRight="15px"
+                android:text="@string/service_phone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

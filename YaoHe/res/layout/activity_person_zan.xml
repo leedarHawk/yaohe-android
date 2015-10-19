@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_psg_yaohe_zan_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UsablepinlunQuanActivity"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <!-- 返回 标题 -->
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        layout="@layout/layout_backandtitle_top" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/diliver_in_gray"
+        android:orientation="vertical" >
+
+        <!-- 列表 -->
+
+        <com.collcloud.swipe.view.XListView
+            android:id="@+id/xlv_person_dianzan_pinlun"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="#00000000" >
+        </com.collcloud.swipe.view.XListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_person_zan_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/item_yaohe_no_data_default" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_activity_haowan_eggs_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="ContentDescription,ObsoleteLayoutParam,ButtonStyle,PxUsage,HardcodedText" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ll_haowan_game_bottom_root"
+        android:background="@drawable/eggbg1" >
+
+        <ImageView
+            android:id="@+id/image_show_anim"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="15px" />
+
+        <ImageView
+            android:id="@+id/image_show_result_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100px"
+            android:padding="15px"
+            android:layout_gravity="center|top" />
+
+        <LinearLayout
+            android:id="@+id/ll_image_show_eggs_"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="180px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:visibility="gone"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/iv_eggs_img1"
+                android:layout_width="wrap_content"
+                android:layout_height="240px"
+                android:layout_weight="1"
+                android:background="@drawable/dan1_0" />
+
+            <ImageView
+                android:id="@+id/iv_eggs_img2"
+                android:layout_width="wrap_content"
+                android:layout_height="240px"
+                android:layout_marginLeft="20px"
+                android:layout_weight="1"
+                android:background="@drawable/dan1_0" />
+
+            <ImageView
+                android:id="@+id/iv_eggs_img3"
+                android:layout_width="wrap_content"
+                android:layout_height="240px"
+                android:layout_marginLeft="20px"
+                android:layout_weight="1"
+                android:background="@drawable/dan1_0" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_haowan_game_bottom_root"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/ll_bottom_haowan_game_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/yaohe_footer_no" />
+    </LinearLayout>
+
+</RelativeLayout>

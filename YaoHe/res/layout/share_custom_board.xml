@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_share_content_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:splitMotionEvents="false"
+    tools:ignore="HardcodedText,PxUsage,DisableBaselineAlignment" >
+
+    <TextView
+        android:id="@+id/share_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15px"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="15px"
+        android:text="想告诉谁......"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_share_first_viewgroup"
+        android:layout_width="match_parent"
+        android:layout_height="145px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_below="@+id/share_text"
+        android:orientation="horizontal"
+        android:splitMotionEvents="false" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/share_sina_weibo"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_sina_weibo"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/share_wechat"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_wechat"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/share_wechat_circle"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_wechat_friend"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/share_wechat_shoucang"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_wecht_shoucang"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+         <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/share_qq"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_qq" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_share_second_viewgroup"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_height="145px"
+        android:layout_marginTop="5px"
+        android:layout_below="@+id/ll_share_first_viewgroup"
+        android:orientation="horizontal"
+        android:splitMotionEvents="false" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/share_qq_zone"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_qq_zone" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/share_qq_"
+                android:layout_width="140px"
+                android:layout_height="140px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/share_qq" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible" >
+
+            <ImageButton
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible" >
+
+            <ImageButton
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_share_close"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_below="@+id/ll_share_second_viewgroup"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="15px"
+        android:background="@drawable/btn_background_white"
+        android:text="取消"
+        android:textColor="@color/common_text_color_chengse"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:layout_below="@+id/btn_share_close" />
+
+</RelativeLayout>

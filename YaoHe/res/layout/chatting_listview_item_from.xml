@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_message_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tv_account"
+        android:layout_below="@+id/tv_account"
+        android:maxWidth="380px"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tv_account_to"
+        android:layout_width="wrap_content"     
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/tv_account"
+        android:textSize="20sp"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:id="@+id/tv_message_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_message_content"
+        android:layout_alignBottom="@+id/tv_message_content"
+        android:layout_alignLeft="@+id/tv_account_to"
+        android:maxWidth="380px"
+        android:textSize="15sp"/>
+
+</RelativeLayout>

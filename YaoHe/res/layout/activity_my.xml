@@ -1,0 +1,468 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_mine_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:splitMotionEvents="false"
+    tools:context=".MineActivity"
+    tools:ignore="HardcodedText,PxUsage,ButtonStyle,UseCompoundDrawables,ContentDescription" >
+
+    <!-- 头部背景图片&登录&注册按钮 -->
+
+    <LinearLayout
+        android:id="@+id/lay_my_top"
+        android:layout_width="fill_parent"
+        android:layout_height="330px"
+        android:background="@drawable/my_top_img"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <!-- 未登录 -->
+
+        <LinearLayout
+            android:id="@+id/panelNologin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_register_bg"
+            android:gravity="center"
+            android:minWidth="240px"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/mine_btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="right|center"
+                android:paddingBottom="10px"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:singleLine="true"
+                android:text="登录/"
+                android:textColor="#fc6047"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/mine_btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="center|left"
+                android:paddingBottom="10px"
+                android:paddingRight="20px"
+                android:paddingTop="10px"
+                android:singleLine="true"
+                android:text="注册"
+                android:textColor="#fc6047"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- 已登录 -->
+
+        <LinearLayout
+            android:id="@+id/panelLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            
+            <com.meg7.widget.CustomShapeImageView
+                android:id="@+id/mine_per_photo"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tx"
+                app:shape="circle" />
+
+            <TextView
+                android:id="@+id/mine_per_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 我的消息、关注、优惠、收藏、申请商家、 意见反馈、设置 -->
+
+    <com.collcloud.yaohe.ui.view.BorderScrollView
+        android:id="@+id/sv_msg_gz_yh_sc_fb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_bottom_tab_container_no_yaohe"
+        android:layout_below="@id/lay_my_top" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingLeft="30px"
+            android:paddingRight="30px" >
+
+            <!-- 我的消息 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_msg"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:id="@+id/iv_activity_mine_msg"
+                    android:layout_width="30px"
+                    android:layout_height="30px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_home_item_liuyan_off" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="我的消息"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 我的关注 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_focus"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:id="@+id/iv_activity_mine_focus"
+                    android:layout_width="35px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/my_follow" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="我的关注"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_myguanzhu"
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 我的收藏 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_scang"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:id="@+id/iv_activity_mine_scang"
+                    android:layout_width="35px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/my_collection" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="我的收藏"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_myshoucnag"
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 我的优惠 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_yhui"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:layout_width="35px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/my_favourable" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="我的优惠"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_myyouhui"
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="20px"
+                android:background="#e1e1e1" />
+
+            <!-- 申请商家 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_sqshangjia"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:layout_width="35px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/my_bussiness" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="申请商家"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_shengqinshagnjia"
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <RelativeLayout
+                android:id="@+id/rl_user_base_share"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:clickable="true" >
+
+                <TextView
+                    android:id="@+id/tv_bussiness_share"
+                    android:layout_width="32px"
+                    android:layout_height="35px"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_share_friend"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="邀请好友"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+            <!-- 意见反馈 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_feedback_"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:layout_width="35px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/my_feedback" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="意见反馈"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_yijianfankui"
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_list_driver_white" />
+
+            <!-- 设置 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_my_seetings"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <ImageView
+                    android:layout_width="35px"
+                    android:layout_height="35px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/my_seting" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="55px"
+                    android:gravity="center_vertical"
+                    android:text="设置"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_shezhi"
+                    android:layout_width="20px"
+                    android:layout_height="22px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_arrow_right_normal"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#e1e1e1" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="20px"
+                android:layout_below="@id/business_blank"
+                android:background="@color/diliver_in_gray" />
+        </LinearLayout>
+    </com.collcloud.yaohe.ui.view.BorderScrollView>
+
+    <!-- 底部导航条 无喇叭 -->
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_tab_container_no_yaohe"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/ll_bottom_fujin_normal_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/yaohe_footer_no" />
+    </LinearLayout>
+
+</RelativeLayout>

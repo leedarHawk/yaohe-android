@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_item_business_fans"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,PxUsage,ContentDescription,UselessParent" >
+
+    <!-- 具体内容 -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 用户头像 名称 时间 回复 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_bus_fans_item_content"
+            android:layout_width="fill_parent"
+            android:layout_height="130px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <!-- 用户头像  消息提示 -->
+
+            <FrameLayout
+                android:id="@+id/im_bus_fans_item_photo"
+                android:layout_width="130px"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/im_item_per_fans_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:background="@drawable/icon_yaohe_loading_default"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tv_item_per_fans_msg_tags"
+                    android:layout_width="34px"
+                    android:layout_height="34px"
+                    android:layout_gravity="right"
+                    android:background="@drawable/red_circle"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- 名称 时间 -->
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_toLeftOf="@+id/bt_bus_item_fans_fxx"
+                android:layout_toRightOf="@id/im_bus_fans_item_photo" >
+
+                <!-- 名称 -->
+
+                <TextView
+                    android:id="@+id/tv_bus_item_fans_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 性别 -->
+
+                <TextView
+                    android:id="@+id/tv_per_item_pinglun_time"
+                    android:layout_width="18px"
+                    android:layout_height="18px"
+                    android:layout_below="@id/tv_bus_item_fans_name"
+                    android:layout_marginTop="10px"
+                    android:background="@drawable/women"
+                    android:singleLine="true"
+                    android:text=""
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <!-- 发消息 -->
+
+            <Button
+                android:id="@+id/bt_bus_item_fans_fxx"
+                android:layout_width="110px"
+                android:layout_height="70px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_red_normal"
+                android:gravity="center"
+                android:text="发消息"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

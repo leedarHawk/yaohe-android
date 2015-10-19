@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.collcloud.yaohe"
+    android:versionCode="31"
+    android:versionName="1.0.31" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+    <!--
+         <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="ef0cb7c696f7d4ae4cec6971ced72d7b" />
+    -->
+    <!-- 6dba57897e3cc193c8765761db931177 -->
+    <!-- 6dba57897e3cc193c8765761db931177 这个为正式发布到应用宝，app打包需要 -->
+    <!-- 76f3543c08ee77bb8061fc3a498b384d  Eclipse测试 -->
+    <!-- LEE: ef0cb7c696f7d4ae4cec6971ced72d7b -->
+
+
+    <!-- 扫描相关 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- 应用程序必要的权限声明 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- QQ、QQ空间所需权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- 照相相关权限 -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <application
+        android:name="com.collcloud.yaohe.common.base.AppApplacation"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme" >
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="a2c561bd5b4db3469293b052622b0d52" />
+
+        <activity
+            android:name="com.collcloud.yaohe.activity.splash.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 主页面Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 城市定位Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.lbs.LBSCityActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 搜索Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.search.SearchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 附近 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.fujin.FuJinActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 好玩 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.friend.HaoWanActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.friend.FriendHaowanActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 我的 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.my.MineActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我的 二维码 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.my.QRCodeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 活动详情页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.huodong.HuoDongDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 会员卡信息详情页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.vip.VipCardDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 优惠券详情页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.youhui.YouHuiDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 新品发布详情页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.xinpin.XinPinDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 吆喝啦详情页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 附近推荐商圈详情页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.fujinshop.FuJinFuwuDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.fujinshop.DetailsCallActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.fujinshop.DetailsServiceActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.dianpin.fujin.DetailsCallPinlunActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.dianpin.fujin.DetailsBusinessPinlunActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.yaohela.PicFullScreenShowActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 附近推荐商圈点评页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.dianpin.fujin.FuJinXiaoXiActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 附近推荐商圈新评论页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.dianpin.fujin.AddNewDianpinActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <!-- 附近推荐商圈新回复页面 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.dianpin.fujin.FuJinHuiFuActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 商铺点评 Activity 声明 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.dianpin.fujin.ShopCommentActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.details.yaohela.YaoHeCommentActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 扫描Activity -->
+        <activity
+            android:name="com.zbar.lib.CaptureActivity"
+            android:label="@string/title_activity_capture"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.BusinessActivity"
+            android:label="@string/title_activity_business"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 举报 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.jubao.JuBaoActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 个人 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.PersonActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_person"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.UpdataSexActivity"
+            android:label="@string/title_activity_person"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 修改密码 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.updatepassword.UpdatePasswordActivity"
+            android:label="@string/title_activity_update_password"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.upnickname.UpNicknameActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家信息 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.businessinfo.BusinessInfoActivity"
+            android:label="@string/title_activity_business_info"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家详情信息 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.businessinfo.details.BusnissInfoDetailsActivity"
+            android:label="@string/title_activity_busniss_info_details"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 个人信息Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.message.PersonMsgActivity"
+            android:label="@string/title_activity_person_msg"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 个人赞列表Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.zan.PersonZanActivity"
+            android:label="@string/title_activity_person_zan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我的关注Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.guanzhubusiness.GuanZhuBusinessActivity"
+            android:label="@string/title_activity_guan_zhu_business"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我的优惠Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.youhui.PersonYouhuiActivity"
+            android:label="@string/title_activity_person_youhui"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 使用过的优惠券Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.youhui.usedyouhuiquan.UsedYouHuiQuanActivity"
+            android:label="@string/title_activity_used_you_hui_quan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 可使用的优惠券Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.youhui.usableyouhuiquan.UsableYouHuiQuanActivity"
+            android:label="@string/title_activity_usable_you_hui_quan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 优惠券详情Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.youhuiquan.detail.YouHuiQuanDetailActivity"
+            android:label="@string/title_activity_you_hui_quan_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 收藏 商家Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.shoucang.PersonShouCangActivity"
+            android:label="@string/title_activity_person_shou_cang"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 收藏 个人Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.shoucang.person.PersonSCPersonActivity"
+            android:label="@string/title_activity_person_scbusiness"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 用户反馈Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.feedback.UserFeedBackActivity"
+            android:label="@string/title_activity_user_feed_back"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 个人设置Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.setting.PersonSettingActivity"
+            android:label="@string/title_activity_person_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家我的吆喝Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.myyaohe.MyYaoHeActivity"
+            android:label="@string/title_activity_my_yao_he"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家发吆喝Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.fayaohe.BusinessFaYaoHeActivity"
+            android:label="@string/title_activity_business_fa_yao_he"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家发券Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.faquan.BusinessFQActivity"
+            android:label="@string/title_activity_business_fq"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家发会员卡Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.fahuiyuanka.BusinessFHYKActivity"
+            android:label="@string/title_activity_business_fhyk"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家发新品Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.faxinpin.BusinessFXPActivity"
+            android:label="@string/title_activity_business_fxp"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家发活动Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.fahuodong.BusinessFHDActivity"
+            android:label="@string/title_activity_business_fhd"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家我的粉丝Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity"
+            android:label="@string/title_activity_business_my_fans"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家服务管理Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.myservicemanager.BusinessFWGLActivity"
+            android:label="@string/title_activity_business_fwgl"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.myservicemanager.ServiceTypeDetailsActivity"
+            android:label="@string/title_activity_business_fwgl"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.myservicemanager.BusinessServiceManagerActivity"
+            android:label="@string/title_activity_business_fwgl"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家创建服务Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.createservice.BusinessCreateServiceActivity"
+            android:label="@string/title_activity_business_create_service"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家我的消息Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.mymsg.BusinessMyMsgActivity"
+            android:label="@string/title_activity_business_my_msg"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 评论Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.pinglun.PersonPingLunActivity"
+            android:label="@string/title_activity_person_ping_lun"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.pinglun.PersonShopCommentActivity"
+            android:label="@string/title_activity_person_ping_lun"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 店铺点评Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.shopdianping.PerShopDianPingActivity"
+            android:label="@string/title_activity_per_shop_dian_ping"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 评论输入Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.inputpinglun.InputPingLunActivity"
+            android:label="@string/title_activity_input_ping_lun"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- webView Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.webview.WebViewActivity"
+            android:label="@string/title_activity_web_view"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 忘记密码 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.forgetpassword.ForgetPasswordActivity"
+            android:label="@string/title_activity_forget_password"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 重置密码 Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.resetpassword.ResetPasswordActivity"
+            android:label="@string/title_activity_reset_password"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 登录Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.login.LoginActivity"
+            android:label="@string/title_activity_business_fwgl"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 注册Activity -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.register.RegisterActivity"
+            android:label="@string/title_activity_business_fhd"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 申请为商家 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.shenqingweishangjia.ShenQingWeiSJActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_shen_qing_wei_sj"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.shenqingweishangjia.ChoiceClassifyActivity"
+            android:label="@string/title_activity_shen_qing_wei_sj"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.shenqingweishangjia.ChoiceDistrictActivity"
+            android:label="@string/title_activity_shen_qing_wei_sj"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 友盟AppKey 恒泰地产QQ号申请 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55a1fd7767e58e1ca8005848" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" >
+        </meta-data>
+        <!-- 分享内容编辑页 -->
+        <activity
+            android:name="com.umeng.socialize.view.ShareActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+
+        <!-- 腾讯SSO授权的Activity注册 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1104674811" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 微信回调activity -->
+        <activity
+            android:name="com.collcloud.yaohe.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- ++++++++++++ 更新 +++++++++++++ -->
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <!-- ++++++++++++ 定位 地图相关 +++++++++++++ -->
+
+
+        <!-- 高德SDK地理编码位置显示 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.map.ShowGeocoderActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 高德SDK当前地理位置显示 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.map.ShowMapLocationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.activity.map.ShowPoiSearchActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 商家服务页面 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.business.service.BusinessServiceActivity"
+            android:label="@string/title_activity_business_service"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 个人会员卡列表页面 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.huiyuanka.PersonHYKActivity"
+            android:label="@string/title_activity_person_hyk"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 个人会员卡详情页面 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.person.huiyuanka.detail.PersonHYKDetailActivity"
+            android:label="@string/title_activity_person_hykdetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 奖品列表页面 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.friend.award.AwardActivity"
+            android:label="@string/title_activity_award"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- ECSDK核心服务类 -->
+        <service
+            android:name="com.yuntongxun.ecsdk.ECClientService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- 聊天页面 -->
+        <activity
+            android:name="com.collcloud.yaohe.activity.chat.ChattingActivity"
+            android:label="@string/title_activity_award"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.photo.activity.AlbumActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.collcloud.yaohe.photo.activity.GalleryActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.collcloud.yaohe.photo.activity.ImageFile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.collcloud.yaohe.photo.activity.ShowAllPhoto"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.dtr.zbar.scan.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+    </application>
+
+</manifest>

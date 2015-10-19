@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_common_custom_listview_viewgroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="PxUsage,DisableBaselineAlignment" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ListView
+            android:id="@+id/lv_common_custom_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_activity_search"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:minHeight="140px" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/lv_fujin_two_classfy_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/diliver_in_gray"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:minHeight="140px" >
+        </ListView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_fujin_shop_category_bottom_blank"
+        android:layout_width="match_parent"
+        android:layout_height="40px"
+        android:background="@drawable/icon_fujin_shop_bottom_action"
+        android:text="" />
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_lbs_hot_city_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <TextView
+        android:id="@+id/tv_item_lbs_hot_city"
+        android:layout_width="wrap_content"
+        android:layout_height="70px"
+        android:minWidth="170px"
+        android:background="@drawable/editext_gray_stroke"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="天津"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp" />
+
+</RelativeLayout>

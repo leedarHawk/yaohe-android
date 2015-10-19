@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_home_fragment_guanzhu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent" >
+
+    <com.collcloud.yaohe.ui.view.SingleLayoutListView
+        android:id="@+id/lv_home_guanzhu_shop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#bababa" />
+
+    <LinearLayout
+        android:id="@+id/ll_home_guanzhu_shop_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical" >
+
+        <include layout="@layout/fragment_home_extra" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_home_guanzhu_net_error"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60px"
+        android:gravity="center"
+        android:text="@string/network_not_connected"
+        android:textColor="@color/common_home_text_color_fans_time"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+</LinearLayout>

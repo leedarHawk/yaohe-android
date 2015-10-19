@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_item_fujin_shop_pinglun_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <!-- 图片 和 说明文字 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_item_fujin_pinglun_image_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:id="@+id/ll_item_fujin_shop_pinglun_names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_item_fujin_shop_pinglun_names"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px" >
+
+            <LinearLayout
+                android:id="@+id/ll_item_fujin_pinglun_person_3_huifu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pinglun_person_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="管理员"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_fujin_pinglun_person_huifu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回复"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_item_fujin_pinglun_person_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ll_item_fujin_pinglun_person_3_huifu"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="笑笑笑"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_item_fujin_pinglun_report"
+                android:layout_width="95px"
+                android:layout_height="42px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_fujin_pinglun_huifu"
+                android:singleLine="true"
+                android:text=""
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_item_fujin_pinglun_delete"
+                android:layout_width="95px"
+                android:layout_height="42px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_fujin_pinglun_delete"
+                android:singleLine="true"
+                android:text="" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- 评价几颗星 -->
+
+    <LinearLayout
+        android:id="@+id/ll_item_fujin_pinglun_pingjia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="10px"
+        android:gravity="left|center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_item_fujin_pinlun_pingjia1"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:background="@drawable/icon_rate_star_on"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_fujin_pinlun_pingjia2"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_marginLeft="5px"
+            android:background="@drawable/icon_rate_star_on"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_fujin_pinlun_pingjia3"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_marginLeft="5px"
+            android:background="@drawable/icon_rate_star_on"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_fujin_pinlun_pingjia4"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_marginLeft="5px"
+            android:background="@drawable/icon_rate_star_on"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_fujin_pinlun_pingjia5"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_marginLeft="5px"
+            android:background="@drawable/icon_rate_star_off"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <!-- 内容 -->
+
+    <TextView
+        android:id="@+id/tv_item_fujin_pingjia_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:gravity="center_vertical"
+        android:text="味道很不错，小伙伴快来呀，先到先得哟。"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp" />
+
+    <!-- 评论图片信息 -->
+
+    <LinearLayout
+        android:id="@+id/ll_activity_fujin_pinglun_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <com.collcloud.yaohe.ui.view.MyGridView
+            android:id="@+id/gv_activity_fujin_pinglun_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:horizontalSpacing="15px"
+            android:numColumns="6"
+            android:verticalSpacing="15px" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_fujin_pingjia_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="20px"
+        android:gravity="center_vertical"
+        android:paddingBottom="20px"
+        android:text="2014-12-23"
+        android:textColor="@color/common_home_text_color_fans_time"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/diliver_out_gray" />
+
+</LinearLayout>

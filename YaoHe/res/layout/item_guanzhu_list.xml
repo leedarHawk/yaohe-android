@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_mine_guanzhu_root"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15px"
+        android:paddingTop="15px" >
+
+        <!-- 店铺图片 -->
+
+        <ImageView
+            android:id="@+id/im_per_guanzhu_item_shop_photo"
+            android:layout_width="145px"
+            android:layout_height="135px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/icon_yaohe_loading_default"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+        <!-- 店铺名  店铺类型 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_per_guanzhu_item_shop_con"
+            android:layout_width="fill_parent"
+            android:layout_height="135px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_toRightOf="@id/im_per_guanzhu_item_shop_photo"
+            android:orientation="vertical" >
+
+            <!-- 店铺名 -->
+
+            <TextView
+                android:id="@+id/tv_per_item_guanzhu_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="15sp" />
+            <!-- 店铺类型 -->
+
+            <TextView
+                android:id="@+id/tv_per_item_guanzhu_shop_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/tv_per_item_guanzhu_shop_name"
+                android:gravity="bottom"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10px"
+        android:background="@color/diliver_out_gray" />
+
+</LinearLayout>

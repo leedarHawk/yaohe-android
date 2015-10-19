@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pst="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_home_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 头部 城市定位 ，搜索 ，二维码扫描 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_home_title"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:background="@drawable/icon_home_title_transparent_red"
+        android:gravity="center_vertical"
+        android:splitMotionEvents="false" >
+
+        <TextView
+            android:id="@+id/tv_activity_home_city"
+            android:layout_width="150px"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/icon_home_arrow_down"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/et_activity_home_search"
+            android:layout_width="fill_parent"
+            android:layout_height="70px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15px"
+            android:layout_marginRight="15px"
+            android:layout_toLeftOf="@+id/ll_activity_home_erweima"
+            android:layout_toRightOf="@+id/tv_activity_home_city"
+            android:background="@drawable/icon_home_searchbar_bg"
+            android:drawablePadding="10px"
+            android:drawableRight="@drawable/icon_home_searchbar"
+            android:gravity="center_vertical"
+            android:hint="请输入商家名称，吆喝"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:singleLine="true"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_activity_home_erweima"
+            android:layout_width="90px"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_activity_home_erweima"
+                android:layout_width="70px"
+                android:layout_height="50px"
+                android:src="@drawable/icon_home_scan" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_horizon_listview"
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:layout_below="@+id/rl_activity_home_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/leftArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:background="@drawable/icon_home_tab_left_arrow" />
+
+            <com.collcloud.frame.viewpager.PagerSlidingTabStrip
+                android:id="@+id/pagerTabs"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:background="@color/transparent"
+                pst:pstsDividerColor="#f9f4f3"
+                pst:pstsIndicatorColor="@color/common_text_color_chengse"
+                pst:pstsTabBackground="@color/transparent"
+                pst:pstsTextHighLightColor="@color/common_text_color_chengse"
+                pst:pstsUnderlineColor="@color/common_text_color" />
+
+            <TextView
+                android:id="@+id/rightArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dip"
+                android:background="@drawable/icon_home_tab_right_arrow" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    
+
+    <!-- 主页面的视图容器 -->
+
+    <FrameLayout
+        android:id="@+id/fl_home_tab_menu_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_home_bottom_menu"
+        android:layout_below="@+id/fl_horizon_listview" />
+
+    <LinearLayout
+        android:id="@+id/ll_home_fragment_net_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_home_bottom_menu"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/item_yaohe_no_data_default" />
+    </LinearLayout>
+
+    <!-- 底部 切换菜单选项 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_home_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:id="@+id/ll_home_bottom_menu_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </RelativeLayout>
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rl_home_bottom_menu"
+        android:layout_below="@id/fl_horizon_listview" />
+
+</RelativeLayout>

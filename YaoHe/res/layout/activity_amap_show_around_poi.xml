@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_map_poi_location_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessLeaf" >
+
+  <fragment
+        android:id="@+id/map_around_poi_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.amap.api.maps2d.SupportMapFragment" />
+
+    <Button
+        android:id="@+id/btn_map_show_poi_location_back"
+        android:layout_width="75px"
+        android:layout_height="75px"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/icon_yaohe_map_back_arrow" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/scan_mask"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tv_map_poi_location_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_map_poi_location_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_map_poi_location_title"
+            android:layout_marginTop="20px"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30px"
+            android:layout_below="@+id/tv_map_poi_location_address" />
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomerCheckBox">
+        <attr name="android:text" />
+        <attr name="src_selected" format="reference" />
+        <attr name="src_not_selected" format="reference" />
+        <attr name="android:textSize" />
+        <attr name="checkbox_width" format="dimension" />
+        <attr name="checkbox_height" format="dimension" />
+        <attr name="padding_left" format="dimension" />
+    </declare-styleable>
+    <!-- 上下拉刷新相关 -->
+    <declare-styleable name="SwipeLayout">
+        <attr name="drag_edge" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="top" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="show_mode" format="enum">
+            <enum name="lay_down" value="0" />
+            <enum name="pull_out" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="swipelistviewstyle">
+        <attr name="right_width" format="dimension"></attr>
+    </declare-styleable>
+
+</resources>

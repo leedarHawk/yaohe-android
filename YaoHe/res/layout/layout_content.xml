@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_home_fragment_tuijian"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="PxUsage,UselessParent" >
+
+    <RelativeLayout
+        android:id="@+id/rl_home_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_top_slide_page"
+            android:layout_width="fill_parent"
+            android:layout_height="270px"
+            android:clickable="true"
+            android:fadingEdge="none"
+            android:focusable="true"
+            android:overScrollMode="always" />
+
+        <LinearLayout
+            android:id="@+id/top_circle_images"
+            android:layout_width="fill_parent"
+            android:layout_height="30px"
+            android:layout_alignBottom="@id/vp_top_slide_page"
+            android:background="@null"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.collcloud.yaohe.ui.view.SingleLayoutListView
+        android:id="@+id/lv_home_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/diliver_gray" />
+
+    <LinearLayout
+        android:id="@+id/ll_home_fragment_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/fragment_home_extra" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_home_net_error"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60px"
+        android:gravity="center"
+        android:text="@string/network_not_connected"
+        android:textColor="@color/common_home_text_color_fans_time"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+</LinearLayout>

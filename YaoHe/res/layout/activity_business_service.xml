@@ -1,0 +1,167 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_fw_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".BusinessServiceManagerActivity"
+    tools:ignore="RtlHardcoded,HardcodedText,PxUsage,DisableBaselineAlignment" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_fw_back_title_send"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_backandtitle_top" />
+
+    <!-- 发券 -->
+
+    <LinearLayout
+        android:id="@+id/ll_business_service_1"
+        android:layout_width="fill_parent"
+        android:layout_height="110px"
+        android:layout_below="@+id/in_fw_back_title_send"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="30px"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rl_fw_fq"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cir_re"
+            android:clickable="true"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fw_pic_quan"
+                android:layout_width="45px"
+                android:layout_height="35px"
+                android:layout_centerVertical="true"
+                android:background="@drawable/youhuiquan"
+                android:contentDescription="@string/app_name" />
+
+            <TextView
+                android:id="@+id/tv_fw_fq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/im_fw_pic_quan"
+                android:paddingLeft="10px"
+                android:text="发  券"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!-- 发会员卡 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fw_fhyk"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20px"
+            android:layout_weight="1"
+            android:background="@drawable/cir_re"
+            android:clickable="true"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fw_pic_hyk"
+                android:layout_width="45px"
+                android:layout_height="35px"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/huiyuanka" />
+
+            <TextView
+                android:id="@+id/tv_fw_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/im_fw_pic_hyk"
+                android:paddingLeft="10px"
+                android:text="会员卡"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_business_service_2"
+        android:layout_width="fill_parent"
+        android:layout_height="110px"
+        android:layout_below="@+id/ll_business_service_1"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal" >
+
+        <!-- 新品 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fw_xp"
+            android:layout_width="0dp"
+            android:layout_height="110px"
+            android:layout_weight="1"
+            android:background="@drawable/cir_re"
+            android:clickable="true"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fw_pic_xp"
+                android:layout_width="44px"
+                android:layout_height="38px"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/new_brand" />
+
+            <TextView
+                android:id="@+id/tv_fw_fxp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/im_fw_pic_xp"
+                android:paddingLeft="10px"
+                android:text="新  品"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!-- 发活动 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_fw_fhd"
+            android:layout_width="0dp"
+            android:layout_height="110px"
+            android:layout_marginLeft="20px"
+            android:layout_weight="1"
+            android:background="@drawable/cir_re"
+            android:clickable="true"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_fw_pic_hd"
+                android:layout_width="44px"
+                android:layout_height="40px"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/send_activity" />
+
+            <TextView
+                android:id="@+id/tv_fw_hd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/im_fw_pic_hd"
+                android:paddingLeft="10px"
+                android:layout_centerVertical="true"
+                android:text="发活动"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

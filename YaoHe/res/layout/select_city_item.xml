@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <TextView
+        android:id="@+id/group_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/diliver_out_gray"
+        android:gravity="left|center"
+        android:paddingBottom="10px"
+        android:paddingLeft="10px"
+        android:paddingTop="10px"
+        android:text="S"
+        android:textColor="@color/common_home_text_color_title"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/friends_item_alpha_line"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_list_divider_drawable"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/column_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:gravity="center_vertical"
+        android:minHeight="55px"
+        android:paddingLeft="20px"
+        android:text="深圳"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp" />
+
+</LinearLayout>

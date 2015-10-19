@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f7f7f7"
+    tools:context=".PerShopDianPingActivity" >
+   <!--头部标题 -->
+   <include 
+       android:layout_width="fill_parent"
+       android:layout_height="90px"
+       layout="@layout/layout_backandtitle_top"/>
+   
+   <!-- 信息评论 店铺评论 -->
+   <RelativeLayout 
+       android:layout_width="fill_parent"
+       android:layout_height="70px"
+       android:background="#f5f5f5"
+       android:gravity="center"
+       android:orientation="horizontal">
+       <!-- 信息评论  -->
+       <TextView
+           android:id="@+id/tv_per_msg_shoppinglun" 
+           android:layout_width="220px"
+           android:layout_height="50px"
+           android:layout_marginTop="8px"
+           android:layout_marginBottom="8px"
+           android:paddingLeft="60px"
+           android:paddingRight="60px"
+           android:paddingTop="8px"
+           android:paddingBottom="8px"
+           android:background="@drawable/red_fram_right_stright"
+           android:layout_gravity="center_horizontal"
+           android:textColor="@color/red_text_color"           
+           android:text="信息评论"
+            android:textSize="14sp"/>
+       <!-- 店铺评论 -->
+       <TextView 
+           android:id="@+id/tv_per_shop_dianping" 
+           android:layout_width="220px"
+           android:layout_height="50px"
+           android:layout_marginTop="8px"
+           android:layout_marginBottom="8px"
+           android:paddingLeft="60px"
+           android:paddingRight="60px"
+           android:paddingTop="8px"
+           android:paddingBottom="8px"
+           android:background="@drawable/red_left_stright"
+           android:layout_toRightOf="@id/tv_per_msg_shoppinglun"
+           android:layout_gravity="center_horizontal"
+           android:textColor="@color/white"
+           android:text="店铺点评"
+           android:textSize="14sp"/>
+   </RelativeLayout >
+   
+   <!-- 评论列表 -->
+   <com.handmark.pulltorefresh.library.PullToRefreshListView 
+       android:id="@+id/pull_to_re_shop_dianping"
+       android:layout_marginTop="10px"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent">
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+</LinearLayout>

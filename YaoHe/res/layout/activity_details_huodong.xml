@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_details_huodong_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diliver_out_gray"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_huodong_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_yaohe_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_details_huodong_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
+
+            <!-- 活动标题文字 , 优惠类型，时间信息等 -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/diliver_out_gray" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7px"
+                    android:minHeight="145px" 
+                    android:background="@color/white" >
+
+                    <!-- 活动标题文字 -->
+
+                    <LinearLayout
+                        android:id="@+id/tv_details_type_title_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/ll_details_tag_img"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_details_type_huodong_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="20px"
+                            android:layout_marginRight="15px"
+                            android:layout_marginTop="20px"
+                            android:text=""
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_details_huodong_type_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20px"
+                            android:layout_marginTop="15px"
+                            android:text=""
+                            android:textColor="@color/common_home_text_color_fans_time"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_details_tag_img"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="180px"
+                            android:layout_height="141px"
+                            android:background="@drawable/icon_home_details_huodong"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_details_type_img"
+                    android:layout_width="80px"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:id="@+id/iv_details_type_img"
+                        android:layout_width="55px"
+                        android:layout_height="100px"
+                        android:background="@drawable/icon_home_details_huodong"
+                        android:gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20px"
+                android:background="@drawable/icon_details_bolang_line" />
+
+            <!-- 详情简介 -->
+
+            <TextView
+                android:id="@+id/tv_details_huodong_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <!-- 活动时间 信息 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动时间："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_huodong_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <!-- 活动地点 信息 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="10px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动地点："
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_huodong_didian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15px"
+                    android:text=" "
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="@color/diliver_out_gray" />
+
+            <RelativeLayout
+                android:id="@+id/rl_huodong_page_adapter_pic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20px" >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_huodong_page_adapter_pic"
+                    android:layout_width="fill_parent"
+                    android:layout_height="400px"
+                    android:clickable="true"
+                    android:fadingEdge="none"
+                    android:focusable="true"
+                    android:overScrollMode="always" />
+
+                <LinearLayout
+                    android:id="@+id/ll_huodong_page_adapter_circle_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30px"
+                    android:layout_alignBottom="@id/vp_huodong_page_adapter_pic"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="15px"
+                android:background="@color/diliver_out_gray" />
+
+            <!-- 活动详情页面推荐的店铺信息 -->
+
+            <LinearLayout
+                android:id="@+id/rl_details_huodong_bottom_tujian_shop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <include layout="@layout/common_bottom_details_tuijian_shop" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40px"
+                android:background="@color/diliver_out_gray" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- 包含活动页面底部的 评论，点赞 ，收藏功能 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_details_huodong_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <include layout="@layout/common_bottom_details_info" />
+    </RelativeLayout>
+
+</RelativeLayout>

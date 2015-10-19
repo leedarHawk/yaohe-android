@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_item_home_content_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText,UseCompoundDrawables,UselessParent,ObsoleteLayoutParam,SmallSp,DisableBaselineAlignment" >
+
+    <!-- android:descendantFocusability="blocksDescendants"android:focusable="false" -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/diliver_in_gray" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15px"
+        android:paddingBottom="20px"
+        android:splitMotionEvents="false" >
+
+        <RelativeLayout
+            android:id="@+id/rl_item_business_shop_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:splitMotionEvents="false" >
+
+            <!-- 商家名称 和 关注 -->
+
+            <RelativeLayout
+                android:id="@+id/ll_item_home_name_guanzhud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:gravity="center_vertical"
+                android:splitMotionEvents="false" >
+
+                <TextView
+                    android:id="@+id/tv_item_home_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/tv_item_home_guanzhu"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_home_guanzhu"
+                    android:layout_width="100px"
+                    android:layout_height="45px"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/icon_home_type_weiguanzhu"
+                    android:contentDescription="@string/app_name"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
+            </RelativeLayout>
+            <!-- 星级评定 和 粉丝 -->
+
+            <RelativeLayout
+                android:id="@+id/ll_item_home_xingji_fans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_item_home_name_guanzhud"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="6px"
+                android:gravity="center_vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_item_home_pingjia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/tv_item_home_fans"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_item_home_pingjia1"
+                        android:layout_width="25px"
+                        android:layout_height="25px"
+                        android:background="@drawable/icon_rate_star_on"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_item_home_pingjia2"
+                        android:layout_width="25px"
+                        android:layout_height="25px"
+                        android:layout_marginLeft="3px"
+                        android:background="@drawable/icon_rate_star_on"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_item_home_pingjia3"
+                        android:layout_width="25px"
+                        android:layout_height="25px"
+                        android:layout_marginLeft="3px"
+                        android:background="@drawable/icon_rate_star_on"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_item_home_pingjia4"
+                        android:layout_width="25px"
+                        android:layout_height="25px"
+                        android:layout_marginLeft="3px"
+                        android:background="@drawable/icon_rate_star_off"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_item_home_pingjia5"
+                        android:layout_width="25px"
+                        android:layout_height="25px"
+                        android:layout_marginLeft="3px"
+                        android:background="@drawable/icon_rate_star_off"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_item_home_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/item_content_diviler"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_below="@+id/rl_item_business_shop_content"
+            android:layout_marginTop="10px"
+            android:background="@color/diliver_in_gray" />
+        <!-- 图片 和 说明文字 -->
+
+        <RelativeLayout
+            android:id="@+id/ll_item_hoe_image_content"
+            android:layout_width="match_parent"
+            android:layout_height="160px"
+            android:layout_below="@+id/item_content_diviler"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical" >
+
+            <FrameLayout
+                android:id="@+id/fv_item_home_shop_image"
+                android:layout_width="200px"
+                android:layout_height="160px"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/iv_item_hme_shop_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="7px"
+                    android:background="@drawable/icon_yaohe_loading_default"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/iv_item_hme_shop_image_tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_item_home_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tv_item_home_shop_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15px"
+                android:layout_toRightOf="@+id/fv_item_home_shop_image"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingBottom="10px"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_item_home_shop_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/fv_item_home_shop_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/item_content_diviler_2"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/ll_item_hoe_image_content"
+            android:layout_marginTop="15px"
+            android:background="@drawable/icon_details_fenge_line" />
+
+        <!-- 点赞  &  收藏  &  评论 -->
+
+        <LinearLayout
+            android:id="@+id/ll_item_home_zan_pinlun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_content_diviler_2"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="15px"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_item_home_zan_img"
+                    android:layout_width="33px"
+                    android:layout_height="34px"
+                    android:layout_marginLeft="40px"
+                    android:background="@drawable/icon_home_item_zan_off"
+                    android:gravity="left|center"
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
+
+                <TextView
+                    android:id="@+id/tv_item_home_zan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:paddingLeft="20px"
+                    android:paddingRight="15px"
+                    android:text="0"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:minHeight="34px"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_item_home_pinlun_img"
+                    android:layout_width="32px"
+                    android:layout_height="33px"
+                    android:background="@drawable/icon_home_item_liuyan_off"
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
+
+                <TextView
+                    android:id="@+id/tv_item_home_pinlun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:paddingRight="15px"
+                    android:text="0"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_item_home_shoucang_img"
+                    android:layout_width="33px"
+                    android:layout_height="34px"
+                    android:background="@drawable/icon_home_item_shoucang_off"
+                    android:gravity="left|center"
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
+
+                <TextView
+                    android:id="@+id/tv_item_home_shoucang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:paddingRight="40px"
+                    android:text="0"
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

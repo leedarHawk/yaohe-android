@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_home_viewpager"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_top_slide_page"
+        android:layout_width="fill_parent"
+        android:layout_height="200dip"
+        android:clickable="true"
+        android:fadingEdge="none"
+        android:focusable="true"
+        android:overScrollMode="always" />
+
+    <LinearLayout
+        android:id="@+id/top_circle_images"
+        android:layout_width="fill_parent"
+        android:layout_height="30px"
+        android:layout_alignBottom="@id/vp_top_slide_page"
+        android:background="@null"
+        android:gravity="center"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    <!-- 5颗星 -->
+    <TextView
+        android:id="@+id/tv_dianping_star1"
+        android:layout_width="18px"
+        android:layout_height="17px"
+        android:background="@drawable/red_star"/>
+      
+      <TextView
+        android:id="@+id/tv_dianping_star2"
+        android:layout_width="18px"
+        android:layout_height="17px"
+        android:background="@drawable/red_star"/>
+      
+      <TextView
+        android:id="@+id/tv_dianping_star3"
+        android:layout_width="18px"
+        android:layout_height="17px"
+        android:background="@drawable/red_star"/>
+      
+      <TextView
+        android:id="@+id/tv_dianping_star4"
+        android:layout_width="18px"
+        android:layout_height="17px"
+        android:background="@drawable/red_star"/>
+      
+      <TextView
+        android:id="@+id/tv_dianping_star5"
+        android:layout_width="18px"
+        android:layout_height="17px"
+        android:background="@drawable/gray_star"/>
+
+</LinearLayout>

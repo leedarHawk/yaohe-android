@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_commonn_bottom_tuijian_shop_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="30px"
+    android:layout_marginTop="25px"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText,DisableBaselineAlignment,RtlHardcoded" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px" >
+
+        <ImageView
+            android:id="@+id/iv_details_huodong_tuijian_img"
+            android:layout_width="120px"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/app_name"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/icon_yaohe_default_logo" />
+
+        <RelativeLayout
+            android:id="@+id/rl_details_tuijian_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="15px"
+            android:layout_toLeftOf="@+id/rl_details_tuijian_guanzhu"
+            android:layout_toRightOf="@+id/iv_details_huodong_tuijian_img" >
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_huodong_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="top"
+                android:layout_marginTop="5px"
+                android:maxLines="2"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_huodong_fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5px"
+                android:layout_marginTop="3px"
+                android:text="0 粉丝"
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_details_tuijian_guanzhu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20px" >
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_guanzhu"
+                android:layout_width="100px"
+                android:layout_height="40px"
+                android:layout_centerInParent="true"
+                android:text=""
+                android:textColor="@android:color/transparent"
+                android:background="@drawable/icon_home_type_weiguanzhu" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:background="@color/line1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="30px" >
+
+        <TextView
+            android:id="@+id/tv_details_tuijian_dizhi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top|left"
+            android:layout_toLeftOf="@+id/tv_details_huodong_dianhua_diliver"
+            android:text=""
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+        <!-- 商家客服 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_details_tuijian_kefu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/tv_details_huodong_dianhua_diliver"
+            android:gravity="center"
+            android:visibility="gone"
+            android:minWidth="80px" >
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_kefu_img"
+                android:layout_width="50px"
+                android:layout_height="40px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_home_details_type_help" />
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_kefu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_details_tuijian_kefu_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10px"
+                android:text="客服"
+                android:textColor="@color/common_home_title_bg" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_details_huodong_dianhua_diliver"
+            android:layout_width="2px"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/rl_details_tuijian_dianhua"
+            android:layout_alignTop="@+id/rl_details_tuijian_dianhua"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/rl_details_tuijian_dianhua"
+            android:background="@color/diliver_out_gray" />
+        <!-- 商家电话 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_details_tuijian_dianhua"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10px"
+            android:gravity="center"
+            android:minWidth="80px" >
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_dianhua_img"
+                android:layout_width="50px"
+                android:layout_height="40px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_home_details_type_tel" />
+
+            <TextView
+                android:id="@+id/tv_details_tuijian_dianhua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_details_tuijian_dianhua_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10px"
+                android:text="电话"
+                android:textColor="@color/common_home_title_bg" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

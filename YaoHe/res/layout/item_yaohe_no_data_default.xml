@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_yaohe_no_data_text_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,PxUsage" >
+
+    <ImageView
+        android:id="@+id/iv_yaohe_no_data_"
+        android:layout_width="192px"
+        android:layout_height="142px"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/icon_yaohe_no_data_default"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_yaohe_no_data_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30px"
+        android:gravity="center"
+        android:text="@string/yaohe_fujin_district_no_shop_"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_yaohe_no_data_link"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30px"
+        android:gravity="center"
+        android:text="去附近商家看看吧"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+</LinearLayout>

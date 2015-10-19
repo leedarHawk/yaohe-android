@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_fujin_viewgroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,UselessParent,HardcodedText,ContentDescription" >
+
+    <!-- 头部 附近名称，地图定位 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_fujin_title"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:background="@color/common_home_title_bg"
+        android:gravity="center_vertical"
+        android:splitMotionEvents="false" >
+
+        <TextView
+            android:id="@+id/tv_activity_fujin_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="附近的商家"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btn_activity_fujin_location"
+            android:layout_width="60px"
+            android:layout_height="55px"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="30px"
+            android:background="@drawable/icon_fujin_location" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_activity_fujin_action"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_activity_fujin_title"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="70px"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_activity_fujin_fenlei"
+                android:layout_width="0dp"
+                android:layout_height="70px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_activity_fujin_fenlei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="分类"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_activity_fujin_fenlei_arrow"
+                    android:layout_width="20px"
+                    android:layout_height="10px"
+                    android:layout_marginLeft="15px"
+                    android:background="@drawable/icon_fujin_category_arrow_gray"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="15px"
+                android:layout_marginTop="15px"
+                android:background="@color/line2" />
+
+            <LinearLayout
+                android:id="@+id/ll_activity_fujin_shangjia"
+                android:layout_width="0dp"
+                android:layout_height="70px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_activity_fujin_shangjia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="商圈"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_activity_fujin_shangjia_arrow"
+                    android:layout_width="20px"
+                    android:layout_height="10px"
+                    android:layout_marginLeft="15px"
+                    android:background="@drawable/icon_fujin_category_arrow_gray"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title_gray_line"
+            android:layout_width="fill_parent"
+            android:layout_height="3px"
+            android:background="@color/diliver_out_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_shop_nearby_fragment_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ll_bottom_fujin_menus"
+        android:layout_below="@+id/ll_activity_fujin_action"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/item_yaohe_no_data_default" />
+    </LinearLayout>
+    <!-- 附近商圈 内容列表 -->
+
+    <com.collcloud.yaohe.ui.view.SingleLayoutListView
+        android:id="@+id/lv_fujin_shagnquan_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ll_bottom_fujin_menus"
+        android:layout_below="@+id/ll_activity_fujin_action"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_fujin_menus"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/ll_bottom_fujin_normal_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/yaohe_footer_no" />
+    </LinearLayout>
+
+</RelativeLayout>

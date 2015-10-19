@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sp="http://schemas.android.com/apk/res/com.collcloud.yaohe"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_myyaohe_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="PxUsage" >
+
+    <!-- 返回 标题 发布 -->
+
+    <include
+        android:id="@+id/incl_myh_back_title_send"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        layout="@layout/layout_back_title_send_top" />
+
+    <!-- 我的吆喝列表 -->
+    <!--
+    <com.collcloud.swipe.view.XListView
+        android:id="@+id/xListView_myh_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000" >
+    </com.collcloud.swipe.view.XListView>
+    -->
+    <!-- 列表 -->
+
+
+    <!--
+         <com.collcloud.yaohe.ui.view.SwipeListView
+        android:id="@+id/slv_person_my_yaohe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff4f7f9"
+        android:cacheColorHint="#00000000"
+        android:divider="#dddbdb"
+        android:dividerHeight="1dp"
+        sp:right_width="160px" />
+    -->
+
+    <cn.swu.pulltorefreshswipemenulistviewsample.PullToRefreshSwipeMenuListView
+        android:id="@+id/slv_person_my_yaohe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:background="#fff4f7f9"
+        android:cacheColorHint="#00000000"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_business_my_yaohe_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/item_yaohe_no_data_default" />
+    </LinearLayout>
+
+</LinearLayout>

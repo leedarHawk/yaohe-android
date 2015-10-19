@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <com.collcloud.swipe.SwipeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+    <!-- 删除  按钮 -->
+    <LinearLayout
+        android:id="@+id/ll_menu_bus_msg_del"
+        android:layout_width="90px"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_light"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/im_bus_msg_trash"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:src="@drawable/trash" />
+
+        <TextView
+            android:id="@+id/tv_bus_msg_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout> 
+    
+    <!-- 具体内容 -->
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_selector"
+            android:padding="6dp">   
+    
+    <!-- 用户头像 名称 时间 回复 -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:orientation="horizontal">
+        
+          <!-- 用户头像  消息提示-->
+          <FrameLayout
+              android:id="@+id/im_bus_bus_msg_item_photo"
+              android:layout_width="100px"
+              android:layout_height="match_parent"
+              android:layout_alignParentLeft="true"
+              android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/im_item_per_bus_msg_img"
+                    android:layout_width="80px"
+		            android:layout_height="80px"
+		            android:padding="10px"
+		            android:src="@drawable/women" 
+		            android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:id="@+id/tv_item_per_bus_msg_msg_tags"
+                    android:layout_width="24px"
+                    android:layout_height="24px"
+                    android:gravity="center"
+                    android:layout_gravity="right"
+                    android:background="@drawable/red_circle"
+                    android:textColor="@color/white"
+                    android:text="14"
+                    android:textSize="12sp"
+                    android:contentDescription="@string/app_name" />
+            </FrameLayout>
+            
+        <!-- 名称 时间-->
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@id/im_bus_bus_msg_item_photo">
+            <!-- 名称 -->
+            <TextView
+              android:id="@+id/tv_bus_item_bus_msg_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:singleLine="true" 
+              android:text="乐乐"
+              android:textSize="18sp"
+              android:textColor="@color/tv_gray"/>
+            
+            <!-- 性别-->
+            <TextView
+               android:layout_below="@id/tv_bus_item_bus_msg_name"
+               android:id="@+id/tv_per_item_pinglun_time"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" 
+               android:layout_marginTop="10px"
+               android:singleLine="true" 
+               android:text="新发的消息奥"
+               android:textSize="14sp"
+               android:textColor="@color/my_textcolor"/>            
+        </RelativeLayout>
+        
+        <!-- 发消息-->
+        <TextView 
+            android:id="@+id/bt_bus_item_bus_msg_fxx"
+            android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="10px"
+	        android:layout_marginTop="29px"
+	        android:layout_marginBottom="29px"
+	        android:layout_alignParentRight="true"
+	        android:singleLine="true"
+	        android:text="7:30"
+	        android:textColor="@color/my_textcolor"/>
+    </RelativeLayout>
+    
+   </LinearLayout>
+   
+ </com.collcloud.swipe.SwipeLayout>
+ 
+</LinearLayout>
+
+
+
+
+    

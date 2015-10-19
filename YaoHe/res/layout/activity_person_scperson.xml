@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_per_sc_per_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaebed"
+    tools:context=".PersonSCPersonActivity" >
+
+    <!-- 返回  标题 -->
+
+    <include
+        android:id="@+id/in_sc_per_top"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_backandtitle_top" />
+
+    <!-- 商家  个人 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_bus_per_top"
+        android:layout_width="fill_parent"
+        android:layout_height="80px"
+        android:layout_below="@id/in_sc_per_top"
+        android:background="#f5f5f5"
+        android:gravity="center" >
+
+        <!-- 商家 -->
+
+        <TextView
+            android:id="@+id/tv_sc_bus_mu_"
+            android:layout_width="220px"
+            android:layout_height="60px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:background="@drawable/red_right_stright"
+            android:gravity="center"
+            android:paddingBottom="8px"
+            android:paddingLeft="60px"
+            android:paddingRight="60px"
+            android:paddingTop="8px"
+            android:singleLine="true"
+            android:text="商家"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <!-- 个人 -->
+
+        <TextView
+            android:id="@+id/tv_sc_person_mu"
+            android:layout_width="220px"
+            android:layout_height="60px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_toRightOf="@id/tv_sc_bus_mu_"
+            android:background="@drawable/red_fram_left_stright"
+            android:gravity="center"
+            android:paddingBottom="8px"
+            android:paddingLeft="60px"
+            android:paddingRight="60px"
+            android:paddingTop="8px"
+            android:singleLine="true"
+            android:text="个人"
+            android:textColor="@color/red_text_color"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <!-- 列表 -->
+
+    <com.collcloud.swipe.view.XListView
+        android:id="@+id/xlv_sc_person"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/rl_bus_per_top"
+        android:cacheColorHint="#00000000" >
+    </com.collcloud.swipe.view.XListView>
+
+</RelativeLayout>

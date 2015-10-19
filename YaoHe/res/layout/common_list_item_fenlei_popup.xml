@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_item_fenlei_complete_adapter"
+    android:gravity="center_vertical"
+    android:minHeight="80px"
+    tools:ignore="PxUsage" >
+
+    <TextView
+        android:id="@+id/tv_common_list_item_popup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="14sp" >
+    </TextView>
+
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_award_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AwardActivity" >
+
+    <!-- 头部菜单 -->
+
+    <include
+        android:id="@+id/in_award_top"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        layout="@layout/my_login_top" />
+
+    <ListView
+        android:id="@+id/lv_award_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/in_award_top"
+        android:cacheColorHint="#00000000" />
+
+</RelativeLayout>

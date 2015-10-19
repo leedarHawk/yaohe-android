@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_person_shoucang_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/diliver_in_gray" />
+
+    <com.collcloud.swipe.SwipeLayout
+        android:id="@+id/swipe_shoucang"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <!-- 删除图片 按钮 -->
+
+        <LinearLayout
+            android:id="@+id/ll_menu_shoucnag"
+            android:layout_width="140px"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/trash_shoucang"
+                android:layout_width="30px"
+                android:layout_height="35px"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/trash" />
+
+            <TextView
+                android:id="@+id/delete_shoucang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="删除"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </com.collcloud.swipe.SwipeLayout>
+    <!-- 具体信息 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:orientation="vertical"
+        android:paddingBottom="15px"
+        android:paddingTop="15px" >
+
+        <!-- 上层信息 名称 图标 时间 -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:background="@drawable/item_selector" >
+
+            <!-- 名称 -->
+
+            <TextView
+                android:id="@+id/tv_who_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:maxWidth="560px"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <!-- 商家图标 -->
+
+            <ImageView
+                android:id="@+id/im_tb"
+                android:layout_width="25px"
+                android:layout_height="25px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15px"
+                android:layout_toRightOf="@+id/tv_who_"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_business_type" />
+        </RelativeLayout>
+
+        <!-- 灰色底线 -->
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_list_driver_white" />
+
+        <!-- 图片  折扣  文字 -->
+
+        <RelativeLayout
+            android:id="@+id/ll_item_home_image_content"
+            android:layout_width="match_parent"
+            android:layout_height="140px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="15px"
+            android:gravity="center_vertical" >
+
+            <FrameLayout
+                android:id="@+id/fl_item_home_shop_img"
+                android:layout_width="165px"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/iv_item_shop_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="7px"
+                    android:background="@drawable/icon_yaohe_loading_default"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/iv_item_shop_img_tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36px"
+                    android:background="@drawable/icon_home_type_youhuiquan"
+                    android:contentDescription="@string/app_name"
+                    android:maxWidth="60px" />
+            </FrameLayout>
+
+            <!-- 折扣信息 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_item_zhekou_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/fl_item_home_shop_img" >
+
+                <TextView
+                    android:id="@+id/tv_item_zhekou_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15px"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+                <!-- 时间 -->
+
+                <TextView
+                    android:id="@+id/tv_show_shoucang_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_fans_time"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

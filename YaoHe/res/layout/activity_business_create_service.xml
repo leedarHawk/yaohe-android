@@ -1,0 +1,178 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_create_servers_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaebed"
+    tools:context=".BusinessCreateServiceActivity"
+    tools:ignore="HardcodedText,ContentDescription,PxUsage" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_create_service"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_backandtitle_top" />
+
+    <!-- 发券     发会员卡    新品     发活动 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/in_create_service"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:padding="10px" >
+
+        <!-- 发券 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_createser_fq"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="16px"
+            android:layout_marginRight="5px"
+            android:layout_toLeftOf="@+id/tv_center_port_createser"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_createser_pic_quan"
+                android:layout_width="45px"
+                android:layout_height="35px"
+                android:layout_centerVertical="true"
+                android:src="@drawable/youhuiquan" />
+
+            <TextView
+                android:id="@+id/tv_createser_fq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@id/im_createser_pic_quan"
+                android:text="发  券"
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <!-- 第一个中心点 -->
+
+        <TextView
+            android:id="@+id/tv_center_port_createser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="" />
+
+        <!-- 发会员卡 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_createser_fhyk"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="16px"
+            android:layout_toRightOf="@id/tv_center_port_createser"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_createser_pic_hyk"
+                android:layout_width="45px"
+                android:layout_height="35px"
+                android:layout_centerVertical="true"
+                android:src="@drawable/huiyuanka" />
+
+            <TextView
+                android:id="@+id/tv_createser_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@id/im_createser_pic_hyk"
+                android:text="会员卡"
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!-- 新品 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_createser_xp"
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_below="@id/rl_createser_fq"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="16px"
+            android:layout_marginRight="5px"
+            android:layout_toLeftOf="@+id/tv_center_port2_createser"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_createser_pic_xp"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_centerVertical="true"
+                android:src="@drawable/new_brand" />
+
+            <TextView
+                android:id="@+id/tv_createser_fxp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@id/im_createser_pic_xp"
+                android:text="新  品"
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!-- 第二个中心点 -->
+
+        <TextView
+            android:id="@+id/tv_center_port2_createser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_center_port_createser"
+            android:layout_centerHorizontal="true"
+            android:text="" />
+
+        <!-- 发活动 -->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="110px"
+            android:layout_below="@id/rl_createser_fhyk"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="16px"
+            android:layout_toRightOf="@id/tv_center_port2_createser"
+            android:background="@drawable/cir_re"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/im_createser_pic_hd"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_centerVertical="true"
+                android:src="@drawable/send_activity" />
+
+            <TextView
+                android:id="@+id/tv_createser_hd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@id/im_createser_pic_hd"
+                android:text="发活动"
+                android:textColor="@color/common_home_text_color_fans_time"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

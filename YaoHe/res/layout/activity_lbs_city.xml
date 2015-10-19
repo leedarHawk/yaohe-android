@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_activity_lbs_city_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <!-- 包含吆喝共通title -->
+
+    <RelativeLayout
+        android:id="@+id/rl_lbs_city_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center" >
+
+        <include layout="@layout/common_back_text_title" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_lbs_current_hot_city_details"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_lbs_city_title"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_lbs_current_city"
+            android:layout_width="fill_parent"
+            android:layout_height="60px"
+            android:background="@color/diliver_out_gray"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20px"
+            android:text="当前城市"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="15sp" />
+
+        <!-- 当前城市 内容 -->
+
+        <LinearLayout
+            android:id="@+id/ll_current_city_location"
+            android:layout_width="fill_parent"
+            android:layout_height="110px"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_current_city_show"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20px" >
+
+                <TextView
+                    android:id="@+id/tv_current_city_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70px"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="center"
+                    android:minWidth="150px"
+                    android:paddingLeft="5px"
+                    android:paddingRight="5px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_current_city_shuoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15px"
+                    android:layout_marginRight="15px"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="该城市尚未开通，请重新选择"
+                    android:textColor="@color/common_text_color_chengse"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_lbs_retry_viewgroup"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="定位失败,请"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_lbs_retry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="点击重试"
+                    android:textColor="@color/common_text_color_chengse"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 热门城市标题 -->
+
+    <TextView
+        android:id="@+id/tv_lbs_hot_city"
+        android:layout_width="fill_parent"
+        android:layout_height="60px"
+        android:layout_below="@+id/ll_lbs_current_hot_city_details"
+        android:background="@color/diliver_out_gray"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20px"
+        android:text="热门城市"
+        android:textColor="@color/common_home_text_color_title"
+        android:layout_marginRight="15dip"
+        android:textSize="15sp" />
+    <!-- 热门城市内容 -->
+
+    <LinearLayout
+        android:id="@+id/ll_activity_details_hot_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_lbs_hot_city"
+        android:layout_marginBottom="15px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="15px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <com.collcloud.yaohe.ui.view.MyGridView
+            android:id="@+id/gv_activity_details_hot_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:gravity="center"
+            android:horizontalSpacing="15px"
+            android:listSelector="@color/white"
+            android:numColumns="3"
+            android:verticalSpacing="15px" />
+    </LinearLayout>
+
+    <!--  以下内容为快速索引listview -->
+    <RelativeLayout
+        android:id="@+id/rl_lbs_city_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="15dip"
+        android:layout_above="@+id/rl_lbs_bottom_menu"
+        android:layout_below="@+id/ll_activity_details_hot_city" >
+
+        <com.collcloud.yaohe.ui.view.PinnedHeaderListView
+            android:id="@+id/citys_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="#00000000"
+            android:background="#878987"
+            android:focusableInTouchMode="true" />
+    </RelativeLayout>
+
+    <com.collcloud.yaohe.ui.view.BladeView
+        android:id="@+id/ll_lbs_bladeview"
+        android:layout_width="50px"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rl_lbs_bottom_menu"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_lbs_hot_city"
+        android:background="#00000000"
+        android:paddingBottom="15px"
+        android:visibility="gone"
+        android:paddingTop="15px" />
+
+    <!-- 底部 切换菜单选项 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_lbs_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <include
+            android:id="@+id/ll_bottom_lbs_normal_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/yaohe_footer_no" />
+    </RelativeLayout>
+
+</RelativeLayout>

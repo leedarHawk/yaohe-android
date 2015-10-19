@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90px"
+    android:background="@color/common_home_title_bg"
+    android:orientation="horizontal"
+    android:splitMotionEvents="false"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <!-- 头部 返回箭头 ，标题内容 ，分享按钮，其他 -->
+
+    <RelativeLayout
+        android:id="@+id/my_login_rela_top"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:background="@color/common_home_title_bg"
+        android:gravity="center_vertical"
+        android:splitMotionEvents="false" >
+
+        <!-- 标题栏 返回按钮 -->
+
+        <LinearLayout
+            android:id="@+id/ll_top_back"
+            android:layout_width="90px"
+            android:layout_height="90px"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" >
+
+            <ImageView
+                android:id="@+id/my_login_im_top_back"
+                android:layout_width="30px"
+                android:layout_height="35px"
+                android:background="@drawable/top_back_btn"
+                android:contentDescription="@string/app_name"/>
+        </LinearLayout>
+        <!-- 标题文字 -->
+
+        <TextView
+            android:id="@+id/my_login_tv_top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <!-- 对立按钮 -->
+
+        <TextView
+            android:id="@+id/my_login_top_tv_loginorregist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="注册"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</LinearLayout>

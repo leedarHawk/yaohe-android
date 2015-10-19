@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.collcloud.swipe.SwipeLayout
+        android:id="@+id/swipe_shoucang"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        
+        <!-- 删除图片 按钮-->
+        <LinearLayout
+            android:id="@+id/ll_menu_shoucnag"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/trash_shoucang"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/trash" 
+                android:contentDescription="@string/app_name"/>
+
+            <TextView
+                android:id="@+id/delete_shoucang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+       <!--具体信息  -->
+       <LinearLayout
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:paddingTop="10px"
+           android:paddingBottom="10px"
+           android:background="@drawable/item_selector"
+           android:orientation="horizontal">
+            
+         <!-- 左侧个人头像 -->
+         <RelativeLayout
+            android:id="@+id/rl_per_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:gravity="top"
+            android:background="@drawable/item_selector">           
+            
+            <!-- 个人头像 -->
+            <ImageView
+                android:id="@+id/im_sc_per_pic"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_marginLeft="10px"
+                
+                android:src="@drawable/business" 
+                android:contentDescription="@string/app_name"/>  
+                       
+          </RelativeLayout> 
+         
+         
+	     <!-- 姓名 时间 信息-->   
+         <RelativeLayout
+            android:id="@+id/ll_item_name_time_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:gravity="center_vertical" >
+            
+            <!-- 姓名     时间 -->
+            <RelativeLayout
+                android:id="@+id/rl_name_time"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_vertical"
+	            android:layout_marginTop="10px"
+	            android:layout_marginLeft="10px"
+	            android:layout_marginRight="10px"
+	            android:background="@drawable/item_selector">
+	           
+	            <!-- 姓名-->
+	            <TextView
+	                android:id="@+id/tv_item_rl_name"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_toLeftOf="@+id/tv_item_sc_per_time"
+	                android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:maxWidth="200px"
+	                android:singleLine="true"
+	                android:text="萌萌"
+	                android:textColor="@color/common_home_text_color_title"
+	                android:textSize="18sp" /> 
+	                
+	            <!-- 时间 -->	 
+	            <TextView
+	                android:id="@+id/tv_item_sc_per_time"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentRight="true"
+	                android:singleLine="true"
+	                android:text="11:30"
+	                android:textColor="@color/text_gray"
+	                android:textSize="16sp" /> 
+	                          
+	        </RelativeLayout>
+	                         
+            <!-- 折扣信息 -->
+            <TextView
+                android:id="@+id/tv_item_per_content"
+                android:layout_below="@id/rl_name_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:layout_marginRight="10px"
+                android:maxLines="3"
+                android:text=" 8.5折   优惠平安夜到店既享持招商银行卡在享折上折"
+                android:textColor="@color/text_gray"
+                android:textSize="16sp" />
+        </RelativeLayout>    
+            
+     </LinearLayout>   
+     
+    </com.collcloud.swipe.SwipeLayout>
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="140px"
+    android:background="@drawable/bg_youhuiquan"
+    android:orientation="vertical"
+    android:paddingLeft="10px"
+    android:paddingRight="10px"
+    android:paddingTop="20px" >
+
+    <!-- 店铺图片 -->
+
+    <ImageView
+        android:id="@+id/im_youhuiquan_shop_photo"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/tx" />
+    <!-- 店铺名  店铺类型 -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_toRightOf="@id/im_youhuiquan_shop_photo"
+        android:orientation="vertical" >
+
+        <!-- 店铺名 -->
+
+        <TextView
+            android:id="@+id/tv_award_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="木槿花紫菜包饭（望京店）"
+            android:textColor="@color/tv_gray"
+            android:textSize="16sp" />
+        <!-- 奖品信息 -->
+
+        <TextView
+            android:id="@+id/tv_award_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:singleLine="true"
+            android:text="满200酒水免费"
+            android:textColor="@color/common_text_color_red"
+            android:textSize="16sp" />
+        <!-- 有效期   使用次数 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <!-- 有效期 -->
+
+            <TextView
+                android:id="@+id/tv_award_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:singleLine="true"
+                android:text="中奖码:"
+                android:textColor="@color/my_textcolor"
+                android:textSize="14sp" />
+            <!-- 使用次数 -->
+
+            <TextView
+                android:id="@+id/tv_award_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:paddingLeft="10px"
+                android:singleLine="true"
+                android:text="34356465"
+                android:textColor="@color/my_textcolor"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

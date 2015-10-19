@@ -1,0 +1,273 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_shopinfo_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaebed"
+    tools:context=".BusinessInfoActivity"
+    tools:ignore="HardcodedText,PxUsage" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_business_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/my_login_top" />
+    <!-- 账号  头像  登录密码 店铺信息 -->
+
+    <LinearLayout
+        android:id="@+id/lay_account_photo_password_businessinfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/in_business_top"
+        android:layout_marginTop="20px"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <!-- 账号 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:background="@color/white"
+            android:paddingLeft="20px"
+            android:paddingRight="20px" >
+
+            <TextView
+                android:id="@+id/tv_business_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="账户"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_business_accountnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_business_account"
+                android:gravity="center|right"
+                android:paddingLeft="15px"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_list_driver_white" />
+        <!-- 账号 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:background="@color/white"
+            android:paddingLeft="20px"
+            android:paddingRight="20px" >
+
+            <TextView
+                android:id="@+id/tv_business_shop_na"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="商家名称"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_business_shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_business_shop_na"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center|right"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingLeft="15px"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_list_driver_white" />
+        <!-- 头像 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_img_business_face"
+            android:layout_width="match_parent"
+            android:layout_height="130px"
+            android:background="@color/white"
+            android:clickable="true"
+            android:paddingLeft="20px"
+            android:paddingRight="20px" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:text="头像"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <com.meg7.widget.CustomShapeImageView
+                android:id="@+id/im_business_photo"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="45px"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tx"
+                app:shape="circle" />
+
+            <TextView
+                android:layout_width="22px"
+                android:layout_height="26px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_arrow_right_normal"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_list_driver_white" />
+
+        <!-- 登录密码 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_business_password"
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:background="@color/white"
+            android:clickable="true"
+            android:paddingLeft="20px"
+            android:paddingRight="20px" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:text="修改密码"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_person_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="45px"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="22px"
+                android:layout_height="26px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_arrow_right_normal"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_list_driver_white" />
+        <!-- 店铺信息 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_activity_shop_info"
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:background="@color/white"
+            android:paddingLeft="20px"
+            android:paddingRight="20px" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:text="店铺信息"
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_person_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="45px"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="22px"
+                android:layout_height="26px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_arrow_right_normal"
+                android:gravity="center" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- 退出账号 -->
+
+    <Button
+        android:id="@+id/bt_business_exit"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_below="@id/lay_account_photo_password_businessinfo"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/common_btn_white_normal"
+        android:gravity="center"
+        android:text="退出账号"
+        android:textColor="@color/common_text_color_chengse"
+        android:textSize="16sp" />
+
+</RelativeLayout>

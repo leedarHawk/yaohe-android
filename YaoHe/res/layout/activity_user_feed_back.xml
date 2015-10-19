@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_user_feedback_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserFeedBackActivity"
+    tools:ignore="HardcodedText,PxUsage,ObsoleteLayoutParam" >
+
+    <!-- 头部信息  返回 标题 -->
+
+    <include
+        android:id="@+id/in_fb_back_title"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        layout="@layout/layout_back_title_send_top" />
+
+    <!-- 提示文字 -->
+
+    <TextView
+        android:id="@+id/tv_fb_tishiinfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/in_fb_back_title"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:text="请留下您的建议，您的要求将是我们前进的无限动力。"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="15sp" />
+
+    <!-- 输入反馈信息 -->
+
+    <EditText
+        android:id="@+id/edt_input_feedback"
+        android:layout_width="fill_parent"
+        android:layout_height="280px"
+        android:layout_below="@id/tv_fb_tishiinfo"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/bg_pinglun"
+        android:focusable="true"
+        android:gravity="top|left"
+        android:hint="输入300字以内..."
+        android:padding="15px"
+        android:text=""
+        android:textColor="@color/common_home_text_color_title"
+        android:textColorHint="@color/common_home_text_color_fans_time"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_input_phonenumb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_input_feedback"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <!-- 电话 -->
+
+        <TextView
+            android:id="@+id/tv_fb_telfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_fb_tishiinfo"
+            android:singleLine="true"
+            android:text="电话:"
+            android:textColor="@color/common_home_text_color_title"
+            android:textSize="14sp" />
+
+        <!-- 电话号码 -->
+
+        <EditText
+            android:id="@+id/edt_input_fb_numb"
+            android:layout_width="fill_parent"
+            android:layout_height="70px"
+            android:layout_marginLeft="15px"
+            android:background="@drawable/editext_gray_stroke"
+            android:gravity="left|center"
+            android:hint="11位电话号码"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingLeft="15px"
+            android:textColor="@color/common_home_text_color_title"
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>

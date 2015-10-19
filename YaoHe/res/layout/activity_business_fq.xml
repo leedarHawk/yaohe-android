@@ -1,0 +1,601 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_fq_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".BusinessFQActivity"
+    tools:ignore="PxUsage,ObsoleteLayoutParam,HardcodedText,RtlHardcoded,ContentDescription,ButtonStyle,RtlSymmetry,NestedScrolling" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/include_fq_back_title_send"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_send_top" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/include_fq_back_title_send"
+        android:background="@color/white" >
+
+        <!-- ScrollView只允许一个孩子节点 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:orientation="vertical" >
+
+            <!-- 类型 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_type"
+                android:layout_width="match_parent"
+                android:layout_height="75px"
+                android:layout_marginTop="20px" >
+
+                <TextView
+                    android:id="@+id/tv_fq_type_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="类型:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 下拉列表框 -->
+
+                <Spinner
+                    android:id="@+id/Spinner01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="75px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20px"
+                    android:layout_toRightOf="@+id/tv_fq_type_show"
+                    android:background="@drawable/bg_spinner"
+                    android:gravity="center"
+                    android:paddingLeft="20px" >
+                </Spinner>
+            </RelativeLayout>
+
+            <!-- 条件 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_tiaojian"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px" >
+
+                <TextView
+                    android:id="@+id/tv_fq_tj_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="条件:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+                <!-- 满减券 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_mjq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fq_tj_show"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_fq_tj_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20px"
+                        android:text="满"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/edt_fq_tj_money1"
+                        android:layout_width="150px"
+                        android:layout_height="75px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10px"
+                        android:layout_toRightOf="@+id/tv_fq_tj_man"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center"
+                        android:hint="100"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fq_tj_yuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/edt_fq_tj_money1"
+                        android:padding="6px"
+                        android:text="元,减"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/edt_fq_tj_money2"
+                        android:layout_width="150px"
+                        android:layout_height="75px"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fq_tj_yuan"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center"
+                        android:hint="100"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fq_tj_yuan2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/edt_fq_tj_money2"
+                        android:padding="6px"
+                        android:text="元"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <!-- 满赠券 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_mzq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fq_tj_show"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/tv_fq_mzq_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20px"
+                        android:text="满"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/edt_fq_mzq_money1"
+                        android:layout_width="150px"
+                        android:layout_height="75px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10px"
+                        android:layout_toRightOf="@+id/tv_fq_mzq_man"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center"
+                        android:hint="100"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fq_mzq_yuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/edt_fq_mzq_money1"
+                        android:padding="6px"
+                        android:text="元,赠"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/edt_fq_mzq_money2"
+                        android:layout_width="150px"
+                        android:layout_height="75px"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fq_mzq_yuan"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center"
+                        android:hint="100"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fq_mzq_yuan2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/edt_fq_mzq_money2"
+                        android:padding="6px"
+                        android:text="元"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <!-- 代金券 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_djq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fq_tj_show"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <EditText
+                        android:id="@+id/edt_fq_djq_money1"
+                        android:layout_width="150px"
+                        android:layout_height="75px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center"
+                        android:hint="100"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fq_djq_yuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/edt_fq_djq_money1"
+                        android:padding="6px"
+                        android:text="元"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <!-- 折扣券 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_zkq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fq_tj_show"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <EditText
+                        android:id="@+id/edt_fq_zkq_money1"
+                        android:layout_width="150px"
+                        android:layout_height="75px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center"
+                        android:digits="0123456789."
+                        android:hint="7"
+                        android:maxLength="6"
+                        android:paddingLeft="10px"
+                        android:paddingRight="10px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_fq_zkq_yuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/edt_fq_zkq_money1"
+                        android:padding="6px"
+                        android:text="折"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 标题 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fq_title_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="标题:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入标题 -->
+
+                <EditText
+                    android:id="@+id/edt_fq_bt_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20px"
+                    android:layout_toRightOf="@+id/tv_fq_title_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="诱人的名称可以吸引用户吆!"
+                    android:minHeight="90px"
+                    android:padding="10px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- 使用范围 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_fw"
+                android:layout_width="fill_parent"
+                android:layout_height="180px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fq_fw_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="范围:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入范围 -->
+
+                <EditText
+                    android:id="@+id/edt_fq_bt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_toRightOf="@+id/tv_fq_fw_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left"
+                    android:hint="清晰阐述您优惠的内容!"
+                    android:minHeight="190px"
+                    android:padding="10px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- 6张图片 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_sixpic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fq_sixpic_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:maxLines="2"
+                    android:text="图片\n1/6:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="24px"
+                    android:layout_toRightOf="@+id/tv_fq_sixpic_show"
+                    android:orientation="horizontal" >
+
+                    <GridView
+                        android:id="@+id/noScrollgridview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="140px"
+                        android:horizontalSpacing="3dp"
+                        android:numColumns="3"
+                        android:scrollbars="none"
+                        android:verticalSpacing="6dp" >
+                    </GridView>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 有效期 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fq_yxq_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="有效期:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 起止日期 -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@+id/tv_fq_yxq_show"
+                    android:orientation="vertical" >
+
+                    <!-- 从 -->
+
+                    <TextView
+                        android:id="@+id/edt_fq_cong"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="center_vertical"
+                        android:hint="从 : 2015-01-01"
+                        android:paddingLeft="15px"
+                        android:paddingRight="15px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <!-- 到 -->
+
+                    <TextView
+                        android:id="@+id/edt_fq_dao"
+                        android:layout_width="fill_parent"
+                        android:layout_height="90px"
+                        android:layout_marginTop="15px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="center_vertical"
+                        android:hint="到 : 2015-12-31"
+                        android:paddingLeft="15px"
+                        android:paddingRight="15px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 发行量 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_fxl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fq_time"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fq_fxl_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="发行量:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入发行量 -->
+
+                <EditText
+                    android:id="@+id/edt_fq_fxl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="90px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@+id/tv_fq_fxl_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="请输入发行量"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:singleLine="true"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- 使用次数 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fq_sycs"
+                android:layout_width="fill_parent"
+                android:layout_height="85px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fq_sy_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="使  用:"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 多次 -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20px"
+                    android:layout_toRightOf="@+id/tv_fq_sy_show"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/bt_fq_dc"
+                        android:layout_width="145px"
+                        android:layout_height="65px"
+                        android:background="@drawable/common_btn_red_selected"
+                        android:text="单  次"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <!-- 单次 -->
+
+                    <Button
+                        android:id="@+id/bt_fq_doc"
+                        android:layout_width="145px"
+                        android:layout_height="65px"
+                        android:layout_marginLeft="20px"
+                        android:background="@drawable/common_btn_red_selected"
+                        android:text="多  次"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40px" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

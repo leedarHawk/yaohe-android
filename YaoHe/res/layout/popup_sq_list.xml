@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_pinglun"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,InefficientWeight,PxUsage" >
+
+    <TextView
+        android:id="@+id/groupAll2_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="20px"
+        android:text="选择商圈"
+        android:textColor="@color/common_home_text_color_title"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_group_list_bg_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_list_driver_white" />
+
+    <ListView
+        android:id="@+id/lvGroup_sq"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="2.0px"
+        android:drawSelectorOnTop="true"
+        android:fadingEdgeLength="0dip"
+        android:listSelector="@drawable/grouplist_item_bg" />
+
+</LinearLayout>

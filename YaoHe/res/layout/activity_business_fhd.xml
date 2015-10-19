@@ -1,0 +1,263 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_fhd_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".BusinessFHDActivity"
+    tools:ignore="HardcodedText,ContentDescription,PxUsage,ObsoleteLayoutParam,NestedScrolling" >
+
+    <!-- 头部信息 -->
+
+    <include
+        android:id="@+id/in_fhd_back_title_send"
+        android:layout_width="fill_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_back_title_send_top" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/in_fhd_back_title_send" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rl_fhd_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhd_title_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="标 题 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入标题 -->
+
+                <EditText
+                    android:id="@+id/edt_fhd_bt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhd_title_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left|center"
+                    android:hint="诱人的名称可以吸引用户吆!"
+                    android:minHeight="80px"
+                    android:paddingBottom="10px"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:paddingTop="10px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- 内容 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhd_nr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fhd_title"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhd_nr_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="left|center_vertical"
+                    android:text="使 用 \n\n范 围 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入内容 -->
+
+                <EditText
+                    android:id="@+id/edt_fhd_fw"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhd_nr_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left"
+                    android:hint="清晰阐述您的活动内容\n“到店可参加抽奖”"
+                    android:minHeight="190px"
+                    android:padding="15px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- 图片 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhd_sixpic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fhd_nr"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhd_sixpic_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:maxLines="2"
+                    android:text="图  片\n1/6 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhd_sixpic_show"
+                    android:orientation="horizontal" >
+
+                    <GridView
+                        android:id="@+id/huodong_noScrollgridview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:horizontalSpacing="3dp"
+                        android:minHeight="140px"
+                        android:numColumns="3"
+                        android:scrollbars="none"
+                        android:verticalSpacing="6dp" >
+                    </GridView>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 有效期 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhd_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fhd_sixpic"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhd_yxq_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="活 动 \n\n时 间 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 起止日期 -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_fhd_yxq_show"
+                    android:orientation="vertical" >
+
+                    <!-- 从 -->
+
+                    <TextView
+                        android:id="@+id/edt_fhd_cong"
+                        android:layout_width="fill_parent"
+                        android:layout_height="80px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center_vertical"
+                        android:hint="从 : 2015-01-01"
+                        android:paddingLeft="15px"
+                        android:paddingRight="15px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+
+                    <!-- 到 -->
+
+                    <TextView
+                        android:id="@+id/edt_fhd_dao"
+                        android:layout_width="fill_parent"
+                        android:layout_height="80px"
+                        android:layout_marginTop="15px"
+                        android:background="@drawable/editext_gray_stroke"
+                        android:gravity="left|center_vertical"
+                        android:hint="到 : 2015-12-31"
+                        android:paddingLeft="15px"
+                        android:paddingRight="15px"
+                        android:singleLine="true"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textColorHint="@color/common_home_text_color_fans_time"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 地址 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_fhd_dz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_fhd_time"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:gravity="left" >
+
+                <TextView
+                    android:id="@+id/tv_fhd_dz_show"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="地  址 :"
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textSize="15sp" />
+
+                <!-- 输入地址 -->
+
+                <EditText
+                    android:id="@+id/edt_fhd_dz"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_fhd_dz_show"
+                    android:background="@drawable/editext_gray_stroke"
+                    android:gravity="left|center_vertical"
+                    android:hint="输入活动地址"
+                    android:minHeight="80px"
+                    android:padding="15px"
+                    android:text=""
+                    android:textColor="@color/common_home_text_color_title"
+                    android:textColorHint="@color/common_home_text_color_fans_time"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="40px"
+                android:layout_below="@+id/rl_fhd_dz" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

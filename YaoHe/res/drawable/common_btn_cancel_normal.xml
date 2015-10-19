@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- <corners android:radius="@dimen/common_button_corners" /> -->
+
+    <gradient
+        android:centerColor="@color/common_home_title_bg"
+        android:endColor="@color/common_home_title_bg"
+        android:startColor="@color/common_home_title_bg" />
+
+</shape>

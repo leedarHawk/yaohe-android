@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90px"
+    android:background="@color/common_home_title_bg"
+    android:orientation="horizontal"
+    tools:ignore="PxUsage,HardcodedText" >
+
+    <LinearLayout
+        android:id="@+id/ll_tv_actionbarback"
+        android:layout_width="90px"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/tv_actionbarback"
+            android:layout_width="30px"
+            android:layout_height="35px"
+            android:background="@drawable/top_back_btn"
+            android:contentDescription="@string/app_name" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_actionbartitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="城市定位"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+</RelativeLayout>
