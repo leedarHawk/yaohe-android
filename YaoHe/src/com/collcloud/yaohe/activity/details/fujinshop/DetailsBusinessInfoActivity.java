@@ -62,6 +62,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
  */
 public class DetailsBusinessInfoActivity extends BaseActivity implements
 		OnClickListener {
+	private String gittest;
 
 	/**
 	 * 商家发布的吆喝列表区域
