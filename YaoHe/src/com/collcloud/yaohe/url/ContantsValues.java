@@ -87,7 +87,9 @@ public interface ContantsValues {
 
 	/** 我的吆喝接口url */
 	String MYYH = "http://www.17yaohe.com/?c=Api&a=getMyCallList&partent=ht&key=ht";
-
+  
+	String aa = "" ;
+	
 	/** 我的粉丝接口url */
 	String MYFS = "http://www.17yaohe.com/?c=Api&a=getMyFansList&partent=ht&key=ht";
 
