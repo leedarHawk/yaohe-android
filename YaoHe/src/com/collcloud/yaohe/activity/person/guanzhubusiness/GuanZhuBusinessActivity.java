@@ -95,7 +95,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 	/**
 	 * 获取可使用的我的关注数据
 	 */
-	private void getFollowList() {    
+	private void getFollowList() {       
 
 		HttpUtils http = new HttpUtils();
 		// 用来封装参数
