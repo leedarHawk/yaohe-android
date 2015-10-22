@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements
 	
 	private FragmentManager fragmentManager;
 	FragmentTransaction fragmentTransaction;
-	
+	private String aa;
 	private Intent onNewIntent;
 
 	@Override
