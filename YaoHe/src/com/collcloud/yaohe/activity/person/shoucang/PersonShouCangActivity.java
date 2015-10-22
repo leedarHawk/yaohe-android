@@ -153,8 +153,8 @@ public class PersonShouCangActivity extends BaseActivity implements
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId()
 				.toString());
-
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.SC, params,
+		String url = ContantsValues.SC+"&member_id="+mLoginDataManager.getMemberId();
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 					// 网络返回字符串
 					String responseInfo = null;
