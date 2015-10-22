@@ -104,7 +104,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 		// 用户ID
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
-		String url = ContantsValues.MYGZ+"&member_id="+mLoginDataManager.getMemberId();
+		String url = ContantsValues.MYGZ+"&member_id="+mLoginDataManager.getMemberId();    
 		
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
