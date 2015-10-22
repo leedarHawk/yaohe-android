@@ -96,7 +96,7 @@ public class PersonShouCangActivity extends BaseActivity implements
 	private SelectPicPopupWindow mPopupWindow;
 	private int mDeleteID = -1;
 
-	@Override
+	@Override   
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_person_shou_cang);
