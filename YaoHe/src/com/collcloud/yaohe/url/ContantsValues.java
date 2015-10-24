@@ -11,7 +11,7 @@ public interface ContantsValues {
 
 	/** 获取验证码接口url */
 	String GETVCODE = "http://192.168.10.182:8099/admin/?c=Api&a=register_sms&partent=ht&key=ht";
- String a ="";
+
 	/** 用户登录接口url */
 	String LOGIN = "http://192.168.10.182:8099/admin/?c=Api&a=login&partent=ht&key=ht";
 
