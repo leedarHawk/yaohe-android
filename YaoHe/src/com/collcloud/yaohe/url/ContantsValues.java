@@ -2,6 +2,7 @@ package com.collcloud.yaohe.url;
 
 public interface ContantsValues {
 	//test.htcheng.com
+	//public String HOST="http://www.17yaohe.com/";
 	public String HOST="http://192.168.10.182:8099/admin/";
 	/** 个人注册接口url */
 	String REGISTERURL = "http://192.168.10.182:8099/admin/?c=Api&a=register&partent=ht&key=ht";
@@ -87,9 +88,7 @@ public interface ContantsValues {
 
 	/** 我的吆喝接口url */
 	String MYYH = "http://192.168.10.182:8099/admin/?c=Api&a=getMyCallList&partent=ht&key=ht";
-  
-	String aa = "" ;
-	
+
 	/** 我的粉丝接口url */
 	String MYFS = "http://192.168.10.182:8099/admin/?c=Api&a=getMyFansList&partent=ht&key=ht";
 

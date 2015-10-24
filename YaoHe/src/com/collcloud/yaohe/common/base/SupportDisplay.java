@@ -40,7 +40,7 @@ public class SupportDisplay {
 	 */
 	private static final float BASIC_DENSITY = 2.0f;
 
-	/**
+	/** 
 	 * 补充值
 	 */
 	private static final float COMPLEMENT_VALUE = 0.5f;

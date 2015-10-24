@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
  */
 public abstract class BaseImageView extends ImageView {
     private static final String TAG = BaseImageView.class.getSimpleName();
-
+//
     protected Context mContext;
 
     private static final Xfermode sXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);

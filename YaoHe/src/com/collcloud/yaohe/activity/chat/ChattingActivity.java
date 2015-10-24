@@ -78,6 +78,9 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 		mNickname = getIntent().getStringExtra("NICKNAME");// 对方的昵称
 
 		// 聊天界面标题
+		if(null==mNickname || "".equals(mNickname) || "null".equals(mNickname)) {
+			mNickname="吆喝用户";
+		}
 		tv_title.setText(mNickname);
 
 		InitSDK();

@@ -254,15 +254,17 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 	 * @Title getCallDetail
 	 */
 	@SuppressLint("SimpleDateFormat")
-	private void getCallDetail() {
+	private void getCallDetail() {   
 		ApiAccess.showProgressDialog(this, "数据加载中..",
 				R.style.progress_dialog);
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("id", mStrCallId);
+		
+		String url = ContantsValues.DETAILS_GET_CALL_INFO+"&id="+mStrCallId;
 
 		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.DETAILS_GET_CALL_INFO, params,
+				url, params,
 				new RequestCallBack<String>() {
 
 					@Override

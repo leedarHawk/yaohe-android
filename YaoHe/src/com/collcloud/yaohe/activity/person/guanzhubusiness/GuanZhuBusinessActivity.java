@@ -276,9 +276,9 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 		params.addBodyParameter("id", shopID);
 		CCLog.i("取消关注参数：", "member_id=" + mLoginDataManager.getMemberId()
 				+ " id=" + shopID);
-
+		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+shopID;
 		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.CANCEL_FOLLOW_URL, params,
+				url, params,
 				new RequestCallBack<String>() {
 
 					@Override
