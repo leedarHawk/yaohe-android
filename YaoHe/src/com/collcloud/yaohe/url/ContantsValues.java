@@ -69,7 +69,7 @@ public interface ContantsValues {
 
 	/** 我的（个人）优惠券详情接口url */
 	String YHQDETAIL = "http://192.168.10.182:8099/admin/?c=Api&a=plyCouponDetail&partent=ht&key=ht";
-
+//test
 	/** 我的（个人）会员卡接口url */
 	String MYCARD = "http://192.168.10.182:8099/admin/?c=Api&a=getMyMemberCardList&partent=ht&key=ht";
 
