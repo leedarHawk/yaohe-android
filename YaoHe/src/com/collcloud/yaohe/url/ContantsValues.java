@@ -1,7 +1,7 @@
 package com.collcloud.yaohe.url;
 
 public interface ContantsValues {
-	//test.htcheng.com
+	public static final String xxx = "test.htcheng.com";
 	//public String HOST="http://www.17yaohe.com/";
 	public String HOST="http://192.168.10.182:8099/admin/";
 	/** 个人注册接口url */
