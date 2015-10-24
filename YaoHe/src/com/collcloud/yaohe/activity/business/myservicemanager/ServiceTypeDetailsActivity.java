@@ -51,6 +51,8 @@ import com.lidroid.xutils.http.client.HttpRequest;
  */
 public class ServiceTypeDetailsActivity extends BaseActivity implements
 		Callback {
+	
+	private String TestgitCommitn;
 	/**
 	 * 商家ID
 	 */
