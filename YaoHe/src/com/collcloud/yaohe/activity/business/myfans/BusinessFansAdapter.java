@@ -92,6 +92,8 @@ public class BusinessFansAdapter extends BaseAdapter {
 		MyFansList fansInfo = mDatas.get(position);
 		if (!Utils.isStringEmpty(fansInfo.nickname)) {
 			vHolder.mTvName.setText(fansInfo.nickname);
+		} else {
+			vHolder.mTvName.setText("吆喝用户");
 		}
 
 		ImageListener listener = ImageLoader.getImageListener(vHolder.mIvFace,
@@ -103,6 +105,9 @@ public class BusinessFansAdapter extends BaseAdapter {
 		}
 
 		final String member_id = fansInfo.id;
+		if(null==fansInfo.nickname || "".equals(fansInfo.nickname) || "null".equals(fansInfo.nickname)) {
+			fansInfo.nickname="吆喝用户";
+		}
 		final String nickname = fansInfo.nickname;
 
 		vHolder.mBtnSendMSG.setOnClickListener(new OnClickListener() {

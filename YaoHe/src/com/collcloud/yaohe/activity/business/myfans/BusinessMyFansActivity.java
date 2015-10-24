@@ -232,6 +232,7 @@ public class BusinessMyFansActivity extends BaseActivity implements
 												.getJSONObject(0);
 										if (Utils.isStringEmpty(yhObject
 												.optString("id"))) {
+											myfans_Dialog.dismiss();
 											showToast("您还没有粉丝");
 											return;
 										}

@@ -260,9 +260,11 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("id", mStrCallId);
+		
+		String url = ContantsValues.DETAILS_GET_CALL_INFO+"&id="+mStrCallId;
 
 		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.DETAILS_GET_CALL_INFO, params,
+				url, params,
 				new RequestCallBack<String>() {
 
 					@Override
