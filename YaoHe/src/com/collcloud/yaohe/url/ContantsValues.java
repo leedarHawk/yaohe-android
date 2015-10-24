@@ -151,7 +151,7 @@ public interface ContantsValues {
 
 	// ************　店铺点评、店铺收藏、店铺点赞 　************** //
 	/** 店铺点赞url */
-	String SHOP_PRAISE_URL = "http://192.168.10.182:8099/admin/?c=Api&a=shopPraise&partent=ht&key=ht";   
+	String SHOP_PRAISE_URL = "http://192.168.10.182:8099/admin/?c=Api&a=shopPraise&partent=ht&key=ht";
 	/** 店铺点评url */
 	String SHOP_COMMENT_URL = "http://192.168.10.182:8099/admin/?c=Api&a=shopComment&partent=ht&key=ht";
 	/** 店铺收藏url */

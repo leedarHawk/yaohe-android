@@ -254,7 +254,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 	 * @Title getCallDetail
 	 */
 	@SuppressLint("SimpleDateFormat")
-	private void getCallDetail() {
+	private void getCallDetail() {   
 		ApiAccess.showProgressDialog(this, "数据加载中..",
 				R.style.progress_dialog);
 		HttpUtils http = new HttpUtils();
