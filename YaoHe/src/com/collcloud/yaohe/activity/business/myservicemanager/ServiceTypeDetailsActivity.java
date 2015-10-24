@@ -280,6 +280,8 @@ public class ServiceTypeDetailsActivity extends BaseActivity implements
 			deleteBusinessService(serviceID, url);
 		}
 	}
+	
+	// test git commit;;;;
 
 	/**
 	 * 设定服务列表数据
