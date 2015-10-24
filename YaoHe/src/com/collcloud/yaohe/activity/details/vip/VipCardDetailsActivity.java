@@ -545,8 +545,8 @@ public class VipCardDetailsActivity extends BaseActivity implements
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("id", mStrCardID);
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
-
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.SHOP_GET_CARD,
+		String url = ContantsValues.SHOP_GET_CARD+"&id="+mStrCardID+"&member_id="+mLoginDataManager.getMemberId();
+		http.send(HttpRequest.HttpMethod.POST, url,
 				params, new RequestCallBack<String>() {
 
 					@Override

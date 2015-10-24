@@ -894,15 +894,29 @@ public class HomeTuijianFragment extends BaseFragment  {
 	private void onItemSelectAction(String callId, String serviceId,
 			String shopId, String memberId, String type) {
 		Intent intent = new Intent();
-		if (!Utils.isStringEmpty(type)) {
-			intent.setClass(mBaseActivity, YaoHeLaDetailsActivity.class);
-			intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID, serviceId);
-			intent.putExtra(IntentKeyNames.KEY_CALL_ID, callId);
+		
+		
+		//商家
+		if("0".equals(type)) {
+			intent.setClass(getActivity(),
+					DetailsBusinessInfoActivity.class);
 			intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
-			intent.putExtra(IntentKeyNames.KEY_CALL_TYPE, type);
 			intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, memberId);
-			mBaseActivity.baseStartActivity(intent);
+			mBaseActivity.startActivity(intent);
+		} else {
+			if (!Utils.isStringEmpty(type)) {
+				intent.setClass(mBaseActivity, YaoHeLaDetailsActivity.class);
+				intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID, serviceId);
+				intent.putExtra(IntentKeyNames.KEY_CALL_ID, callId);
+				intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
+				intent.putExtra(IntentKeyNames.KEY_CALL_TYPE, type);
+				intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, memberId);
+				mBaseActivity.baseStartActivity(intent);
+			}
 		}
+		
+		
+		
 	}
 
 	/**
@@ -1332,7 +1346,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 							mBaseActivity.baseStartActivity(intent);
 
 						} else {
-							onItemSelectAction(rotate.id, rotate.id, "", "",
+							onItemSelectAction(rotate.content_id, rotate.content_id, rotate.content_id, "",
 									rotate.type);
 						}
 					}
