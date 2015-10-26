@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.collcloud.yaohe"
-    android:versionCode="32"
-    android:versionName="1.0.32" >
+    android:versionCode="33"
+    android:versionName="1.0.33" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -508,7 +508,7 @@
         <!-- 友盟AppKey 恒泰地产QQ号申请 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55a1fd7767e58e1ca8005848" >
+            android:value="562467a967e58edd3800054a" >
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
