@@ -286,9 +286,9 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("id", mStrShopID);
 		params.addBodyParameter("member_id", mStrMemberID);
-
+		String url = ContantsValues.DETAILS_GET_BUSINESS_SHOP_INFO+"&id="+mStrShopID+"&member_id="+mStrMemberID;
 		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.DETAILS_GET_BUSINESS_SHOP_INFO, params,
+				url, params,
 				new RequestCallBack<String>() {
 
 					@Override
