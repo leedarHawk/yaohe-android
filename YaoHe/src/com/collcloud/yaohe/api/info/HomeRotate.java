@@ -17,5 +17,6 @@ public class HomeRotate implements Serializable {
 		public String link_url;
 		public String title;
 		public String img;
+		public String service_id;
 	}
 }

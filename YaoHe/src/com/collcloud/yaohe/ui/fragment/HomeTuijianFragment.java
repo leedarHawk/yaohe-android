@@ -29,7 +29,6 @@ import com.collcloud.yaohe.activity.details.yaohela.YaoHeCommentActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
 import com.collcloud.yaohe.activity.login.LoginActivity;
 import com.collcloud.yaohe.activity.webview.WebViewActivity;
-import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.HomeCallInfo;
@@ -48,7 +47,6 @@ import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.GsonUtils;
 import com.collcloud.yaohe.ui.utils.UIHelper;
 import com.collcloud.yaohe.ui.utils.Utils;
-import com.collcloud.yaohe.ui.view.PullScrollView.OnPullListener;
 import com.collcloud.yaohe.url.ContantsValues;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -296,6 +294,10 @@ public class HomeTuijianFragment extends BaseFragment  {
 											if (mHomeRotateInfo.data.get(j).id != null) {
 												rotateInfo.id = mHomeRotateInfo.data
 														.get(j).id;
+											}
+											if (mHomeRotateInfo.data.get(j).service_id != null) {
+												rotateInfo.service_id = mHomeRotateInfo.data
+														.get(j).service_id;
 											}
 											mRotates.add(rotateInfo);
 										}
@@ -1346,7 +1348,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 							mBaseActivity.baseStartActivity(intent);
 
 						} else {
-							onItemSelectAction(rotate.content_id, rotate.content_id, rotate.content_id, "",
+							onItemSelectAction(rotate.service_id, rotate.content_id, rotate.content_id, "",
 									rotate.type);
 						}
 					}
