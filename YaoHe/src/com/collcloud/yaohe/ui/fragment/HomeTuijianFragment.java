@@ -1384,8 +1384,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	 */
 	private void callCollection(String callID) {
 		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&call_id="+callID;
-		shopActionApi(mLoginDataManager.getMemberId(), callID,
-				url, "收藏成功。");
+		shopActionApi(mLoginDataManager.getMemberId(), callID, url, "收藏成功。");
 	}
 
 	// 是否可以关注
