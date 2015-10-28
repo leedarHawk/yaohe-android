@@ -1383,7 +1383,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	 * 吆喝收藏
 	 */
 	private void callCollection(String callID) {
-		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&call_id="+callID;
+		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
 		shopActionApi(mLoginDataManager.getMemberId(), callID, url, "收藏成功。");
 	}
 

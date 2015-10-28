@@ -901,7 +901,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	 */
 	protected boolean callCollectionApi(String memberID, String callID,
 			final String message) {
-		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+memberID+"&call_id="+callID;
+		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+memberID+"&id="+callID;
 		//String url = ContantsValues.CALL_FOLLOW_URL;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
