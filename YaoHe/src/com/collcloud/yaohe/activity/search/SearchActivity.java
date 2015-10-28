@@ -111,7 +111,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("keywords", keywords);
 		params.addBodyParameter("city_id", mStrCityID);
-		String url = ContantsValues.HOME_SEARCH_URL;
+		String url = ContantsValues.HOME_SEARCH_URL + "&keywords=" + keywords + "&=city_id=" + mStrCityID;
 		CCLog.i("搜索参数信息： ", "city_id= " + mStrCityID + " keywords= " + keywords);
 
 		http.send(HttpRequest.HttpMethod.POST, url, params,
