@@ -222,16 +222,13 @@ public class BusinessMyFansActivity extends BaseActivity implements
 
 							if (code.equals("0")) {
 
-								JSONArray jsoArray = object
-										.optJSONArray("data");
+								JSONArray jsoArray = object.optJSONArray("data");
 								final int itemFSCount = jsoArray.length();
 
 								if (itemFSCount > 0) {
 									if (itemFSCount == 1) {
-										JSONObject yhObject = jsoArray
-												.getJSONObject(0);
-										if (Utils.isStringEmpty(yhObject
-												.optString("id"))) {
+										JSONObject yhObject = jsoArray.getJSONObject(0);
+										if (Utils.isStringEmpty(yhObject.optString("member_id"))) {
 											myfans_Dialog.dismiss();
 											showToast("您还没有粉丝");
 											return;
