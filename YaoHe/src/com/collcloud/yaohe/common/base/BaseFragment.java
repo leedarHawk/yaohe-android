@@ -903,7 +903,7 @@ public abstract class BaseFragment extends Fragment {
 	 * 吆喝收藏
 	 */
 	public void baseCallCollection(String callID) {
-		baseShopActionApi(mLoginDataManager.getMemberId(), callID,
-				ContantsValues.CALL_FOLLOW_URL, "收藏成功。");
+		String url = ContantsValues.CALL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
+		baseShopActionApi(mLoginDataManager.getMemberId(), callID,url, "收藏成功。");
 	}
 }
