@@ -84,7 +84,10 @@ public class BusinessServiceManagerActivity extends BaseActivity implements
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("id", mStrShopID);
-		params.addBodyParameter("member_id", mStrMemberID);
+		//params.addBodyParameter("member_id", mStrMemberID);
+		//修改member id为当前用户的ID,mStrMemberID为shop member ID
+		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+
 
 		http.send(HttpRequest.HttpMethod.POST,
 				ContantsValues.DETAILS_GET_BUSINESS_SHOP_INFO, params,
