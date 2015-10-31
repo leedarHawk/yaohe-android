@@ -205,6 +205,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		// }
 		setFollosStatus();
 		// 关注店铺状态信息查询
+//		isFollow(mLoginDataManager.getMemberId(), mStrShopID,	ContantsValues.SHOP_FOLLOW_URL);
 		CCLog.i("我就只看个店铺信息，怎么给我加关注啊！！！！！！！！");
 		// 获取详情
 		getBusinessShopInfo();
