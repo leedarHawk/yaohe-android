@@ -1031,6 +1031,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 					} else {
 						if (shopID != null) {
 							CCLog.i("点击关注 ，对应的shopID ：", " " + shopID);
+							CCLog.i("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
 						}
 
 						if (Utils.strFromView(tvGuanZhu).equals(
@@ -1044,13 +1045,9 @@ public class HomeTuijianFragment extends BaseFragment  {
 								public void run() {
 									ApiAccess.dismissProgressDialog();
 									if (!mIsAllowFollow) {
-										if (Utils
-												.strFromView(tvGuanZhu)
-												.equals(GlobalConstant.INVALID_VALUE)) {
-											tvGuanZhu
-													.setText(GlobalConstant.VALID_VALUE);
-											tvGuanZhu
-													.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+										if (Utils.strFromView(tvGuanZhu).equals(GlobalConstant.INVALID_VALUE)) {
+											tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
+											tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
 
 											new Thread(new Runnable() {
 
@@ -1689,7 +1686,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	 * 取消关注
 	 */
 	private void cancelFollows(String shopID) {
-		String url = ContantsValues.CANCEL_FOLLOWS;
+		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
