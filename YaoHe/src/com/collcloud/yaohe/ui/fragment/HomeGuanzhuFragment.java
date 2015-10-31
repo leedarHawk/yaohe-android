@@ -880,8 +880,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	 * 吆喝收藏
 	 */
 	private void callCollection(String callID) {
-		shopActionApi(mLoginDataManager.getMemberId(), callID,
-				ContantsValues.CALL_FOLLOW_URL, "收藏成功。");
+		String url = ContantsValues.CALL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
+		shopActionApi(mLoginDataManager.getMemberId(), callID, url, "收藏成功。");
 	}
 
 	/**
