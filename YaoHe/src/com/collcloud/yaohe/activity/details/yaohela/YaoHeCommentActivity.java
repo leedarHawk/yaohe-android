@@ -86,9 +86,9 @@ public class YaoHeCommentActivity extends BaseActivity implements
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("call_id", callID);
+		String url = ContantsValues.CALL_DETAILS_COMMENT_URL + "&call_id=" + callID ;
 
-		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.CALL_DETAILS_COMMENT_URL, params,
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override
