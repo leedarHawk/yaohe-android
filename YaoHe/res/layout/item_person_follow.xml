@@ -89,7 +89,7 @@
             android:id="@+id/tv_cancel_follow_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="取消关注"
+            android:text="取消\n关注"
             android:layout_gravity="center"
             android:textColor="#ffffff"
             android:textSize="13sp" />
