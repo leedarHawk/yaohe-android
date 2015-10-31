@@ -1383,7 +1383,8 @@ public class HomeTuijianFragment extends BaseFragment  {
 	 * 吆喝收藏
 	 */
 	private void callCollection(String callID) {
-		String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
+		//String url = ContantsValues.CANCEL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
+		String url = ContantsValues.CALL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
 		shopActionApi(mLoginDataManager.getMemberId(), callID, url, "收藏成功。");
 	}
 
@@ -1480,6 +1481,8 @@ public class HomeTuijianFragment extends BaseFragment  {
 		params.addBodyParameter("member_id", memberID);
 		params.addBodyParameter("call_id", callID);
 		CCLog.i("吆喝收藏点赞参数：", "member_id=" + memberID + " call_id=" + callID);
+		CCLog.i("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+		CCLog.i("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG        URL=", url);
 
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
