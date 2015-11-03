@@ -10,7 +10,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import com.collcloud.yaohe.common.base.GlobalVariable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -104,7 +104,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 		// 用户ID
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
-		String url = ContantsValues.MYGZ+"&member_id="+mLoginDataManager.getMemberId();    
+		String url = ContantsValues.MYGZ+"&member_id="+mLoginDataManager.getMemberId()+"&city_id="+GlobalVariable.sChoiceCityID;
 		    
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
