@@ -190,7 +190,14 @@ public class ShopCommentActivity extends BaseActivity implements
 		CCLog.i("吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
 				+ " type=" + strType + " content=" + content + " is_anonymous="
 				+ isAnonymous);
-
+		StringBuffer bf = new StringBuffer();
+		bf.append("&member_id=").append(memberID);
+		bf.append("&call_id=").append(callID);
+		bf.append("&content=").append(content);
+		bf.append("&is_anonymous=").append(isAnonymous);
+		bf.append("&type=").append(strType);
+		bf.append("&parentid=").append("");
+		url = url+bf.toString();
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 

@@ -569,6 +569,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
 	public void onLocationChanged(AMapLocation amapLocation) {
 		if (amapLocation != null
 				&& amapLocation.getAMapException().getErrorCode() == 0) {
+			setJdWd(amapLocation);
 			// 定位成功回调信息，设置相关消息
 			if (amapLocation.getCity() == null) {
 				GlobalVariable.LBSRESULT = false;
@@ -609,6 +610,33 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
 			setDefaultCityInfo();
 		}
 
+	}
+	
+	
+	/**
+	 * 设置经度维度
+	 * @param amapLocation
+	 */
+	private void setJdWd(AMapLocation amapLocation) {
+		if (amapLocation.getLatitude() != 0) {
+			GlobalVariable.mLatitude = amapLocation.getLatitude();
+			CCLog.i("当前位置的 纬度：", " " + amapLocation.getLatitude());
+		} else {
+			GlobalVariable.mLatitude = 40.003662;
+		}
+
+		if (amapLocation.getLongitude() != 0) {
+			GlobalVariable.mLongitude = amapLocation.getLongitude();
+			CCLog.i("当前位置的 经度：", " " + amapLocation.getLongitude());
+		} else {
+			GlobalVariable.mLongitude = 116.465271;
+		}
+		if (amapLocation.getDistrict() != null) {
+			GlobalVariable.mStrDistrict = amapLocation.getDistrict();
+			CCLog.i("当前位置对应的区域：", " " + amapLocation.getDistrict());
+		} else {
+			GlobalVariable.mStrDistrict = GlobalConstant.DEFAULT_DISTRACT;
+		}
 	}
 	
 	/**

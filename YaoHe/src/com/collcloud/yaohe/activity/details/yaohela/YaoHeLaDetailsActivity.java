@@ -165,7 +165,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 				+ mStrMemberId);
 		// 关注店铺状态信息查询
 		isFollow(mLoginDataManager.getMemberId(), mStrShopID,
-				ContantsValues.SHOP_FOLLOW_URL);
+				ContantsValues.SHOP_FOLLOW_STATUS_URL);
 		initView();
 		// 吆喝详情内容
 		getCallDetail();

@@ -160,6 +160,8 @@ public interface ContantsValues {
 	String SHOP_FOLLOW_URL = "http://www.17yaohe.com/?c=Api&a=shopFollow&partent=ht&key=ht";
 	/** 取消关注url */
 	String CANCEL_FOLLOW_URL = "http://www.17yaohe.com/?c=Api&a=cancelFollow&partent=ht&key=ht";
+	/** 检测店铺关注状态url */
+	String SHOP_FOLLOW_STATUS_URL = "http://www.17yaohe.com/?c=Api&a=isFollowed&partent=ht&key=ht";
 
 	// ************　吆喝点评、吆喝收藏、吆喝点赞 　************** //
 	/** 吆喝点赞url */

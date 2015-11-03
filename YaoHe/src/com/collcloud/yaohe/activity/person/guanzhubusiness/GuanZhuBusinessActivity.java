@@ -32,6 +32,7 @@ import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.common.base.BaseActivity;
+import com.collcloud.yaohe.common.base.GlobalVariable;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.GuanZhunBusiList.GuanZhunBusi;
@@ -92,7 +93,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 		getFollowList();
 	}
 
-	/**
+	/**   
 	 * 获取可使用的我的关注数据
 	 */
 	private void getFollowList() {       
