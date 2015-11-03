@@ -93,7 +93,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 		getFollowList();
 	}
 
-	/**
+	/**   
 	 * 获取可使用的我的关注数据
 	 */
 	private void getFollowList() {       
