@@ -169,6 +169,13 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	 */
 	private void init() {
 		// 一级分类列表- 程序启动时，已经预加载
+
+		String _long = new String().valueOf(GlobalVariable.mLongitude);
+		String lat   = new String().valueOf(GlobalVariable.mLatitude);
+		CCLog.i("-------------------------------------------：", _long);
+		CCLog.i("-------------------------------------------：", lat);
+
+
 		if (AppApplacation.sOneClassFy != null
 				&& AppApplacation.sOneClassFy.size() > 0) {
 			mCategoryDatas.clear();
@@ -267,7 +274,7 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	 *            第一级分类
 	 * @param industry_class_id
 	 *            第二级分类
-	 * @param district_i
+	 * @param district_id
 	 *            商圈ID
 	 * @param rice
 	 *            距离(多少米)500代表500米
@@ -275,7 +282,10 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	private void getNearByList(String cityid, String page, String lat,
 			String _long, String one_id, String industry_class_id,
 			String district_id, String rice) {
-
+		_long = new String().valueOf(GlobalVariable.mLongitude);
+		lat   = new String().valueOf(GlobalVariable.mLatitude);
+		CCLog.i("-------------------------------------------：", _long);
+		CCLog.i("-------------------------------------------：", lat);
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("city_id", cityid);
@@ -287,7 +297,7 @@ public class FuJinActivity extends CommonActivity implements Callback,
 		params.addBodyParameter("district_id", district_id);
 		params.addBodyParameter("rice", rice);
 		String url = ContantsValues.NEAR_BY_SHOP_LIST;
-
+		url =  url + "&_long="+_long+ "&lat="+lat;
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
@@ -417,6 +427,11 @@ public class FuJinActivity extends CommonActivity implements Callback,
 					}
 				});
 
+	}
+
+	@Override
+	public List<DistrictList> getDistrictList(String areaID) {
+		return super.getDistrictList(areaID);
 	}
 
 	/**
@@ -867,12 +882,12 @@ public class FuJinActivity extends CommonActivity implements Callback,
 		if (amapLocation != null
 				&& amapLocation.getAMapException().getErrorCode() == 0) {
 			if (amapLocation.getLongitude() != 0) {
-				CCLog.i("当前位置的 经度：", " " + amapLocation.getLongitude());
+				CCLog.i("onLocationChanged当前位置的 经度--------------->：", " " + amapLocation.getLongitude());
 				mLongitude = amapLocation.getLongitude();
 			} else {
 			}
 			if (amapLocation.getLatitude() != 0) {
-				CCLog.i("当前位置的 纬度：", " " + amapLocation.getLatitude());
+				CCLog.i("onLocationChanged当前位置的 纬度--------------->：", " " + amapLocation.getLatitude());
 				mLatitude = amapLocation.getLatitude();
 			} else {
 			}

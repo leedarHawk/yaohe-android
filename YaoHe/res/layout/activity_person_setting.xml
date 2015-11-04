@@ -174,7 +174,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="right"
                 android:paddingRight="15px"
-                android:text="loveinTai"
+                android:text="17吆喝"
                 android:textColor="@color/common_home_text_color_title"
                 android:textSize="14sp" />
         </RelativeLayout>

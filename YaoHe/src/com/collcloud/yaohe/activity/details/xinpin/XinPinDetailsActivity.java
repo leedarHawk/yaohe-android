@@ -176,7 +176,7 @@ public class XinPinDetailsActivity extends BaseActivity implements
 		CCLog.i("新品详情接收 ", "新品ID " + mStrNewProductID + " shop_id: "
 				+ mStrShopID + " member_id: " + mStrMemberId);
 		isFollow(mLoginDataManager.getMemberId(), mStrShopID,
-				ContantsValues.SHOP_FOLLOW_URL);
+				ContantsValues.SHOP_FOLLOW_STATUS_URL);
 		getNewProductDetail();
 	}
 

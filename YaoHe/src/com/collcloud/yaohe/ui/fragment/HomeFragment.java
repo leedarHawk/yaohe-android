@@ -620,20 +620,20 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
 	private void setJdWd(AMapLocation amapLocation) {
 		if (amapLocation.getLatitude() != 0) {
 			GlobalVariable.mLatitude = amapLocation.getLatitude();
-			CCLog.i("当前位置的 纬度：", " " + amapLocation.getLatitude());
+			CCLog.i("setJdWd当前位置的 纬度：", " " + amapLocation.getLatitude());
 		} else {
 			GlobalVariable.mLatitude = 40.003662;
 		}
 
 		if (amapLocation.getLongitude() != 0) {
 			GlobalVariable.mLongitude = amapLocation.getLongitude();
-			CCLog.i("当前位置的 经度：", " " + amapLocation.getLongitude());
+			CCLog.i("setJdWd当前位置的 经度：", " " + amapLocation.getLongitude());
 		} else {
 			GlobalVariable.mLongitude = 116.465271;
 		}
 		if (amapLocation.getDistrict() != null) {
 			GlobalVariable.mStrDistrict = amapLocation.getDistrict();
-			CCLog.i("当前位置对应的区域：", " " + amapLocation.getDistrict());
+			CCLog.i("setJdWd当前位置对应的区域：", " " + amapLocation.getDistrict());
 		} else {
 			GlobalVariable.mStrDistrict = GlobalConstant.DEFAULT_DISTRACT;
 		}
@@ -690,14 +690,14 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
 		
 		if (amapLocation.getLatitude() != 0) {
 			GlobalVariable.mLatitude = amapLocation.getLatitude();
-			CCLog.i("当前位置的 纬度：", " " + amapLocation.getLatitude());
+			CCLog.i("setLBSCity 当前位置的 纬度：", " " + amapLocation.getLatitude());
 		} else {
 			GlobalVariable.mLatitude = 40.003662;
 		}
 
 		if (amapLocation.getLongitude() != 0) {
 			GlobalVariable.mLongitude = amapLocation.getLongitude();
-			CCLog.i("当前位置的 经度：", " " + amapLocation.getLongitude());
+			CCLog.i("setLBSCity 当前位置的 经度：", " " + amapLocation.getLongitude());
 		} else {
 			GlobalVariable.mLongitude = 116.465271;
 		}

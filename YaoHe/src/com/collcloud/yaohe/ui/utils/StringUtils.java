@@ -131,13 +131,13 @@ public class StringUtils {
 		String dis = "";
 		if (distance >= 1000) {
 			if (distance / 1000 >= 1000) {
-				dis = "<100km";
+				dis = "<3000km";
 			} else if (distance / 1000 >= 100) {
+				dis = "<1000km";
+			} else if (distance / 1000 >= 10) {
 				dis = "<100km";
-			} else if (distance / 1000 >= 10) {
+			} else if (distance / 1000 >= 1) {
 				dis = "<10km";
-			} else if (distance / 1000 >= 10) {
-				dis = "<1km";
 			} else {
 				dis = "<1km";
 				// dis = String.format("%.1f", (distance / 1000)) + "km";

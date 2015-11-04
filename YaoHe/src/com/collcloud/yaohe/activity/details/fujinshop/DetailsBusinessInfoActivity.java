@@ -438,74 +438,78 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 			if (callArray.length() == 1) {
 				JSONObject callObject = callArray.optJSONObject(0);
-				if (Utils.isStringEmpty(callObject.optString("id"))) {
-					mLlCall.setVisibility(View.GONE);
-					return;
-				} else {
-					mLlCall.setVisibility(View.VISIBLE);
+				if (callObject!=null) {
+					if (Utils.isStringEmpty(callObject.optString("id"))) {
+						mLlCall.setVisibility(View.GONE);
+						return;
+					} else {
+						mLlCall.setVisibility(View.VISIBLE);
+					}
 				}
 			}
 			for (int i = 0; i < callArray.length(); i++) {
 				JSONObject callObject = callArray.optJSONObject(i);
-				BusinessCallInfo callInfo = new BusinessCallInfo();
+				if (callObject!=null) {
+					BusinessCallInfo callInfo = new BusinessCallInfo();
 
-				if (callObject.has("id")) {
-					callInfo.id = callObject.optString("id");
-				}
-				if (callObject.has("member_id")) {
-					callInfo.member_id = callObject.optString("member_id");
-				}
-				if (callObject.has("service_id")) {
-					callInfo.service_id = callObject.optString("service_id");
-				}
-				if (callObject.has("type")) {
-					callInfo.type = callObject.optString("type");
-				}
-				if (callObject.has("title")) {
-					callInfo.title = callObject.optString("title");
-				}
-				if (callObject.has("addtime")) {
-					callInfo.addtime = callObject.optString("addtime");
-				}
-				if (callObject.has("city_id")) {
-					callInfo.city_id = callObject.optString("city_id");
-				}
-				if (callObject.has("zan_num")) {
-					callInfo.zan_num = callObject.optString("zan_num");
-				}
-				if (callObject.has("comment_num")) {
-					callInfo.comment_num = callObject.optString("comment_num");
-				}
-				if (callObject.has("collection_num")) {
-					callInfo.collection_num = callObject
-							.optString("collection_num");
-				}
-				if (callObject.has("one_id")) {
-					callInfo.one_id = callObject.optString("one_id");
-				}
-				if (callObject.has("industry_class_id")) {
-					callInfo.industry_class_id = callObject
-							.optString("industry_class_id");
-				}
-				if (callObject.has("province_id")) {
-					callInfo.province_id = callObject.optString("province_id");
-				}
-				if (callObject.has("area_id")) {
-					callInfo.area_id = callObject.optString("area_id");
-				}
-				if (callObject.has("district_id")) {
-					callInfo.district_id = callObject.optString("district_id");
-				}
-				if (callObject.has("img")) {
-					if (!Utils.isStringEmpty(callObject.optString("img"))) {
-						callInfo.img = URLs.IMG_PRE
-								+ callObject.optString("img");
+					if (callObject.has("id")) {
+						callInfo.id = callObject.optString("id");
 					}
+					if (callObject.has("member_id")) {
+						callInfo.member_id = callObject.optString("member_id");
+					}
+					if (callObject.has("service_id")) {
+						callInfo.service_id = callObject.optString("service_id");
+					}
+					if (callObject.has("type")) {
+						callInfo.type = callObject.optString("type");
+					}
+					if (callObject.has("title")) {
+						callInfo.title = callObject.optString("title");
+					}
+					if (callObject.has("addtime")) {
+						callInfo.addtime = callObject.optString("addtime");
+					}
+					if (callObject.has("city_id")) {
+						callInfo.city_id = callObject.optString("city_id");
+					}
+					if (callObject.has("zan_num")) {
+						callInfo.zan_num = callObject.optString("zan_num");
+					}
+					if (callObject.has("comment_num")) {
+						callInfo.comment_num = callObject.optString("comment_num");
+					}
+					if (callObject.has("collection_num")) {
+						callInfo.collection_num = callObject
+								.optString("collection_num");
+					}
+					if (callObject.has("one_id")) {
+						callInfo.one_id = callObject.optString("one_id");
+					}
+					if (callObject.has("industry_class_id")) {
+						callInfo.industry_class_id = callObject
+								.optString("industry_class_id");
+					}
+					if (callObject.has("province_id")) {
+						callInfo.province_id = callObject.optString("province_id");
+					}
+					if (callObject.has("area_id")) {
+						callInfo.area_id = callObject.optString("area_id");
+					}
+					if (callObject.has("district_id")) {
+						callInfo.district_id = callObject.optString("district_id");
+					}
+					if (callObject.has("img")) {
+						if (!Utils.isStringEmpty(callObject.optString("img"))) {
+							callInfo.img = URLs.IMG_PRE
+									+ callObject.optString("img");
+						}
+					}
+					if (callObject.has("content")) {
+						callInfo.content = callObject.optString("content");
+					}
+					mListCalls.add(callInfo);
 				}
-				if (callObject.has("content")) {
-					callInfo.content = callObject.optString("content");
-				}
-				mListCalls.add(callInfo);
 			}
 		}
 
