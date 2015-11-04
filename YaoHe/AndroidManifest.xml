@@ -63,7 +63,7 @@
         android:theme="@style/Theme" >
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="a2c561bd5b4db3469293b052622b0d52" />
+            android:value="bb8b09020443b811e9318a595a728a54" />
 
         <activity
             android:name="com.collcloud.yaohe.activity.splash.SplashActivity"
