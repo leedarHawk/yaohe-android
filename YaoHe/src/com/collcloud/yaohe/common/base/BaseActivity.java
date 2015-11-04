@@ -1156,7 +1156,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("member_id", memberID);
 		params.addBodyParameter("id", id);
-
+		url = url+"&member_id="+memberID+"&id="+id;
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
@@ -1174,6 +1174,8 @@ public abstract class BaseActivity extends FragmentActivity {
 										if (statusObject.has("code")) {
 											int code = statusObject
 													.optInt("code");
+
+											CCLog.i("code：", code + " ");
 											if (code == 1) {
 												String strErrorMsg = statusObject
 														.optString("message");
@@ -1185,6 +1187,11 @@ public abstract class BaseActivity extends FragmentActivity {
 												mBaseIsFollow = false;
 											}
 										}
+										//直接获取是否已经关注状态
+										//mBaseIsFollow = errorJsonObject.optBoolean("data");
+										CCLog.i("code：", errorJsonObject.optBoolean("data") + " ");
+										CCLog.i("isFollow：", mBaseIsFollow + " ");
+										
 									}
 								} catch (Exception e) {
 									mBaseIsFollow = false;
