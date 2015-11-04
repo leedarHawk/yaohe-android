@@ -409,7 +409,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 														.setVisibility(View.VISIBLE);
 												mLlEmpty.setVisibility(View.GONE);
 												// 设定首页吆喝内容
-												// refreshFollow(mFollowShops);
+												 refreshFollow(mFollowShops);
 												if (mUiHandler != null) {
 													mUiHandler.obtainMessage(2);
 												}
