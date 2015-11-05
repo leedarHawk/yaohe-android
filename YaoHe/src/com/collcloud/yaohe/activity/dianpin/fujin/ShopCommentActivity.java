@@ -187,7 +187,7 @@ public class ShopCommentActivity extends BaseActivity implements
 		params.addBodyParameter("is_anonymous", isAnonymous);
 		params.addBodyParameter("type", strType);
 		params.addBodyParameter("parentid", "");
-		CCLog.i("吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
+		CCLog.i("ShopCommentActivity 吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
 				+ " type=" + strType + " content=" + content + " is_anonymous="
 				+ isAnonymous);
 		StringBuffer bf = new StringBuffer();
