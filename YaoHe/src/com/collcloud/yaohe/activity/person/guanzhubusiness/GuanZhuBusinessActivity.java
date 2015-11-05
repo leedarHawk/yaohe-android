@@ -84,6 +84,8 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
+		CCLog.v("==================================================================");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guan_zhu_business);
 
