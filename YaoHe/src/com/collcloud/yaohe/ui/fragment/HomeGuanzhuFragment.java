@@ -165,6 +165,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	//临时保存城市id 为了与当前的进行比较 。如果一样 就不进行数据加载，如果不一致则进行加载
 	private String tmpStrCityId;
 	public void getData(String mStrCityId) {
+		CCLog.i("关注页面开始加载数据 ==================================");
+
 		this.mStrCityID = mStrCityId;
 		//此参数 从 MainActivity来 为了表示 是否刷新数据
 		boolean refreshData = this.getActivity().getIntent().getBooleanExtra("refreshData", false);
