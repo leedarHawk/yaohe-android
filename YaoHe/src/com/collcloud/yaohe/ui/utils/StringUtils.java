@@ -129,7 +129,7 @@ public class StringUtils {
 	 */
 	public static String friendly_Distance(double distance) {
 		String dis = "";
-		if (distance >= 1000) {
+		/**if (distance >= 1000) {
 			if (distance / 1000 >= 1000) {
 				dis = "<3000km";
 			} else if (distance / 1000 >= 100) {
@@ -145,8 +145,11 @@ public class StringUtils {
 		} else {
 			dis = "<1km";
 			// dis = distance + "m";
-		}
+		}**/
 		// Log.v("以友好的方式显示距离", distance + "   " + dis);
+		if (distance > 0){
+			dis = String.format("%.1f", (distance / 1000)) + "km";
+		}
 		return dis;
 	}
 
