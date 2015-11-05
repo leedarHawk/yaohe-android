@@ -816,7 +816,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		params.addBodyParameter("is_anonymous", isAnonymous);
 		params.addBodyParameter("type", strType);
 		params.addBodyParameter("parentid", "");
-		CCLog.i("吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
+		CCLog.i("BaseActivity 吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
 				+ " star=" + star + " content=" + content + " is_anonymous="
 				+ isAnonymous);
 
