@@ -350,7 +350,7 @@ public class DetailsCallPinlunActivity extends BaseActivity implements
 		params.addBodyParameter("star", star);
 		params.addBodyParameter("content", content);
 		params.addBodyParameter("is_anonymous", isAnonymous);
-		CCLog.i("吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
+		CCLog.i("DetailsCallPinlunActivity 吆喝点评参数：", "member_id= " + memberID + " call_id=" + callID
 				+ " star=" + star + " content=" + content + " is_anonymous="
 				+ isAnonymous);
 
