@@ -86,9 +86,15 @@ public class PersonPingLunActivity extends BaseActivity implements
 		// 用户ID
 		CCLog.v(GlobalConstant.TAG,
 				"当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
+		String url =  ContantsValues.MY_YAOHE_COMMENT;
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		params.addBodyParameter("is_del", "Y");
 
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.MY_YAOHE_COMMENT,
+		//判断是否删除记录
+		url = url + "&member_id=" + mLoginDataManager.getMemberId() + "&is_del=Y";
+
+
+		http.send(HttpRequest.HttpMethod.POST, url,
 				params, new RequestCallBack<String>() {
 
 					@Override
