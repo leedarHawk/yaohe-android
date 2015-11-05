@@ -92,9 +92,13 @@ public class BusinessMyMsgActivity extends BaseActivity implements
 		// 用户ID
 		CCLog.v(GlobalConstant.TAG,
 				"当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
+		String url =  ContantsValues.MY_YAOHE_COMMENT;
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		url = url + "&member_id=" + mLoginDataManager.getMemberId() ;
+		//判断是否删除记录
+		params.addBodyParameter("is_del", "Y");
 
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.MY_YAOHE_COMMENT,
+		http.send(HttpRequest.HttpMethod.POST, url,
 				params, new RequestCallBack<String>() {
 
 					@Override
