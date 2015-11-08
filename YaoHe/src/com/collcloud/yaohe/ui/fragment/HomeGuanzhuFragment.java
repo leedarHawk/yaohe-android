@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.collcloud.frame.xlistview.XListView;
+import com.collcloud.frame.xlistview.XListView.IXListViewListener;
+import com.collcloud.frame.xlistview.XListView.OnSlidingDirectionListen;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeCommentActivity;
@@ -29,6 +32,7 @@ import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.HomeFollowShopInfo;
+import com.collcloud.yaohe.api.info.HomeCallInfo.CallInfo;
 import com.collcloud.yaohe.api.info.HomeFollowShopInfo.FollowShop;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.BaseFragment;
@@ -63,7 +67,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	/**
 	 * 主页面显示内容的List
 	 */
-	private SingleLayoutListView mLvPullToRefreshView;
+	//private SingleLayoutListView mLvPullToRefreshView;
+	/**
+	 * 主页面显示内容的List
+	 */
+	private XListView mLvPullToRefreshView;
 	/**
 	 * 主页list列表适配器
 	 */
@@ -95,6 +103,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	 * 城市id
 	 */
 	private String mStrCityID;
+	
+	//总页数
+	private int mTotalPage = 0;
+	//当前页
+	private int currentPage = 1;
 
 
 	/**
@@ -118,7 +131,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 				false);
 		CCLog.i("关注商家Fragment", "onCreateView");
 
-		mLvPullToRefreshView = (SingleLayoutListView) v
+		mLvPullToRefreshView = (XListView) v
 				.findViewById(R.id.lv_home_guanzhu_shop);
 
 		mLlEmpty = (LinearLayout) v
@@ -166,7 +179,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	private String tmpStrCityId;
 	public void getData(String mStrCityId) {
 		CCLog.i("关注页面开始加载数据 ==================================");
-
+		currentPage = 1;
 		this.mStrCityID = mStrCityId;
 		//此参数 从 MainActivity来 为了表示 是否刷新数据
 		boolean refreshData = this.getActivity().getIntent().getBooleanExtra("refreshData", false);
@@ -177,90 +190,90 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			} else {
 				tmpStrCityId = mStrCityID;
 				CCLog.d(tag, "tmpStrCityId is not null but different old id so load data.......");
-				getFollowShopList(mStrCityID, mLoginDataManager.getMemberId());
+				getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
 			}
 		} else {
 			tmpStrCityId = mStrCityID;
 			CCLog.d(tag, "tmpStrCityId is null load data.......");
-			getFollowShopList(mStrCityID, mLoginDataManager.getMemberId());
+			getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
 		}
 	}
 
-	@SuppressLint("HandlerLeak")
-	Handler mUiHandler = new Handler() {
-		public void handleMessage(Message msg) {
-
-			super.handleMessage(msg);
-			switch (msg.what) {
-			case 0:
-				// 获取首页关注吆喝内容列表
-				getFollowShopList(mStrCityID, mLoginDataManager.getMemberId());
-				break;
-
-			case 1:
-				UIHelper.ToastMessage(mBaseActivity, "数据已全部加载，没有更多了。");
-				mLvPullToRefreshView.onRefreshComplete(); // 下拉刷新完成
-				break;
-			case 2:
-				ApiAccess.dismissProgressDialog();
-				if (mFollowShops != null && mFollowShops.size() > 0) {
-					mLvPullToRefreshView.setVisibility(View.VISIBLE);
-					mLlEmpty.setVisibility(View.GONE);
-					// 设定首页吆喝内容
-					mAdapter = new HomeGuanZhuAdapter(mBaseActivity,
-							mFollowShops);
-					mLvPullToRefreshView.setAdapter(mAdapter);
-					initControlerListenner();
-				}
-				break;
-			default:
-				break;
-			}
-		};
-	};
+//	@SuppressLint("HandlerLeak")
+//	Handler mUiHandler = new Handler() {
+//		public void handleMessage(Message msg) {
+//
+//			super.handleMessage(msg);
+//			switch (msg.what) {
+//			case 0:
+//				// 获取首页关注吆喝内容列表
+//				getFollowShopList(mStrCityID, mLoginDataManager.getMemberId());
+//				break;
+//
+//			case 1:
+//				UIHelper.ToastMessage(mBaseActivity, "数据已全部加载，没有更多了。");
+//				mLvPullToRefreshView.onRefreshComplete(); // 下拉刷新完成
+//				break;
+//			case 2:
+//				ApiAccess.dismissProgressDialog();
+//				if (mFollowShops != null && mFollowShops.size() > 0) {
+//					mLvPullToRefreshView.setVisibility(View.VISIBLE);
+//					mLlEmpty.setVisibility(View.GONE);
+//					// 设定首页吆喝内容
+//					mAdapter = new HomeGuanZhuAdapter(mBaseActivity,
+//							mFollowShops);
+//					mLvPullToRefreshView.setAdapter(mAdapter);
+//					initControlerListenner();
+//				}
+//				break;
+//			default:
+//				break;
+//			}
+//		};
+//	};
 
 	/**
 	 * 加载数据啦~
 	 */
-	public void loadData(final int type) {
-		new Thread() {
-			@Override
-			public void run() {
-				switch (type) {
-				case 0:
-					Message _Msg = mUiHandler.obtainMessage(0);
-					mUiHandler.sendMessage(_Msg);
-					CCLog.i("关注商家  —— 可以加载数据了。。");
-					break;
-				case 1:
-					getFollowShopList(mStrCityID,
-							mLoginDataManager.getMemberId());
-					break;
-				}
-
-				try {
-					Thread.sleep(1500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				if (type == 0) { // 下拉刷新
-					// Collections.reverse(mList); //逆序
-					Message _Msg = mUiHandler.obtainMessage(1);
-					mUiHandler.sendMessage(_Msg);
-				}
-			}
-		}.start();
-	}
-
-	class myRunnable implements Runnable {
-		@Override
-		public void run() {
-
-			// 获取首页关注吆喝内容列表
-			getFollowShopList(GlobalConstant.DEFAULT_CITY_ID,
-					mLoginDataManager.getMemberId());
-		}
-	}
+//	public void loadData(final int type) {
+//		new Thread() {
+//			@Override
+//			public void run() {
+//				switch (type) {
+//				case 0:
+//					Message _Msg = mUiHandler.obtainMessage(0);
+//					mUiHandler.sendMessage(_Msg);
+//					CCLog.i("关注商家  —— 可以加载数据了。。");
+//					break;
+//				case 1:
+//					getFollowShopList(mStrCityID,
+//							mLoginDataManager.getMemberId());
+//					break;
+//				}
+//
+//				try {
+//					Thread.sleep(1500);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				if (type == 0) { // 下拉刷新
+//					// Collections.reverse(mList); //逆序
+//					Message _Msg = mUiHandler.obtainMessage(1);
+//					mUiHandler.sendMessage(_Msg);
+//				}
+//			}
+//		}.start();
+//	}
+//
+//	class myRunnable implements Runnable {
+//		@Override
+//		public void run() {
+//
+//			// 获取首页关注吆喝内容列表
+//			getFollowShopList(GlobalConstant.DEFAULT_CITY_ID,
+//					mLoginDataManager.getMemberId());
+//		}
+//	}
 
 	
 
@@ -269,17 +282,26 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	 * 
 	 * @Title getFollowShopList
 	 */
-	private void getFollowShopList(String cityid, String memberID) {
+	private void getFollowShopList(String cityid, String memberID,final boolean refreshData) {
 		if (mLoginDataManager.getLoginState().equals("1")) {
 
 			HttpUtils http = new HttpUtils();
 			String url = ContantsValues.HOME_FOLLOW_SHOP_LIST_URL + "&city_id="
-					+ cityid + "&member_id=" + memberID;
+					+ cityid + "&member_id=" + memberID+"&page="+currentPage;;
+			CCLog.d(tag, "home guanzhu shangjia url:"+url);
 			http.send(HttpRequest.HttpMethod.GET, url, null,
 					new RequestCallBack<String>() {
+				
+				
 
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
+							CCLog.d(tag, "refresh data:"+refreshData);
+							if(refreshData) {
+								currentPage = 1;
+								mFollowShops.clear();
+							}
+							
 							ApiAccess.dismissProgressDialog();
 							JSONObject jsonObject;
 							try {
@@ -299,7 +321,15 @@ public class HomeGuanzhuFragment extends BaseFragment {
 										if (mHomeFollowShopInfo.data != null
 												&& mHomeFollowShopInfo.data
 														.size() > 0) {
-											mFollowShops.clear();
+											
+											try {
+												mTotalPage = jsonObject.optInt("pageNumber");
+											} catch(Exception e) {
+												e.printStackTrace();
+											}
+											
+											//mFollowShops.clear();
+//											currentPage = currentPage + 1;
 											if (mHomeFollowShopInfo.data.size() == 1) {
 												if (Utils
 														.isStringEmpty(mHomeFollowShopInfo.data
@@ -316,8 +346,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 															.setVisibility(View.VISIBLE);
 												}
 											}
-											for (int j = 0; j < mHomeFollowShopInfo.data
-													.size(); j++) {
+											
+											ArrayList<FollowShop> mFollowShopsTmp = new ArrayList<FollowShop>();
+											int dataSize = mHomeFollowShopInfo.data.size();
+											
+											for (int j = 0; j < dataSize; j++) {
 												FollowShop followShopInfo = new FollowShop();
 												if (mHomeFollowShopInfo.data
 														.get(j).id != null) {
@@ -401,9 +434,40 @@ public class HomeGuanzhuFragment extends BaseFragment {
 													followShopInfo.fans_num = mHomeFollowShopInfo.data
 															.get(j).fans_num;
 												}
-												mFollowShops
-														.add(followShopInfo);
+												////////////////引用
+												if (mHomeFollowShopInfo.data.get(j).s_content != null) {
+													followShopInfo.s_content = mHomeFollowShopInfo.data
+															.get(j).s_content;
+												}
+												if (!Utils
+														.isStringEmpty(mHomeFollowShopInfo.data
+																.get(j).s_img)) {
+													followShopInfo.s_img = URLs.IMG_PRE
+															+ mHomeFollowShopInfo.data
+																	.get(j).s_img;
+												}
+												if (!Utils
+														.isStringEmpty(mHomeFollowShopInfo.data
+																.get(j).img)) {
+													followShopInfo.img = URLs.IMG_PRE
+															+ mHomeFollowShopInfo.data
+																	.get(j).img;
+												}
+												
+												followShopInfo.c_id = mHomeFollowShopInfo.data
+														.get(j).c_id;
+												
+												
+												mFollowShopsTmp.add(followShopInfo);
 											}
+											
+											//刷新数据
+											if(refreshData) {
+												mFollowShops.addAll(mFollowShopsTmp);
+											} else {//加载更多数据
+												mFollowShops.addAll(mFollowShopsTmp);
+											}
+											
 
 											if (mFollowShops != null
 													&& mFollowShops.size() > 0) {
@@ -412,9 +476,9 @@ public class HomeGuanzhuFragment extends BaseFragment {
 												mLlEmpty.setVisibility(View.GONE);
 												// 设定首页吆喝内容
 												 refreshFollow(mFollowShops);
-												if (mUiHandler != null) {
-													mUiHandler.obtainMessage(2);
-												}
+//												if (mUiHandler != null) {
+//													mUiHandler.obtainMessage(2);
+//												}
 											}
 										} else {
 											mLlEmpty.setVisibility(View.VISIBLE);
@@ -427,14 +491,17 @@ public class HomeGuanzhuFragment extends BaseFragment {
 											.setVisibility(View.GONE);
 									mLlEmpty.setVisibility(View.VISIBLE);
 								}
+								onLoad();
 							} catch (JSONException e) {
 								mLvPullToRefreshView.setVisibility(View.GONE);
 								mLlEmpty.setVisibility(View.VISIBLE);
+								onLoad();
 							}
 						}
 
 						@Override
 						public void onFailure(HttpException error, String msg) {
+							onLoad();
 							ApiAccess.dismissProgressDialog();
 							mLvPullToRefreshView.setVisibility(View.GONE);
 							mLlEmpty.setVisibility(View.VISIBLE);
@@ -608,10 +675,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 												@Override
 												public void run() {
+													currentPage = 1;
 													getFollowShopList(
 															mStrCityID,
 															mLoginDataManager
-																	.getMemberId());
+																	.getMemberId(),true);
 												}
 											}).start();
 
@@ -922,7 +990,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		LinearLayout rlLayout = (LinearLayout) view
 				.findViewById(R.id.ll_home_fragment_guanzhu);
 		SupportDisplay.resetAllChildViewParam(rlLayout);
-		mLvPullToRefreshView = (SingleLayoutListView) view
+		mLvPullToRefreshView = (XListView) view
 				.findViewById(R.id.lv_home_guanzhu_shop);
 		mLvPullToRefreshView.setVisibility(View.VISIBLE);
 
@@ -961,22 +1029,65 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		// 设定首页关注显示内容
 		setFollowShopList();
 
-		mLvPullToRefreshView.setCanLoadMore(false);
-		mLvPullToRefreshView.setCanRefresh(true);
-		mLvPullToRefreshView.setAutoLoadMore(false);
-		mLvPullToRefreshView.setMoveToFirstItemAfterRefresh(false);
-		mLvPullToRefreshView.setDoRefreshOnUIChanged(false);
-
-		mLvPullToRefreshView.setOnRefreshListener(new OnRefreshListener() {
-
+		mLvPullToRefreshView.setPullLoadEnable(true);
+		mLvPullToRefreshView.setPullRefreshEnable(true);
+		
+		mLvPullToRefreshView.setXListViewListener(new IXListViewListener() {
+			
 			@Override
 			public void onRefresh() {
-				// TODO Auto-generated method stub
-				loadData(0);
+				refresh();
+			}
+			
+			@Override
+			public void onLoadMore() {
+				loadMore();
+			}
+		});
+		mLvPullToRefreshView.setOnSlidingDirectionListen(new OnSlidingDirectionListen() {
+			
+			@Override
+			public void onScrollUpWard(float value) {
+			}
+			
+			@Override
+			public void onScrollTop() {
+			}
+			
+			@Override
+			public void onScrollDownWard(float value) {
+			}
+			
+			@Override
+			public void onScrollBottom() {
+				
 			}
 		});
 
 	}
+	
+	public void refresh() {
+		currentPage = 1;
+		getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
+	}
+	
+	public void loadMore() {
+		currentPage = currentPage + 1;
+		if (currentPage>mTotalPage) {
+			mLvPullToRefreshView.forbiddenLoadMore();
+			UIHelper.ToastMessage(getActivity(), "数据已全部加载，没有更多了。");
+		} else {
+			getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),false);
+		}
+
+	}
+	
+	private void onLoad() {
+		mLvPullToRefreshView.stopRefresh();
+		mLvPullToRefreshView.stopLoadMore();
+		mLvPullToRefreshView.setRefreshTime("");
+	}
+	
 
 	// 是否可以关注
 	private boolean mIsAllow = true;
@@ -1187,7 +1298,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 														getFollowShopList(
 																mStrCityID,
 																mLoginDataManager
-																		.getMemberId());
+																		.getMemberId(),true);
 													}
 												}).start();
 											}

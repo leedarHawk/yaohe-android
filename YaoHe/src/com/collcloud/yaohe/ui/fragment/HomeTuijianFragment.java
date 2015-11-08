@@ -135,8 +135,10 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 	//private PullScrollView pullScrollView;
 	//private LinearLayout contentLayout;
-	private int mTotal = 0;
-	private int mPage = 0;
+	//总页数
+	private int mTotalPage = 0;
+	//当前页
+	private int currentPage = 1;
 	private static final int NUM = 15;
 	
 	private static String tag = HomeTuijianFragment.class.getSimpleName();
@@ -196,7 +198,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 				@Override
 				public void run() {
-					mPage = 0;
+					currentPage = 1;
 					getData(mStrCityId);
 				}
 			}).start();
@@ -224,13 +226,13 @@ public class HomeTuijianFragment extends BaseFragment  {
 				tmpStrCityId = mStrCityId;
 				CCLog.d(tag, "tmpStrCityId is not null but different old id so load data.......");
 				getHomeRotateListInfo(mStrCityId);
-				getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
+				getHomeCallList(mStrCityId, mLoginDataManager.getMemberId(),true);
 			}
 		} else {
 			tmpStrCityId = mStrCityId;
 			CCLog.d(tag, "tmpStrCityId is null load data.......");
 			getHomeRotateListInfo(mStrCityId);
-			getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
+			getHomeCallList(mStrCityId, mLoginDataManager.getMemberId(),true);
 		}
 		
 	}
@@ -333,191 +335,197 @@ public class HomeTuijianFragment extends BaseFragment  {
 	 * 
 	 * @Title getHomeCallList
 	 */
-	private void getHomeCallList1(String cityid, String memberId) {
-
-		HttpUtils http = new HttpUtils();
-		String url = ContantsValues.HOME_CALL_LIST_URL + "&city_id=" + cityid
-				+ "&member_id=" + memberId + "&time="
-				+ System.currentTimeMillis();
-		CCLog.d(tag, "data list url:"+url); 
-
-		http.send(HttpRequest.HttpMethod.GET, url, null,
-				new RequestCallBack<String>() {
-
-					@Override
-					public void onSuccess(ResponseInfo<String> responseInfo) {
-						JSONObject jsonObject;
-						try {
-							jsonObject = new JSONObject(responseInfo.result);
-							if (responseInfo.result != null) {
-								CCLog.e("推荐Fragment获取的吆喝信息：",
-										responseInfo.result.toString());
-							}
-
-							if (jsonObject.has("data")) {
-								mHomeCallInfo = new HomeCallInfo();
-								mHomeCallInfo = GsonUtils
-										.json2Bean(responseInfo.result,
-												HomeCallInfo.class);
-								if (mHomeCallInfo != null) {
-									if (mHomeCallInfo.data != null
-											&& mHomeCallInfo.data.size() > 0) {
-										mCallInfos.clear();
-										mPage = mPage + 1;
-										if (mHomeCallInfo.data.size() <= NUM) {
-											//pullScrollView.setfooterViewGone();
-										}
-										if (mHomeCallInfo.data.size() == 1) {
-											if (Utils
-													.isStringEmpty(mHomeCallInfo.data
-															.get(0).id)
-													&& Utils.isStringEmpty(mHomeCallInfo.data
-															.get(0).shop_id)) {
-												mLlEmpty.setVisibility(View.VISIBLE);
-												mLvPullToRefreshView
-														.setVisibility(View.GONE);
-												return;
-											} else {
-												mLlEmpty.setVisibility(View.GONE);
-												mLvPullToRefreshView
-														.setVisibility(View.VISIBLE);
-											}
-										}
-										mCallInfos = new ArrayList<CallInfo>();
-										mTotal = mHomeCallInfo.data.size();
-										int requestCount = NUM;
-										CCLog.i("page = ", mPage + " ");
-										if (mTotal > mPage * NUM) {
-											requestCount = mPage * NUM;
-										} else {
-											requestCount = mTotal;
-										}
-										CCLog.i("requestCount = ", requestCount
-												+ " ");
-										for (int j = 0; j < requestCount; j++) {
-											CallInfo callInfo = new CallInfo();
-											if (mHomeCallInfo.data.get(j).shop_id != null) {
-												callInfo.shop_id = mHomeCallInfo.data
-														.get(j).shop_id;
-											}
-											if (mHomeCallInfo.data.get(j).shop_name != null) {
-												callInfo.shop_name = mHomeCallInfo.data
-														.get(j).shop_name;
-											}
-											if (mHomeCallInfo.data.get(j).shop_star != null) {
-												callInfo.shop_star = mHomeCallInfo.data
-														.get(j).shop_star;
-											}
-											if (mHomeCallInfo.data.get(j).shop_fans_num != null) {
-												callInfo.shop_fans_num = mHomeCallInfo.data
-														.get(j).shop_fans_num;
-											}
-											if (mHomeCallInfo.data.get(j).id != null) {
-												callInfo.id = mHomeCallInfo.data
-														.get(j).id;
-											}
-											if (mHomeCallInfo.data.get(j).guanzhu != null) {
-												callInfo.guanzhu = mHomeCallInfo.data
-														.get(j).guanzhu;
-											}
-											if (mHomeCallInfo.data.get(j).member_id != null) {
-												callInfo.member_id = mHomeCallInfo.data
-														.get(j).member_id;
-											}
-											if (mHomeCallInfo.data.get(j).service_id != null) {
-												callInfo.service_id = mHomeCallInfo.data
-														.get(j).service_id;
-											}
-											if (mHomeCallInfo.data.get(j).type != null) {
-												callInfo.type = mHomeCallInfo.data
-														.get(j).type;
-											}
-											if (mHomeCallInfo.data.get(j).title != null) {
-												callInfo.title = mHomeCallInfo.data
-														.get(j).title;
-											}
-											if (mHomeCallInfo.data.get(j).addtime != null) {
-												callInfo.addtime = mHomeCallInfo.data
-														.get(j).addtime;
-											}
-											if (mHomeCallInfo.data.get(j).city_id != null) {
-												callInfo.city_id = mHomeCallInfo.data
-														.get(j).city_id;
-											}
-
-											if (mHomeCallInfo.data.get(j).content != null) {
-												callInfo.content = mHomeCallInfo.data
-														.get(j).content;
-											}
-											if (!Utils
-													.isStringEmpty(mHomeCallInfo.data
-															.get(j).img)) {
-												callInfo.img = URLs.IMG_PRE
-														+ mHomeCallInfo.data
-																.get(j).img;
-											}
-											if (mHomeCallInfo.data.get(j).collection_num != null) {
-												callInfo.collection_num = mHomeCallInfo.data
-														.get(j).collection_num;
-											}
-											if (mHomeCallInfo.data.get(j).zan_num != null) {
-												callInfo.zan_num = mHomeCallInfo.data
-														.get(j).zan_num;
-											}
-											if (mHomeCallInfo.data.get(j).comment_num != null) {
-												callInfo.comment_num = mHomeCallInfo.data
-														.get(j).comment_num;
-											}
-											mCallInfos.add(callInfo);
-										}
-
-										if (mCallInfos != null
-												&& mCallInfos.size() > 0) {
-											mLvPullToRefreshView
-													.setVisibility(View.VISIBLE);
-											mLlEmpty.setVisibility(View.GONE);
-
-											// 设定首页吆喝内容
-											setHomeRecommendInfo();
-										}
-									} else {
-										mLlEmpty.setVisibility(View.VISIBLE);
-										mLvPullToRefreshView
-												.setVisibility(View.GONE);
-										mRlRotate.setVisibility(View.GONE);
-									}
-								}
-							} else {
-								mLvPullToRefreshView.setVisibility(View.GONE);
-								mLlEmpty.setVisibility(View.VISIBLE);
-								mRlRotate.setVisibility(View.GONE);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-							mLvPullToRefreshView.setVisibility(View.GONE);
-							mLlEmpty.setVisibility(View.VISIBLE);
-							mRlRotate.setVisibility(View.GONE);
-						}
-						onLoad();
-					}
-
-					@Override
-					public void onFailure(HttpException error, String msg) {
-						mLvPullToRefreshView.setVisibility(View.GONE);
-						mLlEmpty.setVisibility(View.VISIBLE);
-						mRlRotate.setVisibility(View.GONE);
-						onLoad();
-					}
-				});
-
-	}
+//	private void getHomeCallList1(String cityid, String memberId) {
+//
+//		HttpUtils http = new HttpUtils();
+//		String url = ContantsValues.HOME_CALL_LIST_URL + "&city_id=" + cityid
+//				+ "&member_id=" + memberId + "&time="
+//				+ System.currentTimeMillis();
+//		CCLog.d(tag, "data list url:"+url); 
+//
+//		http.send(HttpRequest.HttpMethod.GET, url, null,
+//				new RequestCallBack<String>() {
+//
+//					@Override
+//					public void onSuccess(ResponseInfo<String> responseInfo) {
+//						JSONObject jsonObject;
+//						try {
+//							jsonObject = new JSONObject(responseInfo.result);
+//							if (responseInfo.result != null) {
+//								CCLog.e("推荐Fragment获取的吆喝信息：",
+//										responseInfo.result.toString());
+//							}
+//
+//							if (jsonObject.has("data")) {
+//								mHomeCallInfo = new HomeCallInfo();
+//								mHomeCallInfo = GsonUtils
+//										.json2Bean(responseInfo.result,
+//												HomeCallInfo.class);
+//								if (mHomeCallInfo != null) {
+//									if (mHomeCallInfo.data != null
+//											&& mHomeCallInfo.data.size() > 0) {
+//										mCallInfos.clear();
+//										mPage = mPage + 1;
+//										if (mHomeCallInfo.data.size() <= NUM) {
+//											//pullScrollView.setfooterViewGone();
+//										}
+//										if (mHomeCallInfo.data.size() == 1) {
+//											if (Utils
+//													.isStringEmpty(mHomeCallInfo.data
+//															.get(0).id)
+//													&& Utils.isStringEmpty(mHomeCallInfo.data
+//															.get(0).shop_id)) {
+//												mLlEmpty.setVisibility(View.VISIBLE);
+//												mLvPullToRefreshView
+//														.setVisibility(View.GONE);
+//												return;
+//											} else {
+//												mLlEmpty.setVisibility(View.GONE);
+//												mLvPullToRefreshView
+//														.setVisibility(View.VISIBLE);
+//											}
+//										}
+//										mCallInfos = new ArrayList<CallInfo>();
+//										mTotal = mHomeCallInfo.data.size();
+//										int requestCount = NUM;
+//										CCLog.i("page = ", mPage + " ");
+//										if (mTotal > mPage * NUM) {
+//											requestCount = mPage * NUM;
+//										} else {
+//											requestCount = mTotal;
+//										}
+//										CCLog.i("requestCount = ", requestCount
+//												+ " ");
+//										for (int j = 0; j < requestCount; j++) {
+//											CallInfo callInfo = new CallInfo();
+//											if (mHomeCallInfo.data.get(j).shop_id != null) {
+//												callInfo.shop_id = mHomeCallInfo.data
+//														.get(j).shop_id;
+//											}
+//											if (mHomeCallInfo.data.get(j).shop_name != null) {
+//												callInfo.shop_name = mHomeCallInfo.data
+//														.get(j).shop_name;
+//											}
+//											if (mHomeCallInfo.data.get(j).shop_star != null) {
+//												callInfo.shop_star = mHomeCallInfo.data
+//														.get(j).shop_star;
+//											}
+//											if (mHomeCallInfo.data.get(j).shop_fans_num != null) {
+//												callInfo.shop_fans_num = mHomeCallInfo.data
+//														.get(j).shop_fans_num;
+//											}
+//											if (mHomeCallInfo.data.get(j).id != null) {
+//												callInfo.id = mHomeCallInfo.data
+//														.get(j).id;
+//											}
+//											if (mHomeCallInfo.data.get(j).guanzhu != null) {
+//												callInfo.guanzhu = mHomeCallInfo.data
+//														.get(j).guanzhu;
+//											}
+//											if (mHomeCallInfo.data.get(j).member_id != null) {
+//												callInfo.member_id = mHomeCallInfo.data
+//														.get(j).member_id;
+//											}
+//											if (mHomeCallInfo.data.get(j).service_id != null) {
+//												callInfo.service_id = mHomeCallInfo.data
+//														.get(j).service_id;
+//											}
+//											if (mHomeCallInfo.data.get(j).type != null) {
+//												callInfo.type = mHomeCallInfo.data
+//														.get(j).type;
+//											}
+//											if (mHomeCallInfo.data.get(j).title != null) {
+//												callInfo.title = mHomeCallInfo.data
+//														.get(j).title;
+//											}
+//											if (mHomeCallInfo.data.get(j).addtime != null) {
+//												callInfo.addtime = mHomeCallInfo.data
+//														.get(j).addtime;
+//											}
+//											if (mHomeCallInfo.data.get(j).city_id != null) {
+//												callInfo.city_id = mHomeCallInfo.data
+//														.get(j).city_id;
+//											}
+//
+//											if (mHomeCallInfo.data.get(j).content != null) {
+//												callInfo.content = mHomeCallInfo.data
+//														.get(j).content;
+//											}
+//											if (!Utils
+//													.isStringEmpty(mHomeCallInfo.data
+//															.get(j).img)) {
+//												callInfo.img = URLs.IMG_PRE
+//														+ mHomeCallInfo.data
+//																.get(j).img;
+//											}
+//											if (mHomeCallInfo.data.get(j).collection_num != null) {
+//												callInfo.collection_num = mHomeCallInfo.data
+//														.get(j).collection_num;
+//											}
+//											if (mHomeCallInfo.data.get(j).zan_num != null) {
+//												callInfo.zan_num = mHomeCallInfo.data
+//														.get(j).zan_num;
+//											}
+//											if (mHomeCallInfo.data.get(j).comment_num != null) {
+//												callInfo.comment_num = mHomeCallInfo.data
+//														.get(j).comment_num;
+//											}
+//											mCallInfos.add(callInfo);
+//										}
+//
+//										if (mCallInfos != null
+//												&& mCallInfos.size() > 0) {
+//											mLvPullToRefreshView
+//													.setVisibility(View.VISIBLE);
+//											mLlEmpty.setVisibility(View.GONE);
+//
+//											// 设定首页吆喝内容
+//											setHomeRecommendInfo();
+//										}
+//									} else {
+//										mLlEmpty.setVisibility(View.VISIBLE);
+//										mLvPullToRefreshView
+//												.setVisibility(View.GONE);
+//										mRlRotate.setVisibility(View.GONE);
+//									}
+//								}
+//							} else {
+//								mLvPullToRefreshView.setVisibility(View.GONE);
+//								mLlEmpty.setVisibility(View.VISIBLE);
+//								mRlRotate.setVisibility(View.GONE);
+//							}
+//						} catch (JSONException e) {
+//							e.printStackTrace();
+//							mLvPullToRefreshView.setVisibility(View.GONE);
+//							mLlEmpty.setVisibility(View.VISIBLE);
+//							mRlRotate.setVisibility(View.GONE);
+//						}
+//						onLoad();
+//					}
+//
+//					@Override
+//					public void onFailure(HttpException error, String msg) {
+//						mLvPullToRefreshView.setVisibility(View.GONE);
+//						mLlEmpty.setVisibility(View.VISIBLE);
+//						mRlRotate.setVisibility(View.GONE);
+//						onLoad();
+//					}
+//				});
+//
+//	}
 	
-	private void getHomeCallList(String cityid, String memberId) {
-
+	/**
+	 * 
+	 * @param cityid
+	 * @param memberId
+	 * @param refreshData 是否是刷新数据  false：加载更多
+	 */
+	private void getHomeCallList(String cityid, String memberId,final boolean refreshData) {
+		
 		HttpUtils http = new HttpUtils();
 		String url = ContantsValues.HOME_CALL_LIST_URL + "&city_id=" + cityid
 				+ "&member_id=" + memberId + "&time="
-				+ System.currentTimeMillis();
+				+ System.currentTimeMillis()+"&page="+currentPage;
 		CCLog.d(tag, "data list url:"+url); 
 
 		http.send(HttpRequest.HttpMethod.GET, url, null,
@@ -525,6 +533,11 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
+						CCLog.d(tag, "refresh data:"+refreshData);
+						if(refreshData) {
+							currentPage = 1;
+							mCallInfos.clear();
+						}
 						JSONObject jsonObject;
 						ApiAccess.dismissProgressDialog();
 						try {
@@ -533,6 +546,13 @@ public class HomeTuijianFragment extends BaseFragment  {
 								CCLog.e("推荐Fragment获取的吆喝信息：",
 										responseInfo.result.toString());
 							}
+							
+							try {
+								mTotalPage = jsonObject.optInt("pageNumber");
+							} catch(Exception e) {
+								e.printStackTrace();
+							}
+							
 
 							if (jsonObject.has("data")) {
 								mHomeCallInfo = new HomeCallInfo();
@@ -542,8 +562,8 @@ public class HomeTuijianFragment extends BaseFragment  {
 								if (mHomeCallInfo != null) {
 									if (mHomeCallInfo.data != null
 											&& mHomeCallInfo.data.size() > 0) {
-										mCallInfos.clear();
-										mPage = mPage + 1;
+										//mCallInfos.clear();
+										currentPage = currentPage + 1;
 										if (mHomeCallInfo.data.size() <= NUM) {
 											//pullScrollView.setfooterViewGone();
 										}
@@ -563,20 +583,11 @@ public class HomeTuijianFragment extends BaseFragment  {
 														.setVisibility(View.VISIBLE);
 											}
 										}
-										//mCallInfos = new ArrayList<CallInfo>();
-										mTotal = mHomeCallInfo.data.size();
-										int requestCount = NUM;
-										CCLog.i("page = ", mPage + " ");
-										if (mTotal > mPage * NUM) {
-											requestCount = mPage * NUM;
-										} else {
-											requestCount = mTotal;
-										}
-										CCLog.i("requestCount = ", requestCount
-												+ " ");
+										ArrayList<CallInfo> mCallInfosTmp = new ArrayList<CallInfo>();
+										int dataSize = mHomeCallInfo.data.size();
 										//LEE
 
-										for (int j = 0; j < mTotal; j++) {
+										for (int j = 0; j < dataSize; j++) {
 											CallInfo callInfo = new CallInfo();
 											if (mHomeCallInfo.data.get(j).shop_id != null) {
 												callInfo.shop_id = mHomeCallInfo.data
@@ -631,6 +642,11 @@ public class HomeTuijianFragment extends BaseFragment  {
 												callInfo.content = mHomeCallInfo.data
 														.get(j).content;
 											}
+											if (mHomeCallInfo.data.get(j).s_content != null) {
+												callInfo.s_content = mHomeCallInfo.data
+														.get(j).s_content;
+											}
+											
 											if (!Utils
 													.isStringEmpty(mHomeCallInfo.data
 															.get(j).img)) {
@@ -638,6 +654,17 @@ public class HomeTuijianFragment extends BaseFragment  {
 														+ mHomeCallInfo.data
 																.get(j).img;
 											}
+											if (!Utils
+													.isStringEmpty(mHomeCallInfo.data
+															.get(j).s_img)) {
+												callInfo.s_img = URLs.IMG_PRE
+														+ mHomeCallInfo.data
+																.get(j).s_img;
+											}
+											
+											callInfo.c_id = mHomeCallInfo.data
+													.get(j).c_id;
+											
 											if (mHomeCallInfo.data.get(j).collection_num != null) {
 												callInfo.collection_num = mHomeCallInfo.data
 														.get(j).collection_num;
@@ -650,7 +677,14 @@ public class HomeTuijianFragment extends BaseFragment  {
 												callInfo.comment_num = mHomeCallInfo.data
 														.get(j).comment_num;
 											}
-											mCallInfos.add(callInfo);
+											mCallInfosTmp.add(callInfo);
+										}
+										//刷新数据
+										if(refreshData) {
+											//mCallInfos = mCallInfosTmp;
+											mCallInfos.addAll(mCallInfosTmp);
+										} else {//加载更多数据
+											mCallInfos.addAll(mCallInfosTmp);
 										}
 
 										if (mCallInfos != null
@@ -1053,11 +1087,11 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 												@Override
 												public void run() {
-													mPage = 0;
+													currentPage = 1;
 													getHomeCallList(
 															mStrCityId,
 															mLoginDataManager
-																	.getMemberId());
+																	.getMemberId(),true);
 												}
 											}).start();
 
@@ -1622,7 +1656,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 	public void refresh() {
 		// 获取首页吆喝内容列表
-		getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
+		getHomeCallList(mStrCityId, mLoginDataManager.getMemberId(),true);
 		getHomeRotateListInfo(mStrCityId);
 //		new Handler().postDelayed(new Runnable() {
 //
@@ -1639,34 +1673,12 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 
 	public void loadMore() {
-		//if (mPage * NUM > mTotal) {
-		if (true) {
-			//pullScrollView.setfooterViewGone();
+		if (currentPage>mTotalPage) {
 			mLvPullToRefreshView.forbiddenLoadMore();
 			UIHelper.ToastMessage(getActivity(), "数据已全部加载，没有更多了。");
 		} else {
-
-			//pullScrollView.setfooterViewReset();
-			getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
+			getHomeCallList(mStrCityId, mLoginDataManager.getMemberId(),false);
 		}
-		
-		// 获取首页吆喝内容列表
-//		getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
-//		new Handler().postDelayed(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				if (mPage * NUM > mTotal) {
-//					//pullScrollView.setfooterViewGone();
-//					mLvPullToRefreshView.forbiddenLoadMore();
-//					UIHelper.ToastMessage(getActivity(), "数据已全部加载，没有更多了。");
-//				} else {
-//
-//					//pullScrollView.setfooterViewReset();
-//				}
-//			}
-//
-//		}, 100);
 
 	}
 	
@@ -1679,7 +1691,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		mPage = 0;
+		currentPage = 1;
 	}
 
 	/**
@@ -1729,11 +1741,11 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 													@Override
 													public void run() {
-														mPage = 0;
+														currentPage = 1;
 														getHomeCallList(
 																mStrCityId,
 																mLoginDataManager
-																		.getMemberId());
+																		.getMemberId(),true);
 													}
 												}).start();
 											}

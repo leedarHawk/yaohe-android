@@ -35,5 +35,13 @@ public class HomeFollowShopInfo implements Serializable {
 		public String shop_star;// 评价星级
 		public String shop_name;// 店铺名称
 		public String shop_fans_num;// 粉丝数
+		
+		//引用图片
+		public String s_img;
+		//引用内容
+		public String s_content;
+		// 为0的时候 标志 没有引用服务 ，而是纯吆喝
+		public String c_id;
+		public String img;
 	}
 }
