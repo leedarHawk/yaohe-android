@@ -1082,19 +1082,6 @@ public class HomeTuijianFragment extends BaseFragment  {
 										if (Utils.strFromView(tvGuanZhu).equals(GlobalConstant.INVALID_VALUE)) {
 											tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
 											tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-
-											new Thread(new Runnable() {
-
-												@Override
-												public void run() {
-													currentPage = 1;
-													getHomeCallList(
-															mStrCityId,
-															mLoginDataManager
-																	.getMemberId(),true);
-												}
-											}).start();
-
 										} else {
 											tvGuanZhu
 													.setText(GlobalConstant.INVALID_VALUE);
@@ -1110,7 +1097,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 							ApiAccess.showProgressDialog(getActivity(),
 									"取消关注中...");
 							// 关注
-							cancelFollows(shopID);
+							cancelFollows(shopID,tvGuanZhu);
 						
 
 						}
@@ -1697,7 +1684,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID) {
+	private void cancelFollows(String shopID,final TextView tvGuanZhu) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1737,17 +1724,9 @@ public class HomeTuijianFragment extends BaseFragment  {
 											} else {
 												UIHelper.ToastMessage(
 														mBaseActivity, "取消关注成功");
-												new Thread(new Runnable() {
-
-													@Override
-													public void run() {
-														currentPage = 1;
-														getHomeCallList(
-																mStrCityId,
-																mLoginDataManager
-																		.getMemberId(),true);
-													}
-												}).start();
+												tvGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+												tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+												
 											}
 										}
 									}
@@ -1756,6 +1735,9 @@ public class HomeTuijianFragment extends BaseFragment  {
 											.getMessage(5, mBaseActivity);
 									UIHelper.ToastMessage(mBaseActivity,
 											errorMsg);
+									tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
+									tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+									
 								}
 
 							}
