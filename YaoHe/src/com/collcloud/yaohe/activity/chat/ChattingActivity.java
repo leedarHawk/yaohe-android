@@ -133,7 +133,6 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 						@Override
 						public void onConnectState(
 								ECDevice.ECConnectState state, ECError error) {
-							// TODO Auto-generated method stub
 							if (state == ECDevice.ECConnectState.CONNECT_FAILED
 									&& error.errorCode == SdkErrorCode.SDK_KICKED_OFF) {
 								Toast.makeText(getApplicationContext(), "连接成功",
@@ -251,7 +250,6 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 
 	@SuppressWarnings("rawtypes")
 	private void initDate() {
-		// TODO Auto-generated method stub
 		arrayList = new ArrayList();
 		baseAdapter = new ChatAdapter(this, arrayList);
 		lv_chatting.setAdapter(baseAdapter);
@@ -266,7 +264,6 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 
 				@Override
 				public void onLogout() {
-					// TODO Auto-generated method stub
 					if (params != null && params.getInitParams() != null) {
 						params.getInitParams().clear();
 					}

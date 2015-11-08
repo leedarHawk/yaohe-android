@@ -15,7 +15,8 @@ import com.collcloud.yaohe.MainActivity;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.BusinessActivity;
 import com.collcloud.yaohe.activity.business.fayaohe.BusinessFaYaoHeActivity;
-import com.collcloud.yaohe.activity.friend.HaoWanActivity;
+//import com.collcloud.yaohe.activity.friend.HaoWanActivity;
+import com.collcloud.yaohe.activity.friend.FriendHaowanActivity;
 import com.collcloud.yaohe.activity.fujin.FuJinActivity;
 import com.collcloud.yaohe.activity.my.MineActivity;
 
@@ -336,7 +337,7 @@ public class CommonActivity extends BaseActivity {
 	public void clickOnHaoWan() {
 
 		Intent intent = new Intent();
-		intent.setClass(this, HaoWanActivity.class);
+		intent.setClass(this, FriendHaowanActivity.class);
 		baseStartActivity(intent);
 	}
 

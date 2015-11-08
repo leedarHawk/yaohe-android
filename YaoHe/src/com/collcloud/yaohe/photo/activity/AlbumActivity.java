@@ -71,7 +71,6 @@ public class AlbumActivity extends Activity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			mContext.unregisterReceiver(this);
-			// TODO Auto-generated method stub
 			gridImageAdapter.notifyDataSetChanged();
 		}
 	};

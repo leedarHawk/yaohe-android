@@ -395,7 +395,6 @@ public class DetailsCallPinlunActivity extends BaseActivity implements
 																	.setText("");
 															ApiAccess
 																	.dismissProgressDialog();
-															// TODO 刷新数据
 															loadData(0);
 														}
 													}, 1000);

@@ -3,6 +3,7 @@ package com.collcloud.yaohe.common.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.collcloud.yaohe.activity.friend.FriendHaowanActivity;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -36,7 +37,7 @@ import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.BusinessActivity;
 import com.collcloud.yaohe.activity.business.fayaohe.BusinessFaYaoHeActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.ShopCommentActivity;
-import com.collcloud.yaohe.activity.friend.HaoWanActivity;
+//import com.collcloud.yaohe.activity.friend.HaoWanActivity;
 import com.collcloud.yaohe.activity.fujin.FuJinActivity;
 import com.collcloud.yaohe.activity.my.MineActivity;
 import com.collcloud.yaohe.api.ApiAccess;
@@ -709,7 +710,7 @@ public abstract class BaseFragment extends Fragment {
 	public void clickOnHaoWan() {
 
 		Intent intent = new Intent();
-		intent.setClass(mBaseActivity, HaoWanActivity.class);
+		intent.setClass(mBaseActivity, FriendHaowanActivity.class);
 		mBaseActivity.baseStartActivity(intent);
 	}
 

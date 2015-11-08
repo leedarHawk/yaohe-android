@@ -114,7 +114,7 @@ public class FriendHaowanActivity extends CommonActivity implements
 			return;
 		}
 		switch (v.getId()) {
-
+		//TODO mCount 数据需要存到数据库中，每天玩的次数，包括兑奖后的控制也在这里
 		// 点我有惊喜 按钮事件：
 		case R.id.btn_activity_haowan_commit:
 			// timerTask();
@@ -169,13 +169,17 @@ public class FriendHaowanActivity extends CommonActivity implements
 				public void run() {
 					// TODO 此处缺少掉用接口，判断成功与否的判断，然后显示图片。
 					// 爆炸后的优惠券、未中奖图片显示
-					if(awardID==""){//未中奖
+					/**if(awardID==""){//未中奖
 						mIvShowCoupon.setVisibility(View.VISIBLE);
 						showCoupon();
 						mCount = 0;
 					}else{//中奖了
 						dialog();
-					}
+					}**/
+					//dialog();
+
+					accessNet();
+
 				}
 			},400);
 		} else {
@@ -450,8 +454,12 @@ public class FriendHaowanActivity extends CommonActivity implements
 		// 用户ID
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		String url = ContantsValues.ZHONGJIANG;
+		url = url + "&member_id=" + mLoginDataManager.getMemberId();
 
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.ZHONGJIANG, params,
+
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override
@@ -482,6 +490,7 @@ public class FriendHaowanActivity extends CommonActivity implements
 							code = object2.getString("code");
 
 							if (code.equals("0")) {//表示中奖
+//							if (true) {//表示中奖
 
 								CCLog.v(TAG, "+" + code);
  
@@ -492,8 +501,10 @@ public class FriendHaowanActivity extends CommonActivity implements
 								awardID=object3.optString("id");
 								awardAID=object3.optString("aid");
 								awardAID=object3.optString("title");
-							
-								} 
+
+								dialog();
+							}
+							else{mCount = 0;}
 
 						} catch (JSONException e) {
 							

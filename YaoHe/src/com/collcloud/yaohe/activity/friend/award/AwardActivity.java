@@ -121,9 +121,10 @@ public class AwardActivity extends BaseActivity implements OnClickListener {
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
 		params.addBodyParameter("page", "1");
-		
+		String url = ContantsValues.ZHONGJIANGJILU;
+		url = url + "&member_id=" +  mLoginDataManager.getMemberId()+ "&page=1";
 
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.ZHONGJIANGJILU, params,
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override

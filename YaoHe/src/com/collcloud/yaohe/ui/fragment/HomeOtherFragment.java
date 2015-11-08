@@ -539,7 +539,7 @@ public class HomeOtherFragment extends BaseFragment {
 						}
 						ApiAccess.showProgressDialog(getActivity(), "卖力关注中...");
 						// 关注
-						shopFollow(shopID);
+//						shopFollow(shopID);
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {

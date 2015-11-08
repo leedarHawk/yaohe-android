@@ -631,6 +631,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 									"取消关注中...");
 							// 关注
 							cancelFollows(shopID);
+							//TODO 需要加刷新
 
 						}
 
@@ -1145,7 +1146,9 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		params.addBodyParameter("id", shopID);
 		CCLog.i("取消关注参数：", "member_id=" + mLoginDataManager.getMemberId()
 				+ " id=" + shopID);
-
+		//首页关注 取消关注
+		url = url + "&member_id=" + mLoginDataManager.getMemberId()
+				+ "&id=" + shopID;
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
