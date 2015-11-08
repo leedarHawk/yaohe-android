@@ -142,10 +142,53 @@
         <!-- 图片 和 说明文字 -->
 
         <RelativeLayout
+            android:id="@+id/ll_item_hoe_image_content_yaohe"
+            android:layout_width="match_parent"
+            android:layout_height="190px"
+            android:layout_below="@+id/item_content_guanzhu_diviler"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical" >
+
+            <FrameLayout
+                android:id="@+id/fv_item_home_shop_image_yaohe"
+                android:layout_width="200px"
+                android:layout_height="160px"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/iv_item_hme_shop_image_yaohe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="7px"
+                    android:background="@drawable/icon_yaohe_loading_default"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_item_home_content_yaohe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15px"
+                android:layout_toRightOf="@+id/fv_item_home_shop_image_yaohe"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingBottom="10px"
+                android:text=""
+                android:textColor="@color/common_home_text_color_title"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/ll_item_home_guanzhu_image_content"
             android:layout_width="match_parent"
+            android:background="@color/diliver_in_gray"
             android:layout_height="160px"
-            android:layout_below="@+id/item_content_guanzhu_diviler"
+            android:layout_below="@+id/ll_item_hoe_image_content_yaohe"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
             android:layout_marginTop="20px"
@@ -163,8 +206,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7px"
-                    android:contentDescription="@string/app_name"
                     android:background="@drawable/icon_yaohe_loading_default"
+                    android:contentDescription="@string/app_name"
                     android:scaleType="fitXY" />
 
                 <ImageView
@@ -178,7 +221,6 @@
                 android:id="@+id/tv_item_home_guanzhu_shop_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/tv_item_home_guanzhu_shop_guanzhu_time"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="15px"
                 android:layout_toRightOf="@+id/fv_item_home_guanzhu_shop_image"
@@ -188,26 +230,26 @@
                 android:text=""
                 android:textColor="@color/common_home_text_color_title"
                 android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_item_home_guanzhu_shop_guanzhu_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/fv_item_home_guanzhu_shop_image"
-                android:gravity="right"
-                android:text="11:23"
-                android:textColor="@color/common_home_text_color_fans_time"
-                android:textSize="13sp"
-                android:visibility="invisible" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_item_home_guanzhu_shop_guanzhu_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ll_item_home_guanzhu_image_content"
+            android:gravity="right"
+            android:text="11:23"
+            android:textColor="@color/common_home_text_color_fans_time"
+            android:layout_marginRight="5dip"
+            android:textSize="13sp"
+            android:visibility="invisible" />
 
         <View
             android:id="@+id/item_content_guanzhu_diviler_2"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_below="@+id/ll_item_home_guanzhu_image_content"
+            android:layout_below="@+id/tv_item_home_guanzhu_shop_guanzhu_time"
             android:layout_marginTop="15px"
             android:background="@drawable/icon_details_fenge_line" />
 
