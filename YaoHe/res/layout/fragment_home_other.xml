@@ -6,7 +6,16 @@
     android:orientation="vertical"
     android:splitMotionEvents="false" >
 
-    <com.collcloud.yaohe.ui.view.SingleLayoutListView
+    <!--
+         <com.collcloud.yaohe.ui.view.SingleLayoutListView
+        android:id="@+id/lv_home_other_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#bababa"
+        android:visibility="gone" />
+    -->
+
+    <com.collcloud.frame.xlistview.XListView
         android:id="@+id/lv_home_other_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

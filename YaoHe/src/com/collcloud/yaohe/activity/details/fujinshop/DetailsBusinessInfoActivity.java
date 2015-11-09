@@ -24,6 +24,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity;
+import com.collcloud.yaohe.activity.chat.ChattingActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.DetailsBusinessPinlunActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.FuJinXiaoXiActivity;
@@ -63,6 +64,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 public class DetailsBusinessInfoActivity extends BaseActivity implements
 		OnClickListener {
 	private String gittest;
+	private String tag = DetailsBusinessInfoActivity.class.getSimpleName();
 
 	/**
 	 * 商家发布的吆喝列表区域
@@ -289,6 +291,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		//修改member id为当前用户的ID,mStrMemberID为shop member ID
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
 		String url = ContantsValues.DETAILS_GET_BUSINESS_SHOP_INFO+"&id="+mStrShopID+"&member_id="+ mLoginDataManager.getMemberId();
+		CCLog.d(tag, "getBusinessShopInfo:"+url);
 		http.send(HttpRequest.HttpMethod.POST,
 				url, params,
 				new RequestCallBack<String>() {
@@ -338,6 +341,8 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 	}
 
+	//商家member id 号
+	private String shop_member_id;
 	/**
 	 * 商家个人商铺介绍
 	 * 
@@ -348,6 +353,10 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		if (jsonObject.has("full_name")) {
 			mTvShopName.setText(jsonObject.optString("full_name"));
 		}
+		if (jsonObject.has("shop_member_id")) {
+			shop_member_id = jsonObject.optString("shop_member_id");
+		}
+		
 		if (jsonObject.has("content")) {
 			mTvShopContent.setText(Html.fromHtml(jsonObject
 					.optString("content")));
@@ -774,11 +783,24 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			baseStartActivity(intent);
 		} else {
 
-			Intent intent = new Intent();
-			intent.setClass(DetailsBusinessInfoActivity.this,
-					FuJinXiaoXiActivity.class);
-			intent.putExtra(IntentKeyNames.KEY_NEAR_MESSAGE_SHOP_ID, mStrShopID);
+//			Intent intent = new Intent();
+//			intent.setClass(DetailsBusinessInfoActivity.this,
+//					FuJinXiaoXiActivity.class);
+//			intent.putExtra(IntentKeyNames.KEY_NEAR_MESSAGE_SHOP_ID, mStrShopID);
+//			baseStartActivity(intent);
+			
+			
+			Intent intent = new Intent(DetailsBusinessInfoActivity.this,
+					ChattingActivity.class);
+			intent.putExtra("ACCOUNTTO", shop_member_id);
+			intent.putExtra("myMemberId", mLoginDataManager.getMemberId());
+			intent.putExtra("NICKNAME", Utils.strFromView(mTvShopName));
 			baseStartActivity(intent);
+			
+			
+			
+			
+			
 		}
 
 	}

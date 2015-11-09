@@ -1303,5 +1303,29 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
 		}
 		
 	}
+	
+	@Override
+	public void doResetData() {
+		super.doResetData();
+		mHomeTuijianFragment.doResetData();
+		mHomeGuanzhuFragment.doResetData();
+		if(registeredFragments != null && registeredFragments.size()>2) {
+			int len = registeredFragments.size();
+			for(int i=0;i<len;i++) {
+				try {
+					HomeOtherFragment fragment = (HomeOtherFragment)registeredFragments.get(i-2);
+					fragment.refreshData(
+							AppApplacation.sTypeInfos.get(i-2).city_id,
+							AppApplacation.sTypeInfos.get(i-2).class_id);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+		}
+		
+		
+	}
 
 }
