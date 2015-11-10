@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,12 +52,15 @@ import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.GlobalVariable;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.FourService;
+import com.collcloud.yaohe.photo.activity.AlbumActivity;
+import com.collcloud.yaohe.photo.util.Bimp;
+import com.collcloud.yaohe.photo.util.ImageItem;
 import com.collcloud.yaohe.ui.adapter.YinYongFuWuAdapter;
 import com.collcloud.yaohe.ui.adapter.YinYongFuWuAdapter.OnYaoHeItemListener;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.UIHelper;
 import com.collcloud.yaohe.ui.utils.Utils;
-import com.collcloud.yaohe.ui.view.MyListView;
+import com.collcloud.yaohe.ui.view.SelectPicPopupWindow;
 import com.collcloud.yaohe.url.ContantsValues;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -131,6 +135,14 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 	/** 四大服务 */
 	List<FourService> mFourServiceListView;
 	YinYongFuWuAdapter mYinYongAdapter;
+	
+	ImageView [] imageViews = new ImageView[6];
+	
+	// 自定义的弹出框类
+	private SelectPicPopupWindow faceWindow;
+	
+	private String mStrImgPath1, mStrImgPath2, mStrImgPath3, mStrImgPath4,
+	mStrImgPath5, mStrImgPath6;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +159,12 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 		accessNetGetService();
 		fyh_service_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		this.doXiangeCeSelPicsShow();
 	}
 
 	/**
@@ -169,43 +187,44 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 				}
 				Bundle bundle = data.getExtras();
 				Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
-
-				for (int i = 0; i < 6; i++) {
-
-					if (pic[i] == 6) {
-						if (i == 0) {
-
-							CCLog.v(TAG, "im_fyh_pic_1被设置数据");
-							im_fyh_pic_1.setImageBitmap(bitmap);
-							break;
-						} else if (i == 1) {
-
-							CCLog.v(TAG, "im_fyh_pic_2被设置数据");
-							im_fyh_pic_2.setImageBitmap(bitmap);
-							break;
-						} else if (i == 2) {
-
-							CCLog.v(TAG, "im_fyh_pic_3被设置数据");
-							im_fyh_pic_3.setImageBitmap(bitmap);
-							break;
-						} else if (i == 3) {
-
-							CCLog.v(TAG, "im_fyh_pic_4被设置数据");
-							im_fyh_pic_4.setImageBitmap(bitmap);
-							break;
-						} else if (i == 4) {
-
-							CCLog.v(TAG, "im_fyh_pic_5被设置数据");
-							im_fyh_pic_5.setImageBitmap(bitmap);
-							break;
-						} else if (i == 5) {
-
-							CCLog.v(TAG, "im_fyh_pic_6被设置数据");
-							im_fyh_pic_6.setImageBitmap(bitmap);
-							break;
-						}
-					}
-				}
+//				int selIndex=-1;
+//				for (int i = 0; i < 6; i++) {
+//
+//					if (pic[i] == 6) {
+//						selIndex = i;
+//						if (i == 0) {
+//
+//							CCLog.v(TAG, "im_fyh_pic_1被设置数据");
+//							im_fyh_pic_1.setImageBitmap(bitmap);
+//							break;
+//						} else if (i == 1) {
+//
+//							CCLog.v(TAG, "im_fyh_pic_2被设置数据");
+//							im_fyh_pic_2.setImageBitmap(bitmap);
+//							break;
+//						} else if (i == 2) {
+//
+//							CCLog.v(TAG, "im_fyh_pic_3被设置数据");
+//							im_fyh_pic_3.setImageBitmap(bitmap);
+//							break;
+//						} else if (i == 3) {
+//
+//							CCLog.v(TAG, "im_fyh_pic_4被设置数据");
+//							im_fyh_pic_4.setImageBitmap(bitmap);
+//							break;
+//						} else if (i == 4) {
+//
+//							CCLog.v(TAG, "im_fyh_pic_5被设置数据");
+//							im_fyh_pic_5.setImageBitmap(bitmap);
+//							break;
+//						} else if (i == 5) {
+//
+//							CCLog.v(TAG, "im_fyh_pic_6被设置数据");
+//							im_fyh_pic_6.setImageBitmap(bitmap);
+//							break;
+//						}
+//					}
+//				}
 
 				FileOutputStream fos = null;
 				File appDir = new File(
@@ -249,54 +268,54 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 
 					// 给图片地址赋值
 
-					for (int i = 0; i < 6; i++) {
-
-						if (pic[i] == 6) {
-							if (i == 0) {
-
-								CCLog.v(TAG, "img_1被赋值");
-								img_1 = file;
-								pic[i] = 0;
-								break;
-
-							} else if (i == 1) {
-
-								CCLog.v(TAG, "img_2被赋值");
-								img_2 = file;
-								pic[i] = 0;
-								break;
-
-							} else if (i == 2) {
-
-								CCLog.v(TAG, "img_3被赋值");
-								img_3 = file;
-								pic[i] = 0;
-								break;
-
-							} else if (i == 3) {
-
-								CCLog.v(TAG, "img_4被赋值");
-								img_4 = file;
-								pic[i] = 0;
-								break;
-
-							} else if (i == 4) {
-
-								CCLog.v(TAG, "img_5被赋值");
-								img_5 = file;
-								pic[i] = 0;
-								break;
-
-							} else if (i == 5) {
-
-								CCLog.v(TAG, "img_6被赋值");
-								img_6 = file;
-								pic[i] = 0;
-								break;
-
-							}
-						}
-					}
+//					for (int i = 0; i < 6; i++) {
+//
+//						if (pic[i] == 6) {
+//							if (i == 0) {
+//
+//								CCLog.v(TAG, "img_1被赋值");
+//								img_1 = file;
+//								pic[i] = 0;
+//								break;
+//
+//							} else if (i == 1) {
+//
+//								CCLog.v(TAG, "img_2被赋值");
+//								img_2 = file;
+//								pic[i] = 0;
+//								break;
+//
+//							} else if (i == 2) {
+//
+//								CCLog.v(TAG, "img_3被赋值");
+//								img_3 = file;
+//								pic[i] = 0;
+//								break;
+//
+//							} else if (i == 3) {
+//
+//								CCLog.v(TAG, "img_4被赋值");
+//								img_4 = file;
+//								pic[i] = 0;
+//								break;
+//
+//							} else if (i == 4) {
+//
+//								CCLog.v(TAG, "img_5被赋值");
+//								img_5 = file;
+//								pic[i] = 0;
+//								break;
+//
+//							} else if (i == 5) {
+//
+//								CCLog.v(TAG, "img_6被赋值");
+//								img_6 = file;
+//								pic[i] = 0;
+//								break;
+//
+//							}
+//						}
+//					}
 				} catch (FileNotFoundException e) {
 
 					e.printStackTrace();
@@ -305,6 +324,19 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 				this.sendBroadcast(new Intent(
 						Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri
 								.fromFile(new File(fileName))));
+				
+				//保存到缓存中
+				ImageItem takePhoto = new ImageItem();
+				takePhoto.setBitmap(bitmap);
+				takePhoto.setImagePath(file.toString());
+//				if(Bimp.tempSelectBitmap.size()==0) {
+//					for(int i=0;i<6;i++) {
+//						Bimp.tempSelectBitmap.add(null);
+//					}
+//				}
+				Bimp.tempSelectBitmap.add(takePhoto);
+
+				
 				break;
 
 			case Activity.RESULT_CANCELED:// 取消按钮
@@ -351,6 +383,161 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 			break;
 		}
 	}
+	
+	/**
+	 * 处理相册选择图片
+	 */
+	private void doXiangeCeSelPicsShow() {
+		
+//		if(size==0) {
+//			for(int i=0;i<6;i++) {
+//				Bimp.tempSelectBitmap.add(null);
+//			}
+//		}
+		
+		try {
+			int size = Bimp.tempSelectBitmap.size();
+			for(int i=0;i<size;i++) {
+				imageViews[i].setImageBitmap(Bimp.tempSelectBitmap.get(i).getBitmap());
+			}
+			
+			for(int i=size;i<6;i++) {
+				imageViews[i].setImageBitmap(null);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+//		for(int i=0;i<6;i++) {
+//			try {
+//				ImageItem imageItem = Bimp.tempSelectBitmap.get(i);
+//				if(imageItem !=null) {
+//					if (i == 0) {
+//
+//						CCLog.v(TAG, "im_fyh_pic_1被设置数据");
+//						im_fyh_pic_1.setImageBitmap(imageItem.getBitmap());
+//					} else if (i == 1) {
+//
+//						CCLog.v(TAG, "im_fyh_pic_2被设置数据");
+//						im_fyh_pic_2.setImageBitmap(imageItem.getBitmap());
+//					} else if (i == 2) {
+//
+//						CCLog.v(TAG, "im_fyh_pic_3被设置数据");
+//						im_fyh_pic_3.setImageBitmap(imageItem.getBitmap());
+//					} else if (i == 3) {
+//
+//						CCLog.v(TAG, "im_fyh_pic_4被设置数据");
+//						im_fyh_pic_4.setImageBitmap(imageItem.getBitmap());
+//					} else if (i == 4) {
+//
+//						CCLog.v(TAG, "im_fyh_pic_5被设置数据");
+//						im_fyh_pic_5.setImageBitmap(imageItem.getBitmap());
+//					} else if (i == 5) {
+//
+//						CCLog.v(TAG, "im_fyh_pic_6被设置数据");
+//						im_fyh_pic_6.setImageBitmap(imageItem.getBitmap());
+//					}
+//				} else {
+//					if (i == 0) {
+//						im_fyh_pic_1.setImageBitmap(null);
+//					} else if (i == 1) {
+//						im_fyh_pic_2.setImageBitmap(null);
+//					} else if (i == 2) {
+//						im_fyh_pic_3.setImageBitmap(null);
+//					} else if (i == 3) {
+//						im_fyh_pic_4.setImageBitmap(null);
+//					} else if (i == 4) {
+//						im_fyh_pic_5.setImageBitmap(null);
+//					} else if (i == 5) {
+//						im_fyh_pic_6.setImageBitmap(null);
+//					}
+//				}
+//			} catch(Exception e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
+	}
+	
+	private void resetImgPath() {
+		if (Bimp.tempSelectBitmap.size() == 1) {
+			mStrImgPath1 = Bimp.tempSelectBitmap.get(0).getImagePath();
+		} else if (Bimp.tempSelectBitmap.size() == 2) {
+			mStrImgPath1 = Bimp.tempSelectBitmap.get(0).getImagePath();
+			mStrImgPath2 = Bimp.tempSelectBitmap.get(1).getImagePath();
+
+		} else if (Bimp.tempSelectBitmap.size() == 3) {
+			mStrImgPath1 = Bimp.tempSelectBitmap.get(0).getImagePath();
+			mStrImgPath2 = Bimp.tempSelectBitmap.get(1).getImagePath();
+			mStrImgPath3 = Bimp.tempSelectBitmap.get(2).getImagePath();
+
+		} else if (Bimp.tempSelectBitmap.size() == 4) {
+			mStrImgPath1 = Bimp.tempSelectBitmap.get(0).getImagePath();
+			mStrImgPath2 = Bimp.tempSelectBitmap.get(1).getImagePath();
+			mStrImgPath3 = Bimp.tempSelectBitmap.get(2).getImagePath();
+			mStrImgPath4 = Bimp.tempSelectBitmap.get(3).getImagePath();
+
+		} else if (Bimp.tempSelectBitmap.size() == 5) {
+			mStrImgPath1 = Bimp.tempSelectBitmap.get(0).getImagePath();
+			mStrImgPath2 = Bimp.tempSelectBitmap.get(1).getImagePath();
+			mStrImgPath3 = Bimp.tempSelectBitmap.get(2).getImagePath();
+			mStrImgPath4 = Bimp.tempSelectBitmap.get(3).getImagePath();
+			mStrImgPath5 = Bimp.tempSelectBitmap.get(4).getImagePath();
+
+		} else if (Bimp.tempSelectBitmap.size() == 6) {
+			mStrImgPath1 = Bimp.tempSelectBitmap.get(0).getImagePath();
+			mStrImgPath2 = Bimp.tempSelectBitmap.get(1).getImagePath();
+			mStrImgPath3 = Bimp.tempSelectBitmap.get(2).getImagePath();
+			mStrImgPath4 = Bimp.tempSelectBitmap.get(3).getImagePath();
+			mStrImgPath5 = Bimp.tempSelectBitmap.get(4).getImagePath();
+			mStrImgPath6 = Bimp.tempSelectBitmap.get(5).getImagePath();
+		}
+		if(mStrImgPath1 != null && !"".equals(mStrImgPath1)) {
+			if(img_1 == null) {
+				img_1 = new File(mStrImgPath1);
+			}
+		}
+		if(mStrImgPath2 != null && !"".equals(mStrImgPath2)) {
+			if(img_2 == null) {
+				img_2 = new File(mStrImgPath2);
+			}
+		}
+		if(mStrImgPath3 != null && !"".equals(mStrImgPath3)) {
+			if(img_3 == null) {
+				img_3 = new File(mStrImgPath3);
+			}
+		}
+		if(mStrImgPath4 != null && !"".equals(mStrImgPath4)) {
+			if(img_4 == null) {
+				img_4 = new File(mStrImgPath4);
+			}
+		}
+		if(mStrImgPath5 != null && !"".equals(mStrImgPath5)) {
+			if(img_5 == null) {
+				img_5 = new File(mStrImgPath5);
+			}
+		}
+		if(mStrImgPath6 != null && !"".equals(mStrImgPath6)) {
+			if(img_6 == null) {
+				img_6 = new File(mStrImgPath6);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Bimp.tempSelectBitmap.clear();
+	}
+	
+	
+	
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -417,6 +604,13 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 		fyh_service_list.setPullRefreshEnable(false);
 		fyh_service_list.addHeaderView(view);
 		
+		imageViews[0]=im_fyh_pic_1;
+		imageViews[1]=im_fyh_pic_2;
+		imageViews[2]=im_fyh_pic_3;
+		imageViews[3]=im_fyh_pic_4;
+		imageViews[4]=im_fyh_pic_5;
+		imageViews[5]=im_fyh_pic_6;
+		
 
 	}
 
@@ -460,7 +654,8 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 					CCLog.v(TAG, pic[i] + "");
 				}
 			}
-			photo();
+			//photo();
+			showPopWindow();
 			break;
 
 		// 第二张图
@@ -472,7 +667,8 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 					pic[i] = 0;
 				}
 			}
-			photo();
+			//photo();
+			showPopWindow();
 			break;
 
 		// 第三张图
@@ -484,7 +680,8 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 					pic[i] = 0;
 				}
 			}
-			photo();
+			//photo();
+			showPopWindow();
 			break;
 
 		// 第四张图
@@ -498,7 +695,8 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 					CCLog.v(TAG, pic[i] + "");
 				}
 			}
-			photo();
+			//photo();
+			showPopWindow();
 			break;
 
 		// 第五张图
@@ -510,7 +708,8 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 					pic[i] = 0;
 				}
 			}
-			photo();
+			//photo();
+			showPopWindow();
 			break;
 
 		// 第六张图
@@ -522,7 +721,8 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 					pic[i] = 0;
 				}
 			}
-			photo();
+			//photo();
+			showPopWindow();
 			break;
 
 		// 发券
@@ -600,7 +800,7 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 	 * 访问网络发吆喝
 	 */
 	private void accessNetSend() {
-
+		resetImgPath();
 		HttpUtils http = new HttpUtils();
 
 		// 用来封装参数
@@ -668,6 +868,7 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 
 					@Override
 					public void onSuccess(ResponseInfo<String> arg0) {
+						Bimp.tempSelectBitmap.clear();
 						fyh_mDialog.dismiss();
 						CCLog.v(TAG, "网络发送吆喝数据成功");
 						CCLog.v(TAG, arg0.result);
@@ -936,9 +1137,11 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 	 * */
 	public void photo() {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		Uri photoUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+		//Uri photoUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 		startActivityForResult(intent, 1);
 	}
+	
+	
 
 	/**
 	 * 调用系统图册的方法
@@ -947,6 +1150,47 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 		Intent intent = new Intent(Intent.ACTION_PICK,
 				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startActivityForResult(intent, 2);
+	}
+	
+	private void showPopWindow() {
+		faceWindow = new SelectPicPopupWindow(
+				BusinessFaYaoHeActivity.this, itemsOnClick);
+		// 显示窗口
+		faceWindow.showAtLocation(BusinessFaYaoHeActivity.this
+				.findViewById(R.id.rl_fyh_root), Gravity.BOTTOM
+				| Gravity.CENTER_HORIZONTAL, 0, 0);
+	}
+	
+	
+	// 为弹出窗口实现监听类
+	private OnClickListener itemsOnClick = new OnClickListener() {
+
+		public void onClick(View v) {
+			faceWindow.dismiss();
+			switch (v.getId()) {
+			case R.id.btn_take_photo:
+				photo();
+				break;
+			case R.id.btn_pick_photo:
+				choiceImg();
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
+	private void choiceImg() {
+		// Intent intent = new Intent();
+		// /* 开启Pictures画面Type设定为image */
+		// intent.setType("image/*");
+		// /* 使用Intent.ACTION_GET_CONTENT这个Action */
+		// intent.setAction(Intent.ACTION_GET_CONTENT);
+		// intent.addCategory(Intent.CATEGORY_OPENABLE);
+		// /* 取得相片后返回本画面 */
+		// startActivityForResult(intent, 2);
+		Intent intent = new Intent(BusinessFaYaoHeActivity.this, AlbumActivity.class);
+		startActivity(intent);
 	}
 
 }
