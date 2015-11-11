@@ -13,4 +13,6 @@ public class PublicWay {
 	
 	public static int num = 6;
 	
+	public static int numOne=1;
+	
 }

@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.collcloud.frame.xlistview.XListView;
+import com.collcloud.frame.xlistview.XListView.IXListViewListener;
+import com.collcloud.frame.xlistview.XListView.OnSlidingDirectionListen;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
@@ -29,6 +32,7 @@ import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.HomeTypeCallInfo;
+import com.collcloud.yaohe.api.info.HomeCallInfo.CallInfo;
 import com.collcloud.yaohe.api.info.HomeTypeCallInfo.TypeCall;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.BaseFragment;
@@ -63,7 +67,8 @@ public class HomeOtherFragment extends BaseFragment {
 	/**
 	 * 主页面显示内容的List
 	 */
-	private SingleLayoutListView mLvPullToRefreshView;
+	//private SingleLayoutListView mLvPullToRefreshView;
+	private XListView 			 mLvPullToRefreshView;
 	/**
 	 * 主页list列表适配器
 	 */
@@ -101,6 +106,12 @@ public class HomeOtherFragment extends BaseFragment {
 	private TextView mTvNetError = null;
 	
 	private static String tag = HomeOtherFragment.class.getSimpleName();
+	
+	//总页数
+	private int mTotalPage = 0;
+	//当前页
+	private int currentPage = 1;
+		
 
 	/**
 	 * 构造方法
@@ -120,8 +131,42 @@ public class HomeOtherFragment extends BaseFragment {
 		View v = inflater.inflate(R.layout.fragment_home_other, container,
 				false);
 		CCLog.i("分类内容Fragment", "onCreateView");
-		mLvPullToRefreshView = (SingleLayoutListView) v
+		mLvPullToRefreshView = (XListView) v
 				.findViewById(R.id.lv_home_other_list);
+		mLvPullToRefreshView.setPullLoadEnable(true);
+		mLvPullToRefreshView.setPullRefreshEnable(true);
+		
+		mLvPullToRefreshView.setXListViewListener(new IXListViewListener() {
+			
+			@Override
+			public void onRefresh() {
+				refresh();
+			}
+			
+			@Override
+			public void onLoadMore() {
+				loadMore();
+			}
+		});
+		mLvPullToRefreshView.setOnSlidingDirectionListen(new OnSlidingDirectionListen() {
+			
+			@Override
+			public void onScrollUpWard(float value) {
+			}
+			
+			@Override
+			public void onScrollTop() {
+			}
+			
+			@Override
+			public void onScrollDownWard(float value) {
+			}
+			
+			@Override
+			public void onScrollBottom() {
+				
+			}
+		});
 
 		mLlEmpty = (LinearLayout) v.findViewById(R.id.ll_home_other_empty);
 		// 获取首页某个分类下的吆喝列表
@@ -135,10 +180,27 @@ public class HomeOtherFragment extends BaseFragment {
 		super.onResume();
 		CCLog.i("分类内容Fragment", "onResume");
 		// 接收从城市定位页面传递的城市ID
+		/**
 		if (getActivity().getIntent().getStringExtra(
 				IntentKeyNames.KEY_LBS_CURRENT_CITY_ID) != null) {
 			mStrCityID = getActivity().getIntent().getStringExtra(
 					IntentKeyNames.KEY_LBS_CURRENT_CITY_ID);
+			CCLog.i(tag, "onresume lbs.......mStrCityID:"+mStrCityID);
+			CCLog.i("分类内容Fragment", "onResume \n获取的城市ID ：" + mStrCityID);
+			mHandler.sendEmptyMessageDelayed(0, 200);
+			//getTypeCallList(mStrCityID, mStrTypeID);
+
+		}*/
+	}
+	
+	@Override
+	public void doResetData() {
+		super.doResetData();
+		if (getActivity().getIntent().getStringExtra(
+				IntentKeyNames.KEY_LBS_CURRENT_CITY_ID) != null) {
+			mStrCityID = getActivity().getIntent().getStringExtra(
+					IntentKeyNames.KEY_LBS_CURRENT_CITY_ID);
+			CCLog.i(tag, "onresume lbs.......mStrCityID:"+mStrCityID);
 			CCLog.i("分类内容Fragment", "onResume \n获取的城市ID ：" + mStrCityID);
 			mHandler.sendEmptyMessageDelayed(0, 200);
 			//getTypeCallList(mStrCityID, mStrTypeID);
@@ -146,21 +208,46 @@ public class HomeOtherFragment extends BaseFragment {
 		}
 	}
 	
+	/**
+	 * 刷新数据
+	 */
+	public void refresh() {
+		currentPage = 1;
+		getTypeCallList(mStrCityID, mStrTypeID,true);
+	}
+	
+	public void loadMore() {
+		currentPage = currentPage + 1;
+		if (currentPage>mTotalPage) {
+			mLvPullToRefreshView.forbiddenLoadMore();
+			UIHelper.ToastMessage(getActivity(), "数据已全部加载，没有更多了。");
+		} else {
+			getTypeCallList(mStrCityID, mStrTypeID,false);
+		}
+
+	}
+	
+	private void onLoad() {
+		mLvPullToRefreshView.stopRefresh();
+		mLvPullToRefreshView.stopLoadMore();
+		mLvPullToRefreshView.setRefreshTime("");
+	}
+	
 	//临时保存城市id 为了与当前的进行比较 。如果一样 就不进行数据加载，如果不一致则进行加载
 	private String tmpStrCityId;
 	private void getData() {
 		if(tmpStrCityId != null) {
 			if(tmpStrCityId.equals(mStrCityID)) {
-				CCLog.d(tag, "tmpStrCityId is the same to the old id so not load data.......");
+				CCLog.d(tag, "1111tmpStrCityId is the same to the old id so not load data.......");
 			} else {
 				tmpStrCityId = mStrCityID;
-				CCLog.d(tag, "tmpStrCityId is not null but different old id so load data.......");
-				getTypeCallList(mStrCityID, mStrTypeID);
+				CCLog.d(tag, "111122tmpStrCityId is not null but different old id so load data.......");
+				getTypeCallList(mStrCityID, mStrTypeID,true);
 			}
 		} else {
 			tmpStrCityId = mStrCityID;
 			CCLog.d(tag, "tmpStrCityId is null load data.......");
-			getTypeCallList(mStrCityID, mStrTypeID);
+			getTypeCallList(mStrCityID, mStrTypeID,true);
 		}
 	}
 
@@ -197,12 +284,13 @@ public class HomeOtherFragment extends BaseFragment {
 				// 获取首页某个分类下的吆喝列表
 				//getData();
 				CCLog.d(tag, "getTypeCallList>>"+"mStrCityID:"+mStrCityID+"--mStrTypeID:"+mStrTypeID); 
-				getTypeCallList(mStrCityID, mStrTypeID);
+				currentPage = 1;
+				getTypeCallList(mStrCityID, mStrTypeID,true);
 				break;
 
 			case 1:
 				UIHelper.ToastMessage(mBaseActivity, "数据已全部加载，没有更多了。");
-				mLvPullToRefreshView.onRefreshComplete(); // 下拉刷新完成
+				//mLvPullToRefreshView.onRefreshComplete(); // 下拉刷新完成
 
 				break;
 			default:
@@ -216,12 +304,13 @@ public class HomeOtherFragment extends BaseFragment {
 	 * 
 	 * @Title getFollowShopList
 	 */
-	private void getTypeCallList(String cityid, String typeID) {
+	private void getTypeCallList(String cityid, String typeID,final boolean refreshData) {
 
 		HttpUtils http = new HttpUtils();
 		String url = ContantsValues.HOME_TYPE_CALL_LIST_URL + "&city_id="
-				+ cityid + "&one_id=" + typeID;
+				+ cityid + "&one_id=" + typeID+"&page="+currentPage;
 		CCLog.d(tag, "getTypeCallList url:---"+url);
+		CCLog.d(tag, "refreshData:"+refreshData);
 		http.send(HttpRequest.HttpMethod.GET, url, null,
 				new RequestCallBack<String>() {
 
@@ -234,6 +323,19 @@ public class HomeOtherFragment extends BaseFragment {
 								CCLog.e("首页分类id " + mStrTypeID + " 列表内容：",
 										responseInfo.result + " ");
 							}
+							
+							if(refreshData) {
+								currentPage = 1;
+								mTypeCalls.clear();
+							}
+							
+							
+							try {
+								mTotalPage = jsonObject.optInt("pageNumber");
+							} catch(Exception e) {
+								e.printStackTrace();
+							}
+							
 							if (jsonObject.has("data")) {
 								mHomeTypeCallInfo = GsonUtils.json2Bean(
 										responseInfo.result,
@@ -241,7 +343,6 @@ public class HomeOtherFragment extends BaseFragment {
 								if (mHomeTypeCallInfo != null) {
 									if (mHomeTypeCallInfo.data != null
 											&& mHomeTypeCallInfo.data.size() > 0) {
-										mTypeCalls.clear();
 
 										if (mHomeTypeCallInfo.data.size() == 1) {
 											if (Utils
@@ -259,9 +360,9 @@ public class HomeOtherFragment extends BaseFragment {
 														.setVisibility(View.VISIBLE);
 											}
 										}
-
-										for (int j = 0; j < mHomeTypeCallInfo.data
-												.size(); j++) {
+										ArrayList<TypeCall> mCallInfosTmp = new ArrayList<TypeCall>();
+										int dataSize = mHomeTypeCallInfo.data.size();
+										for (int j = 0; j < dataSize; j++) {
 											TypeCall typeCallInfo = new TypeCall();
 											if (mHomeTypeCallInfo.data.get(j).id != null) {
 												typeCallInfo.id = mHomeTypeCallInfo.data
@@ -334,8 +435,41 @@ public class HomeOtherFragment extends BaseFragment {
 												typeCallInfo.fans_num = mHomeTypeCallInfo.data
 														.get(j).fans_num;
 											}
-											mTypeCalls.add(typeCallInfo);
+											
+									    ////////////////引用
+										if (mHomeTypeCallInfo.data.get(j).s_content != null) {
+											typeCallInfo.s_content = mHomeTypeCallInfo.data
+													.get(j).s_content;
 										}
+										if (!Utils
+												.isStringEmpty(mHomeTypeCallInfo.data
+														.get(j).s_img)) {
+											typeCallInfo.s_img = URLs.IMG_PRE
+													+ mHomeTypeCallInfo.data
+															.get(j).s_img;
+										}
+										if (!Utils
+												.isStringEmpty(mHomeTypeCallInfo.data
+														.get(j).img)) {
+											typeCallInfo.img = URLs.IMG_PRE
+													+ mHomeTypeCallInfo.data
+															.get(j).img;
+										}
+										
+										typeCallInfo.c_id = mHomeTypeCallInfo.data
+												.get(j).c_id;
+																			
+											mCallInfosTmp.add(typeCallInfo);
+										}
+										
+										//刷新数据
+										if(refreshData) {
+											//mCallInfos = mCallInfosTmp;
+											mTypeCalls.addAll(mCallInfosTmp);
+										} else {//加载更多数据
+											mTypeCalls.addAll(mCallInfosTmp);
+										}
+										
 
 										if (mTypeCalls != null
 												&& mTypeCalls.size() > 0) {
@@ -355,9 +489,11 @@ public class HomeOtherFragment extends BaseFragment {
 								mLvPullToRefreshView.setVisibility(View.GONE);
 								mLlEmpty.setVisibility(View.VISIBLE);
 							}
+							onLoad();
 						} catch (JSONException e) {
 							mLvPullToRefreshView.setVisibility(View.GONE);
 							mLlEmpty.setVisibility(View.VISIBLE);
+							onLoad();
 						}
 					}
 
@@ -365,6 +501,7 @@ public class HomeOtherFragment extends BaseFragment {
 					public void onFailure(HttpException error, String msg) {
 						mLvPullToRefreshView.setVisibility(View.GONE);
 						mLlEmpty.setVisibility(View.VISIBLE);
+						onLoad();
 					}
 				});
 
@@ -537,30 +674,65 @@ public class HomeOtherFragment extends BaseFragment {
 						if (shopID != null) {
 							CCLog.i("点击关注 ，对应的shopID ：", " " + shopID);
 						}
-						ApiAccess.showProgressDialog(getActivity(), "卖力关注中...");
-						// 关注
-//						shopFollow(shopID);
-						new Handler().postDelayed(new Runnable() {
-							@Override
-							public void run() {
-								ApiAccess.dismissProgressDialog();
-								if (!mIsAllowFollow) {
-									if (Utils.strFromView(tvGuanZhu).equals(
-											GlobalConstant.INVALID_VALUE)) {
-										tvGuanZhu
-												.setText(GlobalConstant.VALID_VALUE);
-										tvGuanZhu
-												.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-
-									} else {
-										tvGuanZhu
-												.setText(GlobalConstant.INVALID_VALUE);
-										tvGuanZhu
-												.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+						
+						if (Utils.strFromView(tvGuanZhu).equals(
+								GlobalConstant.INVALID_VALUE)) {
+							ApiAccess.showProgressDialog(getActivity(),
+									"卖力关注中...");
+							// 关注
+							shopFollow(shopID);
+							new Handler().postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									ApiAccess.dismissProgressDialog();
+									if (!mIsAllowFollow) {
+										if (Utils.strFromView(tvGuanZhu).equals(GlobalConstant.INVALID_VALUE)) {
+											tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
+											tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+										} else {
+											tvGuanZhu
+													.setText(GlobalConstant.INVALID_VALUE);
+											tvGuanZhu
+													.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+										}
 									}
 								}
-							}
-						}, 1000);
+							}, 1000);
+						} else if (Utils.strFromView(tvGuanZhu).equals(
+								GlobalConstant.VALID_VALUE)) {
+
+							ApiAccess.showProgressDialog(getActivity(),
+									"取消关注中...");
+							// 关注
+							cancelFollows(shopID,tvGuanZhu);
+						
+
+						}
+						
+//						ApiAccess.showProgressDialog(getActivity(), "卖力关注中...");
+//						// 关注
+//						shopFollow(shopID);
+//						new Handler().postDelayed(new Runnable() {
+//							@Override
+//							public void run() {
+//								ApiAccess.dismissProgressDialog();
+//								if (!mIsAllowFollow) {
+//									if (Utils.strFromView(tvGuanZhu).equals(
+//											GlobalConstant.INVALID_VALUE)) {
+//										tvGuanZhu
+//												.setText(GlobalConstant.VALID_VALUE);
+//										tvGuanZhu
+//												.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+//
+//									} else {
+//										tvGuanZhu
+//												.setText(GlobalConstant.INVALID_VALUE);
+//										tvGuanZhu
+//												.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+//									}
+//								}
+//							}
+//						}, 1000);
 
 					}
 
@@ -846,7 +1018,7 @@ public class HomeOtherFragment extends BaseFragment {
 		SupportDisplay.resetAllChildViewParam(rlLayout);
 		CCLog.i("分类内容Fragment", "resetLayout");
 		// 列表内容
-		mLvPullToRefreshView = (SingleLayoutListView) view
+		mLvPullToRefreshView = (XListView) view
 				.findViewById(R.id.lv_home_other_list);
 
 		// 空内容提示
@@ -955,6 +1127,7 @@ public class HomeOtherFragment extends BaseFragment {
 												UIHelper.ToastMessage(
 														mBaseActivity,
 														strErrorMsg);
+												setRefreshHomeGuanzhuFragmentStatus(true);
 											} else {
 												mIsAllowFollow = false;
 											}
@@ -978,6 +1151,80 @@ public class HomeOtherFragment extends BaseFragment {
 								R.string.response_data_invalid);
 					}
 				});
+	}
+	
+	/**
+	 * 取消关注
+	 */
+	private void cancelFollows(String shopID,final TextView tvGuanZhu) {
+		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		params.addBodyParameter("id", shopID);
+		CCLog.i("取消关注参数：", "member_id=" + mLoginDataManager.getMemberId()
+				+ " id=" + shopID);
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						ApiAccess.dismissProgressDialog();
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (responseInfo.result != null) {
+										CCLog.i("取消关注状态信息：",
+												responseInfo.result + " ");
+									}
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+											if (code == 1) {
+												String strErrorMsg = statusObject
+														.optString("message");
+												UIHelper.ToastMessage(
+														mBaseActivity,
+														strErrorMsg);
+											} else {
+												UIHelper.ToastMessage(
+														mBaseActivity, "取消关注成功");
+												tvGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+												tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+												setRefreshHomeGuanzhuFragmentStatus(true);
+												
+											}
+										}
+									}
+								} catch (Exception e) {
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+									tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
+									tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+									
+								}
+
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						ApiAccess.dismissProgressDialog();
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+					}
+				});
+
 	}
 
 	// 是否可以关注
@@ -1079,7 +1326,7 @@ public class HomeOtherFragment extends BaseFragment {
 	 * @update 2015年10月5日 上午1:02:57
 	 */
 	public boolean isNeedRefreshData() {
-		
+		/** 暂做每次都刷新
 		boolean istheSameCity = true;
 		if(tmpStrCityId != null) {
 			if(tmpStrCityId.equals(mStrCityID)) {
@@ -1099,7 +1346,7 @@ public class HomeOtherFragment extends BaseFragment {
 		
 		if(mTypeCalls != null && mTypeCalls.size()>0 && istheSameCity) {
 			return false;
-		}
+		}*/
 		return true;
 	}
 }

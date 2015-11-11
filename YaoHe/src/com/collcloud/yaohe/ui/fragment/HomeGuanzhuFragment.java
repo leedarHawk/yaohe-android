@@ -140,7 +140,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 				R.style.progress_dialog);
 		// 获取首页关注吆喝内容列表
 		//getFollowShopList(mStrCityID, mLoginDataManager.getMemberId());
-		getData(mStrCityID);
+		//getData(mStrCityID);
+		doResetData();
 		initControlerListenner();
 		return v;
 	}
@@ -149,6 +150,42 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	public void onResume() {
 		super.onResume();
 		CCLog.i("关注商家Fragment", "onResume");
+		//在其他页面是否 点击了关注按钮 取消 或者 添加关注 检测是否需要刷新数据
+		if(isRefreshHomeGuanzhuFragment()) {
+			doResetData();
+		} else {
+			//do nothing....
+		}
+		// 接收从城市定位页面传递的城市ID
+		/**
+		if (getActivity().getIntent().getStringExtra(
+				IntentKeyNames.KEY_LBS_CURRENT_CITY_ID) != null) {
+			mStrCityID = getActivity().getIntent().getStringExtra(
+					IntentKeyNames.KEY_LBS_CURRENT_CITY_ID);
+			CCLog.i("关注商家Fragment", "onResume \n获取的城市ID ：" + mStrCityID);
+			//getFollowShopList(mStrCityID, mLoginDataManager.getMemberId());
+			getData(mStrCityID);
+
+		} else {
+
+			if (mLoginDataManager.getLoginState().equals("1")) {
+				//loadData(1);
+				getData(mStrCityID);
+			} else {
+				ApiAccess.dismissProgressDialog();
+				if (mLvPullToRefreshView != null) {
+					mLvPullToRefreshView.setVisibility(View.GONE);
+				}
+				if (mLlEmpty != null) {
+					mLlEmpty.setVisibility(View.VISIBLE);
+				}
+			}
+		}*/
+	}
+	/**
+	 * 更换城市 以及 发布新的产品 重新设置数据 代替onresume
+	 */
+	public void doResetData() {
 		// 接收从城市定位页面传递的城市ID
 		if (getActivity().getIntent().getStringExtra(
 				IntentKeyNames.KEY_LBS_CURRENT_CITY_ID) != null) {
@@ -187,11 +224,16 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			if(tmpStrCityId.equals(mStrCityID) &&!refreshData) {
 				CCLog.d(tag, "tmpStrCityId is the same to the old id so not load data.......");
 				ApiAccess.dismissProgressDialog();
+				if(isFromGuanzhuStatusChanged) {
+					CCLog.d(tag, "tmpStrCityId is the same to the old id but guanzhu status changed so load data...");
+					getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
+				}
 			} else {
 				tmpStrCityId = mStrCityID;
 				CCLog.d(tag, "tmpStrCityId is not null but different old id so load data.......");
 				getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
 			}
+			
 		} else {
 			tmpStrCityId = mStrCityID;
 			CCLog.d(tag, "tmpStrCityId is null load data.......");
@@ -287,7 +329,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 			HttpUtils http = new HttpUtils();
 			String url = ContantsValues.HOME_FOLLOW_SHOP_LIST_URL + "&city_id="
-					+ cityid + "&member_id=" + memberID+"&page="+currentPage;;
+					+ cityid + "&member_id=" + memberID+"&page="+currentPage;
 			CCLog.d(tag, "home guanzhu shangjia url:"+url);
 			http.send(HttpRequest.HttpMethod.GET, url, null,
 					new RequestCallBack<String>() {
@@ -327,6 +369,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 											} catch(Exception e) {
 												e.printStackTrace();
 											}
+											CCLog.d(tag, "mTotalPage:"+mTotalPage);
 											
 											//mFollowShops.clear();
 //											currentPage = currentPage + 1;
@@ -1249,7 +1292,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID) {
+	private void cancelFollows(final String shopID) {
 		String url = ContantsValues.CANCEL_FOLLOWS;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1291,16 +1334,28 @@ public class HomeGuanzhuFragment extends BaseFragment {
 											} else {
 												UIHelper.ToastMessage(
 														mBaseActivity, "取消关注成功");
-												new Thread(new Runnable() {
-
-													@Override
-													public void run() {
-														getFollowShopList(
-																mStrCityID,
-																mLoginDataManager
-																		.getMemberId(),true);
+												
+												
+												if(mFollowShops !=null){
+													ArrayList<FollowShop> list = new ArrayList<FollowShop>();
+													for(FollowShop fs :mFollowShops) {
+														if(shopID.equals(fs.shop_id)) {
+															list.add(fs);
+														}
 													}
-												}).start();
+													mFollowShops.removeAll(list);
+												}
+												refreshFollow(mFollowShops);
+//												new Thread(new Runnable() {
+//
+//													@Override
+//													public void run() {
+//														getFollowShopList(
+//																mStrCityID,
+//																mLoginDataManager
+//																		.getMemberId(),true);
+//													}
+//												}).start();
 											}
 										}
 									}
@@ -1417,5 +1472,23 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		intent.putExtra("YaoHeType", type);
 		mBaseActivity.baseStartActivity(intent);
 
+	}
+	//是否来自关注状态的变化
+	boolean isFromGuanzhuStatusChanged = false;
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if(!hidden) {
+			//在其他页面是否 点击了关注按钮 取消 或者 添加关注 检测是否需要刷新数据
+			if(isRefreshHomeGuanzhuFragment()) {
+				setRefreshHomeGuanzhuFragmentStatus(false);
+				isFromGuanzhuStatusChanged = true;
+				CCLog.d(tag, "refresh data beasure guanzhu status is changed");
+				doResetData();
+			} else {
+				//do nothing....
+			}
+			CCLog.d(tag, "show guanzhu fragment.....");
+		}
 	}
 }

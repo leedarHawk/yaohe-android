@@ -254,10 +254,19 @@ public class HomeAdapter extends BaseAdapter {
 			CCLog.d(tag, "yaohe img url:"+callInfo.img);
 			holder.iv_item_hme_shop_image_yaohe.setImageResource(R.drawable.icon_yaohe_loading_default);
 		}
-		if("0".equals(callInfo.c_id) || Utils.isStringEmpty(callInfo.c_id)) {
-			holder.mRlContent.setVisibility(View.GONE);
-		} else {
+		//不是吆喝
+		if(callInfo != null &&  !TYPE_DEFAULT.equals(callInfo.type)) {
+			holder.ll_item_hoe_image_content_yaohe.setVisibility(View.GONE);
 			holder.mRlContent.setVisibility(View.VISIBLE);
+			holder.mRlContent.setBackgroundResource(R.color.transparent);
+		} else {//是吆喝
+			holder.ll_item_hoe_image_content_yaohe.setVisibility(View.VISIBLE);
+			if("0".equals(callInfo.c_id) || Utils.isStringEmpty(callInfo.c_id)) {//纯吆喝
+				holder.mRlContent.setVisibility(View.GONE);
+			} else {//有引用
+				holder.mRlContent.setVisibility(View.VISIBLE);
+				holder.mRlContent.setBackgroundResource(R.color.diliver_in_gray);
+			}
 		}
 		
 		
@@ -563,6 +572,7 @@ public class HomeAdapter extends BaseAdapter {
 		ImageView iv_item_hme_shop_image_yaohe;
 		//吆喝本身内容
 		TextView tv_item_home_content_yaohe;
+		View ll_item_hoe_image_content_yaohe;
 		
 
 	}
@@ -615,6 +625,7 @@ public class HomeAdapter extends BaseAdapter {
 		//吆喝图片 以及内容 LEE
 		holder.iv_item_hme_shop_image_yaohe = (ImageView)view.findViewById(R.id.iv_item_hme_shop_image_yaohe);
 		holder.tv_item_home_content_yaohe = (TextView)view.findViewById(R.id.tv_item_home_content_yaohe);
+		holder.ll_item_hoe_image_content_yaohe = view.findViewById(R.id.ll_item_hoe_image_content_yaohe);
 	}
 
 	// private static class AnimateFirstDisplayListener extends

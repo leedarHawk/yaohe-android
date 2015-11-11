@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity implements
 		super.onNewIntent(intent);
 		intent.putExtra("refreshData", true);
 		setIntent(intent);
-		
+		mHomeFragment.doResetData();
 		
 		
 	}

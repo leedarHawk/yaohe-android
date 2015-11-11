@@ -196,5 +196,8 @@ public interface ContantsValues {
 	String BUSINESS_DELETE_CALL = "http://192.168.1.102/admin/?c=Api&a=delcall&partent=ht&key=ht";
 	/** 取消关注url */
 	String CANCEL_FOLLOWS = "http://192.168.1.102/admin/?c=Api&a=cancelFollow&partent=ht&key=ht";
+	
+	/**发送消息 chatting */
+	String SEND_CHATTING_URL = "http://192.168.1.102/admin/?c=Api&a=sms&partent=ht&key=ht";
 
 }

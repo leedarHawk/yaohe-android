@@ -169,6 +169,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 		//getHomeRotateListInfo(mStrCityId);
 		// // 获取首页吆喝内容列表
 		// getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
+		doResetData();
 		return v;
 	}
 
@@ -184,6 +185,33 @@ public class HomeTuijianFragment extends BaseFragment  {
 		super.onResume();
 		CCLog.i("推荐Fragment", "onResume");
 		// 接收从城市定位页面传递的城市ID
+		/**
+		if (getActivity().getIntent().getStringExtra(
+				IntentKeyNames.KEY_LBS_CURRENT_CITY_ID) != null) {
+			ApiAccess.showProgressDialog(getActivity(), "数据加载中..",
+					R.style.progress_dialog);
+			mStrCityId = getActivity().getIntent().getStringExtra(
+					IntentKeyNames.KEY_LBS_CURRENT_CITY_ID);
+			CCLog.i("推荐Fragment", "onResume \n获取的城市ID ：" + mStrCityId);
+			getData(mStrCityId);
+
+		} else {
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					currentPage = 1;
+					getData(mStrCityId);
+				}
+			}).start();
+
+		}**/
+	}
+	
+	/**
+	 * 更换城市 以及 发布新的产品 重新设置数据 代替onresume
+	 */
+	public void doResetData() {
 		if (getActivity().getIntent().getStringExtra(
 				IntentKeyNames.KEY_LBS_CURRENT_CITY_ID) != null) {
 			ApiAccess.showProgressDialog(getActivity(), "数据加载中..",
@@ -563,7 +591,6 @@ public class HomeTuijianFragment extends BaseFragment  {
 									if (mHomeCallInfo.data != null
 											&& mHomeCallInfo.data.size() > 0) {
 										//mCallInfos.clear();
-										currentPage = currentPage + 1;
 										if (mHomeCallInfo.data.size() <= NUM) {
 											//pullScrollView.setfooterViewGone();
 										}
@@ -1082,19 +1109,6 @@ public class HomeTuijianFragment extends BaseFragment  {
 										if (Utils.strFromView(tvGuanZhu).equals(GlobalConstant.INVALID_VALUE)) {
 											tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
 											tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-
-											new Thread(new Runnable() {
-
-												@Override
-												public void run() {
-													currentPage = 1;
-													getHomeCallList(
-															mStrCityId,
-															mLoginDataManager
-																	.getMemberId(),true);
-												}
-											}).start();
-
 										} else {
 											tvGuanZhu
 													.setText(GlobalConstant.INVALID_VALUE);
@@ -1110,7 +1124,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 							ApiAccess.showProgressDialog(getActivity(),
 									"取消关注中...");
 							// 关注
-							cancelFollows(shopID);
+							cancelFollows(shopID,tvGuanZhu);
 						
 
 						}
@@ -1462,10 +1476,14 @@ public class HomeTuijianFragment extends BaseFragment  {
 												UIHelper.ToastMessage(
 														mBaseActivity,
 														strErrorMsg);
+												setRefreshHomeGuanzhuFragmentStatus(true);
 											} else {
 												mIsAllowFollow = false;
 											}
 										}
+									}
+									if (errorJsonObject.optBoolean("data")) {
+										setRefreshHomeGuanzhuFragmentStatus(true);
 									}
 								} catch (Exception e) {
 									mIsAllowFollow = true;
@@ -1655,6 +1673,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 
 	public void refresh() {
+		currentPage = 1;
 		// 获取首页吆喝内容列表
 		getHomeCallList(mStrCityId, mLoginDataManager.getMemberId(),true);
 		getHomeRotateListInfo(mStrCityId);
@@ -1673,6 +1692,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 
 	public void loadMore() {
+		currentPage = currentPage + 1;
 		if (currentPage>mTotalPage) {
 			mLvPullToRefreshView.forbiddenLoadMore();
 			UIHelper.ToastMessage(getActivity(), "数据已全部加载，没有更多了。");
@@ -1697,7 +1717,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID) {
+	private void cancelFollows(String shopID,final TextView tvGuanZhu) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1737,17 +1757,10 @@ public class HomeTuijianFragment extends BaseFragment  {
 											} else {
 												UIHelper.ToastMessage(
 														mBaseActivity, "取消关注成功");
-												new Thread(new Runnable() {
-
-													@Override
-													public void run() {
-														currentPage = 1;
-														getHomeCallList(
-																mStrCityId,
-																mLoginDataManager
-																		.getMemberId(),true);
-													}
-												}).start();
+												tvGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+												tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+												setRefreshHomeGuanzhuFragmentStatus(true);
+												
 											}
 										}
 									}
@@ -1756,6 +1769,9 @@ public class HomeTuijianFragment extends BaseFragment  {
 											.getMessage(5, mBaseActivity);
 									UIHelper.ToastMessage(mBaseActivity,
 											errorMsg);
+									tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
+									tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+									
 								}
 
 							}

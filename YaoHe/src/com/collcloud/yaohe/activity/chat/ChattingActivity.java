@@ -3,6 +3,10 @@ package com.collcloud.yaohe.activity.chat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,10 +22,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.collcloud.yaohe.R;
+import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.ChatInfo;
 import com.collcloud.yaohe.ui.adapter.ChatAdapter;
+import com.collcloud.yaohe.ui.utils.CCLog;
+import com.collcloud.yaohe.ui.utils.UIHelper;
+import com.collcloud.yaohe.url.ContantsValues;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 import com.yuntongxun.ecsdk.ECChatManager;
 import com.yuntongxun.ecsdk.ECDevice;
 import com.yuntongxun.ecsdk.ECDevice.OnECDeviceConnectListener;
@@ -59,6 +73,10 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 	public static final String ACTION_LOGOUT = "com.yuntongxun.ECDemo_logout";
 	/** 是否是同步消息 */
 	private boolean isFirstSync = false;
+	private String tag  =ChattingActivity.class.getSimpleName();
+	
+	//我的id号
+	private String myMemberId;
     // test git
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +94,7 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 
 		account = mLoginDataManager.getUserPhone();
 		mNickname = getIntent().getStringExtra("NICKNAME");// 对方的昵称
+		myMemberId = getIntent().getStringExtra("myMemberId");
 
 		// 聊天界面标题
 		if(null==mNickname || "".equals(mNickname) || "null".equals(mNickname)) {
@@ -276,6 +295,8 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.btn_send:
+			sendMsg();
+			/**
 			message_content = et_message.getText().toString().trim();
 			if(null==message_content || "".equals(message_content)) {
 				Toast.makeText(ChattingActivity.this, "内容不能为空", Toast.LENGTH_SHORT).show();
@@ -350,11 +371,70 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 			arrayList.add(ci2);
 			baseAdapter.notifyDataSetChanged();
 			et_message.setText("");
-			break;
+			break; */
 
 		default:
 			break;
 		}
+	}
+	
+	
+	
+	
+	/**
+	 * 发送消息
+	 */
+	private void sendMsg() {
+		message_content = et_message.getText().toString().trim();
+		if(null==message_content || "".equals(message_content)) {
+			Toast.makeText(ChattingActivity.this, "内容不能为空", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		ChatInfo ci2 = new ChatInfo(account, message_content, 1);
+		arrayList.add(ci2);
+		baseAdapter.notifyDataSetChanged();
+		et_message.setText("");
+		//&member_id=156&to_member_id=213&content=内容
+		
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		params.addBodyParameter("to_member_id", mAccountTo);
+		params.addBodyParameter("content", message_content);
+		String url = ContantsValues.SEND_CHATTING_URL+"&member_id="+mLoginDataManager.getMemberId()+"&to_member_id="+mAccountTo+"&content="+message_content;
+		CCLog.d(tag, "sms url :"+url);
+		http.send(HttpRequest.HttpMethod.POST,
+				url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						JSONObject jsonObject;
+						try {
+							jsonObject = new JSONObject(responseInfo.result);
+							if (jsonObject != null && jsonObject.has("data")) {
+								boolean result = jsonObject
+										.optBoolean("data");
+								if(result) {
+									CCLog.d(tag, "send success ! ");
+								} else {
+									CCLog.d(tag, "send failed ! ");
+								}
+							}
+
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						UIHelper.ToastMessage(ChattingActivity.this,
+								"消息发送失败");
+					}
+				});
+		
 	}
 
 	@SuppressWarnings("unchecked")

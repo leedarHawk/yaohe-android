@@ -104,7 +104,7 @@ public class BusinessFansAdapter extends BaseAdapter {
 			mImageLoader.get(fansInfo.face, listener,context.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),context.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_height));
 		}
 
-		final String member_id = fansInfo.id;
+		final String member_id = fansInfo.member_id;
 		if(null==fansInfo.nickname || "".equals(fansInfo.nickname) || "null".equals(fansInfo.nickname)) {
 			fansInfo.nickname="吆喝用户";
 		}

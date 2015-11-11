@@ -907,4 +907,20 @@ public abstract class BaseFragment extends Fragment {
 		String url = ContantsValues.CALL_FOLLOW_URL +"&member_id="+mLoginDataManager.getMemberId()+"&id="+callID;
 		baseShopActionApi(mLoginDataManager.getMemberId(), callID,url, "收藏成功。");
 	}
+	
+	/**
+	 * 更换城市 以及 发布新的产品 重新设置数据 代替onresume
+	 */
+	public void doResetData() {
+		//调用 子类对应的方法
+	}
+	
+	//是否刷新 关注商家页面
+	private static boolean isRefreshHomeGuanzhuFragment=false;
+	public static boolean isRefreshHomeGuanzhuFragment() {
+		return isRefreshHomeGuanzhuFragment;
+	}
+	public static void setRefreshHomeGuanzhuFragmentStatus(boolean isRefreshHomeGuanzhuFragmentStatus) {
+		isRefreshHomeGuanzhuFragment = isRefreshHomeGuanzhuFragmentStatus;
+	}
 }
