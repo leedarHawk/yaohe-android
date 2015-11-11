@@ -170,7 +170,6 @@ public class HuoDongDetailsActivity extends BaseActivity implements
 		// 关注店铺状态信息查询
 		isFollow(mLoginDataManager.getMemberId(), mStrShopID,
 				ContantsValues.SHOP_FOLLOW_URL);
-		onResume() ;
 		getActivityDetail();
 		
 
