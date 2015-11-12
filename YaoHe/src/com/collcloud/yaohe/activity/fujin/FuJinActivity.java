@@ -635,7 +635,7 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	private int mAreaIndex;
 	private int mOneClassIndex;
 	private String mOne_id = "";
-
+	int districtSelectedMark = 0;
 	@Override
 	public boolean handleMessage(Message msg) {
 		Bundle data = msg.getData();
@@ -703,6 +703,7 @@ public class FuJinActivity extends CommonActivity implements Callback,
 
 			break;
 		case 3:
+			districtSelectedMark = 1;
 			int districtIndex = data.getInt(
 					IntentKeyNames.KEY_POPUP_WINDOW_SELECTED_TOWN_INDEX, 0);
 			shopControl();
@@ -791,20 +792,24 @@ public class FuJinActivity extends CommonActivity implements Callback,
 
 				assessNetTips();
 
+				String tmpDistrictId = null;
+				if (districtSelectedMark == 1){  // 商圈被选择
+					int twoDistrictIndex = data.getInt(
+							IntentKeyNames.KEY_POPUP_WINDOW_SELECTED_TOWN_INDEX, 0);
+					tmpDistrictId = mDistrictIDs.get(twoDistrictIndex);
+				}
 				// 请求数据分析
 				if (mOneClassIndex == 0) {
 					getNearByList(GlobalVariable.sChoiceCityID, "1", null,
-							null, mOne_id, null, null, null);
+								null, mOne_id, null,tmpDistrictId, null);
 				} else {
 					if (mTwoClassfyData.get(twoClassfyIndex).equals(
 							DEFAULT_ALL_CLASSFY)) {
-
 						getNearByList(GlobalVariable.sChoiceCityID, "1", null,
-								null, mOne_id, null, null, null);
+								null, mOne_id, null, tmpDistrictId, null);
 					} else {
 						getNearByList(GlobalVariable.sChoiceCityID, "1", null,
-								null, mOne_id,
-								mTwoClassfyID.get(twoClassfyIndex), null, null);
+								null, mOne_id,	mTwoClassfyID.get(twoClassfyIndex),tmpDistrictId, null);
 					}
 				}
 
