@@ -76,12 +76,17 @@ public class ShopCommentActivity extends BaseActivity implements
 	 */
 	private String mStrContent = null;
 	/**
+	 * 回复的评论的id号
+	 */
+	private String parentId;
+	/**
 	 * 是否匿名 （0 、 1 ）
 	 */
 	private String mStrIsAnonymous;
 	private boolean mIsAnonymous = false;
 
 	private String mStrType;
+	private String shopCommentType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +95,8 @@ public class ShopCommentActivity extends BaseActivity implements
 		mStrShopID = getStringExtra(IntentKeyNames.KEY_SHOP_COMMENT_ID);
 		mStrCallID = getStringExtra(IntentKeyNames.KEY_CALL_COMMENT_ID);
 		mStrType = getStringExtra("callCommentType");
+		shopCommentType = getStringExtra("shopCommentType");
+		parentId = getStringExtra("parentId");
 
 		if (!Utils.isStringEmpty(mStrCallID)) {
 			mRlRatingLayout.setVisibility(View.GONE);
@@ -146,13 +153,13 @@ public class ShopCommentActivity extends BaseActivity implements
 			} else if (!Utils.isStringEmpty(mStrShopID)) {
 				// 店铺点评API调用
 				shopCommentApi(mLoginDataManager.getMemberId(), mStrShopID,
-						mStrStar, mStrContent, mStrIsAnonymous, "0", "0",
+						mStrStar, mStrContent, mStrIsAnonymous, shopCommentType, parentId,
 						ContantsValues.SHOP_COMMENT_URL, "点评成功。");
 			} else if (!Utils.isStringEmpty(mStrCallID)) {
 				// 吆喝点评API调用
 				yaoheComment(mLoginDataManager.getMemberId(), mStrCallID,
 						mStrStar, mStrContent, mStrIsAnonymous, mStrType,
-						ContantsValues.CALL_COMMENT_URL, "点评成功。");
+						ContantsValues.CALL_COMMENT_URL, "点评成功。",parentId);
 			}
 			break;
 
@@ -176,7 +183,7 @@ public class ShopCommentActivity extends BaseActivity implements
 
 	private void yaoheComment(String memberID, String callID, String star,
 			String content, String isAnonymous, String strType, String url,
-			final String message) {
+			final String message,String parentid) {
 
 		ApiAccess.showProgressDialog(mBaseActivity, "提交中..");
 		HttpUtils http = new HttpUtils();
@@ -186,18 +193,17 @@ public class ShopCommentActivity extends BaseActivity implements
 		params.addBodyParameter("content", content);
 		params.addBodyParameter("is_anonymous", isAnonymous);
 		params.addBodyParameter("type", strType);
-		params.addBodyParameter("parentid", "");
-		CCLog.i("ShopCommentActivity 吆喝点评参数11111111111111：", "member_id= " + memberID + " call_id=" + callID
-				+ " type=" + strType + " content=" + content + " is_anonymous="
-				+ isAnonymous);
-		//StringBuffer bf = new StringBuffer();
-		//bf.append("&member_id=").append(memberID);
-		//bf.append("&call_id=").append(callID);
-		//bf.append("&content=").append(content);
-		//bf.append("&is_anonymous=").append(isAnonymous);
-		//bf.append("&type=").append(strType);
-		//bf.append("&parentid=").append("");
-		//url = url+bf.toString();
+		params.addBodyParameter("parentid", parentid);
+		
+		StringBuffer bf = new StringBuffer();
+		bf.append("&member_id=").append(memberID);
+		bf.append("&call_id=").append(callID);
+		bf.append("&content=").append(content);
+		bf.append("&is_anonymous=").append(isAnonymous);
+		bf.append("&type=").append(strType);
+		bf.append("&parentid=").append(parentid);
+		url = url+bf.toString();
+
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 

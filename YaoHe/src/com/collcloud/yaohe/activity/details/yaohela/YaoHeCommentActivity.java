@@ -17,10 +17,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.dianpin.fujin.ShopCommentActivity;
-import com.collcloud.yaohe.api.ApiAccess;
+import com.collcloud.yaohe.activity.login.LoginActivity;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.DetailsCallCommentInfo;
@@ -29,6 +30,7 @@ import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.adapter.HomeCallDetailsAdapter;
+import com.collcloud.yaohe.ui.adapter.HomeCallDetailsAdapter.CommentHuifuListener;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.GsonUtils;
 import com.collcloud.yaohe.ui.utils.UIHelper;
@@ -62,6 +64,8 @@ public class YaoHeCommentActivity extends BaseActivity implements
 	private DetailsCallCommentInfo mDetailsCallCommentInfo;
 	private List<CallCommentInfo> mList = new ArrayList<CallCommentInfo>();
 	private int mTotalCount = 0;
+	
+	private String tag = YaoHeCommentActivity.class.getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,8 @@ public class YaoHeCommentActivity extends BaseActivity implements
 		setContentView(R.layout.activity_yaohe_comment_details);
 		mStrCallID = getStringExtra(IntentKeyNames.KEY_CALL_COMMENT_ID);
 		mStrType = getStringExtra("YaoHeType");
+		ApiAccess.showProgressDialog(this, "数据加载中..",
+				R.style.progress_dialog);
 		getCallCommentInfo(mStrCallID);
 		CCLog.i("吆喝点评 CallID = ",""+mStrCallID );
 		// SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -87,13 +93,14 @@ public class YaoHeCommentActivity extends BaseActivity implements
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("call_id", callID);
 		String url = ContantsValues.CALL_DETAILS_COMMENT_URL + "&call_id=" + callID ;
-
+		CCLog.d(tag, "url--->"+url);
 		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
 						JSONObject jsonObject;
+						ApiAccess.dismissProgressDialog();
 						try {
 							jsonObject = new JSONObject(responseInfo.result);
 							responseErrorInfo(responseInfo);
@@ -125,6 +132,7 @@ public class YaoHeCommentActivity extends BaseActivity implements
 									}
 									mTotalCount = mDetailsCallCommentInfo.data
 											.size();
+									
 									for (int j = 0; j < mDetailsCallCommentInfo.data
 											.size(); j++) {
 
@@ -160,6 +168,15 @@ public class YaoHeCommentActivity extends BaseActivity implements
 													+ mDetailsCallCommentInfo.data
 															.get(j).face;
 										}
+										
+										if (mDetailsCallCommentInfo.data.get(j).parentid != null) {
+											commentInfo.parentid = mDetailsCallCommentInfo.data
+													.get(j).parentid;
+										}
+										if (mDetailsCallCommentInfo.data.get(j).answerName != null) {
+											commentInfo.answerName = mDetailsCallCommentInfo.data
+													.get(j).answerName;
+										}
 
 										mList.add(commentInfo);
 
@@ -178,6 +195,7 @@ public class YaoHeCommentActivity extends BaseActivity implements
 									}
 
 								}
+								setTopOnlyBackTitle("评论详情"+"（"+mTotalCount+"）");
 							}
 
 						} catch (JSONException e) {
@@ -189,6 +207,8 @@ public class YaoHeCommentActivity extends BaseActivity implements
 					public void onFailure(HttpException error, String msg) {
 						UIHelper.ToastMessage(YaoHeCommentActivity.this,
 								R.string.response_data_invalid);
+						setTopOnlyBackTitle("评论详情");
+						ApiAccess.dismissProgressDialog();
 					}
 				});
 
@@ -210,19 +230,56 @@ public class YaoHeCommentActivity extends BaseActivity implements
 	 */
 	private void setCommentListInfo() {
 		String memberId = mLoginDataManager.getMemberId();
-		mAdapter = new HomeCallDetailsAdapter(YaoHeCommentActivity.this, mList,
-				memberId);
-		mLvPullToRefreshView.setAdapter(mAdapter);
+		if(mAdapter ==null) {
+			mAdapter = new HomeCallDetailsAdapter(YaoHeCommentActivity.this, mList,
+					memberId,new CommentHuifuListener(){
+						@Override
+						public void onCommentForHuifu(
+								CallCommentInfo callCommentInfo) {
+							//回复评论
+							CCLog.d(tag, "huifu pinglun .......>"+callCommentInfo.nickname);
+							//huifuComment(callCommentInfo);
+							gotoShopCommentActivity(callCommentInfo.id);
+							
+						}
+						@Override
+						public void onDelComment(CallCommentInfo callCommentInfo) {
+							if (!mLoginDataManager.getLoginState().equals("1")) {
+								UIHelper.ToastMessage(YaoHeCommentActivity.this, "您还没登录，请先登录。");
+								Intent intent = new Intent(mBaseActivity,
+										LoginActivity.class);
+								mBaseActivity.baseStartActivity(intent);
+							} else {
+								delComment(callCommentInfo.id);
+							}
+							
+						}
+			});
+			mLvPullToRefreshView.setAdapter(mAdapter);
+		} else {
+			mAdapter.notifyDataSetChanged();
+		}
+		setTopOnlyBackTitle("评论详情"+"（"+mList.size()+"）");
 
 	}
-
+	
+//	private void huifuComment(CallCommentInfo callCommentInfo) {
+//		rlLayoutCallSend.setVisibility(View.VISIBLE);
+//	}
+//	
+	
+	
+	//显示隐藏 回复输入框
+	private RelativeLayout rlLayoutCallSend;
 	@Override
 	protected void resetLayout() {
 		RelativeLayout rlLayout = (RelativeLayout) findViewById(R.id.rl_activity_details_yaohe_comment);
+		rlLayoutCallSend = (RelativeLayout) findViewById(R.id.rl_activity_details_call_send);
+		
 		SupportDisplay.resetAllChildViewParam(rlLayout);
 
 		initTopOnlyBackTitle();
-		setTopOnlyBackTitle("评论详情");
+		setTopOnlyBackTitle("评论详情"+"（"+mTotalCount+"）");
 		mLvPullToRefreshView = (SingleLayoutListView) findViewById(R.id.lv_activity_yaohe_dianpin);
 		mTvSend = (TextView) findViewById(R.id.tv_activity_yaohe_pinglun_send);
 		mTvSend.setOnClickListener(this);
@@ -331,17 +388,35 @@ public class YaoHeCommentActivity extends BaseActivity implements
 
 			break;
 		case R.id.tv_activity_yaohe_pinglun_send:
-			Intent intent = new Intent();
-			intent.setClass(YaoHeCommentActivity.this,
-					ShopCommentActivity.class);
-			intent.putExtra(IntentKeyNames.KEY_CALL_COMMENT_ID, mStrCallID);
-			intent.putExtra("callCommentType", mStrType);
-			startActivityForResult(intent, 10);
+			gotoShopCommentActivity("");
 			break;
 		default:
 			break;
 		}
 
+	}
+	
+	/**
+	 * 
+	 * @param parentId被回复的评论id号
+	 */
+	private void gotoShopCommentActivity(String parentId) {
+		if (!mLoginDataManager.getLoginState().equals("1")) {
+			UIHelper.ToastMessage(this, "您还没登录，请先登录。");
+			Intent intent = new Intent(mBaseActivity,
+					LoginActivity.class);
+			mBaseActivity.baseStartActivity(intent);
+		} else {
+			Intent intent = new Intent();
+			intent.setClass(YaoHeCommentActivity.this,
+					ShopCommentActivity.class);
+			intent.putExtra(IntentKeyNames.KEY_CALL_COMMENT_ID, mStrCallID);
+			intent.putExtra("callCommentType", mStrType);
+			intent.putExtra("parentId", parentId);
+			startActivityForResult(intent, 10);
+		}
+		
+		
 	}
 
 	@Override
@@ -354,6 +429,83 @@ public class YaoHeCommentActivity extends BaseActivity implements
 				getCallCommentInfo(callID);
 			}
 		}
+	}
+	
+	/**
+	 * 根据评论id删除评论
+	 * @param commentId
+	 */
+	private void delComment(final String commentId) {
+		ApiAccess.showProgressDialog(this, "正在删除评论..",
+				R.style.progress_dialog);
+		String url = ContantsValues.DELYAOHE_COMMENT_URL+"&id="+commentId;
+		CCLog.d(tag, "del comment url :" +url);
+		
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("id", commentId);
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								if (responseInfo.result != null) {
+									CCLog.i("删除点评信息：", " "
+											+ responseInfo.result);
+								}
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										int code = statusObject.optInt("code");
+										if (code == 1) {
+											String strErrorMsg = statusObject
+													.getString("message");
+											UIHelper.ToastMessage(
+													mBaseActivity, strErrorMsg);
+										} else {
+											boolean delResult = errorJsonObject.optBoolean("data", false);
+											if(!delResult) {
+												Toast.makeText(mBaseActivity, "删除失败", Toast.LENGTH_SHORT).show();
+											} else {
+												Toast.makeText(mBaseActivity, "删除成功", Toast.LENGTH_SHORT).show();
+												CallCommentInfo tmpc = null;
+												for(CallCommentInfo cc : mList) {
+													if(cc.id.equals(commentId) ) {
+														tmpc = cc;
+														break;
+													}
+												}
+												mList.remove(tmpc);
+												setCommentListInfo();
+											}
+										}
+									}
+								} catch (Exception e) {
+									ApiAccess.dismissProgressDialog();
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+								}
+
+							}
+						}
+						ApiAccess.dismissProgressDialog();
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+						ApiAccess.dismissProgressDialog();
+					}
+				});
 	}
 
 	private void commentApi(String memberID, String callID, String star,

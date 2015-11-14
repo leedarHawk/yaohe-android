@@ -10,14 +10,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.api.info.DetailBusinessCommentInfo.BusinessCommentInfo;
+import com.collcloud.yaohe.api.info.DetailsCallCommentInfo.CallCommentInfo;
 import com.collcloud.yaohe.common.base.GlobalVariable;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.ui.adapter.HomeCallDetailsAdapter.CommentHuifuListener;
 import com.collcloud.yaohe.ui.utils.Utils;
 
 public class HomeBusinessCommentAdapter extends BaseAdapter {
@@ -28,6 +31,13 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 	// private static ImageLoader mImageLoader;
 
 	private List<BusinessCommentInfo> mCallCommentList = new ArrayList<BusinessCommentInfo>();
+	private String mStrMemberId;
+	
+	private CommentHuifuListener commentHuifuListener;
+	public interface CommentHuifuListener {
+		public void onCommentForHuifu(BusinessCommentInfo callCommentInfo);
+		public void onDelComment(BusinessCommentInfo businessCommentInfo); 
+	}
 
 	public HomeBusinessCommentAdapter(Context context) {
 		this.mContext = context;
@@ -43,6 +53,22 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 		mLayoutInflater = LayoutInflater.from(mContext);
 		// mImageLoader = new ImageLoader(AppApplacation.requestQueue,
 		// new BitmapCache());
+	}
+	public HomeBusinessCommentAdapter(Context context,
+			List<BusinessCommentInfo> datas,CommentHuifuListener commentHuifuListener) {
+		this.mContext = context;
+		this.mCallCommentList = datas;
+		mLayoutInflater = LayoutInflater.from(mContext);
+		this.commentHuifuListener = commentHuifuListener;
+	}
+	
+	public HomeBusinessCommentAdapter(Context context,
+			List<BusinessCommentInfo> datas,String mStrMemberId,CommentHuifuListener commentHuifuListener) {
+		this.mContext = context;
+		this.mCallCommentList = datas;
+		mLayoutInflater = LayoutInflater.from(mContext);
+		this.commentHuifuListener = commentHuifuListener;
+		this.mStrMemberId = mStrMemberId;
 	}
 
 	@Override
@@ -99,14 +125,59 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 		if (callInfo != null && callInfo.content != null) {
 			holder.mTvContent.setText(callInfo.content);
 		}
-		if (callInfo != null && callInfo.is_anonymous != null) {
-			if (callInfo.is_anonymous.equals("1")) {
+		
+		holder.commentBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if(commentHuifuListener !=null) {
+					commentHuifuListener.onCommentForHuifu(mCallCommentList.get(position));
+				}
+			}
+		});
+		
+		holder.delCommentBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if(commentHuifuListener !=null) {
+					commentHuifuListener.onDelComment(mCallCommentList.get(position));
+				}
+			}
+		});
+		
+		//是自己的评论 能够删除
+		if(mStrMemberId !=null && mStrMemberId.equals(callInfo.member_id)) {
+			holder.delCommentBtn.setVisibility(View.VISIBLE);
+		} else {//不是自己的评论 就不能删除
+			holder.delCommentBtn.setVisibility(View.GONE);
+		}
+		
+		
+		
+		if (callInfo != null) {
+			if ("1".equals(callInfo.is_anonymous)) {
 				holder.mTvName.setText("匿名用户");
 			} else {
 				if (callInfo != null && callInfo.nickname != null) {
 					holder.mTvName.setText(callInfo.nickname);
 				} else {
 					holder.mTvName.setText("吆喝用户");
+				}
+			}
+			
+			//如果是回复的情况
+			if(callInfo.parentid != null && !"".equals(callInfo.parentid) && !"0".equals(callInfo.parentid) ) {
+				String answerName="吆喝用户";
+				if(callInfo.answerName!= null && !"".equals(callInfo.answerName)) {
+					answerName = callInfo.answerName;
+				}
+				if ("1".equals(callInfo.is_anonymous)) {
+					holder.mTvName.setText("匿名用户 回复 " +answerName);
+				}else {
+					if (!Utils.isStringEmpty(callInfo.nickname)) {
+						holder.mTvName.setText(callInfo.nickname+" 回复 "+answerName);
+					}else {
+						holder.mTvName.setText("吆喝用户1"+" 回复 "+answerName);
+					}
 				}
 			}
 		}
@@ -295,6 +366,11 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 		TextView mTvStar3;
 		TextView mTvStar4;
 		TextView mTvStar5;
+		
+		//评论按钮
+		TextView commentBtn;
+		//删除评论
+		TextView delCommentBtn;
 
 	}
 
@@ -337,6 +413,9 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 				.findViewById(R.id.tv_item_shop_stars_4);
 		holder.mTvShopStar5 = (TextView) view
 				.findViewById(R.id.tv_item_shop_stars_5);
+		
+		holder.commentBtn = (TextView)view.findViewById(R.id.commentBtn);
+		holder.delCommentBtn = (TextView)view.findViewById(R.id.delCommentBtn);
 
 	}
 

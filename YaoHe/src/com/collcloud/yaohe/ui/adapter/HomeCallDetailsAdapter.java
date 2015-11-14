@@ -7,9 +7,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +22,7 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.Utils;
+import com.meg7.widget.CustomShapeImageView;
 
 public class HomeCallDetailsAdapter extends BaseAdapter {
 
@@ -32,6 +33,12 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 	private String mStrMemberId ;
 
 	private List<CallCommentInfo> mCallCommentList = new ArrayList<CallCommentInfo>();
+	
+	private CommentHuifuListener commentHuifuListener;
+	public interface CommentHuifuListener {
+		public void onCommentForHuifu(CallCommentInfo callCommentInfo);
+		public void onDelComment(CallCommentInfo callCommentInfo);
+	}
 
 	public HomeCallDetailsAdapter(Context context) {
 		this.mContext = context;
@@ -48,6 +55,16 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 		mImageLoader = new ImageLoader(AppApplacation.requestQueue,
 				new BitmapCache());
 	}
+	public HomeCallDetailsAdapter(Context context, List<CallCommentInfo> datas,String memberId,CommentHuifuListener commentHuifuListener) {
+		this.mContext = context;
+		this.mCallCommentList = datas;
+		this.mStrMemberId = memberId;
+		mLayoutInflater = LayoutInflater.from(mContext);
+		mImageLoader = new ImageLoader(AppApplacation.requestQueue,
+				new BitmapCache());
+		this.commentHuifuListener = commentHuifuListener;
+	}
+	
 
 	@Override
 	public int getCount() {
@@ -102,8 +119,9 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 
 		// 设定首页吆喝信息
 		ImageListener listener = ImageLoader.getImageListener(holder.mIvThum,
-				R.drawable.icon_yaohe_loading_default,
-				R.drawable.icon_yaohe_loading_default);
+				R.drawable.icon_yaohe_default_logo,
+				R.drawable.icon_yaohe_default_logo);
+		
 
 		if (callInfo != null && callInfo.content != null) {
 			holder.mTvContent.setText(callInfo.content);
@@ -131,6 +149,22 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 				// }
 				
 			}
+			//如果是回复的情况
+			if(callInfo.parentid != null && !"".equals(callInfo.parentid) && !"0".equals(callInfo.parentid) ) {
+				String answerName="吆喝用户";
+				if(callInfo.answerName!= null && !"".equals(callInfo.answerName)) {
+					answerName = callInfo.answerName;
+				}
+				if (callInfo.is_anonymous.equals("1")) {
+					holder.mTvName.setText("匿名用户 回复 " +answerName);
+				}else {
+					if (!Utils.isStringEmpty(callInfo.nickname)) {
+						holder.mTvName.setText(callInfo.nickname+" 回复 "+answerName);
+					}else {
+						holder.mTvName.setText("吆喝用户1"+" 回复 "+answerName);
+					}
+				}
+			}
 		}
 		if (callInfo != null && callInfo.addtime != null) {
 			holder.mTvDate.setVisibility(View.VISIBLE);
@@ -153,8 +187,35 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 		}
 
 		if (callInfo != null && callInfo.face != null) {
-			mImageLoader.get(callInfo.face, listener);
+			//mImageLoader.get(callInfo.face, listener);
+			mImageLoader.get(callInfo.face, listener, mContext.getResources().getDimensionPixelSize(R.dimen.photo_width), mContext.getResources().getDimensionPixelSize(R.dimen.photo_height));
 		}
+		
+		holder.commentBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if(commentHuifuListener !=null) {
+					commentHuifuListener.onCommentForHuifu(mCallCommentList.get(position));
+				}
+			}
+		});
+		holder.delCommentBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if(commentHuifuListener !=null) {
+					commentHuifuListener.onDelComment(mCallCommentList.get(position));
+				}
+			}
+		});
+		
+		//是自己的评论 能够删除
+		if(mStrMemberId !=null && mStrMemberId.equals(callInfo.member_id)) {
+			holder.delCommentBtn.setVisibility(View.VISIBLE);
+		} else {//不是自己的评论 就不能删除
+			holder.delCommentBtn.setVisibility(View.INVISIBLE);
+		}
+		
+		
 
 		return convertView;
 	}
@@ -167,7 +228,11 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 		/** 日期时间 */
 		TextView mTvDate;
 		/** 列表简介图片 */
-		ImageView mIvThum;
+		CustomShapeImageView mIvThum;
+		//评论按钮
+		TextView commentBtn;
+		//删除评论
+		TextView delCommentBtn;
 
 	}
 
@@ -185,8 +250,10 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 		holder.mTvDate = (TextView) view
 				.findViewById(R.id.tv_item_home_call_comment_time);
 
-		holder.mIvThum = (ImageView) view
+		holder.mIvThum = (CustomShapeImageView) view
 				.findViewById(R.id.iv_item_home_call_comment_img);
+		holder.commentBtn = (TextView)view.findViewById(R.id.commentBtn);
+		holder.delCommentBtn = (TextView)view.findViewById(R.id.delCommentBtn);
 	}
 
 }

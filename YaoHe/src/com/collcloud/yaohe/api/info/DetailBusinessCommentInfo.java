@@ -27,6 +27,11 @@ public class DetailBusinessCommentInfo implements Serializable {
 		public String comment_title;
 		
 		public String totalStar;
+		
+		//parentid所属的用户昵称
+		public String answerName;
+		
+		
 
 
 	}

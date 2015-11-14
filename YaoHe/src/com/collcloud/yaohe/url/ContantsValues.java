@@ -199,5 +199,11 @@ public interface ContantsValues {
 	
 	/**发送消息 chatting */
 	String SEND_CHATTING_URL = "http://www.17yaohe.com/?c=Api&a=sms&partent=ht&key=ht";
+	/**删除吆喝评论*/
+	String DELYAOHE_COMMENT_URL = "http://www.17yaohe.com/?c=Api&a=delShopServiceComment&partent=ht&key=ht";
+	/**删除店铺评论*/
+	String DELSHOP_COMMENT_URL = "http://www.17yaohe.com/?c=Api&a=delShopComment&partent=ht&key=ht";
+	
+	
 
 }

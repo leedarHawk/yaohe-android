@@ -60,10 +60,10 @@
             android:background="@drawable/editext_gray_stroke"
             android:hint="您的点评看法"
             android:paddingLeft="10px"
+            android:visibility="gone"
             android:textColor="@color/common_home_text_color_title"
             android:textColorHint="@color/common_home_text_color_fans_time"
-            android:textSize="14sp"
-            android:visibility="gone" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_activity_yaohe_pinglun_send"
