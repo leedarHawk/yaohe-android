@@ -1,9 +1,7 @@
 package com.collcloud.yaohe.activity.chat;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,12 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.collcloud.yaohe.R;
-import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
+import com.collcloud.yaohe.api.URLs;
+import com.collcloud.yaohe.api.info.ChantInfoBase;
+import com.collcloud.yaohe.api.info.MsgInfo;
 import com.collcloud.yaohe.common.base.BaseActivity;
+import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.ChatInfo;
 import com.collcloud.yaohe.ui.adapter.ChatAdapter;
 import com.collcloud.yaohe.ui.utils.CCLog;
+import com.collcloud.yaohe.ui.utils.GsonUtils;
 import com.collcloud.yaohe.ui.utils.UIHelper;
 import com.collcloud.yaohe.url.ContantsValues;
 import com.lidroid.xutils.HttpUtils;
@@ -36,16 +38,10 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.yuntongxun.ecsdk.ECChatManager;
 import com.yuntongxun.ecsdk.ECDevice;
-import com.yuntongxun.ecsdk.ECDevice.OnECDeviceConnectListener;
-import com.yuntongxun.ecsdk.ECError;
 import com.yuntongxun.ecsdk.ECInitParams;
 import com.yuntongxun.ecsdk.ECMessage;
-import com.yuntongxun.ecsdk.OnChatReceiveListener;
-import com.yuntongxun.ecsdk.SdkErrorCode;
 import com.yuntongxun.ecsdk.im.ECTextMessageBody;
-import com.yuntongxun.ecsdk.im.group.ECGroupNoticeMessage;
 
 /**
  * @类说明 聊天界面
@@ -61,7 +57,7 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 	private String message_content;
 	private static String Tag = "IM_DEMO_TEXT.ChattingActivity";
 	@SuppressWarnings("rawtypes")
-	private ArrayList arrayList;// 用来存放两个聊天对象所说的内容
+	private ArrayList<ChatInfo> chatInfoList = new ArrayList<ChatInfo>();// 用来存放两个聊天对象所说的内容
 	private BaseAdapter baseAdapter;
 	private String account;
 	private String mAccountTo;
@@ -102,11 +98,12 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 		}
 		tv_title.setText(mNickname);
 
-		InitSDK();
-		initDate();
+		//InitSDK();
+		initData();
+		getSmsMsg();
 
 	}
-
+	/**
 	private void InitSDK() {
 		if (!ECDevice.isInitialized()) {
 			ECDevice.initial(this, new ECDevice.InitListener() {
@@ -265,12 +262,19 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 				}
 			});
 		}
-	}
+	}*/
 
 	@SuppressWarnings("rawtypes")
-	private void initDate() {
-		arrayList = new ArrayList();
-		baseAdapter = new ChatAdapter(this, arrayList);
+	private void initData() {
+		
+		String nickName = mLoginDataManager.getUserNickName();
+		if(nickName == null || "".equals(nickName)) {
+			nickName=mLoginDataManager.getUserPhone();
+		}
+		if(nickName == null || "".equals(nickName)) {
+			nickName=mLoginDataManager.getMemberId();
+		}
+		baseAdapter = new ChatAdapter(this, chatInfoList,nickName);
 		lv_chatting.setAdapter(baseAdapter);
 	}
 
@@ -392,7 +396,7 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 		}
 		
 		ChatInfo ci2 = new ChatInfo(account, message_content, 1);
-		arrayList.add(ci2);
+		chatInfoList.add(ci2);
 		baseAdapter.notifyDataSetChanged();
 		et_message.setText("");
 		//&member_id=156&to_member_id=213&content=内容
@@ -452,7 +456,7 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 			String message = textMessageBody.getMessage();
 			Log.i(Tag, "获取到的getUserData：" + msg.getUserData());
 			ChatInfo ci3 = new ChatInfo(null, message, 0);
-			arrayList.add(ci3);
+			chatInfoList.add(ci3);
 
 			baseAdapter.notifyDataSetChanged();
 		}
@@ -465,5 +469,94 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 		LinearLayout ll_chat_root = (LinearLayout) findViewById(R.id.ll_chat_root);
 		SupportDisplay.resetAllChildViewParam(ll_chat_root);
 	}
+	
+	
+	
+	private void getSmsMsg() {
+
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+
+		CCLog.v(GlobalConstant.TAG,
+				"当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
+		
+		
+		String url = ContantsValues.PERSON_MY_SMS_LIST_MSG+"&member_id="+mLoginDataManager.getMemberId()+"&to_member_id="+mAccountTo;
+		params.addBodyParameter("member_id", mLoginDataManager.getMemberId()
+				.toString());
+		
+		CCLog.d(tag, "get sms detail ist msg url :"+url);
+
+		http.send(HttpRequest.HttpMethod.POST, url,
+				params, new RequestCallBack<String>() {
+					// 网络返回字符串
+					String responseData = null;
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfos) {
+						CCLog.v(GlobalConstant.TAG, "获取个人消息数量成功");
+						CCLog.v(GlobalConstant.TAG, responseInfos.result);
+						JSONObject object, object2, object3;
+						String code = null;
+						String responseMsg = null;
+						try {
+							object = new JSONObject(responseInfos.result);
+							// 获取一个返回的字符串
+							String responseInfo = object.getString("status");
+
+							object2 = new JSONObject(responseInfo);
+
+							code = object2.getString("code");
+
+
+							// 数据获取成功
+							if (code.equals("0")) {
+								ChantInfoBase msgInfoBase = GsonUtils.json2Bean(
+										responseInfos.result,
+										ChantInfoBase.class);
+								
+								if (msgInfoBase.data != null
+										&& msgInfoBase.data.size() > 0) {
+									chatInfoList.clear();									
+									for (int j = 0; j < msgInfoBase.data
+											.size(); j++) {
+										ChatInfo msgInfo = new ChatInfo();
+										if(msgInfoBase.data.get(j).face !=null && !"".equals(msgInfoBase.data.get(j).face)) {
+											msgInfo.face =  URLs.IMG_PRE+msgInfoBase.data.get(j).face;
+										}
+										
+										
+										msgInfo.addtime = msgInfoBase.data.get(j).addtime;
+										msgInfo.nickname = msgInfoBase.data.get(j).nickname;
+										msgInfo.member_id = msgInfoBase.data.get(j).member_id;
+										msgInfo.content = msgInfoBase.data.get(j).content;
+										if(mLoginDataManager.getMemberId().equals(msgInfo.member_id)) {
+											msgInfo.num=1;
+										} else {
+											msgInfo.num=0;
+										}
+										chatInfoList.add(msgInfo);
+									}
+								}
+								
+							} else {// 失败了
+								showToast(object2.getString("message"));
+							}
+
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						baseAdapter.notifyDataSetChanged();
+					}
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+					}
+				});
+
+	}
+	
+	
+	
+	
+	
 
 }

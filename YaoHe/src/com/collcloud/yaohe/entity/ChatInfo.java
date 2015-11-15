@@ -5,9 +5,17 @@ package com.collcloud.yaohe.entity;
  */
 public class ChatInfo {
 	
-	String name;
-	String content;
-	int num;
+	public String name;
+	public String content;
+	public String nickname;
+	public String addtime;
+	public String face;
+	public String member_id;
+	public int num;
+	
+	public ChatInfo() {
+		
+	}
 	
 	public ChatInfo(String name,String content,int num){
 		this.name = name;

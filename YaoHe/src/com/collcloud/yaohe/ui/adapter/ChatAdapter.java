@@ -21,6 +21,8 @@ public class ChatAdapter extends BaseAdapter {
 	@SuppressWarnings("rawtypes")
 	private ArrayList arrayList;
 	private Context context;
+	//我的昵称
+	private String myNickName;
 
 	/**
 	 * 构成方法
@@ -29,6 +31,15 @@ public class ChatAdapter extends BaseAdapter {
 			@SuppressWarnings("rawtypes") ArrayList arrayList) {
 		this.arrayList = arrayList;
 		this.context = context;
+	}
+	/**
+	 * 构成方法
+	 */
+	public ChatAdapter(Context context,
+			@SuppressWarnings("rawtypes") ArrayList arrayList,String myNickName) {
+		this.arrayList = arrayList;
+		this.context = context;
+		this.myNickName = myNickName;
 	}
 
 	@Override
@@ -62,18 +73,22 @@ public class ChatAdapter extends BaseAdapter {
 		TextView tv_receiver = (TextView) v.findViewById(R.id.tv_account_to);// 接收者
 		
 		ChatInfo chatInfo = (ChatInfo) arrayList.get(position);
+		
+//		if(position %2==0) {
+//			chatInfo.num=0;
+//		} else {
+//			chatInfo.num=1;
+//		}
 		// 对显示聊天内容的ListView中显示接收者和发送者的聊天不就进行初始化
-		if (((ChatInfo) arrayList.get(position)).getNum() == 1) {// 发送者
-			//tv_sender.setText("<自己>");
+		if (chatInfo.num == 1) {// 发送者
+			tv_sender.setText(myNickName);
 			//tv_sender.setBackgroundResource(R.drawable.tx);
 			tv_content_from.setBackgroundResource(R.drawable.chat_to_img_bg_normal); 
 			tv_content_from.setText(chatInfo.getContent());
 
-		} else if (((ChatInfo) arrayList.get(position)).getNum() == 0) {// 接收者
-			//tv_receiver.setText("<对方>");
+		} else if (chatInfo.num == 0) {// 接收者
+			tv_receiver.setText(chatInfo.nickname);
 			//tv_receiver.setBackgroundResource(R.drawable.tx);
-			Log.i("适配器", chatInfo.getContent().toString());
-			
 			tv_content_to.setText(chatInfo.getContent());
 			tv_content_to.setBackgroundResource(R.drawable.chat_from_img_bg_normal);
 		}

@@ -9,16 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:textColor="@color/text_gray"
         android:layout_margin="5dp"
-        android:textSize="20sp" />
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/tv_message_content"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dip"
+        android:layout_marginTop="5dip"
         android:layout_alignRight="@+id/tv_account"
         android:layout_below="@+id/tv_account"
-        android:maxWidth="380px"
         android:textSize="15sp"/>
 
     <TextView
@@ -27,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/tv_account"
-        android:textSize="20sp"
+        android:textColor="@color/text_gray"
+        android:textSize="10sp"
         android:layout_margin="5dp" />
 
     <TextView
@@ -37,7 +40,7 @@
         android:layout_alignBaseline="@+id/tv_message_content"
         android:layout_alignBottom="@+id/tv_message_content"
         android:layout_alignLeft="@+id/tv_account_to"
-        android:maxWidth="380px"
+        android:layout_marginRight="50dip"
         android:textSize="15sp"/>
 
 </RelativeLayout>
