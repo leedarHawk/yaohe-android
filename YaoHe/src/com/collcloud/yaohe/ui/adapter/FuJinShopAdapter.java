@@ -22,9 +22,9 @@ import com.collcloud.yaohe.api.info.NearByListInfo.NearBy;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
-import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.StringUtils;
 import com.collcloud.yaohe.ui.utils.Utils;
+import com.meg7.widget.CustomShapeImageView;
 
 /**
  * 附近商圈-内容适配器
@@ -173,6 +173,8 @@ public class FuJinShopAdapter extends BaseAdapter {
 		if (nearInfo != null && !Utils.isStringEmpty(nearInfo.face)) { 
 			//CCLog.d("fujin", "nearInfo.face url :"+nearInfo.face);
 			mImageLoader.get(nearInfo.face, listener,mContext.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),mContext.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_height));
+		} else {
+			holder.mIvShop.setImageResource(R.drawable.icon_yaohe_default_logo);
 		}
 		if (nearInfo != null && nearInfo.type != null) {
 			String type = nearInfo.type;
@@ -265,7 +267,7 @@ public class FuJinShopAdapter extends BaseAdapter {
 				.findViewById(R.id.tv_item_fujin_shop_location_);
 		holder.mTvJuli = (TextView) view
 				.findViewById(R.id.tv_item_fujin_shop_location_juli);
-		holder.mIvShop = (ImageView) view
+		holder.mIvShop = (CustomShapeImageView) view
 				.findViewById(R.id.iv_item_fujin_shop_image);
 
 		holder.mTvTagQuan = (TextView) view
@@ -305,7 +307,7 @@ public class FuJinShopAdapter extends BaseAdapter {
 		/** 评价星数 */
 		TextView mTvPinlunTotal;
 		/** 列表简介图片 */
-		ImageView mIvShop;
+		CustomShapeImageView mIvShop;
 
 		/** 商铺活动类型 */
 		ImageView mIvTag;

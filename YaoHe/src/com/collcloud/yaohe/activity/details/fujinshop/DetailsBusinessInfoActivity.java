@@ -14,7 +14,6 @@ import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -27,9 +26,8 @@ import com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity;
 import com.collcloud.yaohe.activity.chat.ChattingActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.DetailsBusinessPinlunActivity;
-import com.collcloud.yaohe.activity.dianpin.fujin.FuJinXiaoXiActivity;
 import com.collcloud.yaohe.activity.map.ShowGeocoderActivity;
-import com.collcloud.yaohe.api.ApiAccess;
+import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.DetailsBusinessShopInfo.BusinessCallInfo;
 import com.collcloud.yaohe.common.base.AppApplacation;
@@ -53,6 +51,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.meg7.widget.CustomShapeImageView;
 
 /**
  * 商家信息详情
@@ -119,7 +118,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 	/**
 	 * 店铺图片
 	 */
-	private ImageView mIvShopImg = null;
+	private CustomShapeImageView mIvShopImg = null;
 	/**
 	 * 营业时间
 	 */
@@ -195,8 +194,10 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		ImageListener listener = ImageLoader.getImageListener(mIvShopImg,
 				R.drawable.icon_yaohe_default_logo,
 				R.drawable.icon_yaohe_default_logo);
-		//mImageLoader.get(url, listener,getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width));
-
+		
+		String faceUrl = getStringExtra("faceUrl");
+		CCLog.d(tag, "faceUrl:"+faceUrl);
+		mImageLoader.get(faceUrl, listener,getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width));
 		mStrShopID = getStringExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID);
 		mStrMemberID = getStringExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID);
 		mStrFace = getStringExtra(IntentKeyNames.KEY_SHOP_MEMBER_FACE);
@@ -219,6 +220,88 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			}
 		}, 1000);
 	}
+	
+	
+	
+	
+	/**
+	 * 检测是否关注
+	 */
+	public boolean isFollow(String memberID, String id, String url) {
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", memberID);
+		params.addBodyParameter("id", id);
+		url = url+"&member_id="+memberID+"&id="+id;
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+
+											CCLog.i("code：", code + " ");
+											if (code == 1) {
+												String strErrorMsg = statusObject
+														.optString("message");
+												if (strErrorMsg
+														.contains("已经关注")) {
+													mBaseIsFollow = true;
+												}
+											} else {
+												mBaseIsFollow = false;
+											}
+										}
+										//直接获取是否已经关注状态
+										//mBaseIsFollow = errorJsonObject.optBoolean("data");
+										CCLog.i("code：", errorJsonObject.optBoolean("data") + " ");
+										CCLog.i("isFollow：", mBaseIsFollow + " ");
+										
+									}
+								} catch (Exception e) {
+									mBaseIsFollow = false;
+								}
+							}
+						}
+						setFollowStatus();
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						setFollowStatus();
+					}
+				});
+		return mBaseIsFollow;
+	}
+	
+	/**
+	 * 设置关注状态
+	 */
+	private void setFollowStatus() {
+		if (mBaseIsFollow) {
+			mTvShopGuanZhu.setText(GlobalConstant.VALID_VALUE);
+			mTvShopGuanZhu
+					.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+		} else {
+			mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+			mTvShopGuanZhu
+					.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
+		}
+	}
+	
+	
+	
 
 	private void setFollosStatus() {
 		if (mStrMemberID.equals(mLoginDataManager.getMemberId())) {
@@ -250,20 +333,20 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 					});
 		}
 
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (mBaseIsFollow) {
-					mTvShopGuanZhu.setText(GlobalConstant.VALID_VALUE);
-					mTvShopGuanZhu
-							.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-				} else {
-					mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
-					mTvShopGuanZhu
-							.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
-				}
-			}
-		}, 1000);
+//		new Handler().postDelayed(new Runnable() {
+//			@Override
+//			public void run() {
+//				if (mBaseIsFollow) {
+//					mTvShopGuanZhu.setText(GlobalConstant.VALID_VALUE);
+//					mTvShopGuanZhu
+//							.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+//				} else {
+//					mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+//					mTvShopGuanZhu
+//							.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
+//				}
+//			}
+//		}, 1000);
 	}
 
 	private void onItemSelectAction(String serviceId, String type,
@@ -343,6 +426,8 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 	//商家member id 号
 	private String shop_member_id;
+	//粉丝个数
+	private int fansCount=0;
 	/**
 	 * 商家个人商铺介绍
 	 * 
@@ -371,7 +456,12 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			mTvBusinessTime.setText(jsonObject.optString("business_time"));
 		}
 		if (jsonObject.has("fans_num")) {
-			mTvShopFans.setText(jsonObject.optString("fans_num") + " 粉丝");
+			try {
+				fansCount = Integer.parseInt(jsonObject.optString("fans_num"));
+			} catch(Exception e) {
+				
+			}
+			mTvShopFans.setText( fansCount+ " 粉丝");
 		}
 		if (jsonObject.has("subscribe_tel")) {
 			mTvShopTel.setText(jsonObject.optString("subscribe_tel"));
@@ -422,7 +512,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 			}
 		}
-		mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+		//mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
 
 	}
 
@@ -587,7 +677,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 		// ************* 商家信息 ************* //
 		// 店铺图片
-		mIvShopImg = (ImageView) findViewById(R.id.iv_details_fujin_fuwu_tuijian_img);
+		mIvShopImg = (CustomShapeImageView) findViewById(R.id.iv_details_fujin_fuwu_tuijian_img);
 		// 店铺名称
 		mTvShopName = (TextView) findViewById(R.id.tv_details_tuijian_fuwu_name);
 		// 店铺内容
@@ -682,31 +772,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 				UIHelper.ToastMessage(DetailsBusinessInfoActivity.this,
 						"您还没登录，请先登录。");
 			} else {
-				ApiAccess.showProgressDialog(DetailsBusinessInfoActivity.this,
-						"卖力关注中...");// 关注店铺
-				shopFollowApi(mLoginDataManager.getMemberId(), mStrShopID,
-						ContantsValues.SHOP_FOLLOW_URL, "关注成功");
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						ApiAccess.dismissProgressDialog();
-						if (!mBaseIsNotFollow) {
-							if (Utils.strFromView(mTvShopGuanZhu).equals(
-									GlobalConstant.INVALID_VALUE)) {
-								mTvShopGuanZhu
-										.setText(GlobalConstant.VALID_VALUE);
-								mTvShopGuanZhu
-										.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-							} else {
-								mTvShopGuanZhu
-										.setText(GlobalConstant.INVALID_VALUE);
-								mTvShopGuanZhu
-										.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
-							}
-						}
-					}
-				}, 1500);
-
+				onClickFollowBtn();
 			}
 
 			break;
@@ -743,6 +809,211 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			break;
 		}
 	}
+	
+	/**
+	 *当点击关注按钮后
+	 */
+	private void onClickFollowBtn() {
+		String text = mTvShopGuanZhu.getText().toString();
+		if(GlobalConstant.VALID_VALUE.equals(text)) {
+			ApiAccess.showProgressDialog(DetailsBusinessInfoActivity.this,
+					"正在取消关注中...");// 取消关注店铺
+			cancelFollows(mStrShopID);
+		} else {
+			ApiAccess.showProgressDialog(DetailsBusinessInfoActivity.this,
+					"卖力关注中...");// 关注店铺
+			shopFollowApi(mLoginDataManager.getMemberId(), mStrShopID,
+					ContantsValues.SHOP_FOLLOW_URL, "关注成功");
+		}
+		
+		
+//		new Handler().postDelayed(new Runnable() {
+//			@Override
+//			public void run() {
+//				ApiAccess.dismissProgressDialog();
+//				if (!mBaseIsNotFollow) {
+//					if (Utils.strFromView(mTvShopGuanZhu).equals(
+//							GlobalConstant.INVALID_VALUE)) {
+//						mTvShopGuanZhu
+//								.setText(GlobalConstant.VALID_VALUE);
+//						mTvShopGuanZhu
+//								.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+//					} else {
+//						mTvShopGuanZhu
+//								.setText(GlobalConstant.INVALID_VALUE);
+//						mTvShopGuanZhu
+//								.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
+//					}
+//				}
+//			}
+//		}, 1500);
+	}
+	
+	
+	/**
+	 * 会员加店铺关注
+	 * 
+	 * @Title shopFollowApi
+	 * @Description 会员加店铺关注API调用
+	 * @param memberID
+	 *            会员ID(post提交)
+	 * @param id
+	 *            商家ID(post提交)
+	 * @param url
+	 *            请求url地址
+	 * @param message
+	 *            自定义成功后的提示信息
+	 */
+	public void shopFollowApi(String memberID, String id, String url,
+			final String message) {
+		mBaseIsNotFollow = false;
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", memberID);
+		params.addBodyParameter("id", id);
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						ApiAccess.dismissProgressDialog();
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (responseInfo.result != null) {
+										CCLog.i("BaseActivity关注状态信息：",
+												responseInfo.result + " ");
+									}
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+											if (code == 1) {
+												mBaseIsFollow = false;
+												String strErrorMsg = statusObject
+														.getString("message");
+												UIHelper.ToastMessage(
+														mBaseActivity,
+														strErrorMsg);
+											} else {
+												mBaseIsFollow = true;
+												fansCount++;
+												mTvShopFans.setText( fansCount+ " 粉丝");
+												if (!Utils
+														.isStringEmpty(message)) {
+													UIHelper.ToastMessage(
+															mBaseActivity,
+															message);
+												}
+											}
+										}
+									}
+								} catch (Exception e) {
+
+									mBaseIsFollow = false;
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+								}
+
+							}
+						}
+						setFollowStatus();
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+						ApiAccess.dismissProgressDialog();
+						mBaseIsFollow = false;
+						setFollowStatus();
+					}
+				});
+	}
+	
+	
+	/**
+	 * 取消关注
+	 */
+	private void cancelFollows(String shopID) {
+		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		params.addBodyParameter("id", shopID);
+		CCLog.i("取消关注参数：", "member_id=" + mLoginDataManager.getMemberId()
+				+ " id=" + shopID);
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						ApiAccess.dismissProgressDialog();
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (responseInfo.result != null) {
+										CCLog.i("取消关注状态信息：",
+												responseInfo.result + " ");
+									}
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+											if (code == 1) {
+												String strErrorMsg = statusObject
+														.optString("message");
+												UIHelper.ToastMessage(
+														mBaseActivity,
+														strErrorMsg);
+											} else {
+												UIHelper.ToastMessage(
+														mBaseActivity, "取消关注成功");
+												mBaseIsFollow=false;
+												fansCount--;
+												mTvShopFans.setText( fansCount+ " 粉丝");
+												setFollowStatus();
+												
+											}
+										}
+									}
+								} catch (Exception e) {
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+									setFollowStatus();
+									
+								}
+
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						ApiAccess.dismissProgressDialog();
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+					}
+				});
+
+	}
+	
 
 	private void onServiceItemClick(String type) {
 		Intent intent = new Intent();

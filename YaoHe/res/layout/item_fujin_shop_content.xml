@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_item_fujin_business_shop_viewgroup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,15 +20,29 @@
         android:layout_marginRight="20px"
         android:gravity="center_vertical" >
 
-        <ImageView
+        <!--
+             <ImageView
             android:id="@+id/iv_item_fujin_shop_image"
             android:layout_width="140px"
             android:layout_height="140px"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:scaleType="fitXY"
             android:background="@drawable/icon_yaohe_default_logo"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+        -->
+
+        <com.meg7.widget.CustomShapeImageView
+            android:id="@+id/iv_item_fujin_shop_image"
+            android:layout_width="140px"
+            android:layout_height="140px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/icon_yaohe_default_logo"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tx"
+            app:shape="circle" />
 
         <RelativeLayout
             android:id="@+id/rl_fujin_item_text_info"
@@ -72,21 +87,21 @@
                         android:id="@+id/tv_item_fujin_shop_type_quan"
                         android:layout_width="28px"
                         android:layout_height="35px"
-                        android:visibility="gone"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5px"
                         android:background="@drawable/icon_fujin_type_quan"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_item_fujin_shop_type_ka"
                         android:layout_width="28px"
                         android:layout_height="35px"
-                        android:layout_marginRight="5px"
-                        android:visibility="gone"
                         android:layout_centerVertical="true"
+                        android:layout_marginRight="5px"
                         android:background="@drawable/icon_fujin_type_card"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_item_fujin_shop_type_xinpin"
@@ -94,17 +109,17 @@
                         android:layout_height="35px"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5px"
-                        android:visibility="gone"
                         android:background="@drawable/icon_fujin_type_new"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_item_fujin_shop_type_cu"
                         android:layout_width="28px"
                         android:layout_height="35px"
-                        android:visibility="gone"
                         android:background="@drawable/icon_fujin_type_cu"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:visibility="gone" />
                 </LinearLayout>
             </RelativeLayout>
 

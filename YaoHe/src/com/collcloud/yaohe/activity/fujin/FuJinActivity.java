@@ -145,6 +145,8 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	private LinearLayout mLlEmpty;
 	private final String NO_DISTRICT = "暂无商圈入住";
 	private final String DEFAULT_ALL_CLASSFY = "全部分类";
+	
+	private String tag = FuJinActivity.class.getSimpleName();
 
 	private ArrayList<DistrictList> mAreaDistricts = new ArrayList<DistrictList>();
 	private ArrayList<Classify> mOneClassfyInfos = new ArrayList<Classify>();
@@ -239,12 +241,17 @@ public class FuJinActivity extends CommonActivity implements Callback,
 				@Override
 				public void onNearItemClick(int position, String shop_id,
 						String member_id) {
+					String faceUrl = mNearList.get(position).face;
+					CCLog.d(tag, "faceUrl:"+faceUrl);
+					
 					Intent intent = new Intent(FuJinActivity.this,
 							DetailsBusinessInfoActivity.class);
 					intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shop_id);
 					intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID,
 							member_id);
+					intent.putExtra("faceUrl",faceUrl);
 					baseStartActivity(intent);
+					
 				}
 			});
 		}
