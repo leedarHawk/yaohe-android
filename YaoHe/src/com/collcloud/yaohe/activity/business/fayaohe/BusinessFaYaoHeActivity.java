@@ -77,7 +77,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 public class BusinessFaYaoHeActivity extends BaseActivity implements
 		OnClickListener {
 
-	private static final String TAG = "FaYaoHe";
+	private static final String TAG = BusinessFaYaoHeActivity.class.getSimpleName();
 	/** 发吆喝进度条 */
 	private Dialog fyh_mDialog;
 	/** 返回按钮 */
@@ -919,8 +919,9 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 		// 用户ID
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
-
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.YYFW, params,
+		String url = ContantsValues.YYFW+"&isFaYaohe=Y";
+		CCLog.d(TAG, "get service url :"+url);
+		http.send(HttpRequest.HttpMethod.POST,url , params,
 				new RequestCallBack<String>() {
 
 					@Override

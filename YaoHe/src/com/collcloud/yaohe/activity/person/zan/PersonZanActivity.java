@@ -261,17 +261,22 @@ public class PersonZanActivity extends BaseActivity implements OnClickListener {
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
 
-				CCLog.i("选择点赞信息：", "member_id= "
-						+ mDatas.get(position).member_id + "shop_service_id=  "
-						+ mDatas.get(position).shop_service_id);
-				Intent intent = new Intent();
-				intent.setClass(PersonZanActivity.this,
-						YaoHeLaDetailsActivity.class);
-				intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID,
-						mDatas.get(position-1).member_id);
-				intent.putExtra(IntentKeyNames.KEY_CALL_ID,
-						mDatas.get(position-1).shop_service_id);
-				baseStartActivity(intent);
+				try {
+					CCLog.i("选择点赞信息：", "member_id= "
+							+ mDatas.get(position-1).member_id + "shop_service_id=  "
+							+ mDatas.get(position-1).shop_service_id);
+					Intent intent = new Intent();
+					intent.setClass(PersonZanActivity.this,
+							YaoHeLaDetailsActivity.class);
+					intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID,
+							mDatas.get(position-1).member_id);
+					intent.putExtra(IntentKeyNames.KEY_CALL_ID,
+							mDatas.get(position-1).shop_service_id);
+					baseStartActivity(intent);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
 
 			}
 		});
