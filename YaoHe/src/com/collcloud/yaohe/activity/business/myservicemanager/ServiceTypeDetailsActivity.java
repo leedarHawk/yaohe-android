@@ -87,6 +87,8 @@ public class ServiceTypeDetailsActivity extends BaseActivity implements
 	 */
 	private BusinessServiceManagerAdapter mServiceAdapter;
 	private Handler mHandler;
+	
+	private String tag = ServiceTypeDetailsActivity.class.getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +113,10 @@ public class ServiceTypeDetailsActivity extends BaseActivity implements
 		params.addBodyParameter("shop_id", mStrShopID);
 		params.addBodyParameter("type", mStrType);
 		params.addBodyParameter("page", page);
-
+		String url = ContantsValues.DETAILS_GET_BUSINESS_SEVICE_INFO+"&shop_id="+mStrShopID+"&type="+mStrType+"&page=1";
+		CCLog.d(tag, "url:"+url);
 		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.DETAILS_GET_BUSINESS_SEVICE_INFO, params,
+				url, params,
 				new RequestCallBack<String>() {
 
 					@Override

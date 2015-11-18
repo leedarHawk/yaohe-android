@@ -212,13 +212,13 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		CCLog.i("我就只看个店铺信息，怎么给我加关注啊！！！！！！！！");
 		// 获取详情
 		getBusinessShopInfo();
-//		mScrollView.postDelayed(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				mScrollView.smoothScrollBy(0, -1000);
-//			}
-//		}, 1000);
+		mScrollView.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				mScrollView.smoothScrollBy(0, -1000);
+			}
+		}, 1000);
 	}
 	
 	
