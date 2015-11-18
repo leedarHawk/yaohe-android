@@ -665,8 +665,7 @@ public class FuJinActivity extends CommonActivity implements Callback,
 			if (categoryIndex == 0) {
 				mTwoClassfyData.clear();
 				mTwoClassfyData.add("全部分类");
-				mSelectCategoryPopWindow.mFuJinCategoryAdapter
-						.refreshData(mTwoClassfyData);
+				mSelectCategoryPopWindow.mFujinTwoClassfyAdapter.refreshData(mTwoClassfyData);
 			} else if (categoryIndex > 0) {
 				if (AppApplacation.sOneClassFy.size() > 0) {
 					mTwoClassfyData.clear();
