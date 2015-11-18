@@ -28,6 +28,7 @@ import com.collcloud.yaohe.activity.dianpin.fujin.DetailsCallPinlunActivity;
 import com.collcloud.yaohe.activity.jubao.JuBaoActivity;
 import com.collcloud.yaohe.activity.map.ShowGeocoderActivity;
 import com.collcloud.yaohe.api.ApiAccess;
+import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.DetailsNewProductInfo;
 import com.collcloud.yaohe.api.info.DetailsNewProductInfo.NewProduct;
@@ -202,20 +203,267 @@ public class XinPinDetailsActivity extends BaseActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (mBaseIsFollow) {
-					mTvTuiJianGuanZhu.setText(GlobalConstant.VALID_VALUE);
-					mTvTuiJianGuanZhu
-							.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-				} else {
-					mTvTuiJianGuanZhu.setText(GlobalConstant.INVALID_VALUE);
-					mTvTuiJianGuanZhu
-							.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
-				}
-			}
-		}, 1000);
+	}
+	
+	//粉丝个数
+	private int fansCount=0;
+	
+	/**
+	 * 检测是否关注
+	 */
+	public boolean isFollow(String memberID, String id, String url) {
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", memberID);
+		params.addBodyParameter("id", id);
+		url = url+"&member_id="+memberID+"&id="+id;
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+
+											CCLog.i("code：", code + " ");
+											if (code == 1) {
+												String strErrorMsg = statusObject
+														.optString("message");
+												if (strErrorMsg
+														.contains("已经关注")) {
+													mBaseIsFollow = true;
+												}
+											} else {
+												mBaseIsFollow = false;
+											}
+										}
+										//直接获取是否已经关注状态
+										//mBaseIsFollow = errorJsonObject.optBoolean("data");
+										CCLog.i("code：", errorJsonObject.optBoolean("data") + " ");
+										CCLog.i("isFollow：", mBaseIsFollow + " ");
+										
+									}
+								} catch (Exception e) {
+									mBaseIsFollow = false;
+								}
+							}
+						}
+						setFollowStatus();
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						setFollowStatus();
+					}
+				});
+		return mBaseIsFollow;
+	}
+	
+	/**
+	 * 设置关注状态
+	 */
+	private void setFollowStatus() {
+		if (mBaseIsFollow) {
+			mTvTuiJianGuanZhu.setText(GlobalConstant.VALID_VALUE);
+			mTvTuiJianGuanZhu
+					.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+		} else {
+			mTvTuiJianGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+			mTvTuiJianGuanZhu
+					.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
+		}
+	}
+	
+	/**
+	 * 取消关注
+	 */
+	private void cancelFollows(String shopID) {
+		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		params.addBodyParameter("id", shopID);
+		CCLog.i("取消关注参数：", "member_id=" + mLoginDataManager.getMemberId()
+				+ " id=" + shopID);
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						ApiAccess.dismissProgressDialog();
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (responseInfo.result != null) {
+										CCLog.i("取消关注状态信息：",
+												responseInfo.result + " ");
+									}
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+											if (code == 1) {
+												String strErrorMsg = statusObject
+														.optString("message");
+												UIHelper.ToastMessage(
+														mBaseActivity,
+														strErrorMsg);
+											} else {
+												UIHelper.ToastMessage(
+														mBaseActivity, "取消关注成功");
+												mBaseIsFollow=false;
+												fansCount--;
+												mTvTuijianFans.setText( fansCount+ " 粉丝");
+												setFollowStatus();
+												
+											}
+										}
+									}
+								} catch (Exception e) {
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+									setFollowStatus();
+									
+								}
+
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						ApiAccess.dismissProgressDialog();
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+					}
+				});
+
+	}
+	
+	/**
+	 * 会员加店铺关注
+	 * 
+	 * @Title shopFollowApi
+	 * @Description 会员加店铺关注API调用
+	 * @param memberID
+	 *            会员ID(post提交)
+	 * @param id
+	 *            商家ID(post提交)
+	 * @param url
+	 *            请求url地址
+	 * @param message
+	 *            自定义成功后的提示信息
+	 */
+	public void shopFollowApi(String memberID, String id, String url,
+			final String message) {
+		mBaseIsNotFollow = false;
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", memberID);
+		params.addBodyParameter("id", id);
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						ApiAccess.dismissProgressDialog();
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (responseInfo.result != null) {
+										CCLog.i("BaseActivity关注状态信息：",
+												responseInfo.result + " ");
+									}
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+											if (code == 1) {
+												mBaseIsFollow = false;
+												String strErrorMsg = statusObject
+														.getString("message");
+												UIHelper.ToastMessage(
+														mBaseActivity,
+														strErrorMsg);
+											} else {
+												mBaseIsFollow = true;
+												fansCount++;
+												mTvTuijianFans.setText( fansCount+ " 粉丝");
+												if (!Utils
+														.isStringEmpty(message)) {
+													UIHelper.ToastMessage(
+															mBaseActivity,
+															message);
+												}
+											}
+										}
+									}
+								} catch (Exception e) {
+
+									mBaseIsFollow = false;
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+								}
+
+							}
+						}
+						setFollowStatus();
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+						ApiAccess.dismissProgressDialog();
+						mBaseIsFollow = false;
+						setFollowStatus();
+					}
+				});
+	}
+	
+	
+	
+	/**
+	 *当点击关注按钮后
+	 */
+	private void onClickFollowBtn() {
+		String text = mTvTuiJianGuanZhu.getText().toString();
+		if(GlobalConstant.VALID_VALUE.equals(text)) {
+			ApiAccess.showProgressDialog(this,
+					"正在取消关注中...");// 取消关注店铺
+			cancelFollows(mStrShopID);
+		} else {
+			ApiAccess.showProgressDialog(this,
+					"卖力关注中...");// 关注店铺
+			shopFollowApi(mLoginDataManager.getMemberId(), mStrShopID,
+					ContantsValues.SHOP_FOLLOW_URL, "关注成功");
+		}
 	}
 
 	/**
@@ -269,6 +517,7 @@ public class XinPinDetailsActivity extends BaseActivity implements
 										mTvTuijianFans
 												.setText(mProductInfo.shop_fans_num
 														+ " 粉丝");
+										fansCount = Integer.parseInt(mProductInfo.shop_fans_num);
 									}
 									if (mProductInfo.shop_subscribe_tel != null) {
 										mStrTuiJianTel = mProductInfo.shop_subscribe_tel;
@@ -505,53 +754,7 @@ public class XinPinDetailsActivity extends BaseActivity implements
 			if (!mLoginDataManager.getLoginState().equals("1")) {
 				toastNotLogin(XinPinDetailsActivity.this);
 			} else {
-				if (mStrShopID != null) {
-					CCLog.i("点击关注 ，对应的shopID ：", " " + mStrShopID);
-				}
-				ApiAccess.showProgressDialog(XinPinDetailsActivity.this,
-						"卖力关注中...");
-				// 关注店铺
-				shopFollowApi(mLoginDataManager.getMemberId(), mStrShopID,
-						ContantsValues.SHOP_FOLLOW_URL, "关注成功");
-				new Handler().postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						ApiAccess.dismissProgressDialog();
-
-						if (!mBaseIsNotFollow) {
-							if (Utils.strFromView(mTvTuiJianGuanZhu).equals(
-									GlobalConstant.INVALID_VALUE)) {
-								mTvTuiJianGuanZhu
-										.setText(GlobalConstant.VALID_VALUE);
-								mTvTuiJianGuanZhu
-										.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-
-							} else {
-								mTvTuiJianGuanZhu
-										.setText(GlobalConstant.INVALID_VALUE);
-								mTvTuiJianGuanZhu
-										.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
-							}
-						}
-
-					}
-				}, 1500);
-				// new Handler().postDelayed(new Runnable() {
-				//
-				// @Override
-				// public void run() {
-				// ApiAccess.dismissProgressDialog();
-				// // 关注店铺
-				// shopFollowApi(mLoginDataManager.getMemberId(),
-				// mStrShopID, ContantsValues.SHOP_FOLLOW_URL,
-				// "关注成功");
-				// mTvTuiJianGuanZhu.setText(GlobalConstant.VALID_VALUE);
-				// mTvTuiJianGuanZhu
-				// .setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-				//
-				// }
-				// }, 1500);
+				this.onClickFollowBtn();
 			}
 			break;
 		default:
