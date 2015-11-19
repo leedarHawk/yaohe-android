@@ -248,7 +248,7 @@ public class HuoDongDetailsActivity extends BaseActivity implements
 														String strErrorMsg = statusObject
 																.optString("message");
 														if (strErrorMsg
-																.contains("已经关注")) {
+																.contains("已经关注")) {  
 															mBaseIsFollow = true;
 														}
 													} else {

@@ -241,7 +241,7 @@ public class YouHuiDetailsActivity extends BaseActivity implements
 											} else {
 												mBaseIsFollow = false;
 											}
-										}
+										}  
 //										if (errorJsonObject.has("data")) {
 //											mBaseIsFollow = errorJsonObject.optBoolean("data");
 //										}

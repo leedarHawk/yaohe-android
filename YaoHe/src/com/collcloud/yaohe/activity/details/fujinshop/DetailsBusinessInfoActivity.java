@@ -227,7 +227,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 	/**
 	 * 检测是否关注
 	 */
-	public boolean isFollow(String memberID, String id, String url) {
+	public boolean isFollow(String memberID, String id, String url) {  
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("member_id", memberID);

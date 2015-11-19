@@ -242,7 +242,7 @@ public class XinPinDetailsActivity extends BaseActivity implements
 												if (strErrorMsg
 														.contains("已经关注")) {
 													mBaseIsFollow = true;
-												}
+												}  
 											} else {
 												mBaseIsFollow = false;
 											}

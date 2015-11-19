@@ -225,7 +225,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 													mBaseIsFollow = true;
 												}
 											} else {
-												mBaseIsFollow = false;
+												mBaseIsFollow = false;  
 											}
 										}
 										//直接获取是否已经关注状态
