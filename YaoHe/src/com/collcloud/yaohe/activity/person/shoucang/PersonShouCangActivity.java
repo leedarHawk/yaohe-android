@@ -86,7 +86,7 @@ public class PersonShouCangActivity extends BaseActivity implements
 	private ShouCangBusinessAdapter mAdapter;
 	/** 创建缓存 */
 	private static final String TEST_FILE_NAME = "Universal Image Loader @#&=+-_.,!()~'%20.png";
-	/** 图片imageLoader初始化 */
+	/** 图片imageLoader初始化 */  
 	private ImageLoader imageLoader = ImageLoader.getInstance();
 	//private int mPos ;
 	private ArrayList<SCInfoList> mListCollections = new ArrayList<SCInfoList>();
