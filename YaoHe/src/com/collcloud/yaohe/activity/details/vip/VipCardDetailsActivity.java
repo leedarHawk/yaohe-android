@@ -260,9 +260,9 @@ public class VipCardDetailsActivity extends BaseActivity implements
 												}
 											}
 											//直接获取是否已经关注状态
-											if (errorJsonObject.has("data")) {
-												mBaseIsFollow = errorJsonObject.optBoolean("data");
-											}
+//											if (errorJsonObject.has("data")) {
+//												mBaseIsFollow = errorJsonObject.optBoolean("data");
+//											}
 											
 											CCLog.i("code：", errorJsonObject.optBoolean("data") + " ");
 											CCLog.i("isFollow：", mBaseIsFollow + " ");
