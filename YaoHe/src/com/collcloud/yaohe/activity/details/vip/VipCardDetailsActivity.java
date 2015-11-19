@@ -57,7 +57,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
  */
 public class VipCardDetailsActivity extends BaseActivity implements
 		android.view.View.OnClickListener {
-
+	private String tag = VipCardDetailsActivity.class.getSimpleName();
 	/** 活动相关图片 */
 	private ViewPager mPager = null;
 	private ViewGroup mCirleVGroup = null;
@@ -228,6 +228,7 @@ public class VipCardDetailsActivity extends BaseActivity implements
 			params.addBodyParameter("member_id", memberID);
 			params.addBodyParameter("id", id);
 			url = url+"&member_id="+memberID+"&id="+id;
+			CCLog.d(tag, "isFollow  url:"+url);
 			http.send(HttpRequest.HttpMethod.POST, url, params,
 					new RequestCallBack<String>() {
 
@@ -259,9 +260,14 @@ public class VipCardDetailsActivity extends BaseActivity implements
 												}
 											}
 											//直接获取是否已经关注状态
-											//mBaseIsFollow = errorJsonObject.optBoolean("data");
+											if (errorJsonObject.has("data")) {
+												mBaseIsFollow = errorJsonObject.optBoolean("data");
+											}
+											
 											CCLog.i("code：", errorJsonObject.optBoolean("data") + " ");
 											CCLog.i("isFollow：", mBaseIsFollow + " ");
+											
+											//mBaseIsFollow = errorJsonObject.optBoolean("data");
 											
 										}
 									} catch (Exception e) {

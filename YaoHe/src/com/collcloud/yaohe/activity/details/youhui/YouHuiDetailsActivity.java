@@ -242,6 +242,10 @@ public class YouHuiDetailsActivity extends BaseActivity implements
 												mBaseIsFollow = false;
 											}
 										}
+										if (errorJsonObject.has("data")) {
+											mBaseIsFollow = errorJsonObject.optBoolean("data");
+										}
+										
 										//直接获取是否已经关注状态
 										//mBaseIsFollow = errorJsonObject.optBoolean("data");
 										CCLog.i("code：", errorJsonObject.optBoolean("data") + " ");

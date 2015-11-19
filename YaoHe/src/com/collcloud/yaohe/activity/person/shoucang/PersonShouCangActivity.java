@@ -236,6 +236,8 @@ public class PersonShouCangActivity extends BaseActivity implements
 												.optString("addtime");
 										scItem.shop_name = scObject
 												.optString("shop_name");
+										scItem.shop_id = scObject
+												.optString("shop_id");
 										mListCollections.add(scItem);
 									}
 
@@ -644,14 +646,17 @@ public class PersonShouCangActivity extends BaseActivity implements
 					String type = null;
 					String serviceID = null;
 					String callID = null;
+					String shopId = null;
 					if (mListCollections.get(position-1).type != null) {
 						type = mListCollections.get(position - 1).type;
 						serviceID = mListCollections.get(position - 1).service_id;
 						callID = mListCollections.get(position - 1).id;
+						shopId = mListCollections.get(position - 1).shop_id;
 						Intent intent = new Intent();
 						intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID,
 								serviceID);
 						intent.putExtra(IntentKeyNames.KEY_CALL_ID, callID);
+						intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
 						if (type.equals("0")) {
 							intent.setClass(PersonShouCangActivity.this,
 									YouHuiDetailsActivity.class);

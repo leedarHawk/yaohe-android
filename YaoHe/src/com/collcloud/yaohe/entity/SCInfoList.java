@@ -11,7 +11,7 @@ public class SCInfoList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
-		/** 店铺ID */
+		/** 收藏id */
 		public String id;
 		/** 发信息的会员ID */
 		public String member_id;
@@ -26,6 +26,8 @@ public class SCInfoList implements Serializable {
 		public String addtime;
 		/** 店铺名*/
 		public String shop_name;
+		/**店铺id*/
+		public String shop_id;
 
 
 }
