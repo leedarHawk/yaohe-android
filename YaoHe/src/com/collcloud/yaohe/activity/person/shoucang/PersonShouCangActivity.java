@@ -653,7 +653,7 @@ public class PersonShouCangActivity extends BaseActivity implements
 						callID = mListCollections.get(position - 1).id;
 						shopId = mListCollections.get(position - 1).shop_id;
 						Intent intent = new Intent();
-						intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID,
+						intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID,  
 								serviceID);
 						intent.putExtra(IntentKeyNames.KEY_CALL_ID, callID);
 						intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
