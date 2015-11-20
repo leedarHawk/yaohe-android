@@ -450,8 +450,8 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			mTvShopContent.setText(Html.fromHtml(jsonObject
 					.optString("content")));
 		}
-		if (jsonObject.has("type")) {
-			mTvType.setText(jsonObject.optString("type"));
+		if (jsonObject.has("head")) {
+			mTvType.setText(jsonObject.optString("head"));
 		}
 		if (jsonObject.has("address")) {
 			mTvShopAddress.setText(jsonObject.optString("address"));
