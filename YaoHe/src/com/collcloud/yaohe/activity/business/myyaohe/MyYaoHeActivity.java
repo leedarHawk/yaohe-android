@@ -124,8 +124,6 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 				.build();
 		Staticvalue.OPTIONS = myh_options;
 
-		accessNetGetData(true,false);
-
 		// // 设置xlistview可以加载、刷新
 		// mListView.setPullLoadEnable(false);
 		//
@@ -165,6 +163,12 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		// }
 		// });
 
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		accessNetGetData(true,false);
 	}
 
 	@Override
@@ -224,10 +228,9 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 
 								JSONArray jsoArray = object
 										.optJSONArray("data");
-								final int itemYhCount = jsoArray.length();
-
-								if (itemYhCount > 0) {
-									if (itemYhCount == 1) {
+								curCount = jsoArray.length();
+								if (curCount > 0) {
+									if (curCount == 1) {
 										JSONObject yhObject = jsoArray
 												.getJSONObject(0);
 										if (Utils.isStringEmpty(yhObject
@@ -248,7 +251,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 									// } else {
 									// mListView.setPullLoadEnable(false);
 									// }
-									tv_title.setText("吆喝(" + itemYhCount + ")");
+									tv_title.setText("吆喝(" + curCount + ")");
 									List<FourService> yaoHeList = parseJSONArray(jsoArray);
 									setYaoHeData(yaoHeList);
 								} else {
@@ -681,6 +684,8 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 														strErrorMsg);
 											} else {
 												showToast("删除成功");
+												curCount = curCount-1;
+												tv_title.setText("吆喝(" + curCount + ")");
 												mYaoHeList.remove(position);
 												setYaoHeData(mYaoHeList);
 												//accessNetGetData(false);

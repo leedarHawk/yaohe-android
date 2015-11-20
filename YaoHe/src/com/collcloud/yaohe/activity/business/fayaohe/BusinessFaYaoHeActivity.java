@@ -897,7 +897,6 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 
 							dialog();
 							CCLog.v(TAG, "一条吆喝发布成功.....");
-
 						} else {// 返回提示信息
 							CCLog.v(TAG, "发布吆喝时出错啦");
 							showToast(responseMsg);
@@ -1126,6 +1125,7 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
+						BusinessFaYaoHeActivity.this.finish();
 						startActivity(new Intent(BusinessFaYaoHeActivity.this,
 								BusinessFaYaoHeActivity.class));
 					}
