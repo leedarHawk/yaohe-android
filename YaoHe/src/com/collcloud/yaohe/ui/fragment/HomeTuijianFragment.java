@@ -266,21 +266,24 @@ public class HomeTuijianFragment extends BaseFragment  {
 		}
 		
 	}
+	
+	//int  k =0;
 
 	/**
 	 * 获取首页轮换图列表
 	 */
 	private void getHomeRotateListInfo(String cityid) {
-
+		CCLog.d(tag, "mLvPullToRefreshView:"+mLvPullToRefreshView+"--mRlRotate:"+mRlRotate);
 		HttpUtils http = new HttpUtils();
 		String url = ContantsValues.HOME_BANNER_ROTATE_URL + "&city_id="
 				+ cityid;
-
+		//k++;
 		http.send(HttpRequest.HttpMethod.GET, url, null,
 				new RequestCallBack<String>() {
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
+						
 						JSONObject jsonObject;
 						try {
 							jsonObject = new JSONObject(responseInfo.result);
@@ -291,9 +294,14 @@ public class HomeTuijianFragment extends BaseFragment  {
 								if (mHomeRotateInfo != null) {
 									if (mHomeRotateInfo.data != null
 											&& mHomeRotateInfo.data.size() > 0) {
+										if(mRlRotate.getParent() == null) {
+											mLvPullToRefreshView.addHeaderView(mRlRotate);
+										}
+										
 										mRlRotate.setVisibility(View.VISIBLE);
 										mDataPath.clear();
 										mRotates.clear();
+										
 
 										for (int j = 0; j < mHomeRotateInfo.data
 												.size(); j++) {
@@ -341,11 +349,13 @@ public class HomeTuijianFragment extends BaseFragment  {
 										}
 									} else {
 										mRlRotate.setVisibility(View.GONE);
+										mLvPullToRefreshView.removeHeaderView(mRlRotate);
 									}
 
 								}
 							} else {
 								mRlRotate.setVisibility(View.GONE);
+								mLvPullToRefreshView.removeHeaderView(mRlRotate);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -355,6 +365,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 					@Override
 					public void onFailure(HttpException error, String msg) {
 						mRlRotate.setVisibility(View.GONE);
+						mLvPullToRefreshView.removeHeaderView(mRlRotate);
 					}
 				});
 
@@ -783,7 +794,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 		// 主页内容列表
 		mLvPullToRefreshView = (XListView) view
 				.findViewById(R.id.lv_home_content);
-		mLvPullToRefreshView.addHeaderView(mRlRotate);
+		//mLvPullToRefreshView.addHeaderView(mRlRotate);
 		mLvPullToRefreshView.setPullLoadEnable(true);
 		mLvPullToRefreshView.setPullRefreshEnable(true);
 		
