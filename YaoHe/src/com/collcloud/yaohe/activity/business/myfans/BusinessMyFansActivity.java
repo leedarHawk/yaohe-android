@@ -188,7 +188,7 @@ public class BusinessMyFansActivity extends BaseActivity implements
 			params.addBodyParameter("member_id", mStrMemberID);
 		}
 		params.addBodyParameter("page", "1");
-
+		
 		http.send(HttpRequest.HttpMethod.POST, ContantsValues.MYFS, params,
 				new RequestCallBack<String>() {
 

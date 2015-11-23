@@ -21,6 +21,7 @@ import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.MyFansList;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.Utils;
+import com.meg7.widget.CustomShapeImageView;
 
 public class BusinessFansAdapter extends BaseAdapter {
 
@@ -75,7 +76,7 @@ public class BusinessFansAdapter extends BaseAdapter {
 			// 获取布局中的组件
 			vHolder.mTvName = (TextView) view
 					.findViewById(R.id.tv_bus_item_fans_name);
-			vHolder.mIvFace = (ImageView) view
+			vHolder.mIvFace = (CustomShapeImageView) view
 					.findViewById(R.id.im_item_per_fans_img);
 			vHolder.mBtnSendMSG = (Button) view
 					.findViewById(R.id.bt_bus_item_fans_fxx);
@@ -102,6 +103,8 @@ public class BusinessFansAdapter extends BaseAdapter {
 
 		if (!Utils.isStringEmpty(fansInfo.face)) {
 			mImageLoader.get(fansInfo.face, listener,context.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),context.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_height));
+		} else {
+			vHolder.mIvFace.setImageResource(R.drawable.icon_yaohe_default_logo);
 		}
 
 		final String member_id = fansInfo.member_id;
@@ -126,7 +129,7 @@ public class BusinessFansAdapter extends BaseAdapter {
 	class ViewHolder {
 
 		TextView mTvName;
-		ImageView mIvFace;
+		CustomShapeImageView mIvFace;
 		RelativeLayout mRlContentLayout;
 		Button mBtnSendMSG;
 
