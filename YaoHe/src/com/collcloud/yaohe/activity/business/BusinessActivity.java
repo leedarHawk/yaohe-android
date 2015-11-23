@@ -163,24 +163,41 @@ public class BusinessActivity extends CommonActivity implements OnClickListener 
 									mStrShopId = dataObject
 											.optString("shop_id");
 								}
-								if (dataObject.has("face")) {
-									if (!Utils.isStringEmpty(dataObject
-											.optString("face"))) {
-
-										String url = URLs.IMG_PRE
-												+ dataObject.optString("face");
-										mStrFace = url;
-										//url="http://image.photophoto.cn/nm-6/018/030/0180300244.jpg";
-										
-										ImageListener listener = ImageLoader
-												.getImageListener(
-														im_business_photo,
-														R.drawable.icon_yaohe_default_logo,
-														R.drawable.icon_yaohe_default_logo);
-										mImageLoader.get(url, listener, getResources().getDimensionPixelSize(R.dimen.photo_width), getResources().getDimensionPixelSize(R.dimen.photo_height));
-
-									}
-								}
+//								if (dataObject.has("face")) {
+//									if (!Utils.isStringEmpty(dataObject
+//											.optString("face"))) {
+//
+//										String url = URLs.IMG_PRE
+//												+ dataObject.optString("face");
+//										mStrFace = url;
+//										ImageListener listener = ImageLoader
+//												.getImageListener(
+//														im_business_photo,
+//														R.drawable.icon_yaohe_default_logo,
+//														R.drawable.icon_yaohe_default_logo);
+//										mImageLoader.get(url, listener, getResources().getDimensionPixelSize(R.dimen.photo_width), getResources().getDimensionPixelSize(R.dimen.photo_height));
+//
+//									}
+//								} else {
+//									im_business_photo.setImageDrawable(null);
+//									//im_business_photo.setimage
+//								}
+								
+								
+								String url = URLs.IMG_PRE
+										+ dataObject.optString("face");
+								mStrFace = url;
+								ImageListener listener = ImageLoader
+										.getImageListener(
+												im_business_photo,
+												R.drawable.icon_yaohe_default_logo,
+												R.drawable.icon_yaohe_default_logo);
+								mImageLoader.get(url, listener, getResources().getDimensionPixelSize(R.dimen.photo_width), getResources().getDimensionPixelSize(R.dimen.photo_height));
+								
+								
+								
+								
+								
 								if (dataObject.has("star")) {
 									String stars = dataObject.optString("star");
 									setStarInfo(stars);
