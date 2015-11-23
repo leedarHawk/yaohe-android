@@ -198,7 +198,7 @@ public class ShopCommentActivity extends BaseActivity implements
 		StringBuffer bf = new StringBuffer();
 		bf.append("&member_id=").append(memberID);
 		bf.append("&call_id=").append(callID);
-		bf.append("&content=").append(content);
+		//bf.append("&content=").append(content);
 		bf.append("&is_anonymous=").append(isAnonymous);
 		bf.append("&type=").append(strType);
 		bf.append("&parentid=").append(parentid);
