@@ -242,7 +242,19 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		ImageListener listener = ImageLoader.getImageListener(holder.mIvThum,
 				R.drawable.icon_loading_default_small,
 				R.drawable.icon_loading_default_small);
-		holder.mTvGuanzhu.setText(GlobalConstant.INVALID_VALUE);
+		//holder.mTvGuanzhu.setText(GlobalConstant.INVALID_VALUE);
+		
+		if ("1".equals(typeCall.guanzhu)) {
+			holder.mTvGuanzhu.setText(GlobalConstant.VALID_VALUE);
+			holder.mTvGuanzhu
+					.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+		} else {
+			holder.mTvGuanzhu.setText(GlobalConstant.INVALID_VALUE);
+			holder.mTvGuanzhu
+					.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
+		}
+		
+		
 		holder.mTvZanImg.setText(GlobalConstant.INVALID_VALUE);
 		holder.mTvShoucangImg.setText(GlobalConstant.INVALID_VALUE);
 		holder.mTvPinlunImg.setText(GlobalConstant.INVALID_VALUE);

@@ -435,6 +435,12 @@ public class HomeOtherFragment extends BaseFragment {
 												typeCallInfo.fans_num = mHomeTypeCallInfo.data
 														.get(j).fans_num;
 											}
+											if (mHomeTypeCallInfo.data.get(j).guanzhu != null) {
+												typeCallInfo.guanzhu = mHomeTypeCallInfo.data
+														.get(j).guanzhu;
+											}
+											
+											
 											
 									    ////////////////引用
 										if (mHomeTypeCallInfo.data.get(j).s_content != null) {
