@@ -708,6 +708,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 												showToast("删除成功");
 												mYaoHeList.remove(position);
 												setYaoHeData(mYaoHeList);
+												tv_title.setText("吆喝(" + mYaoHeList.size() + ")");
 												//accessNetGetData(false);
 											}
 										}
