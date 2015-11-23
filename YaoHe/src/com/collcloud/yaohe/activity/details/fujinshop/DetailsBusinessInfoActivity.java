@@ -36,6 +36,7 @@ import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.GlobalVariable;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomeBusinessCallAdapter;
 import com.collcloud.yaohe.ui.adapter.HomeBusinessCallAdapter.OnBusinessInfoListener;
 import com.collcloud.yaohe.ui.model.AmapGencodeInfo;
@@ -207,8 +208,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		// mImageLoader.get(mStrFace, listener);
 		// }
 		setFollosStatus();
-		// 关注店铺状态信息查询
-		isFollow(mLoginDataManager.getMemberId(), mStrShopID,	ContantsValues.SHOP_FOLLOW_STATUS_URL);
+		
 		CCLog.i("我就只看个店铺信息，怎么给我加关注啊！！！！！！！！");
 		// 获取详情
 		getBusinessShopInfo();
@@ -220,6 +220,19 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			}
 		}, 1000);
 	}
+	
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//		
+//		
+//		
+//		//回传关注信息
+//		Intent intent = new Intent();
+//		intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, mStrShopID);
+//		intent.putExtra(IntentKeyNames.KEY_ISFOLLOWED, mBaseIsFollow);
+//		setResult(CommonConstant.RESULTCODE_GUANZHU, intent);
+//	}
 	
 	
 	
@@ -302,6 +315,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			mTvShopGuanZhu
 					.setBackgroundResource(R.drawable.icon_fujin_jiaguanzhu);
 		}
+		AppApplacation.setShopFollowedStatus(mStrShopID, mBaseIsFollow);
 	}
 	
 	
@@ -336,6 +350,10 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 						}
 					});
 		}
+		
+		//getBusinessShopInfo();
+		// 关注店铺状态信息查询
+		isFollow(mLoginDataManager.getMemberId(), mStrShopID,	ContantsValues.SHOP_FOLLOW_STATUS_URL);
 
 //		new Handler().postDelayed(new Runnable() {
 //			@Override

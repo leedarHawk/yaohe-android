@@ -50,7 +50,9 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.GlobalVariable;
+import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.entity.FourService;
 import com.collcloud.yaohe.photo.activity.AlbumActivity;
 import com.collcloud.yaohe.photo.util.Bimp;
@@ -1193,5 +1195,6 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 		Intent intent = new Intent(BusinessFaYaoHeActivity.this, AlbumActivity.class);
 		startActivity(intent);
 	}
+	
 
 }

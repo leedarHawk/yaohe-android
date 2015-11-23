@@ -1,7 +1,9 @@
 package com.collcloud.yaohe.ui.fragment;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1794,6 +1796,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 			CCLog.d(tag, "hidden");
 		} else {
 			CCLog.d(tag, "show");
+			changeShopFollowStatus();
 		}
 		super.onHiddenChanged(hidden);
 	}
@@ -1802,5 +1805,32 @@ public class HomeTuijianFragment extends BaseFragment  {
 	public void onPause() {
 		CCLog.d(tag, "onPause");
 		super.onPause();
+	}
+	
+	private void changeShopFollowStatus() {
+		try {
+			Set<String> keySet = AppApplacation.shopFollowStatus.keySet();
+			Iterator<String> keyIte = keySet.iterator();
+			while (keyIte.hasNext()) {
+				String shopId = keyIte.next();
+				for (CallInfo callInfo : mCallInfos) {
+					if (shopId.equals(callInfo.shop_id)) {
+						boolean isFollowed = AppApplacation
+								.getShopFollowedStatus(shopId);
+						if (isFollowed) {
+							callInfo.guanzhu = GlobalConstant.VALID_VALUE;
+						} else {
+							callInfo.guanzhu = GlobalConstant.INVALID_VALUE;
+						}
+						CCLog.d(tag, "changeShopFollowStatus:" + shopId
+								+ "--isFollowed:" + isFollowed);
+						break;
+					}
+				}
+			}
+			mAdapter.notifyDataSetChanged();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

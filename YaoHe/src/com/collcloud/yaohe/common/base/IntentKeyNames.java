@@ -70,5 +70,8 @@ public class IntentKeyNames {
 	public static final String KEY_USER_BASE_INFO = "UserBaseInfo";
 	public static final String KEY_SHOP_BASE_INFO = "ShopBaseInfo";
 	public static final String KEY_NICKNAME = "user_nickname";
+	
+	//////////////////////////
+	public static final String KEY_ISFOLLOWED = "is_followed";
 
 }
