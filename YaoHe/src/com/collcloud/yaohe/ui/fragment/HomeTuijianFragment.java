@@ -960,13 +960,13 @@ public class HomeTuijianFragment extends BaseFragment  {
 		
 		
 		//商家
-		if("0".equals(type)) {
-			intent.setClass(getActivity(),
-					DetailsBusinessInfoActivity.class);
-			intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
-			intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, memberId);
-			mBaseActivity.startActivity(intent);
-		} else {
+//		if("0".equals(type)) {
+//			intent.setClass(getActivity(),
+//					DetailsBusinessInfoActivity.class);
+//			intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
+//			intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, memberId);
+//			mBaseActivity.startActivity(intent);
+//		} else {
 			if (!Utils.isStringEmpty(type)) {
 				intent.setClass(mBaseActivity, YaoHeLaDetailsActivity.class);
 				intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID, serviceId);
@@ -976,7 +976,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 				intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, memberId);
 				mBaseActivity.baseStartActivity(intent);
 			}
-		}
+//		}
 		
 		
 		
