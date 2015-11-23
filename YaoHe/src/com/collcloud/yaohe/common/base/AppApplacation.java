@@ -857,7 +857,7 @@ public class AppApplacation extends Application {
 	public static void setShopFollowedStatus(String shopId,boolean followedStauts) {
 		shopFollowStatus.put(shopId, followedStauts);
 	}
-	
+	   
 	public static boolean getShopFollowedStatus(String shopId) {
 		Boolean status = false;
 		try {
