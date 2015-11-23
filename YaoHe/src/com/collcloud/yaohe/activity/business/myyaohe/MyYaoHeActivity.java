@@ -88,7 +88,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 	/** 进度条 */
 	private Dialog myh_Dialog;
 	/** 用来模拟异步获取数据 */
-	private ArrayList<FourService> mYaoHeList;
+	private ArrayList<FourService> mYaoHeList = new ArrayList<FourService>();
 	// private BusinessMyYaoHeAdapter mAdapter;
 	private MyYaoHeAdapter mAdapter;
 
@@ -101,6 +101,14 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 
 	private LinearLayout mLlEmpty;
 	private TextView mTvEmptyTips;
+	
+	private String tag = MyYaoHeActivity.class.getSimpleName();
+	
+	
+	//总页数
+	private int mTotalPage = 0;
+	//当前页
+	private int currentPage = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +131,8 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 				.cacheInMemory(true).cacheOnDisk(true).considerExifParams(true)
 				.build();
 		Staticvalue.OPTIONS = myh_options;
+
+		accessNetGetData(true,false);
 
 		// // 设置xlistview可以加载、刷新
 		// mListView.setPullLoadEnable(false);
@@ -166,12 +176,6 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-		accessNetGetData(true,false);
-	}
-
-	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		mPage = 0;
@@ -180,7 +184,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * 获取数据
 	 */
-	private void accessNetGetData(boolean showLoadingBar,boolean loadMore) {
+	private void accessNetGetData(boolean showLoadingBar,final boolean loadMore) {
 		if(showLoadingBar) {
 			progressbar(MyYaoHeActivity.this, R.layout.loading_progress);
 		}
@@ -192,8 +196,10 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
 		// params.addBodyParameter("page", "2");
+		String url = ContantsValues.YYFW+"&member_id="+ mLoginDataManager.getMemberId()+"&page="+currentPage;
+		CCLog.d(tag, "url :" +url);
 
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.YYFW, params,
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override
@@ -215,22 +221,35 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 						String code = "";
 						// 网络发布吆喝返回消息
 						String responseMsg = "";
+						
+						if(!loadMore) {
+							currentPage = 1;
+							mYaoHeList.clear();
+						}
 
 						try {
 							object = new JSONObject(arg0.result);
 							responseInfo = object.getString("status");
 							object2 = new JSONObject(responseInfo);
+							
 
 							code = object2.getString("code");
 							responseMsg = object2.getString("message");
+							
+							try {
+								mTotalPage = object.optInt("pageNumber");
+							} catch(Exception e) {
+								e.printStackTrace();
+							}
 
 							if (code.equals("0")) {
 
 								JSONArray jsoArray = object
 										.optJSONArray("data");
-								curCount = jsoArray.length();
-								if (curCount > 0) {
-									if (curCount == 1) {
+								final int itemYhCount = jsoArray.length();
+
+								if (itemYhCount > 0) {
+									if (itemYhCount == 1) {
 										JSONObject yhObject = jsoArray
 												.getJSONObject(0);
 										if (Utils.isStringEmpty(yhObject
@@ -251,9 +270,11 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 									// } else {
 									// mListView.setPullLoadEnable(false);
 									// }
-									tv_title.setText("吆喝(" + curCount + ")");
+									tv_title.setText("吆喝(" + itemYhCount + ")");
 									List<FourService> yaoHeList = parseJSONArray(jsoArray);
-									setYaoHeData(yaoHeList);
+									
+									mYaoHeList.addAll(yaoHeList);
+									setYaoHeData(mYaoHeList);
 								} else {
 									onLoad();
 									showToast("您还没有发布吆喝");
@@ -276,10 +297,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 	 */
 	public ArrayList<FourService> parseJSONArray(JSONArray response) {
 
-		if (mYaoHeList != null && mYaoHeList.size() > 0) {
-			mYaoHeList.clear();
-		}
-		mYaoHeList = new ArrayList<FourService>();
+		ArrayList<FourService> mYaoHeList = new ArrayList<FourService>();
 
 		FourService fourservice = null;
 
@@ -427,7 +445,6 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		tv_do.setText("发布");
 	}
 	
-	int count=0;
 	@SuppressLint("ShowToast")
 	private void initListView() {
 		
@@ -438,19 +455,24 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void onRefresh() {
+				currentPage = 1;
 				mListView.setPullLoadEnable(true);
-				count =0;
 				accessNetGetData(false,false);
 			}
 			
 			@Override
 			public void onLoadMore() {
-				count++;
-				if(count>3) {
+				
+				currentPage = currentPage + 1;
+				if (currentPage>mTotalPage) {
 					mListView.setPullLoadEnable(false);
-					showToast("没有更多数据了");
+					onLoad();
+					//mListView.setPullLoadEnable(false);
+					UIHelper.ToastMessage(MyYaoHeActivity.this, "数据已全部加载，没有更多了。");
+				} else {
+					accessNetGetData(false,true);
 				}
-				accessNetGetData(false,true);
+				
 			}
 		});
 		
@@ -684,8 +706,6 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 														strErrorMsg);
 											} else {
 												showToast("删除成功");
-												curCount = curCount-1;
-												tv_title.setText("吆喝(" + curCount + ")");
 												mYaoHeList.remove(position);
 												setYaoHeData(mYaoHeList);
 												//accessNetGetData(false);
