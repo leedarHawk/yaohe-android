@@ -850,5 +850,24 @@ public class AppApplacation extends Application {
 		return isCityListComplite;
 	}
 	
+	/////////////////////////////////////////////////
+	//LEE
+	//关注商家状态 key：商家shopid，value：关注状态
+	public static HashMap<String,Boolean> shopFollowStatus = new HashMap<String,Boolean>();
+	public static void setShopFollowedStatus(String shopId,boolean followedStauts) {
+		shopFollowStatus.put(shopId, followedStauts);
+	}
+	
+	public static boolean getShopFollowedStatus(String shopId) {
+		Boolean status = false;
+		try {
+			status = shopFollowStatus.get(shopId);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+		
+	}
+	
 	
 }
