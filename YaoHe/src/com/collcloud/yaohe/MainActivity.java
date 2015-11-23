@@ -328,5 +328,11 @@ public class MainActivity extends BaseActivity implements
 		}
 		return flag;
 	}
+	
+@Override
+protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+	super.onActivityResult(arg0, arg1, arg2);
+	CCLog.d(tag, "onActivityResult.........");
+}
 
 }
