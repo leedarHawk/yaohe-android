@@ -22,7 +22,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.collcloud.yaohe.R;
+import com.collcloud.yaohe.activity.business.BusinessActivity;
 import com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity;
+import com.collcloud.yaohe.activity.business.myyaohe.MyYaoHeActivity;
 import com.collcloud.yaohe.activity.chat.ChattingActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.DetailsBusinessPinlunActivity;
@@ -744,6 +746,19 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		mTvCoupon.setOnClickListener(this);
 		// TODO 待做，关注状态
 		mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
+		
+		//更多按钮
+		TextView moreYaoheText = (TextView)this.findViewById(R.id.moreYaoheText);
+		moreYaoheText.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent intent = new Intent(DetailsBusinessInfoActivity.this,
+						MyYaoHeActivity.class);
+				intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, shop_member_id);
+				baseStartActivity(intent);
+			}
+		});
 
 		// 设定吆喝列表数据
 		setCallData();

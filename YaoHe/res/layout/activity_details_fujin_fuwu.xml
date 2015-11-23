@@ -38,24 +38,12 @@
 
             <!-- 标题文字 , 优惠类型，时间信息,粉丝等 -->
 
-            <RelativeLayout
+           <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="260px"
                 android:background="@drawable/business_details_info_bg"
                 android:gravity="center_vertical" >
 
-                <!--
-                     <ImageView
-                    android:id="@+id/iv_details_fujin_fuwu_tuijian_img"
-                    android:layout_width="140px"
-                    android:layout_height="140px"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20px"
-                    android:background="@drawable/icon_yaohe_default_logo"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="fitXY" />
-                -->
 
                 <com.meg7.widget.CustomShapeImageView
                     android:id="@+id/iv_details_fujin_fuwu_tuijian_img"
@@ -467,17 +455,39 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/tv_details_yaohe_title"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70px"
-                    android:background="@color/common_yaohe_content_main_grey"
-                    android:gravity="center|left"
-                    android:paddingLeft="20px"
-                    android:paddingRight="20px"
-                    android:text="吆喝 "
-                    android:textColor="@color/common_home_text_color_title"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_details_yaohe_title"
+                        android:layout_width="0dip"
+                        android:layout_height="70px"
+                        android:layout_weight="1"
+                        android:background="@color/common_yaohe_content_main_grey"
+                        android:gravity="center|left"
+                        android:paddingLeft="20px"
+                        android:paddingRight="20px"
+                        android:text="吆喝 "
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="14sp" />
+                    
+                    <TextView
+                        android:id="@+id/moreYaoheText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="70px"
+                        android:background="@color/common_yaohe_content_main_grey"
+                        android:gravity="center"
+                        android:paddingRight="20px"
+                        android:text="更多 >"
+                        android:textColor="@color/common_home_text_color_title"
+                        android:textSize="14sp" />
+                    
+                    
+                </LinearLayout>
+
                 <!-- 吆喝信息列表 -->
 
                 <com.collcloud.yaohe.ui.view.MyListView

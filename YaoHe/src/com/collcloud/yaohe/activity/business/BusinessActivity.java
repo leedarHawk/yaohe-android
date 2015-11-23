@@ -24,6 +24,7 @@ import com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity;
 import com.collcloud.yaohe.activity.business.myservicemanager.BusinessServiceManagerActivity;
 import com.collcloud.yaohe.activity.business.myyaohe.MyYaoHeActivity;
 import com.collcloud.yaohe.activity.businessinfo.BusinessInfoActivity;
+import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.activity.login.LoginActivity;
 import com.collcloud.yaohe.activity.my.QRCodeActivity;
 import com.collcloud.yaohe.activity.person.feedback.UserFeedBackActivity;
@@ -353,8 +354,12 @@ public class BusinessActivity extends CommonActivity implements OnClickListener 
 					|| mLoginDataManager.getLoginState().equals("0")) {
 				dialogNoLogin();
 			} else {
-				baseStartActivity(new Intent(BusinessActivity.this,
-						MyYaoHeActivity.class));
+//				baseStartActivity(new Intent(BusinessActivity.this,
+//						MyYaoHeActivity.class));
+				Intent intent = new Intent(BusinessActivity.this,
+						MyYaoHeActivity.class);
+				intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, mLoginDataManager.getMemberId());
+				baseStartActivity(intent);
 			}
 			break;
 		case R.id.rela_business_myfans:

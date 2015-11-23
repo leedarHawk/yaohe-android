@@ -109,11 +109,17 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 	private int mTotalPage = 0;
 	//当前页
 	private int currentPage = 1;
+	//商家id号
+	private String memberId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_yao_he);
+		
+		memberId = this.getIntent().getStringExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID);
+		
+		
 		/** 图片imageLoader初始化 */
 		imageLoader.init(ImageLoaderConfiguration.createDefault(this));
 
@@ -194,9 +200,12 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		RequestParams params = new RequestParams();
 		// 用户ID
 		CCLog.v(TAG, "当前用户的ID>>>>>" + mLoginDataManager.getMemberId());
-		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		//params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
+		params.addBodyParameter("member_id", memberId);
+		
+		
 		// params.addBodyParameter("page", "2");
-		String url = ContantsValues.YYFW+"&member_id="+ mLoginDataManager.getMemberId()+"&page="+currentPage;
+		String url = ContantsValues.YYFW+"&member_id="+ memberId+"&page="+currentPage;
 		CCLog.d(tag, "url :" +url);
 
 		http.send(HttpRequest.HttpMethod.POST, url, params,
@@ -270,10 +279,11 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 									// } else {
 									// mListView.setPullLoadEnable(false);
 									// }
-									tv_title.setText("吆喝(" + itemYhCount + ")");
+									
 									List<FourService> yaoHeList = parseJSONArray(jsoArray);
 									
 									mYaoHeList.addAll(yaoHeList);
+									tv_title.setText("吆喝(" + mYaoHeList.size() + ")");
 									setYaoHeData(mYaoHeList);
 								} else {
 									onLoad();
@@ -339,6 +349,11 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 
 	private void setYaoHeData(List<FourService> list) {
 		onLoad();
+		if(list.get(0).member_id.equals(mLoginDataManager.getMemberId())) {
+			mListView.setMenuCreator(creator);
+		} else {
+			mListView.setMenuCreator(null);
+		}
 		if (mAdapter != null) {
 			mAdapter.refresh(list);
 		} else {
@@ -445,6 +460,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		tv_do.setText("发布");
 	}
 	
+	private SwipeMenuCreator creator;
 	@SuppressLint("ShowToast")
 	private void initListView() {
 		
@@ -478,7 +494,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		
 		
 		// step 1. create a MenuCreator
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
+        creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
@@ -510,7 +526,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
             }
         };
         // set creator
-        mListView.setMenuCreator(creator);
+        //mListView.setMenuCreator(creator);
         // step 2. listener item click event
         mListView.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
