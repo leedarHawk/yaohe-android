@@ -21,8 +21,9 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.collcloud.swipe.view.XListView;
-import com.collcloud.swipe.view.XListView.IXListViewListener;
+import com.collcloud.frame.xlistview.XListView;
+import com.collcloud.frame.xlistview.XListView.IXListViewListener;
+import com.collcloud.frame.xlistview.XListView.OnSlidingDirectionListen;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.myfans.BusinessFansAdapter.OnSendMsgListener;
 import com.collcloud.yaohe.activity.chat.ChattingActivity;
@@ -31,6 +32,7 @@ import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.MyFansList;
 import com.collcloud.yaohe.staticvalue.Staticvalue;
 import com.collcloud.yaohe.ui.utils.CCLog;
+import com.collcloud.yaohe.ui.utils.UIHelper;
 import com.collcloud.yaohe.ui.utils.Utils;
 import com.collcloud.yaohe.url.ContantsValues;
 import com.lidroid.xutils.HttpUtils;
@@ -68,10 +70,17 @@ public class BusinessMyFansActivity extends BaseActivity implements
 	private ImageLoader imageLoader = ImageLoader.getInstance();
 	/** 用来模拟异步获取数据 */
 	private Handler handler;
-	private int mPage = 0;
+	//总页数
+	private int mTotalPage = 0;
+	//当前页
+	private int currentPage = 1;
+	
+	
 	private String mStrMemberID ;
 	//是否来自 主页 “我的” 页面点击
 	private boolean fromBusinessActivity = false;
+	
+	ArrayList<MyFansList> myFsList = new ArrayList<MyFansList>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +96,7 @@ public class BusinessMyFansActivity extends BaseActivity implements
 		intialSource();
 		
 
-		handler = new Handler();
+		//handler = new Handler();
 		// 设置xlistview可以加载、刷新
 		mListView.setPullLoadEnable(true);
 		// 设置xlistview可以刷新
@@ -97,35 +106,44 @@ public class BusinessMyFansActivity extends BaseActivity implements
 
 			@Override
 			public void onRefresh() {
-
-				mPage = mPage + 1;
-				accessNetGetData();
-				handler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						mListView.stopRefresh();
-						showToast("数据已是最新。");
-					}
-				}, 1000);
+				mListView.setPullLoadEnable(true);
+				currentPage = 1;
+				accessNetGetData(true);
+				CCLog.d(TAG, "onRefresh........."); 
 
 			}
 
 			@Override
 			public void onLoadMore() {
+				CCLog.d(TAG, "onLoadMore........."); 
+				currentPage = currentPage + 1;
+				if (currentPage>mTotalPage) {
+					onLoad();
+					UIHelper.ToastMessage(BusinessMyFansActivity.this, "数据已全部加载，没有更多了。");
+				} else {
+					accessNetGetData(false);
+				}
 
-				mPage = mPage + 1;
-				accessNetGetData();
-				handler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						mListView.stopLoadMore();
-						mListView.setPullLoadEnable(false);
-						showToast("数据已加载完毕。");
-					}
-				}, 1000);
-
+			}
+		});
+		
+		mListView.setOnSlidingDirectionListen(new OnSlidingDirectionListen() {
+			
+			@Override
+			public void onScrollUpWard(float value) {
+			}
+			
+			@Override
+			public void onScrollTop() {
+			}
+			
+			@Override
+			public void onScrollDownWard(float value) {
+			}
+			
+			@Override
+			public void onScrollBottom() {
+				
 			}
 		});
 
@@ -141,9 +159,18 @@ public class BusinessMyFansActivity extends BaseActivity implements
 				.cacheInMemory(true).cacheOnDisk(true).considerExifParams(true)
 				.build();
 		Staticvalue.OPTIONS = mfans_options;
+		currentPage = 1;
+		accessNetGetData(true);
 
-		accessNetGetData();
-
+	}
+	
+	private void onLoad() {
+		mListView.stopRefresh();
+		mListView.stopLoadMore();
+		mListView.setRefreshTime("");
+		if (currentPage>=mTotalPage) {
+			mListView.forbiddenLoadMore();
+		}
 	}
 
 	/**
@@ -175,7 +202,7 @@ public class BusinessMyFansActivity extends BaseActivity implements
 	/**
 	 * 获取粉丝数据
 	 */
-	private void accessNetGetData() {
+	private void accessNetGetData(final boolean refreshData) {
 
 		HttpUtils http = new HttpUtils();
 		// 用来封装参数
@@ -188,8 +215,9 @@ public class BusinessMyFansActivity extends BaseActivity implements
 			params.addBodyParameter("member_id", mStrMemberID);
 		}
 		params.addBodyParameter("page", "1");
+		String url = ContantsValues.MYFS+"&member_id="+mLoginDataManager.getMemberId()+"&page="+currentPage;
 		
-		http.send(HttpRequest.HttpMethod.POST, ContantsValues.MYFS, params,
+		http.send(HttpRequest.HttpMethod.POST, url, params,
 				new RequestCallBack<String>() {
 
 					@Override
@@ -197,6 +225,7 @@ public class BusinessMyFansActivity extends BaseActivity implements
 						myfans_Dialog.dismiss();
 						showToast("获取我的粉丝时出错了");
 						CCLog.e(TAG, "获取我的粉丝时出错了");
+						onLoad();
 					}
 
 					@Override
@@ -211,6 +240,11 @@ public class BusinessMyFansActivity extends BaseActivity implements
 						String code = "";
 						// 网络发布我的粉丝返回消息
 						String responseMsg = "";
+						
+						if(refreshData) {
+							currentPage = 1;
+							myFsList.clear();
+						}
 
 						try {
 							object = new JSONObject(arg0.result);
@@ -235,14 +269,21 @@ public class BusinessMyFansActivity extends BaseActivity implements
 										}
 
 									}
-									if (itemFSCount >9) {
-										mListView.setPullLoadEnable(true);
-									}else {
-										mListView.setPullLoadEnable(false);
+									
+									try {
+										mTotalPage = object.optInt("pageNumber");
+									} catch(Exception e) {
+										e.printStackTrace();
+										onLoad();
 									}
+//									if (itemFSCount >9) {
+//										mListView.setPullLoadEnable(true);
+//									}else {
+//										mListView.setPullLoadEnable(false);
+//									}
 
 									/** 关注商家数据集合 */
-									ArrayList<MyFansList> myFsList = new ArrayList<MyFansList>();
+									ArrayList<MyFansList> myFsList2 = new ArrayList<MyFansList>();
 
 									for (int i = 0; i < itemFSCount; i++) {
 
@@ -262,9 +303,11 @@ public class BusinessMyFansActivity extends BaseActivity implements
 										fsItem.login_user = yhObject
 												.optString("login_user");
 
-										myFsList.add(fsItem);
+										myFsList2.add(fsItem);
 
 									}
+									
+									myFsList.addAll(myFsList2);
 									setFansData(myFsList);
 									myfans_Dialog.dismiss();
 
@@ -272,17 +315,20 @@ public class BusinessMyFansActivity extends BaseActivity implements
 									myfans_Dialog.dismiss();
 
 									showToast("您还没有粉丝");
+									onLoad();
 								}
-
+								onLoad();
 							} else {
 								myfans_Dialog.dismiss();
 								showToast("您还没有粉丝");
+								onLoad();
 							}
 
 						} catch (JSONException e) {
 							myfans_Dialog.dismiss();
 							CCLog.v(TAG, "获取我的粉丝数据时异常" + e.toString());
 							e.printStackTrace();
+							onLoad();
 						}
 					}
 
@@ -290,23 +336,29 @@ public class BusinessMyFansActivity extends BaseActivity implements
 	}
 
 	private void setFansData(ArrayList<MyFansList> myFsList) {
-		mAdapter = new BusinessFansAdapter(BusinessMyFansActivity.this,
-				myFsList);
-		mListView.setAdapter(mAdapter);
-		if (mAdapter != null) {
-			mAdapter.setOnCollectionItemListerner(new OnSendMsgListener() {
+		if(mAdapter == null) {
+			mAdapter = new BusinessFansAdapter(BusinessMyFansActivity.this,
+					myFsList);
+			mListView.setAdapter(mAdapter);
+			if (mAdapter != null) {
+				mAdapter.setOnCollectionItemListerner(new OnSendMsgListener() {
 
-				@Override
-				public void onSendMsgListener(int position, String member_id,
-						String nickname) {
-					Intent intent = new Intent(BusinessMyFansActivity.this,
-							ChattingActivity.class);
-					intent.putExtra("ACCOUNTTO", member_id);
-					intent.putExtra("NICKNAME", nickname);
-					baseStartActivity(intent);
-				}
-			});
+					@Override
+					public void onSendMsgListener(int position, String member_id,
+							String nickname) {
+						Intent intent = new Intent(BusinessMyFansActivity.this,
+								ChattingActivity.class);
+						intent.putExtra("ACCOUNTTO", member_id);
+						intent.putExtra("NICKNAME", nickname);
+						baseStartActivity(intent);
+					}
+				});
+			}
+		} else {
+			mAdapter.notifyDataSetChanged();
 		}
+		
+
 	}
 
 	/**
