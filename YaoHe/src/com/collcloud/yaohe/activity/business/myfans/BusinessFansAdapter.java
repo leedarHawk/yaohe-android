@@ -98,8 +98,8 @@ public class BusinessFansAdapter extends BaseAdapter {
 		}
 
 		ImageListener listener = ImageLoader.getImageListener(vHolder.mIvFace,
-				R.drawable.icon_yaohe_loading_default,
-				R.drawable.icon_yaohe_loading_default);
+				R.drawable.icon_yaohe_default_logo,
+				R.drawable.icon_yaohe_default_logo);
 
 		if (!Utils.isStringEmpty(fansInfo.face)) {
 			mImageLoader.get(fansInfo.face, listener,context.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),context.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_height));

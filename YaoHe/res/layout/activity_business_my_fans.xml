@@ -19,6 +19,7 @@
         android:id="@+id/xListView_fans"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:dividerHeight="1dip"
         android:cacheColorHint="#00000000" />
 
 </LinearLayout>

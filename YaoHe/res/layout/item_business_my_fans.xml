@@ -19,7 +19,7 @@
         <RelativeLayout
             android:id="@+id/rl_bus_fans_item_content"
             android:layout_width="fill_parent"
-            android:layout_height="130px"
+            android:layout_height="150px"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
             android:gravity="center_vertical"
@@ -29,19 +29,19 @@
 
             <FrameLayout
                 android:id="@+id/im_bus_fans_item_photo"
-                android:layout_width="130px"
+                android:layout_width="150px"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true" >
 
                 <com.meg7.widget.CustomShapeImageView
                     android:id="@+id/im_item_per_fans_img"
-                    android:layout_width="120px"
-                    android:layout_height="120px"
-                    android:background="@drawable/icon_yaohe_default_logo"
+                    android:layout_width="140px"
+                    android:layout_height="140px"
+                    android:layout_gravity="center_vertical"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/tx"
+                    android:src="@drawable/icon_yaohe_default_logo"
                     app:shape="circle" />
 
                 <TextView

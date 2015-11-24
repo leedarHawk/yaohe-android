@@ -27,6 +27,7 @@ import com.collcloud.frame.xlistview.XListView.OnSlidingDirectionListen;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.myfans.BusinessFansAdapter.OnSendMsgListener;
 import com.collcloud.yaohe.activity.chat.ChattingActivity;
+import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.entity.MyFansList;
@@ -296,9 +297,13 @@ public class BusinessMyFansActivity extends BaseActivity implements
 												.optString("member_id");
 										fsItem.nickname = yhObject
 												.optString("nickname");
-
-										fsItem.face = yhObject
-												.optString("face");
+										if(yhObject
+												.optString("face") != null && !"".equals(yhObject
+												.optString("face"))) {
+											fsItem.face =URLs.IMG_PRE+ yhObject
+													.optString("face");
+										}
+										
 
 										fsItem.login_user = yhObject
 												.optString("login_user");
