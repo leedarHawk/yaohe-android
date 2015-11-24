@@ -349,7 +349,7 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 
 	private void setYaoHeData(List<FourService> list) {
 		onLoad();
-		if(list.get(0).member_id.equals(mLoginDataManager.getMemberId())) {
+		if(list.size()>0&&list.get(0).member_id.equals(mLoginDataManager.getMemberId())) {
 			mListView.setMenuCreator(creator);
 		} else {
 			mListView.setMenuCreator(null);
