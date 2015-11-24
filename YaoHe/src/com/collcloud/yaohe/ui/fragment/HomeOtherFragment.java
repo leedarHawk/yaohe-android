@@ -24,6 +24,7 @@ import com.collcloud.frame.xlistview.XListView.IXListViewListener;
 import com.collcloud.frame.xlistview.XListView.OnSlidingDirectionListen;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
+import com.collcloud.yaohe.activity.details.yaohela.YaoHeCommentActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.ShopCommentActivity;
 import com.collcloud.yaohe.activity.fujin.FuJinActivity;
@@ -609,7 +610,7 @@ public class HomeOtherFragment extends BaseFragment {
 
 				@Override
 				public void onPinLunButtonClick(int position,
-						TextView tvPinLunImg, TextView tvPinLun, String callID) {
+						TextView tvPinLunImg, TextView tvPinLun, String callID,String type) {
 				}
 
 				@Override
@@ -644,7 +645,7 @@ public class HomeOtherFragment extends BaseFragment {
 
 				@Override
 				public void onPinLunButtonClick(int position,
-						TextView tvPinLunImg, TextView tvPinLun, String callID) {
+						TextView tvPinLunImg, TextView tvPinLun, String callID,String type) {
 				}
 
 				@Override
@@ -757,7 +758,7 @@ public class HomeOtherFragment extends BaseFragment {
 
 				@Override
 				public void onPinLunButtonClick(int position,
-						TextView tvPinLunImg, TextView tvPinLun, String callID) {
+						TextView tvPinLunImg, TextView tvPinLun, String callID,String type) {
 				}
 
 				@Override
@@ -832,7 +833,7 @@ public class HomeOtherFragment extends BaseFragment {
 
 				@Override
 				public void onPinLunButtonClick(int position,
-						TextView tvPinLunImg, TextView tvPinLun, String callID) {
+						TextView tvPinLunImg, TextView tvPinLun, String callID,String type) {
 				}
 
 				@Override
@@ -900,7 +901,7 @@ public class HomeOtherFragment extends BaseFragment {
 
 				@Override
 				public void onPinLunButtonClick(int position,
-						TextView tvPinLunImg, TextView tvPinLun, String callID) {
+						TextView tvPinLunImg, TextView tvPinLun, String callID,String type) {
 				}
 
 				@Override
@@ -935,7 +936,7 @@ public class HomeOtherFragment extends BaseFragment {
 				@Override
 				public void onPinLunButtonClick(int position,
 						TextView tvPinLunImg, final TextView tvPinLun,
-						String callID) {
+						String callID,String type) {
 
 					if (!mLoginDataManager.getLoginState().equals("1")) {
 						UIHelper.ToastMessage(getActivity(), "您还没登录，请先登录。");
@@ -943,6 +944,7 @@ public class HomeOtherFragment extends BaseFragment {
 								LoginActivity.class);
 						mBaseActivity.baseStartActivity(intent);
 					} else {
+						/**
 						if (Utils.strFromView(tvPinLunImg).equals(
 								GlobalConstant.INVALID_VALUE)) {
 							// 点评
@@ -962,7 +964,8 @@ public class HomeOtherFragment extends BaseFragment {
 									.setBackgroundResource(R.drawable.icon_home_item_liuyan_off);
 							// tvPinLun.setText(String.valueOf(Integer
 							// .valueOf(Utils.strFromView(tvPinLun)) - 1));
-						}
+						} */
+						callComment(callID,type);
 					}
 
 				}
@@ -983,6 +986,19 @@ public class HomeOtherFragment extends BaseFragment {
 				}
 			});
 		}
+
+	}
+	
+	
+	/**
+	 * 吆喝点评
+	 */
+	private void callComment(String callID, String type) {
+		// Intent intent = new Intent(getActivity(), ShopCommentActivity.class);
+		Intent intent = new Intent(getActivity(), YaoHeCommentActivity.class);
+		intent.putExtra(IntentKeyNames.KEY_CALL_COMMENT_ID, callID);
+		intent.putExtra("YaoHeType", type);
+		mBaseActivity.baseStartActivity(intent);
 
 	}
 

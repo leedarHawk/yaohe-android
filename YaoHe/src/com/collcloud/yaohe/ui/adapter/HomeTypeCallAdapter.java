@@ -213,7 +213,7 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				if (mOnPinlunClickListener != null) {
 					mOnPinlunClickListener.onPinLunButtonClick(position,
-							holder.mTvPinlunImg, holder.mTvPinlun, callID);
+							holder.mTvPinlunImg, holder.mTvPinlun, callID,type);
 				}
 
 			}
@@ -224,7 +224,7 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				if (mOnPinlunClickListener != null) {
 					mOnPinlunClickListener.onPinLunButtonClick(position,
-							holder.mTvPinlunImg, holder.mTvPinlun, callID);
+							holder.mTvPinlunImg, holder.mTvPinlun, callID,type);
 				}
 
 			}
@@ -274,6 +274,11 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		if (typeCall != null && typeCall.content != null) {
 			holder.mTvContent.setText(typeCall.content);
 		}
+		if (typeCall != null && typeCall.collection_num != null) {
+			holder.mTvShoucang.setText(typeCall.collection_num);
+		}
+		
+		
 
 //		if (!Utils.isStringEmpty(typeCall.img1)) {
 //			mImageLoader.get(typeCall.img1, listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
@@ -521,7 +526,7 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 
 		// 评论按钮点击
 		void onPinLunButtonClick(int position, TextView tvPinLunImg,
-				TextView tvPinLun, String callID);
+				TextView tvPinLun, String callID,String type);
 	}
 
 	private OnOtherListener mOnBusinessShopListener = null;
