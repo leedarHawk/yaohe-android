@@ -2,6 +2,7 @@ package com.collcloud.yaohe.activity.person.huiyuanka;
 
 import java.util.ArrayList;
 
+import com.collcloud.yaohe.activity.details.vip.VipCardDetailsActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -265,7 +266,7 @@ public class PersonHYKActivity extends BaseActivity implements OnClickListener {
 				intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID,
 						mDatas.get(position - 1).id);
 				intent.setClass(PersonHYKActivity.this,
-						YouHuiDetailsActivity.class);
+						VipCardDetailsActivity.class);
 				baseStartActivity(intent);
 
 			}
