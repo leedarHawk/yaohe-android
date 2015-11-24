@@ -218,7 +218,7 @@ public class HomeAdapter extends BaseAdapter {
 			}
 			SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
 			Date date = null;
-			try {
+			try {  
 				 date = new Date(Long.valueOf(callInfo.addtime));
 			} catch(Exception e) {
 				e.printStackTrace();
