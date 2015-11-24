@@ -216,7 +216,11 @@ public class PersonShopCommentActivity extends BaseActivity implements
 															+ mDetailsCallCommentInfo.data
 																	.get(j).face;
 												}
-
+												if (mDetailsCallCommentInfo.data
+														.get(j).shop_star != null) {
+													commentInfo.shop_star = mDetailsCallCommentInfo.data
+															.get(j).shop_star;
+												}
 												mDatas.add(commentInfo);
 
 											}
