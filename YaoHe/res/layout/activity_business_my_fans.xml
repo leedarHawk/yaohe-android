@@ -1,23 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_myfans_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ll_myfans_root"
-    tools:context=".BusinessMyFansActivity" 
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".BusinessMyFansActivity" >
 
     <!-- 头部信息 -->
-    <include 
+
+    <include
         android:layout_width="fill_parent"
         android:layout_height="90px"
-        layout="@layout/layout_backandtitle_top"/>
-    
+        layout="@layout/layout_backandtitle_top" />
+
     <!-- 列表 -->
-    <com.collcloud.swipe.view.XListView
+
+    <com.collcloud.frame.xlistview.XListView
         android:id="@+id/xListView_fans"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:cacheColorHint="#00000000" >
-    </com.collcloud.swipe.view.XListView>
+        android:cacheColorHint="#00000000" />
 
 </LinearLayout>
