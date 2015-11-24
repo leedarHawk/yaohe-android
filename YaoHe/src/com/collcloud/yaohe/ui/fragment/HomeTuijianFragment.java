@@ -294,9 +294,9 @@ public class HomeTuijianFragment extends BaseFragment  {
 								if (mHomeRotateInfo != null) {
 									if (mHomeRotateInfo.data != null
 											&& mHomeRotateInfo.data.size() > 0) {
-										if(mRlRotate.getParent() == null) {
-											mLvPullToRefreshView.addHeaderView(mRlRotate);
-										}
+//										if(mRlRotate.getParent() == null) {
+//											mLvPullToRefreshView.addHeaderView(mRlRotate);
+//										}
 										
 										mRlRotate.setVisibility(View.VISIBLE);
 										mDataPath.clear();
@@ -349,13 +349,13 @@ public class HomeTuijianFragment extends BaseFragment  {
 										}
 									} else {
 										mRlRotate.setVisibility(View.GONE);
-										mLvPullToRefreshView.removeHeaderView(mRlRotate);
+										//mLvPullToRefreshView.removeHeaderView(mRlRotate);
 									}
 
 								}
 							} else {
 								mRlRotate.setVisibility(View.GONE);
-								mLvPullToRefreshView.removeHeaderView(mRlRotate);
+								//mLvPullToRefreshView.removeHeaderView(mRlRotate);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -365,7 +365,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 					@Override
 					public void onFailure(HttpException error, String msg) {
 						mRlRotate.setVisibility(View.GONE);
-						mLvPullToRefreshView.removeHeaderView(mRlRotate);
+						//mLvPullToRefreshView.removeHeaderView(mRlRotate);
 					}
 				});
 
@@ -794,7 +794,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 		// 主页内容列表
 		mLvPullToRefreshView = (XListView) view
 				.findViewById(R.id.lv_home_content);
-		//mLvPullToRefreshView.addHeaderView(mRlRotate);
+		mLvPullToRefreshView.addHeaderView(mRlRotate);
 		mLvPullToRefreshView.setPullLoadEnable(true);
 		mLvPullToRefreshView.setPullRefreshEnable(true);
 		

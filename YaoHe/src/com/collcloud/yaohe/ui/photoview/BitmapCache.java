@@ -17,7 +17,7 @@ public class BitmapCache implements ImageCache {
 				CCLog.d("BitmapCache", "cache is  null");
 				//int maxcache = AppApplacation.memoryCacheSize/8;
 				
-				cache = new LruCache<String, Bitmap>(4 * 1024 * 1024) {
+				cache = new LruCache<String, Bitmap>(50 * 1024 * 1024) {
 					@Override
 					protected int sizeOf(String key, Bitmap bitmap) {
 						return bitmap.getRowBytes() * bitmap.getHeight();

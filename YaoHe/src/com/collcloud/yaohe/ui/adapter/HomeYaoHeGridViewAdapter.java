@@ -15,6 +15,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.collcloud.yaohe.R;
+import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 
@@ -29,11 +30,13 @@ public class HomeYaoHeGridViewAdapter extends BaseAdapter {
 	private List<String> mImgPaths;
 	private Context mContext;
 	private LayoutInflater mInflater;
-
+	private static ImageLoader mImageLoader;
 	public HomeYaoHeGridViewAdapter(Context context, List<String> mImgPaths) {
 		this.mImgPaths = mImgPaths;
 		mContext = context;
 		mInflater = LayoutInflater.from(this.mContext);
+		mImageLoader = new ImageLoader(AppApplacation.requestQueue,
+				new BitmapCache());
 	}
 
 	@Override
@@ -71,13 +74,11 @@ public class HomeYaoHeGridViewAdapter extends BaseAdapter {
 			holder = (ImageHolder) convertView.getTag();
 		}
 
-		RequestQueue mQueue = Volley.newRequestQueue(mContext);
-		ImageLoader imageLoader = new ImageLoader(mQueue, new BitmapCache());
 		// TODO
 		ImageListener listener = ImageLoader.getImageListener(holder.imageView,
 				R.drawable.icon_yaohe_loading_default,
 				R.drawable.icon_yaohe_loading_default);
-		imageLoader.get(mImgPaths.get(position), listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
+		mImageLoader.get(mImgPaths.get(position), listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
 		return convertView;
 	}
 
