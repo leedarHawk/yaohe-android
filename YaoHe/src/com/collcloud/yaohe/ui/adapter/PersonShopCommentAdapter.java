@@ -122,8 +122,8 @@ public class PersonShopCommentAdapter extends BaseAdapter {
 		if (callInfo != null && callInfo.face != null) {
 			mImageLoader.get(callInfo.face, listener);
 		}
-		if (callInfo != null && callInfo.star != null) {
-			String shopStar = callInfo.star;
+		if (callInfo != null && callInfo.shop_star != null) {
+			String shopStar = callInfo.shop_star;
 			if (shopStar.equals("2")) {
 				holder.mTvStar2
 						.setBackgroundResource(R.drawable.icon_rate_star_on);

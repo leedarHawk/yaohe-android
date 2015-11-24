@@ -16,6 +16,7 @@ public class DetailsCallCommentInfo implements Serializable {
 		public String addtime;
 		public String face;
 		public String nickname;
+		public String shop_star;
 		public String star;
 		//回复的评论id
 		public String parentid;
