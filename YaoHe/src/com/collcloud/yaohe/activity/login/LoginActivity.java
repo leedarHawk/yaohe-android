@@ -2,6 +2,9 @@ package com.collcloud.yaohe.activity.login;
 
 import java.util.List;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,11 +16,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.BusinessActivity;
@@ -62,8 +60,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private TextView my_login_forgetPassWord;
 	/** 用户名 */
 	private EditText my_login_et_editUserName;
+	/** 清除用户名 */
+	private ImageButton imgbtn_clear_username;
 	/** 密码 */
 	private EditText my_login_et_editPassWord;
+	/** 清除密码 */
+	private ImageButton imgbtn_clear_password;
 	/** 登录按钮 */
 	private Button my_login_btnLogin;
 	/** 登录进度条 */
@@ -127,6 +129,52 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 		this.my_login_et_editUserName = (EditText) findViewById(R.id.my_login_et_editUserName);
 		this.my_login_et_editPassWord = (EditText) findViewById(R.id.my_login_et_editPassWord);
+		this.imgbtn_clear_username = (ImageButton) findViewById(R.id.imgbtn_clear_username);
+		this.imgbtn_clear_password = (ImageButton) findViewById(R.id.imgbtn_clear_password);
+		imgbtn_clear_username.setOnClickListener(this);
+		imgbtn_clear_password.setOnClickListener(this);
+
+		my_login_et_editUserName.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if (s.length()>0){
+					imgbtn_clear_username.setVisibility(View.VISIBLE);
+				}else{
+					imgbtn_clear_username.setVisibility(View.GONE);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+
+		my_login_et_editPassWord.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if (s.length()>0){
+					imgbtn_clear_password.setVisibility(View.VISIBLE);
+				}else {
+					imgbtn_clear_password.setVisibility(View.GONE);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
 		this.my_login_btnLogin = (Button) findViewById(R.id.my_login_btnLogin);
 		my_login_btnLogin.setOnClickListener(this);
 		my_login_et_editUserName.setText(mLoginDataManager.getUserPhone());
@@ -143,6 +191,15 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		case R.id.ll_top_back:
 			// 返回按钮
 			LoginActivity.this.finish();
+			break;
+
+		case R.id.imgbtn_clear_username:
+			// 清除用户名
+			my_login_et_editUserName.setText("");
+			break;
+		case R.id.imgbtn_clear_password:
+			// 清除密码
+			my_login_et_editPassWord.setText("");
 			break;
 
 		case R.id.my_login_top_tv_loginorregist:
