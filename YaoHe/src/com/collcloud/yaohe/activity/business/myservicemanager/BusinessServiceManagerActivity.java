@@ -30,6 +30,8 @@ import com.lidroid.xutils.http.client.HttpRequest;
 
 public class BusinessServiceManagerActivity extends BaseActivity implements
 		OnClickListener {
+	
+	private String tag = BusinessServiceManagerActivity.class.getSimpleName();
 	/**
 	 * 服务 -- 优惠券
 	 */
@@ -72,7 +74,7 @@ public class BusinessServiceManagerActivity extends BaseActivity implements
 		CCLog.i("商家个人详情:", "member_id :" + mStrMemberID + "shop_id : "
 				+ mStrShopID);
 		// 获取详情
-		// getBusinessShopInfo();
+		 getBusinessShopInfo();
 	}
 
 	/**
@@ -87,10 +89,11 @@ public class BusinessServiceManagerActivity extends BaseActivity implements
 		//params.addBodyParameter("member_id", mStrMemberID);
 		//修改member id为当前用户的ID,mStrMemberID为shop member ID
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
-
+		String url = ContantsValues.DETAILS_GET_BUSINESS_SHOP_INFO+"&member_id="+mLoginDataManager.getMemberId()+"&id="+mStrShopID;
+		CCLog.d(tag, "url:"+url); 
 
 		http.send(HttpRequest.HttpMethod.POST,
-				ContantsValues.DETAILS_GET_BUSINESS_SHOP_INFO, params,
+				url, params,
 				new RequestCallBack<String>() {
 
 					@Override
