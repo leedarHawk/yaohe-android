@@ -217,7 +217,14 @@ public class HomeAdapter extends BaseAdapter {
 				callInfo.addtime = callInfo.addtime + "000";
 			}
 			SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
-			Date date = new Date(Long.valueOf(callInfo.addtime));
+			Date date = null;
+			try {
+				 date = new Date(Long.valueOf(callInfo.addtime));
+			} catch(Exception e) {
+				e.printStackTrace();
+				 date = new Date();
+			}
+			
 			holder.mTvDate.setText(df.format(date));
 		} else {
 			holder.mTvDate.setVisibility(View.GONE);
