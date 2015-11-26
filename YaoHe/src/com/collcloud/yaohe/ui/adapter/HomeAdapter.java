@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -564,7 +564,7 @@ public class HomeAdapter extends BaseAdapter {
 		/** 消息活动类型 */
 		ImageView mIvTag;
 		/** 关注按钮 */
-		TextView mTvGuanzhu;
+		Button mTvGuanzhu;
 		/** 评价星星1 */
 		TextView mIvxing1;
 		/** 评价星星2 */
@@ -626,7 +626,7 @@ public class HomeAdapter extends BaseAdapter {
 				.findViewById(R.id.tv_item_home_pingjia4);
 		holder.mIvxing5 = (TextView) view
 				.findViewById(R.id.tv_item_home_pingjia5);
-		holder.mTvGuanzhu = (TextView) view
+		holder.mTvGuanzhu = (Button) view
 				.findViewById(R.id.tv_item_home_guanzhu);
 		
 		//吆喝图片 以及内容 LEE

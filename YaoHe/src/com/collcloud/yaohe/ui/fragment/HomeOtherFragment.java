@@ -7,7 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -40,8 +43,10 @@ import com.collcloud.yaohe.common.base.BaseFragment;
 import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomeTypeCallAdapter;
 import com.collcloud.yaohe.ui.adapter.HomeTypeCallAdapter.OnOtherListener;
+import com.collcloud.yaohe.ui.fragment.HomeTuijianFragment.StatusBroadCastReceiver;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.GsonUtils;
 import com.collcloud.yaohe.ui.utils.UIHelper;
@@ -173,6 +178,7 @@ public class HomeOtherFragment extends BaseFragment {
 		// 获取首页某个分类下的吆喝列表
 		mHandler.sendEmptyMessageDelayed(0, 200);
 		//getTypeCallList(mStrCityID, mStrTypeID);
+		registBroadCast();
 		return v;
 	}
 
@@ -1112,7 +1118,7 @@ public class HomeOtherFragment extends BaseFragment {
 	/**
 	 * 会员加店铺关注
 	 */
-	private void shopFollow(String shopID) {
+	private void shopFollow(final String shopID) {
 		mIsAllowFollow = false;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1153,6 +1159,7 @@ public class HomeOtherFragment extends BaseFragment {
 											} else {
 												mIsAllowFollow = false;
 											}
+											sendBroadCast(shopID, false, CommonConstant.doWhat_change_followStatus);
 										}
 									}
 								} catch (Exception e) {
@@ -1178,7 +1185,7 @@ public class HomeOtherFragment extends BaseFragment {
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID,final TextView tvGuanZhu) {
+	private void cancelFollows(final String shopID,final TextView tvGuanZhu) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1220,8 +1227,8 @@ public class HomeOtherFragment extends BaseFragment {
 														mBaseActivity, "取消关注成功");
 												tvGuanZhu.setText(GlobalConstant.INVALID_VALUE);
 												tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
-												setRefreshHomeGuanzhuFragmentStatus(true);
-												
+												//setRefreshHomeGuanzhuFragmentStatus(true);
+												sendBroadCast(shopID, true, CommonConstant.doWhat_change_followStatus);
 											}
 										}
 									}
@@ -1348,7 +1355,6 @@ public class HomeOtherFragment extends BaseFragment {
 	 * @update 2015年10月5日 上午1:02:57
 	 */
 	public boolean isNeedRefreshData() {
-		/** 暂做每次都刷新
 		boolean istheSameCity = true;
 		if(tmpStrCityId != null) {
 			if(tmpStrCityId.equals(mStrCityID)) {
@@ -1368,7 +1374,56 @@ public class HomeOtherFragment extends BaseFragment {
 		
 		if(mTypeCalls != null && mTypeCalls.size()>0 && istheSameCity) {
 			return false;
-		}*/
+		}
 		return true;
 	}
+	
+	
+	/**
+	 * 
+	 * @author LEE
+	 * 关注状态 收藏状态 关注广播
+	 *private List<TypeCall> mTypeCalls = new ArrayList<TypeCall>();
+	 */
+	 class StatusBroadCastReceiver extends BroadcastReceiver {   
+	    @Override  
+	    public void onReceive(Context context, Intent intent) {
+	    	try {
+	    		CCLog.d(tag, "broadcast..........");
+		    	int doWhat = intent.getIntExtra("doWhat",-1);
+		    	String shopId = intent.getStringExtra("shopId");
+		    	boolean isCanceFollow  =intent.getBooleanExtra("isCanceFollow",false);
+		    	switch(doWhat) {
+			    	case CommonConstant.doWhat_change_followStatus:
+			    		for(TypeCall typeCall : mTypeCalls) {
+			    			if(typeCall.shop_id.equals(shopId)) {
+			    				if(isCanceFollow) {
+			    					typeCall.guanzhu = GlobalConstant.INVALID_VALUE;
+			    				} else {
+			    					CCLog.d(tag, "add guanzhu.....");
+			    					typeCall.guanzhu = GlobalConstant.VALID_VALUE;
+			    				}
+			    			}
+			    		}
+			    		CCLog.d(tag, "change guanzhu status... notify adapter");
+			    		refreshTypeCall(mTypeCalls);
+			    		break;
+		    	}
+	    	} catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    }   
+	       
+	}
+	private void registBroadCast() {
+		//生成广播处理   
+		StatusBroadCastReceiver  bc = new StatusBroadCastReceiver();   
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(CommonConstant.STATUS_BROADCAST_ACTION);
+		this.getActivity().registerReceiver(bc, intentFilter);
+	}
+	
+	
+	
 }

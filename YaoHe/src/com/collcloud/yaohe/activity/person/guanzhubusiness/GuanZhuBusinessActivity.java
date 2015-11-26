@@ -10,7 +10,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.collcloud.yaohe.common.base.GlobalVariable;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.GlobalVariable;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.entity.GuanZhunBusiList.GuanZhunBusi;
 import com.collcloud.yaohe.ui.adapter.PersonGuanzhuAdapter;
 import com.collcloud.yaohe.ui.utils.CCLog;
@@ -272,7 +275,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollow(final int position, String shopID) {
+	private void cancelFollow(final int position, final String shopID) {
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
@@ -313,6 +316,7 @@ public class GuanZhuBusinessActivity extends BaseActivity implements
 												mSwipeListView.hideRightView();
 												// updataUI(position);
 												getFollowList();
+												sendBroadCast(shopID, true, CommonConstant.doWhat_change_followStatus);
 											}
 										}
 									}

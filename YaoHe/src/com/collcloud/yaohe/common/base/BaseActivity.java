@@ -47,6 +47,7 @@ import com.collcloud.yaohe.api.info.ClassifyListInfo.Classify;
 import com.collcloud.yaohe.api.info.DistrictListInfo;
 import com.collcloud.yaohe.api.info.DistrictListInfo.DistrictList;
 import com.collcloud.yaohe.common.data.LoginDataManagerSPImpl;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomePageAdapter;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.GsonUtils;
@@ -2192,5 +2193,19 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	public void setmPager(ViewPager mPager) {
 		this.mPager = mPager;
+	}
+	
+	/**
+	 * 关注状态改变广播
+	 * @param shopId 
+	 * @param isCanceFollow
+	 * @param doWhat
+	 */
+	public void sendBroadCast(String shopId,boolean isCanceFollow,int doWhat) {
+		Intent intent = new Intent(CommonConstant.STATUS_BROADCAST_ACTION);
+		intent.putExtra("doWhat", doWhat);
+        intent.putExtra("shopId", shopId);
+        intent.putExtra("isCanceFollow", isCanceFollow);
+        sendBroadcast(intent);
 	}
 }

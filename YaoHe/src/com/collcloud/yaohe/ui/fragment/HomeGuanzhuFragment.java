@@ -7,10 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +30,6 @@ import com.collcloud.yaohe.activity.details.yaohela.YaoHeCommentActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
 import com.collcloud.yaohe.activity.fujin.FuJinActivity;
 import com.collcloud.yaohe.activity.login.LoginActivity;
-import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.HomeFollowShopInfo;
@@ -39,14 +40,14 @@ import com.collcloud.yaohe.common.base.BaseFragment;
 import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomeGuanZhuAdapter;
 import com.collcloud.yaohe.ui.adapter.HomeGuanZhuAdapter.OnGuanZhuListener;
+import com.collcloud.yaohe.ui.fragment.HomeTuijianFragment.StatusBroadCastReceiver;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.GsonUtils;
 import com.collcloud.yaohe.ui.utils.UIHelper;
 import com.collcloud.yaohe.ui.utils.Utils;
-import com.collcloud.yaohe.ui.view.SingleLayoutListView;
-import com.collcloud.yaohe.ui.view.SingleLayoutListView.OnRefreshListener;
 import com.collcloud.yaohe.url.ContantsValues;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -143,6 +144,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		//getData(mStrCityID);
 		doResetData();
 		initControlerListenner();
+		registBroadCast();
 		return v;
 	}
 	
@@ -151,11 +153,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		super.onResume();
 		CCLog.i("关注商家Fragment", "onResume");
 		//在其他页面是否 点击了关注按钮 取消 或者 添加关注 检测是否需要刷新数据
-		if(isRefreshHomeGuanzhuFragment()) {
-			doResetData();
-		} else {
-			//do nothing....
-		}
+//		if(isRefreshHomeGuanzhuFragment()) {
+//			doResetData();
+//		} else {
+//			//do nothing....
+//		}
 		// 接收从城市定位页面传递的城市ID
 		/**
 		if (getActivity().getIntent().getStringExtra(
@@ -339,6 +341,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
 							CCLog.d(tag, "refresh data:"+refreshData);
+							CCLog.d(tag, "refresh data:"+responseInfo.toString());
 							if(refreshData) {
 								currentPage = 1;
 								mFollowShops.clear();
@@ -701,40 +704,40 @@ public class HomeGuanzhuFragment extends BaseFragment {
 									"卖力关注中...");
 							// 关注
 							shopFollow(shopID);
-							new Handler().postDelayed(new Runnable() {
-								@Override
-								public void run() {
-									ApiAccess.dismissProgressDialog();
-									if (!mIsAllowFollow) {
-										if (Utils
-												.strFromView(tvGuanZhu)
-												.equals(GlobalConstant.INVALID_VALUE)) {
-											tvGuanZhu
-													.setText(GlobalConstant.VALID_VALUE);
-											tvGuanZhu
-													.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-
-											new Thread(new Runnable() {
-
-												@Override
-												public void run() {
-													currentPage = 1;
-													getFollowShopList(
-															mStrCityID,
-															mLoginDataManager
-																	.getMemberId(),true);
-												}
-											}).start();
-
-										} else {
-											tvGuanZhu
-													.setText(GlobalConstant.INVALID_VALUE);
-											tvGuanZhu
-													.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
-										}
-									}
-								}
-							}, 1000);
+//							new Handler().postDelayed(new Runnable() {
+//								@Override
+//								public void run() {
+//									ApiAccess.dismissProgressDialog();
+//									if (!mIsAllowFollow) {
+//										if (Utils
+//												.strFromView(tvGuanZhu)
+//												.equals(GlobalConstant.INVALID_VALUE)) {
+//											tvGuanZhu
+//													.setText(GlobalConstant.VALID_VALUE);
+//											tvGuanZhu
+//													.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+//
+//											new Thread(new Runnable() {
+//
+//												@Override
+//												public void run() {
+//													currentPage = 1;
+//													getFollowShopList(
+//															mStrCityID,
+//															mLoginDataManager
+//																	.getMemberId(),true);
+//												}
+//											}).start();
+//
+//										} else {
+//											tvGuanZhu
+//													.setText(GlobalConstant.INVALID_VALUE);
+//											tvGuanZhu
+//													.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+//										}
+//									}
+//								}
+//							}, 1000);
 						} else if (Utils.strFromView(tvGuanZhu).equals(
 								GlobalConstant.VALID_VALUE)) {
 
@@ -1491,4 +1494,57 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			CCLog.d(tag, "show guanzhu fragment.....");
 		}
 	}
+	
+	/**
+	 * 
+	 * @author LEE
+	 * 关注状态 收藏状态 关注广播
+	 *
+	 */
+	 class StatusBroadCastReceiver extends BroadcastReceiver {   
+	    @Override  
+	    public void onReceive(Context context, Intent intent) {
+	    	try {
+	    		CCLog.d(tag, "broadcast..........");
+		    	int doWhat = intent.getIntExtra("doWhat",-1);
+		    	String shopId = intent.getStringExtra("shopId");
+		    	boolean isCanceFollow  =intent.getBooleanExtra("isCanceFollow",false);
+		    	ArrayList<FollowShop> tmp = null;
+		    	switch(doWhat) {
+			    	case CommonConstant.doWhat_change_followStatus:
+			    		if(isCanceFollow) {
+			    			tmp = new ArrayList<FollowShop>();
+			    		}
+			    		for(FollowShop followShop : mFollowShops) {
+			    			if(followShop.shop_id.equals(shopId)) {
+			    				if(isCanceFollow) {
+			    					tmp.add(followShop);
+			    				} else {
+			    					doResetData();
+			    				}
+			    			}
+			    		}
+			    		if(tmp != null) {
+			    			mFollowShops.removeAll(tmp);
+			    			refreshFollow(mFollowShops);
+			    		}
+			    		
+			    		CCLog.d(tag, "change guanzhu status... notify adapter");
+			    		break;
+		    	}
+	    	} catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    }   
+	       
+	}
+	private void registBroadCast() {
+		//生成广播处理   
+		StatusBroadCastReceiver  bc = new StatusBroadCastReceiver();   
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(CommonConstant.STATUS_BROADCAST_ACTION);
+		this.getActivity().registerReceiver(bc, intentFilter);
+	}
+	
 }

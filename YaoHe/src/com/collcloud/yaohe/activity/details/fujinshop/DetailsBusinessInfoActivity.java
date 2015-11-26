@@ -901,7 +901,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 	 * @param message
 	 *            自定义成功后的提示信息
 	 */
-	public void shopFollowApi(String memberID, String id, String url,
+	public void shopFollowApi(String memberID,final String id, String url,
 			final String message) {
 		mBaseIsNotFollow = false;
 		HttpUtils http = new HttpUtils();
@@ -948,6 +948,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 															mBaseActivity,
 															message);
 												}
+												sendBroadCast(id, false, CommonConstant.doWhat_change_followStatus);
 											}
 										}
 									}
@@ -980,7 +981,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID) {
+	private void cancelFollows(final String shopID) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1024,7 +1025,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 												fansCount--;
 												mTvShopFans.setText( fansCount+ " 粉丝");
 												setFollowStatus();
-												
+												sendBroadCast(shopID, true, CommonConstant.doWhat_change_followStatus);
 											}
 										}
 									}
@@ -1162,5 +1163,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			}
 		}
 	}
+	
+
 
 }

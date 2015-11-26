@@ -53,15 +53,13 @@
                     android:textColor="@color/common_home_text_color_title"
                     android:textSize="15sp" />
 
-                <TextView
+                <Button
                     android:id="@+id/tv_item_home_guanzhu"
                     android:layout_width="100px"
                     android:layout_height="45px"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/icon_home_type_weiguanzhu"
                     android:contentDescription="@string/app_name"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:text=""
                     android:textColor="@android:color/transparent" />
             </RelativeLayout>

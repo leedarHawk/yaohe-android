@@ -3,12 +3,12 @@ package com.collcloud.yaohe.common.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.collcloud.yaohe.activity.friend.FriendHaowanActivity;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -37,13 +37,14 @@ import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.business.BusinessActivity;
 import com.collcloud.yaohe.activity.business.fayaohe.BusinessFaYaoHeActivity;
 import com.collcloud.yaohe.activity.dianpin.fujin.ShopCommentActivity;
+import com.collcloud.yaohe.activity.friend.FriendHaowanActivity;
 //import com.collcloud.yaohe.activity.friend.HaoWanActivity;
 import com.collcloud.yaohe.activity.fujin.FuJinActivity;
 import com.collcloud.yaohe.activity.my.MineActivity;
 import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
-import com.collcloud.yaohe.api.ResponseDataToUI;
 import com.collcloud.yaohe.common.data.LoginDataManagerSPImpl;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomePageAdapter;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.UIHelper;
@@ -922,5 +923,19 @@ public abstract class BaseFragment extends Fragment {
 	}
 	public static void setRefreshHomeGuanzhuFragmentStatus(boolean isRefreshHomeGuanzhuFragmentStatus) {
 		isRefreshHomeGuanzhuFragment = isRefreshHomeGuanzhuFragmentStatus;
+	}
+	
+	/**
+	 * 关注状态改变广播
+	 * @param shopId 
+	 * @param isCanceFollow
+	 * @param doWhat
+	 */
+	public void sendBroadCast(String shopId,boolean isCanceFollow,int doWhat) {
+		Intent intent = new Intent(CommonConstant.STATUS_BROADCAST_ACTION);
+		intent.putExtra("doWhat", doWhat);
+        intent.putExtra("shopId", shopId);
+        intent.putExtra("isCanceFollow", isCanceFollow);
+        this.getActivity().sendBroadcast(intent);
 	}
 }

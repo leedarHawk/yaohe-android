@@ -9,7 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -41,10 +44,12 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.BaseFragment;
 import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomeAdapter;
 import com.collcloud.yaohe.ui.adapter.HomeAdapter.OnButtonClickListener;
 import com.collcloud.yaohe.ui.adapter.HomePageAdapter;
 import com.collcloud.yaohe.ui.adapter.HomePageAdapter.OnPagerItemClickListener;
+import com.collcloud.yaohe.ui.fragment.HomeGuanzhuFragment.StatusBroadCastReceiver;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.GsonUtils;
 import com.collcloud.yaohe.ui.utils.UIHelper;
@@ -172,6 +177,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 		// // 获取首页吆喝内容列表
 		// getHomeCallList(mStrCityId, mLoginDataManager.getMemberId());
 		doResetData();
+		registBroadCast();
 		return v;
 	}
 
@@ -1114,23 +1120,23 @@ public class HomeTuijianFragment extends BaseFragment  {
 									"卖力关注中...");
 							// 关注
 							shopFollow(shopID);
-							new Handler().postDelayed(new Runnable() {
-								@Override
-								public void run() {
-									ApiAccess.dismissProgressDialog();
-									if (!mIsAllowFollow) {
-										if (Utils.strFromView(tvGuanZhu).equals(GlobalConstant.INVALID_VALUE)) {
-											tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
-											tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
-										} else {
-											tvGuanZhu
-													.setText(GlobalConstant.INVALID_VALUE);
-											tvGuanZhu
-													.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
-										}
-									}
-								}
-							}, 1000);
+//							new Handler().postDelayed(new Runnable() {
+//								@Override
+//								public void run() {
+//									ApiAccess.dismissProgressDialog();
+//									if (!mIsAllowFollow) {
+//										if (Utils.strFromView(tvGuanZhu).equals(GlobalConstant.INVALID_VALUE)) {
+//											tvGuanZhu.setText(GlobalConstant.VALID_VALUE);
+//											tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_yiguanzhu);
+//										} else {
+//											tvGuanZhu
+//													.setText(GlobalConstant.INVALID_VALUE);
+//											tvGuanZhu
+//													.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
+//										}
+//									}
+//								}
+//							}, 1000);
 						} else if (Utils.strFromView(tvGuanZhu).equals(
 								GlobalConstant.VALID_VALUE)) {
 
@@ -1452,7 +1458,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	/**
 	 * 会员加店铺关注
 	 */
-	private void shopFollow(String shopID) {
+	private void shopFollow(final String shopID) {
 		mIsAllowFollow = false;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1466,6 +1472,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
+						ApiAccess.dismissProgressDialog();
 						if (!Utils.isStringEmpty(responseInfo.result)) {
 							if (responseInfo.result.contains("status")) {
 								try {
@@ -1489,14 +1496,16 @@ public class HomeTuijianFragment extends BaseFragment  {
 												UIHelper.ToastMessage(
 														mBaseActivity,
 														strErrorMsg);
-												setRefreshHomeGuanzhuFragmentStatus(true);
+												//setRefreshHomeGuanzhuFragmentStatus(true);
+												sendBroadCast(shopID, false, CommonConstant.doWhat_change_followStatus);
 											} else {
 												mIsAllowFollow = false;
+												sendBroadCast(shopID, false, CommonConstant.doWhat_change_followStatus);
 											}
 										}
 									}
 									if (errorJsonObject.optBoolean("data")) {
-										setRefreshHomeGuanzhuFragmentStatus(true);
+										//setRefreshHomeGuanzhuFragmentStatus(true);
 									}
 								} catch (Exception e) {
 									mIsAllowFollow = true;
@@ -1512,6 +1521,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 					@Override
 					public void onFailure(HttpException error, String msg) {
+						ApiAccess.dismissProgressDialog();
 						UIHelper.ToastMessage(mBaseActivity,
 								R.string.response_data_invalid);
 					}
@@ -1730,7 +1740,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID,final TextView tvGuanZhu) {
+	private void cancelFollows(final String shopID,final TextView tvGuanZhu) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1772,7 +1782,8 @@ public class HomeTuijianFragment extends BaseFragment  {
 														mBaseActivity, "取消关注成功");
 												tvGuanZhu.setText(GlobalConstant.INVALID_VALUE);
 												tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
-												setRefreshHomeGuanzhuFragmentStatus(true);
+												//setRefreshHomeGuanzhuFragmentStatus(true);
+												sendBroadCast(shopID, true, CommonConstant.doWhat_change_followStatus);
 												
 											}
 										}
@@ -1844,4 +1855,51 @@ public class HomeTuijianFragment extends BaseFragment  {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * 
+	 * @author LEE
+	 * 关注状态 收藏状态 关注广播
+	 *
+	 */
+	 class StatusBroadCastReceiver extends BroadcastReceiver {   
+	    @Override  
+	    public void onReceive(Context context, Intent intent) {
+	    	try {
+	    		CCLog.d(tag, "broadcast..........");
+		    	int doWhat = intent.getIntExtra("doWhat",-1);
+		    	String shopId = intent.getStringExtra("shopId");
+		    	boolean isCanceFollow  =intent.getBooleanExtra("isCanceFollow",false);
+		    	switch(doWhat) {
+			    	case CommonConstant.doWhat_change_followStatus:
+			    		for(CallInfo callInfo : mCallInfos) {
+			    			if(callInfo.shop_id.equals(shopId)) {
+			    				if(isCanceFollow) {
+			    					callInfo.guanzhu = GlobalConstant.INVALID_VALUE;
+			    				} else {
+			    					CCLog.d(tag, "add guanzhu.....");
+			    					callInfo.guanzhu = GlobalConstant.VALID_VALUE;
+			    				}
+			    			}
+			    		}
+			    		CCLog.d(tag, "change guanzhu status... notify adapter");
+			    		setHomeRecommendInfo();
+			    		break;
+		    	}
+	    	} catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    }   
+	       
+	}
+	private void registBroadCast() {
+		//生成广播处理   
+		StatusBroadCastReceiver  bc = new StatusBroadCastReceiver();   
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(CommonConstant.STATUS_BROADCAST_ACTION);
+		this.getActivity().registerReceiver(bc, intentFilter);
+	}
+
 }

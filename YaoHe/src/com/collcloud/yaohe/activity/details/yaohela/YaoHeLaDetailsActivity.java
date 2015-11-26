@@ -44,6 +44,7 @@ import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.GlobalConstant;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.HomeYaoHeGridViewAdapter;
 import com.collcloud.yaohe.ui.model.AmapGencodeInfo;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
@@ -272,7 +273,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(String shopID) {
+	private void cancelFollows(final String shopID) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -316,6 +317,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 												fansCount--;
 												mTvTuijianFans.setText( fansCount+ " 粉丝");
 												setFollowStatus();
+												sendBroadCast(shopID, true, CommonConstant.doWhat_change_followStatus);
 												
 											}
 										}
@@ -357,7 +359,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 	 * @param message
 	 *            自定义成功后的提示信息
 	 */
-	public void shopFollowApi(String memberID, String id, String url,
+	public void shopFollowApi(String memberID, final String id, String url,
 			final String message) {
 		mBaseIsNotFollow = false;
 		HttpUtils http = new HttpUtils();
@@ -404,6 +406,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 															mBaseActivity,
 															message);
 												}
+												sendBroadCast(id, false, CommonConstant.doWhat_change_followStatus);
 											}
 										}
 									}
