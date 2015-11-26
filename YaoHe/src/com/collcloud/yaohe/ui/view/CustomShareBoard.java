@@ -100,15 +100,16 @@ public class CustomShareBoard extends PopupWindow implements OnClickListener {
 					SocializeEntity entity) {
 				String showText = platform.toString();
 				if (eCode == StatusCode.ST_CODE_SUCCESSED) {
-					showText += "分享成功";
+//					showText += "分享成功";
 				} else {
 					String eMsg = "";
 					// if (eCode == -101){
 					// eMsg = "没有授权";
 					// }
-					showText += "分享失败";
+//					showText += "分享失败";
+					Toast.makeText(mActivity, showText + "分享失败", Toast.LENGTH_SHORT).show();
 				}
-				Toast.makeText(mActivity, showText, Toast.LENGTH_SHORT).show();
+//				Toast.makeText(mActivity, showText, Toast.LENGTH_SHORT).show();
 				dismiss();
 			}
 		});
