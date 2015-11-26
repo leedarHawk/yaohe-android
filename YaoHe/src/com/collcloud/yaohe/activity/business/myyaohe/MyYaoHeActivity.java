@@ -614,6 +614,11 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		titleLayout = (LinearLayout) this.findViewById(R.id.ll_common_top_back);
 		titleLayout.setOnClickListener(this);
 		todolayout = (LinearLayout) this.findViewById(R.id.ll_tv_do);
+		if ("1".equals(mLoginDataManager.getUserType())){
+			todolayout.setVisibility(View.VISIBLE);
+		}else{
+			todolayout.setVisibility(View.GONE);
+		}
 		todolayout.setOnClickListener(this);
 
 		mLlEmpty = (LinearLayout) this
