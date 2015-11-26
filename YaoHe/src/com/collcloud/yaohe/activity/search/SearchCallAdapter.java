@@ -109,7 +109,9 @@ public class SearchCallAdapter extends BaseAdapter {
 		}
 
 		if (!Utils.isStringEmpty(callInfo.img)) {
-			mImageLoader.get(callInfo.img, listener);
+			mImageLoader.get(callInfo.img, listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
+		} else {
+			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
 		}
 		String type = callInfo.type;
 		if (!Utils.isStringEmpty(type)) {

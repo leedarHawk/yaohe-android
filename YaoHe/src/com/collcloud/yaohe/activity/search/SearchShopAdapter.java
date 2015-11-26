@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +21,7 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.Utils;
+import com.meg7.widget.CustomShapeImageView;
 
 public class SearchShopAdapter extends BaseAdapter {
 
@@ -108,9 +108,12 @@ public class SearchShopAdapter extends BaseAdapter {
 			holder.mTvTitle.setText(callInfo.title);
 		}
 
-		if (!Utils.isStringEmpty(callInfo.face)) {
-			mImageLoader.get(callInfo.face, listener);
+		if (callInfo != null && !Utils.isStringEmpty(callInfo.face)) { 
+			mImageLoader.get(callInfo.face, listener,mContext.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),mContext.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_height));
+		} else {
+			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_default_logo);
 		}
+		
 		final String shopID = callInfo.id;
 		final String memberID = callInfo.member_id;
 
@@ -121,7 +124,7 @@ public class SearchShopAdapter extends BaseAdapter {
 
 		TextView mTvTitle;
 		RelativeLayout mRlBusinessContent;
-		ImageView mIvThum;
+		CustomShapeImageView mIvThum;
 
 	}
 
@@ -135,7 +138,7 @@ public class SearchShopAdapter extends BaseAdapter {
 		holder.mRlBusinessContent = (RelativeLayout) view
 				.findViewById(R.id.ll_item_search_shhopcontent);
 
-		holder.mIvThum = (ImageView) view.findViewById(R.id.iv_search_shop_img);
+		holder.mIvThum = (CustomShapeImageView) view.findViewById(R.id.iv_search_shop_img);
 	}
 
 }

@@ -519,6 +519,7 @@ public class BusinessInfoActivity extends BaseActivity implements
 				mLoginDataManager.setUserPassword("");
 				mLoginDataManager.setUserType("0");
 				mLoginDataManager.setBusinessState("0");
+				mLoginDataManager.setMemberId("");
 
 				// mApplication.finishAll();
 				Intent intent = new Intent();
