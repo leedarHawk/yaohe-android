@@ -98,8 +98,7 @@ public class PersonHYKDetailActivity extends BaseActivity implements OnClickList
 		//选中会员卡对应商家ID
 		CCLog.v(TAG, "该会员卡的发放者ID>>>>>"+member_card_id);
 		params.addBodyParameter("member_card_id",member_card_id);
-		
-		
+
 		http.send(HttpRequest.HttpMethod.GET,ContantsValues.MYCARDDETAIL,params, new RequestCallBack<String>() {
 
 			@Override
