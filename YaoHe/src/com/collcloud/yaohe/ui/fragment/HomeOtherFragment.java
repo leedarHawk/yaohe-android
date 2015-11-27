@@ -315,7 +315,7 @@ public class HomeOtherFragment extends BaseFragment {
 
 		HttpUtils http = new HttpUtils();
 		String url = ContantsValues.HOME_TYPE_CALL_LIST_URL + "&city_id="
-				+ cityid + "&one_id=" + typeID+"&page="+currentPage;
+				+ cityid + "&one_id=" + typeID+"&page="+currentPage+"&member_id="+mLoginDataManager.getMemberId();
 		CCLog.d(tag, "getTypeCallList url:---"+url);
 		CCLog.d(tag, "refreshData:"+refreshData);
 		http.send(HttpRequest.HttpMethod.GET, url, null,
