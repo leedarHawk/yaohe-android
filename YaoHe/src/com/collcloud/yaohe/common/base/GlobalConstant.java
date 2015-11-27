@@ -63,10 +63,10 @@ public class GlobalConstant {
 			+ "（二）支持图片、文字、gif动图、音频、视频；@好友，关注官方微博等功能"
 			+ "（三）提供详尽的后台用户社交行为分析。http://www.umeng.com/social";
 
-	public static final String QQ_APP_ID = "1104674811";
-	public static final String QQ_APP_KEY = "lzXZj09WkYD4PGfS";
-	public static final String WECHAT_APP_ID = "wxf3220091427130b7";
-	public static final String WECHAT_APP_KEY = "eb2667ee6d05e8ec56685ee6747dcc09";
+	public static final String QQ_APP_ID = "1104716101";
+	public static final String QQ_APP_KEY = "EehYZ8EzC3RKjiCW";
+	public static final String WECHAT_APP_ID = "wx626bb0552913fcb2";
+	public static final String WECHAT_APP_KEY = "adde42616d1d544be9b9b7bfbd62be51";
 
 	public static final String QQ_SHARE_TITLE = "吆喝-QQ";
 	public static final String QQ_SHARE_CONTENT = "小伙伴们一起来，让世界听到我们的吆喝吧。--分享到QQ";
