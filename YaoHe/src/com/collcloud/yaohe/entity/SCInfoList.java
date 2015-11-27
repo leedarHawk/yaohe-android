@@ -16,6 +16,7 @@ public class SCInfoList implements Serializable {
 		/** 发信息的会员ID */
 		public String member_id;
 		public String service_id;
+		public String title;
 		/** 吆喝内容 */
 		public String content;
 		/** 图片地址1 */

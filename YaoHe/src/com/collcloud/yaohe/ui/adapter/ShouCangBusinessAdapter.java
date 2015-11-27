@@ -114,12 +114,12 @@ public class ShouCangBusinessAdapter extends BaseAdapter {
 		if (!Utils.isStringEmpty(sc.type)) {
 			if (sc.type.equals("0")) {
 
-				vHolder.tv_item_zhekou_content.setText(sc.content);
+				vHolder.tv_item_zhekou_content.setText(sc.title);
 				vHolder.iv_item_shop_img_tags.setVisibility(View.VISIBLE);
 				vHolder.iv_item_shop_img_tags
 						.setBackgroundResource(R.drawable.icon_home_type_youhuiquan);
 			} else if (sc.type.equals("1")) {
-				vHolder.tv_item_zhekou_content.setText(sc.content);
+				vHolder.tv_item_zhekou_content.setText(sc.title);
 				vHolder.iv_item_shop_img_tags.setVisibility(View.VISIBLE);
 				vHolder.iv_item_shop_img_tags
 						.setBackgroundResource(R.drawable.icon_home_type_huiyuanka);
@@ -128,17 +128,17 @@ public class ShouCangBusinessAdapter extends BaseAdapter {
 				vHolder.iv_item_shop_img_tags.setVisibility(View.VISIBLE);
 				vHolder.iv_item_shop_img_tags
 						.setBackgroundResource(R.drawable.icon_home_type_huodong);
-				vHolder.tv_item_zhekou_content.setText(sc.content);
+				vHolder.tv_item_zhekou_content.setText(sc.title);
 
 			} else if (sc.type.equals("3")) {
 
 				vHolder.iv_item_shop_img_tags.setVisibility(View.VISIBLE);
 				vHolder.iv_item_shop_img_tags
 						.setBackgroundResource(R.drawable.icon_home_type_xinpin);
-				vHolder.tv_item_zhekou_content.setText("暂无新品介绍。");
+				vHolder.tv_item_zhekou_content.setText(sc.title);
 			} else if (sc.type.equals("4")) {
 
-				vHolder.tv_item_zhekou_content.setText(sc.content);
+				vHolder.tv_item_zhekou_content.setText(sc.title);
 				vHolder.iv_item_shop_img_tags.setVisibility(View.GONE);
 			} else {
 				vHolder.iv_item_shop_img_tags.setVisibility(View.GONE);

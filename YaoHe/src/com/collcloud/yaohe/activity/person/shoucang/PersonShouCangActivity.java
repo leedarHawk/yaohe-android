@@ -221,6 +221,9 @@ public class PersonShouCangActivity extends BaseActivity implements
 										scItem.member_id = scObject
 												.optString("member_id");
 
+										scItem.title = scObject
+												.optString("title");
+
 										scItem.content = scObject
 												.optString("content");
 
