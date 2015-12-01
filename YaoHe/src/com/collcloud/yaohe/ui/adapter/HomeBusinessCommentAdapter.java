@@ -147,8 +147,10 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 		//是自己的评论 能够删除
 		if(mStrMemberId !=null && mStrMemberId.equals(callInfo.member_id)) {
 			holder.delCommentBtn.setVisibility(View.VISIBLE);
+			holder.commentBtn.setVisibility(View.INVISIBLE);
 		} else {//不是自己的评论 就不能删除
 			holder.delCommentBtn.setVisibility(View.GONE);
+			holder.commentBtn.setVisibility(View.VISIBLE);
 		}
 		
 		
