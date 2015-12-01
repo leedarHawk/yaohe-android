@@ -220,7 +220,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 			public void run() {
 				mScrollView.smoothScrollBy(0, -1000);
 			}
-		}, 1000);
+		}, 1);
 	}
 	
 //	@Override
