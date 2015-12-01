@@ -888,27 +888,27 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 						// 吆喝点赞
 						callPraise(callID);
-						new Handler().postDelayed(new Runnable() {
-							@Override
-							public void run() {
-								// ApiAccess.dismissProgressDialog();
-								if (mIsZanAllow) {
-									if (Utils.strFromView(tvZanImg).equals(
-											GlobalConstant.INVALID_VALUE)) {
-
-										tvZanImg.setText(GlobalConstant.VALID_VALUE);
-										tvZan.setTextColor(getResources()
-												.getColor(
-														R.color.common_home_title_bg));
-										tvZanImg.setBackgroundResource(R.drawable.icon_home_item_zan_on);
-										tvZan.setText(String.valueOf(Integer
-												.valueOf(Utils
-														.strFromView(tvZan)) + 1));
-
-									}
-								}
-							}
-						}, 1000);
+//						new Handler().postDelayed(new Runnable() {
+//							@Override
+//							public void run() {
+//								// ApiAccess.dismissProgressDialog();
+//								if (mIsZanAllow) {
+//									if (Utils.strFromView(tvZanImg).equals(
+//											GlobalConstant.INVALID_VALUE)) {
+//
+//										tvZanImg.setText(GlobalConstant.VALID_VALUE);
+//										tvZan.setTextColor(getResources()
+//												.getColor(
+//														R.color.common_home_title_bg));
+//										tvZanImg.setBackgroundResource(R.drawable.icon_home_item_zan_on);
+//										tvZan.setText(String.valueOf(Integer
+//												.valueOf(Utils
+//														.strFromView(tvZan)) + 1));
+//
+//									}
+//								}
+//							}
+//						}, 1000);
 
 					}
 
@@ -1394,7 +1394,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	// 是否可以点赞
 	private boolean mIsZanAllow = true;
 
-	protected boolean shopZanActionApi(String memberID, String callID,
+	protected boolean shopZanActionApi(String memberID, final String callID,
 			String url, final String message) {
 		mIsZanAllow = true;
 		HttpUtils http = new HttpUtils();
@@ -1441,6 +1441,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 															mBaseActivity,
 															message);
 												}
+												sendBroadCastForZan(callID);
 											}
 										}
 									}
@@ -1568,8 +1569,25 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			    		}
 			    		CCLog.d(tag, "change pinglun count ... notify adapter");
 			    		refreshFollow(mFollowShops);
-			    		
 			    		break;
+				    	//点赞个数改变
+				    	case CommonConstant.doWhat_change_zan_count:
+				    		String callId_zan = intent.getStringExtra("callId");
+				    		for(FollowShop callInfo : mFollowShops) {
+				    			if(callInfo.id.equals(callId_zan)) {
+				    				int zanCount = 0;
+			    					try {
+			    						zanCount = Integer.parseInt(callInfo.zan_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						zanCount = 0;
+			    					}
+			    					zanCount = zanCount+1;
+			    					callInfo.zan_num = String.valueOf(zanCount);
+				    			}
+				    		}
+				    		refreshFollow(mFollowShops);
+				    		break;
 			    		
 			    		
 		    	}

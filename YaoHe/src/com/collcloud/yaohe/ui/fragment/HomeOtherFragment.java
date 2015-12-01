@@ -871,6 +871,8 @@ public class HomeOtherFragment extends BaseFragment {
 								LoginActivity.class);
 						mBaseActivity.baseStartActivity(intent);
 					} else {
+						callPraise_zan(callID);
+						/**
 						if (!Utils.isStringEmpty(Utils.strFromView(tvZanImg))) {
 							if (Utils.strFromView(tvZanImg).equals(
 									GlobalConstant.INVALID_VALUE)) {
@@ -895,7 +897,10 @@ public class HomeOtherFragment extends BaseFragment {
 							tvZan.setTextColor(getResources().getColor(
 									R.color.text_gray));
 							tvZanImg.setBackgroundResource(R.drawable.icon_home_item_zan_off);
-						}
+						} */
+						
+						
+						
 					}
 
 				}
@@ -1256,6 +1261,104 @@ public class HomeOtherFragment extends BaseFragment {
 				});
 
 	}
+	
+	/**
+	 * 吆喝点赞
+	 */
+	private void callPraise_zan(String callID) {
+		shopZanActionApi(mLoginDataManager.getMemberId(), callID,
+				ContantsValues.CALL_PRAISE_URL, "点赞成功。");
+	}
+	
+	// 是否可以点赞
+		private boolean mIsZanAllow = true;
+
+		protected boolean shopZanActionApi(String memberID, final String callID,
+				String url, final String message) {
+			mIsZanAllow = true;
+			HttpUtils http = new HttpUtils();
+			RequestParams params = new RequestParams();
+			params.addBodyParameter("member_id", memberID);
+			params.addBodyParameter("call_id", callID);
+			CCLog.i("吆喝点赞参数：", "member_id=" + memberID + " call_id=" + callID);
+
+			http.send(HttpRequest.HttpMethod.POST, url, params,
+					new RequestCallBack<String>() {
+
+						@Override
+						public void onSuccess(ResponseInfo<String> responseInfo) {
+							if (!Utils.isStringEmpty(responseInfo.result)) {
+								if (responseInfo.result.contains("status")) {
+									if (responseInfo.result != null) {
+										CCLog.i("吆喝点赞状态：", responseInfo.result
+												+ " ");
+									}
+									try {
+										// 数据处理
+										JSONObject errorJsonObject = new JSONObject(
+												responseInfo.result);
+										if (errorJsonObject.has("status")) {
+
+											JSONObject statusObject = errorJsonObject
+													.optJSONObject("status");
+											if (statusObject.has("code")) {
+												int code = statusObject
+														.optInt("code");
+												if (code == 1) {
+													mIsZanAllow = false;
+													String strErrorMsg = statusObject
+															.optString("message");
+													UIHelper.ToastMessage(
+															mBaseActivity,
+															strErrorMsg);
+
+												} else {
+													mIsZanAllow = true;
+													if (!Utils
+															.isStringEmpty(message)) {
+														UIHelper.ToastMessage(
+																mBaseActivity,
+																message);
+													}
+													sendBroadCastForZan(callID);
+												}
+											}
+										}
+									} catch (Exception e) {
+										mIsZanAllow = false;
+										String errorMsg = ApiAccessErrorManager
+												.getMessage(5, mBaseActivity);
+										UIHelper.ToastMessage(mBaseActivity,
+												errorMsg);
+									}
+
+								}
+							}
+						}
+
+						@Override
+						public void onFailure(HttpException error, String msg) {
+							mIsZanAllow = false;
+							UIHelper.ToastMessage(mBaseActivity,
+									R.string.response_data_invalid);
+						}
+					});
+			return mIsZanAllow;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 是否可以关注
 	private boolean mIsAllow = true;
@@ -1274,7 +1377,7 @@ public class HomeOtherFragment extends BaseFragment {
 	 * @param message
 	 *            自定义成功后的提示信息
 	 */
-	protected boolean shopActionApi(String memberID, String callID, String url,
+	protected boolean shopActionApi(String memberID, final String callID, String url,
 			final String message) {
 		mIsAllow = true;
 		HttpUtils http = new HttpUtils();
@@ -1469,6 +1572,24 @@ public class HomeOtherFragment extends BaseFragment {
 			    			}
 			    		}
 			    		CCLog.d(tag, "change pinglun count ... notify adapter");
+			    		refreshTypeCall(mTypeCalls);
+			    		break;
+			    		//点赞个数改变
+			    	case CommonConstant.doWhat_change_zan_count:
+			    		String callId_zan = intent.getStringExtra("callId");
+			    		for(TypeCall callInfo : mTypeCalls) {
+			    			if(callInfo.id.equals(callId_zan)) {
+			    				int zanCount = 0;
+		    					try {
+		    						zanCount = Integer.parseInt(callInfo.zan_num);
+		    					} catch(Exception e) {
+		    						e.printStackTrace();
+		    						zanCount = 0;
+		    					}
+		    					zanCount = zanCount+1;
+		    					callInfo.zan_num = String.valueOf(zanCount);
+			    			}
+			    		}
 			    		refreshTypeCall(mTypeCalls);
 			    		break;
 		    	}

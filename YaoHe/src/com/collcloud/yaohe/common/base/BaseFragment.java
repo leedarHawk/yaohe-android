@@ -938,4 +938,18 @@ public abstract class BaseFragment extends Fragment {
         intent.putExtra("isCanceFollow", isCanceFollow);
         this.getActivity().sendBroadcast(intent);
 	}
+	
+	/**
+	 * 点赞改变数量广播
+	 * @param shopId 
+	 * @param isCanceFollow
+	 * @param doWhat
+	 */
+	public void sendBroadCastForZan(String callId) {
+		Intent intent = new Intent(CommonConstant.STATUS_BROADCAST_ACTION);
+		intent.putExtra("doWhat", CommonConstant.doWhat_change_zan_count);
+        intent.putExtra("callId", callId);
+        this.getActivity().sendBroadcast(intent);
+	}
+	
 }

@@ -22,5 +22,9 @@ public class CommonConstant {
 	 * 改变评论个数
 	 */
 	public static final int doWhat_change_comment_count=2;
+	/**
+	 * 改变赞个数
+	 */
+	public static final int doWhat_change_zan_count=3;
 
 }
