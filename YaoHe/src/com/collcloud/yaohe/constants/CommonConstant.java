@@ -26,5 +26,9 @@ public class CommonConstant {
 	 * 改变赞个数
 	 */
 	public static final int doWhat_change_zan_count=3;
+	/**
+	 * 改变收藏个数
+	 */
+	public static final int doWhat_change_shoucang_count=4;
 
 }

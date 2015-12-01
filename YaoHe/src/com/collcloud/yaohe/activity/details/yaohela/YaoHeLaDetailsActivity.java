@@ -944,6 +944,109 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 		}
 
 	}
+	
+	
+	
+	/**
+	 * 吆喝收藏 API调用
+	 * 
+	 * @Title shopActionApi
+	 * @Description 吆喝收藏API调用
+	 * @param memberID
+	 *            会员ID
+	 * @param callID
+	 *            吆喝ID
+	 * @param url
+	 *            请求url地址
+	 * @param message
+	 *            自定义成功后的提示信息
+	 */
+	protected boolean callCollectionApi(String memberID, final String callID,
+			final String message) {
+		String url = ContantsValues.CALL_FOLLOW_URL +"&member_id="+memberID+"&id="+callID;
+		//String url = ContantsValues.CALL_FOLLOW_URL;
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("member_id", memberID);
+		params.addBodyParameter("call_id", callID);
+		CCLog.i("吆喝收藏点赞参数：", "member_id=" + memberID + " call_id=" + callID);
+
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								if (responseInfo.result != null) {
+									CCLog.i("吆喝收藏点赞状态：", responseInfo.result
+											+ " ");
+								}
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (errorJsonObject.has("status")) {
+
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										if (statusObject.has("code")) {
+											int code = statusObject
+													.optInt("code");
+											if (code == 1) {
+												mIsCollectionSuccess = false;
+												String strErrorMsg = statusObject
+														.optString("message");
+												UIHelper.ToastMessage(
+														mBaseActivity,
+														strErrorMsg);
+
+											} else {
+												mIsCollectionSuccess = true;
+												if (!Utils
+														.isStringEmpty(message)) {
+													UIHelper.ToastMessage(
+															mBaseActivity,
+															message);
+												}
+												
+												sendBroadCastForShouCang(callID,true);
+											}
+										}
+									}
+								} catch (Exception e) {
+									mIsCollectionSuccess = false;
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+								}
+
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						mIsCollectionSuccess = false;
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+					}
+				});
+		return mIsCollectionSuccess;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private int mPraise = 0;
 

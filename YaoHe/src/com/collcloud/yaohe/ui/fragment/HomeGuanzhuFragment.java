@@ -828,17 +828,17 @@ public class HomeGuanzhuFragment extends BaseFragment {
 																R.color.common_home_title_bg));
 										tvShouCangImg
 												.setBackgroundResource(R.drawable.icon_home_item_shoucang_on);
-										tvShouCang
-												.setText(String.valueOf(Integer.valueOf(Utils
-														.strFromView(tvShouCang)) + 1));
+//										tvShouCang
+//												.setText(String.valueOf(Integer.valueOf(Utils
+//														.strFromView(tvShouCang)) + 1));
 									} else {
 										tvShouCangImg
 												.setText(GlobalConstant.INVALID_VALUE);
 										tvShouCang.setTextColor(getResources()
 												.getColor(R.color.text_gray));
-										tvShouCang
-												.setText(String.valueOf(Integer.valueOf(Utils
-														.strFromView(tvShouCang)) - 1));
+//										tvShouCang
+//												.setText(String.valueOf(Integer.valueOf(Utils
+//														.strFromView(tvShouCang)) - 1));
 										tvShouCangImg
 												.setBackgroundResource(R.drawable.icon_home_item_shoucang_off);
 									}
@@ -1152,7 +1152,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	 * @param message
 	 *            自定义成功后的提示信息
 	 */
-	protected boolean shopActionApi(String memberID, String callID, String url,
+	protected boolean shopActionApi(String memberID, final String callID, String url,
 			final String message) {
 		mIsAllow = true;
 		HttpUtils http = new HttpUtils();
@@ -1199,6 +1199,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 															mBaseActivity,
 															message);
 												}
+												sendBroadCastForShouCang(callID,true);
 											}
 										}
 									}
@@ -1586,6 +1587,32 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			    					callInfo.zan_num = String.valueOf(zanCount);
 				    			}
 				    		}
+				    		refreshFollow(mFollowShops);
+				    		break;
+				    		//收藏个数改变
+				    	case CommonConstant.doWhat_change_shoucang_count:
+				    		String callId_shoucang = intent.getStringExtra("callId");
+				    		//是否为添加收藏
+				    		boolean isAddShoucang = intent.getBooleanExtra("isAddShoucang",false);
+				    		for(FollowShop callInfo : mFollowShops) {
+				    			if(callInfo.id.equals(callId_shoucang)) {
+				    				int shoucangCount = 0;
+			    					try {
+			    						shoucangCount = Integer.parseInt(callInfo.collection_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						shoucangCount = 0;
+			    					}
+			    					if(isAddShoucang) {
+			    						shoucangCount = shoucangCount+1;
+			    					} else {
+			    						shoucangCount = shoucangCount-1;
+			    					}
+			    					
+			    					callInfo.collection_num = String.valueOf(shoucangCount);
+				    			}
+				    		}
+				    		CCLog.d(tag, "change shoucang status... notify adapter");
 				    		refreshFollow(mFollowShops);
 				    		break;
 			    		

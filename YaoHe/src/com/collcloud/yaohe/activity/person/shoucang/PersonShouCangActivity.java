@@ -326,7 +326,7 @@ public class PersonShouCangActivity extends BaseActivity implements
 		builder.create().show();
 	}
 
-	private void deleteShoucang(String detID,final int position) {
+	private void deleteShoucang(final String detID,final int position) {
 		progressbar(PersonShouCangActivity.this, R.layout.loading_progress);
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -373,6 +373,8 @@ public class PersonShouCangActivity extends BaseActivity implements
 								showToast("删除收藏成功");
 								mListCollections.remove(position);
 								mAdapter.refreshData(mListCollections);
+								//发送删除成功广播
+								sendBroadCastForShouCang(detID, false);
 								
 							} else {
 								showToast(responseMsg);

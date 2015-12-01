@@ -952,4 +952,19 @@ public abstract class BaseFragment extends Fragment {
         this.getActivity().sendBroadcast(intent);
 	}
 	
+	/**
+	 * 收藏改变数量广播
+	 * @param shopId 
+	 * @param isAddShoucang 是否为添加收藏
+	 * @param doWhat
+	 */
+	public void sendBroadCastForShouCang(String callId,boolean isAddShoucang) {
+		Intent intent = new Intent(CommonConstant.STATUS_BROADCAST_ACTION);
+		intent.putExtra("doWhat", CommonConstant.doWhat_change_shoucang_count);
+        intent.putExtra("callId", callId);
+        intent.putExtra("isAddShoucang", isAddShoucang);
+        this.getActivity().sendBroadcast(intent);
+	}
+	
+	
 }
