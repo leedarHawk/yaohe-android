@@ -1398,9 +1398,34 @@ public class HomeOtherFragment extends BaseFragment {
 			    		for(TypeCall typeCall : mTypeCalls) {
 			    			if(typeCall.shop_id.equals(shopId)) {
 			    				if(isCanceFollow) {
+			    					int fansCount = 0;
+			    					try {
+			    						fansCount = Integer.parseInt(typeCall.shop_fans_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						fansCount = 0;
+			    					}
+			    					fansCount = fansCount-1;
+			    					if(fansCount<0) {
+			    						fansCount =0;
+			    					}
+			    					typeCall.shop_fans_num = String.valueOf(fansCount);
+			    					
 			    					typeCall.guanzhu = GlobalConstant.INVALID_VALUE;
+			    					
+			    					
 			    				} else {
 			    					CCLog.d(tag, "add guanzhu.....");
+			    					int fansCount = 0;
+			    					try {
+			    						fansCount = Integer.parseInt(typeCall.shop_fans_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						fansCount = 0;
+			    					}
+			    					fansCount = fansCount+1;
+			    					typeCall.shop_fans_num = String.valueOf(fansCount);
+			    					
 			    					typeCall.guanzhu = GlobalConstant.VALID_VALUE;
 			    				}
 			    			}

@@ -1023,7 +1023,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 				}
 
 				@Override
-				public void onGuanZhuClick(TextView tvGuanZhu, String callID) {
+				public void onGuanZhuClick(TextView tvGuanZhu, TextView mTvFans,String callID) {
 				}
 
 				@Override
@@ -1080,7 +1080,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 				}
 
 				@Override
-				public void onGuanZhuClick(TextView tvGuanzhu, String callID) {
+				public void onGuanZhuClick(TextView tvGuanzhu,TextView mTvFans, String callID) {
 				}
 
 				@Override
@@ -1094,7 +1094,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 			// 首页关注按钮点击监听事件处理
 			mAdapter.setOnGuanZhuClickListener(new OnButtonClickListener() {
 				@Override
-				public void onGuanZhuClick(final TextView tvGuanZhu,
+				public void onGuanZhuClick(final TextView tvGuanZhu,final TextView mTvFans,
 						String shopID) {
 					if (!isNetworkConnected()) { // 网络检查
 						UIHelper.ToastMessage(
@@ -1143,7 +1143,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 							ApiAccess.showProgressDialog(getActivity(),
 									"取消关注中...");
 							// 关注
-							cancelFollows(shopID,tvGuanZhu);
+							cancelFollows(shopID,tvGuanZhu,mTvFans);
 						
 
 						}
@@ -1255,7 +1255,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 				}
 
 				@Override
-				public void onGuanZhuClick(TextView tvGuanzhu, String callID) {
+				public void onGuanZhuClick(TextView tvGuanzhu, TextView mTvFans,String callID) {
 				}
 
 				@Override
@@ -1326,7 +1326,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 				}
 
 				@Override
-				public void onGuanZhuClick(TextView tvGuanzhu, String callID) {
+				public void onGuanZhuClick(TextView tvGuanzhu, TextView mTvFans,String callID) {
 				}
 
 				@Override
@@ -1374,7 +1374,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 				}
 
 				@Override
-				public void onGuanZhuClick(TextView tvGuanzhu, String callID) {
+				public void onGuanZhuClick(TextView tvGuanzhu,TextView mTvFans, String callID) {
 				}
 
 				@Override
@@ -1740,7 +1740,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 	/**
 	 * 取消关注
 	 */
-	private void cancelFollows(final String shopID,final TextView tvGuanZhu) {
+	private void cancelFollows(final String shopID,final TextView tvGuanZhu,final TextView mTvFans) {
 		String url = ContantsValues.CANCEL_FOLLOWS + "&member_id=" + mLoginDataManager.getMemberId() + "&id=" + shopID;
 		HttpUtils http = new HttpUtils();
 		RequestParams params = new RequestParams();
@@ -1784,6 +1784,11 @@ public class HomeTuijianFragment extends BaseFragment  {
 												tvGuanZhu.setBackgroundResource(R.drawable.icon_home_type_weiguanzhu);
 												//setRefreshHomeGuanzhuFragmentStatus(true);
 												sendBroadCast(shopID, true, CommonConstant.doWhat_change_followStatus);
+												//粉丝个数
+//												mTvFans.setText(callInfo.shop_fans_num + " 粉丝");
+//												for(CallInfo ci : mCallInfos) {
+//													if(ci.shop_id.equals(arg0))
+//												}
 												
 											}
 										}
@@ -1876,9 +1881,37 @@ public class HomeTuijianFragment extends BaseFragment  {
 			    		for(CallInfo callInfo : mCallInfos) {
 			    			if(callInfo.shop_id.equals(shopId)) {
 			    				if(isCanceFollow) {
+			    					
+			    					
+			    					int fansCount = 0;
+			    					try {
+			    						fansCount = Integer.parseInt(callInfo.shop_fans_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						fansCount = 0;
+			    					}
+			    					fansCount = fansCount-1;
+			    					if(fansCount<0) {
+			    						fansCount =0;
+			    					}
+			    					callInfo.shop_fans_num = String.valueOf(fansCount);
+			    					
+			    					
 			    					callInfo.guanzhu = GlobalConstant.INVALID_VALUE;
+			    					
 			    				} else {
 			    					CCLog.d(tag, "add guanzhu.....");
+			    					int fansCount = 0;
+			    					try {
+			    						fansCount = Integer.parseInt(callInfo.shop_fans_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						fansCount = 0;
+			    					}
+			    					fansCount = fansCount+1;
+			    					callInfo.shop_fans_num = String.valueOf(fansCount);
+			    					
+			    					
 			    					callInfo.guanzhu = GlobalConstant.VALID_VALUE;
 			    				}
 			    			}

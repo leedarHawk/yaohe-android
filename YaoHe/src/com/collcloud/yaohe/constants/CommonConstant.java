@@ -18,5 +18,9 @@ public class CommonConstant {
 	 * 改变关注状态
 	 */
 	public static final int doWhat_change_followStatus=1;
+	/**
+	 * 改变粉丝个数
+	 */
+	public static final int doWhat_change_fans_count=2;
 
 }

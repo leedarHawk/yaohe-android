@@ -108,7 +108,7 @@ public class HomeAdapter extends BaseAdapter {
 				String shopId, String memberID, String type);
 
 		// 关注按钮点击
-		void onGuanZhuClick(TextView tvGuanzhu, String callID);
+		void onGuanZhuClick(TextView tvGuanzhu, TextView mTvFans,String callID);
 
 		// 点赞按钮点击
 		void onZanButtonClick(int position, TextView tvZanImg, TextView tvZan,
@@ -408,7 +408,7 @@ public class HomeAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				if (mOnGuanZhuClickListener != null) {
 					mOnGuanZhuClickListener.onGuanZhuClick(holder.mTvGuanzhu,
-							shopID);
+							holder.mTvFans,shopID);
 				}
 			}
 		});
