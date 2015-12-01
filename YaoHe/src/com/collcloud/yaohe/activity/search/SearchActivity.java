@@ -7,11 +7,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -22,7 +26,6 @@ import android.widget.Toast;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.activity.details.yaohela.YaoHeLaDetailsActivity;
-import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.DeatilsSearchInfo.SearchShopInfo;
 import com.collcloud.yaohe.api.info.DeatilsSearchInfo.SearchYaoheInfo;
@@ -338,6 +341,33 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 		mEtSearch = (EditText) findViewById(R.id.et_activity_search_view);
 		mTvDefaultTips = (TextView) findViewById(R.id.tv_search_default_tips);
 		mTvSearch.setOnClickListener(this);
+		
+		
+		
+		//添加软键盘事件
+		mEtSearch.setOnEditorActionListener(new EditText.OnEditorActionListener() {  
+		    @Override  
+		    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {  
+		        if (actionId == EditorInfo.IME_ACTION_DONE) {  
+		        	mStrKeywords = Utils.strFromView(mEtSearch);
+		        	if(mStrKeywords != null && !"".equals(mStrKeywords) && !"null".equals(mStrKeywords)) {
+		        		 InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);  
+				            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);  
+				            mTvSearch.performClick();
+		        	} else {
+		        		Toast.makeText(SearchActivity.this, "请输入关键字", Toast.LENGTH_SHORT).show();
+		        	}
+		           
+		            return true;    
+		        }  
+		        return false;  
+		    }  
+		      
+		}); 
+		
+		
+		
+		
 
 		// ********** 搜索吆喝结果显示 ********* //
 		mLlYaoHeNone = (LinearLayout) findViewById(R.id.ll_search_yaohe_none);
