@@ -532,6 +532,7 @@ public class PersonActivity extends BaseActivity implements OnClickListener {
 				mLoginDataManager.setLoginState("0");// 登录状态设置为 未登录
 				mLoginDataManager.setUserType("0"); // 清除默认状态为个人
 				mLoginDataManager.setBusinessState("0");// 清除默认状态,底部导航判断为个人显示
+				mLoginDataManager.setMemberId(""); //清除memberid号
 				// mApplication.finishAll();
 				Intent intent = new Intent();
 				intent.setClass(PersonActivity.this, MineActivity.class);
