@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
@@ -369,23 +370,28 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.tv_search_cancel_text:
 			mStrKeywords = Utils.strFromView(mEtSearch);
-			ApiAccess.showProgressDialog(SearchActivity.this, "搜索中...",
-					R.style.progress_dialog);
-			new Handler().postDelayed(new Runnable() {
+			if(mStrKeywords != null && !"".equals(mStrKeywords) && !"null".equals(mStrKeywords)) {
+				ApiAccess.showProgressDialog(SearchActivity.this, "搜索中...",
+						R.style.progress_dialog);
+				new Handler().postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-					ApiAccess.dismissProgressDialog();
-					getSearchShopCallList(mStrKeywords);
+					@Override
+					public void run() {
+						ApiAccess.dismissProgressDialog();
+						getSearchShopCallList(mStrKeywords);
 
-					// mLlYaoHeNone.setVisibility(View.VISIBLE);
-					// mLlShopNone.setVisibility(View.VISIBLE);
-					mLlBusiness.setVisibility(View.VISIBLE);
-					mLlServiceCall.setVisibility(View.VISIBLE);
-					mTvDefaultTips.setVisibility(View.GONE);
+						// mLlYaoHeNone.setVisibility(View.VISIBLE);
+						// mLlShopNone.setVisibility(View.VISIBLE);
+						mLlBusiness.setVisibility(View.VISIBLE);
+						mLlServiceCall.setVisibility(View.VISIBLE);
+						mTvDefaultTips.setVisibility(View.GONE);
 
-				}
-			}, 1000);
+					}
+				}, 1000);
+			} else {
+				Toast.makeText(SearchActivity.this, "请输入关键字", Toast.LENGTH_SHORT).show();
+			}
+			
 			break;
 
 		default:
