@@ -38,12 +38,11 @@
 
             <!-- 标题文字 , 优惠类型，时间信息,粉丝等 -->
 
-           <RelativeLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="260px"
                 android:background="@drawable/business_details_info_bg"
                 android:gravity="center_vertical" >
-
 
                 <com.meg7.widget.CustomShapeImageView
                     android:id="@+id/iv_details_fujin_fuwu_tuijian_img"
@@ -245,6 +244,110 @@
                     android:orientation="horizontal"
                     android:padding="20px" >
 
+                    <!-- 优惠券 -->
+
+                    <RelativeLayout
+                        android:id="@+id/rl_business_youhuiquan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center" >
+
+                        <TextView
+                            android:id="@+id/tv_business_youhuiquan_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/icon_shop_base_youhuiquan"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:id="@+id/tv_business_youhuiquan_count"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:layout_alignEnd="@+id/tv_business_youhuiquan_img"
+                            android:layout_alignRight="@+id/tv_business_youhuiquan_img"
+                            android:layout_alignTop="@+id/tv_business_youhuiquan_img"
+                            android:layout_marginRight="-6px"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/icon_business_service_circle"
+                            android:gravity="center"
+                            android:maxHeight="16px"
+                            android:maxWidth="16px"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/yaohe_business_service_youhuiquan"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_business_youhuiquan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_business_youhuiquan_img"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10px"
+                            android:gravity="center"
+                            android:text="优惠券"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <!-- 会员卡 -->
+
+                    <RelativeLayout
+                        android:id="@+id/rl_business_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_weight="1"
+                        android:clickable="true" >
+
+                        <TextView
+                            android:id="@+id/tv_business_card_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/icon_shop_base_huiyuanka" />
+
+                        <TextView
+                            android:id="@+id/tv_business_card_count"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:layout_alignEnd="@+id/tv_business_card_img"
+                            android:layout_alignRight="@+id/tv_business_card_img"
+                            android:layout_alignTop="@+id/tv_business_card_img"
+                            android:layout_marginRight="-6px"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/icon_business_service_circle"
+                            android:gravity="center"
+                            android:maxHeight="16px"
+                            android:maxWidth="16px"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/yaohe_business_service_huiyuanka"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_business_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_business_card_img"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10px"
+                            android:gravity="center"
+                            android:text="会员卡"
+                            android:textColor="@color/common_home_text_color_title"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
                     <!-- 新品 -->
 
                     <RelativeLayout
@@ -342,109 +445,6 @@
                             android:textSize="14sp"
                             android:visibility="gone" />
                     </RelativeLayout>
-
-                    <!-- 会员卡 -->
-
-                    <RelativeLayout
-                        android:id="@+id/rl_business_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
-                        android:layout_weight="1"
-                        android:clickable="true" >
-
-                        <TextView
-                            android:id="@+id/tv_business_card_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="100px"
-                            android:layout_centerHorizontal="true"
-                            android:background="@drawable/icon_shop_base_huiyuanka" />
-
-                        <TextView
-                            android:id="@+id/tv_business_card_count"
-                            android:layout_width="40px"
-                            android:layout_height="40px"
-                            android:layout_alignEnd="@+id/tv_business_card_img"
-                            android:layout_alignRight="@+id/tv_business_card_img"
-                            android:layout_alignTop="@+id/tv_business_card_img"
-                            android:layout_marginRight="-6px"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/icon_business_service_circle"
-                            android:gravity="center"
-                            android:maxHeight="16px"
-                            android:maxWidth="16px"
-                            android:padding="1dp"
-                            android:singleLine="true"
-                            android:text="0"
-                            android:textColor="@color/yaohe_business_service_huiyuanka"
-                            android:textSize="12sp"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tv_business_card"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_business_card_img"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10px"
-                            android:gravity="center"
-                            android:text="会员卡"
-                            android:textColor="@color/common_home_text_color_title"
-                            android:textSize="14sp"
-                            android:visibility="gone" />
-                    </RelativeLayout>
-                    <!-- 优惠券 -->
-
-                    <RelativeLayout
-                        android:id="@+id/rl_business_youhuiquan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:gravity="center" >
-
-                        <TextView
-                            android:id="@+id/tv_business_youhuiquan_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="100px"
-                            android:layout_centerHorizontal="true"
-                            android:background="@drawable/icon_shop_base_youhuiquan"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tv_business_youhuiquan_count"
-                            android:layout_width="40px"
-                            android:layout_height="40px"
-                            android:layout_alignEnd="@+id/tv_business_youhuiquan_img"
-                            android:layout_alignRight="@+id/tv_business_youhuiquan_img"
-                            android:layout_alignTop="@+id/tv_business_youhuiquan_img"
-                            android:layout_marginRight="-6px"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/icon_business_service_circle"
-                            android:gravity="center"
-                            android:maxHeight="16px"
-                            android:maxWidth="16px"
-                            android:padding="1dp"
-                            android:singleLine="true"
-                            android:text="0"
-                            android:textColor="@color/yaohe_business_service_youhuiquan"
-                            android:textSize="12sp"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tv_business_youhuiquan"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_business_youhuiquan_img"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10px"
-                            android:gravity="center"
-                            android:text="优惠券"
-                            android:textColor="@color/common_home_text_color_title"
-                            android:textSize="14sp"
-                            android:visibility="gone" />
-                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
             <!-- 吆喝 -->
@@ -473,7 +473,7 @@
                         android:text="吆喝 "
                         android:textColor="@color/common_home_text_color_title"
                         android:textSize="14sp" />
-                    
+
                     <TextView
                         android:id="@+id/moreYaoheText"
                         android:layout_width="wrap_content"
@@ -484,8 +484,6 @@
                         android:text="更多 >"
                         android:textColor="@color/common_home_text_color_title"
                         android:textSize="14sp" />
-                    
-                    
                 </LinearLayout>
 
                 <!-- 吆喝信息列表 -->
