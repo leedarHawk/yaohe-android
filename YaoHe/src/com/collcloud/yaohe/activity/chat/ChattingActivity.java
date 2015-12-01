@@ -406,7 +406,7 @@ public class ChattingActivity extends BaseActivity implements OnClickListener {
 		params.addBodyParameter("member_id", mLoginDataManager.getMemberId());
 		params.addBodyParameter("to_member_id", mAccountTo);
 		params.addBodyParameter("content", message_content);
-		String url = ContantsValues.SEND_CHATTING_URL+"&member_id="+mLoginDataManager.getMemberId()+"&to_member_id="+mAccountTo+"&content="+message_content;
+		String url = ContantsValues.SEND_CHATTING_URL+"&member_id="+mLoginDataManager.getMemberId()+"&to_member_id="+mAccountTo;
 		CCLog.d(tag, "sms url :"+url);
 		http.send(HttpRequest.HttpMethod.POST,
 				url, params,
