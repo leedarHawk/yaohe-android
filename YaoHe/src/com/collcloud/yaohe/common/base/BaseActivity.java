@@ -2208,4 +2208,18 @@ public abstract class BaseActivity extends FragmentActivity {
         intent.putExtra("isCanceFollow", isCanceFollow);
         sendBroadcast(intent);
 	}
+	
+	/**
+	 * 评论数改变广播
+	 * @param shopId 
+	 * @param isCanceFollow
+	 * @param doWhat
+	 */
+	public void sendBroadCastForCommentCountChange(String callId,boolean isAddCommentCount) {
+		Intent intent = new Intent(CommonConstant.STATUS_BROADCAST_ACTION);
+		intent.putExtra("doWhat", CommonConstant.doWhat_change_comment_count);
+        intent.putExtra("callId", callId);
+        intent.putExtra("isAddCommentCount", isAddCommentCount);
+        sendBroadcast(intent);
+	}
 }

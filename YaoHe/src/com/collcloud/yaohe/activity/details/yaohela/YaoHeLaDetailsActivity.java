@@ -172,10 +172,6 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 		isFollow(mLoginDataManager.getMemberId(), mStrShopID,
 				ContantsValues.SHOP_FOLLOW_STATUS_URL);
 		initView();
-		// 吆喝详情内容
-		getCallDetail();
-		// 设定引用服务信息
-		setServiceInfo();
 	}
 
 	/**
@@ -483,6 +479,10 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 		super.onResume();
 		isFollow(mLoginDataManager.getMemberId(), mStrShopID,
 				ContantsValues.SHOP_FOLLOW_STATUS_URL);
+		// 吆喝详情内容
+		getCallDetail();
+		// 设定引用服务信息
+		setServiceInfo();
 	}
 
 	/**

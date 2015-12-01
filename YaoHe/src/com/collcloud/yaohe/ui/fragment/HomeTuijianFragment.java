@@ -1919,6 +1919,44 @@ public class HomeTuijianFragment extends BaseFragment  {
 			    		CCLog.d(tag, "change guanzhu status... notify adapter");
 			    		setHomeRecommendInfo();
 			    		break;
+			    	//评论个数
+			    	case CommonConstant.doWhat_change_comment_count:
+			    		boolean isAddCommentCount=intent.getBooleanExtra("isAddCommentCount",false);
+			    		String callId = intent.getStringExtra("callId");
+			    		for(CallInfo callInfo : mCallInfos) {
+			    			if(callInfo.id.equals(callId)) {
+			    				if(!isAddCommentCount) {//删除评论
+			    					
+			    					
+			    					int commentCount = 0;
+			    					try {
+			    						commentCount = Integer.parseInt(callInfo.comment_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						commentCount = 0;
+			    					}
+			    					commentCount = commentCount-1;
+			    					if(commentCount<0) {
+			    						commentCount =0;
+			    					}
+			    					callInfo.comment_num = String.valueOf(commentCount);
+			    				} else {//添加评论
+			    					int commentCount = 0;
+			    					try {
+			    						commentCount = Integer.parseInt(callInfo.comment_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						commentCount = 0;
+			    					}
+			    					commentCount = commentCount+1;
+			    					callInfo.comment_num = String.valueOf(commentCount);
+			    				}
+			    			}
+			    		}
+			    		CCLog.d(tag, "change guanzhu status... notify adapter");
+			    		setHomeRecommendInfo();
+			    		
+			    		break;
 		    	}
 	    	} catch(Exception e) {
 	    		e.printStackTrace();

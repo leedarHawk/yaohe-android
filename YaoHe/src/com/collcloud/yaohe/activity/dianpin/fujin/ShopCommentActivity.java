@@ -234,7 +234,7 @@ public class ShopCommentActivity extends BaseActivity implements
 											UIHelper.ToastMessage(
 													ShopCommentActivity.this,
 													message);
-											cancelAction();
+											cancelAction(true);
 										}
 									}
 								} catch (Exception e) {
@@ -257,17 +257,19 @@ public class ShopCommentActivity extends BaseActivity implements
 				});
 	}
 
-	private void cancelAction() {
+	private void cancelAction(boolean commentSuccess) {
 		Intent intent = new Intent();
 		if (!Utils.isStringEmpty(mStrCallID)) {
 			Bundle bundle = new Bundle();
 			intent.putExtra("yaoheCallID", mStrCallID);
+			intent.putExtra("commentSuccess", commentSuccess);
 			intent.putExtras(bundle);
 			setResult(11, intent);
 
 		} else if (!Utils.isStringEmpty(mStrShopID)) {
 			Bundle bundle = new Bundle();
 			intent.putExtra("BusinessShopID", mStrShopID);
+			intent.putExtra("commentSuccess", commentSuccess);
 			intent.putExtras(bundle);
 			setResult(22, intent);
 		}

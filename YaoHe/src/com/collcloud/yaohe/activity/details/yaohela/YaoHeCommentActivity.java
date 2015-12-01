@@ -82,6 +82,8 @@ public class YaoHeCommentActivity extends BaseActivity implements
 		// String time = df.format(times);
 		// CCLog.e("时间格式化：",time);
 	}
+	
+
 
 	/**
 	 * 获取评论内容
@@ -426,6 +428,11 @@ public class YaoHeCommentActivity extends BaseActivity implements
 			Bundle b = data.getExtras(); // data为B中回传的Intent
 			if (!Utils.isStringEmpty(b.getString("yaoheCallID"))) {
 				String callID = b.getString("yaoheCallID");
+				boolean commentSuccess = b.getBoolean("commentSuccess");
+				if(commentSuccess) {
+					sendBroadCastForCommentCountChange(callID,true);
+				}
+				
 				getCallCommentInfo(callID);
 			}
 		}
@@ -481,7 +488,9 @@ public class YaoHeCommentActivity extends BaseActivity implements
 														break;
 													}
 												}
+												sendBroadCastForCommentCountChange(mStrCallID,false);
 												mList.remove(tmpc);
+												
 												setCommentListInfo();
 											}
 										}
