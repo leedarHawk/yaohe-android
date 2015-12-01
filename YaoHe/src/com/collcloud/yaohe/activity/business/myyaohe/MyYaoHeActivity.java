@@ -430,8 +430,8 @@ public class MyYaoHeActivity extends BaseActivity implements OnClickListener {
 		switch (arg0.getId()) {
 
 		case R.id.ll_common_top_back:
-			baseStartActivity(new Intent(MyYaoHeActivity.this,
-					BusinessActivity.class));
+//			baseStartActivity(new Intent(MyYaoHeActivity.this,
+//					BusinessActivity.class));
 			finish();
 			break;
 		case R.id.ll_tv_do:
