@@ -380,6 +380,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		intent.putExtra(IntentKeyNames.KEY_CALL_TYPE, type);
 		intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, memberId);
 		intent.putExtra(IntentKeyNames.KEY_DETAILS_SERVICE_ID, serviceId);
+		intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, mStrShopID);
 		intent.setClass(DetailsBusinessInfoActivity.this,
 				YaoHeLaDetailsActivity.class);
 		baseStartActivity(intent);
