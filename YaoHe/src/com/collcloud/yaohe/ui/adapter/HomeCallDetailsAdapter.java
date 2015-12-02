@@ -189,6 +189,8 @@ public class HomeCallDetailsAdapter extends BaseAdapter {
 		if (callInfo != null && callInfo.face != null) {
 			//mImageLoader.get(callInfo.face, listener);
 			mImageLoader.get(callInfo.face, listener, mContext.getResources().getDimensionPixelSize(R.dimen.photo_width), mContext.getResources().getDimensionPixelSize(R.dimen.photo_height));
+		} else {
+			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_default_logo);
 		}
 		
 		holder.commentBtn.setOnClickListener(new OnClickListener() {
