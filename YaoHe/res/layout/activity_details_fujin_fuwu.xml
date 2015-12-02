@@ -239,6 +239,7 @@
                     android:id="@+id/ll_details_fujin_fuwu_layout"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:background="@color/white"
                     android:baselineAligned="false"
                     android:orientation="horizontal"
@@ -250,7 +251,6 @@
                         android:id="@+id/rl_business_youhuiquan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:gravity="center" >
@@ -303,7 +303,7 @@
                         android:id="@+id/rl_business_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
+                        android:layout_marginLeft="18px"
                         android:layout_weight="1"
                         android:clickable="true" >
 
@@ -354,6 +354,7 @@
                         android:id="@+id/rl_business_xinpin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="18px"
                         android:layout_weight="1"
                         android:clickable="true" >
 
@@ -401,7 +402,7 @@
                         android:id="@+id/rl_business_huodong"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
+                        android:layout_marginLeft="18px"
                         android:layout_weight="1"
                         android:clickable="true" >
 

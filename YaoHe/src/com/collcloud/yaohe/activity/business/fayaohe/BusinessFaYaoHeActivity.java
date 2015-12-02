@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.inputmethod.InputMethodManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -554,6 +555,7 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 	private void intialSource() {
 
 		View view = LayoutInflater.from(this).inflate(R.layout.activity_business_fayaohe_header, null);
+		view.setOnClickListener(this);
 		this.ll_common_top_back = (LinearLayout) findViewById(R.id.ll_common_top_back);
 		ll_common_top_back.setOnClickListener(this);
 
@@ -623,6 +625,14 @@ public class BusinessFaYaoHeActivity extends BaseActivity implements
 	protected void resetLayout() {
 		RelativeLayout rel_fyh = (RelativeLayout) findViewById(R.id.rl_fyh_root);
 		SupportDisplay.resetAllChildViewParam(rel_fyh);
+	}
+
+	public void inputClick(View view){
+
+		InputMethodManager imm = (InputMethodManager)
+		getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
 	}
 
 	/**

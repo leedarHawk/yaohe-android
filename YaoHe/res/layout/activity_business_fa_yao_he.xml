@@ -6,7 +6,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     tools:context=".BusinessFaYaoHeActivity"
-    tools:ignore="HardcodedText,ContentDescription,PxUsage,RtlHardcoded" >
+    tools:ignore="HardcodedText,ContentDescription,PxUsage,RtlHardcoded">
 
     <!-- 头部信息 -->
 
@@ -25,5 +25,5 @@
         android:background="#f7f7f7"
         android:cacheColorHint="#00000000"
         android:divider="@null"
-        android:listSelector="#00000000" />
+        android:listSelector="#00000000"/>
 </RelativeLayout>
