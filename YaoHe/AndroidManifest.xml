@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.collcloud.yaohe"
-    android:versionCode="40"
-    android:versionName="1.0.40" >
+    android:versionCode="55"
+    android:versionName="1.0.55" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -16,6 +16,7 @@
     <!-- 6dba57897e3cc193c8765761db931177 这个为正式发布到应用宝，app打包需要 -->
     <!-- 76f3543c08ee77bb8061fc3a498b384d  Eclipse测试 -->
     <!-- LEE: ef0cb7c696f7d4ae4cec6971ced72d7b -->
+
 
 
     <!-- 扫描相关 -->
@@ -63,7 +64,7 @@
         android:theme="@style/Theme" >
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="bb8b09020443b811e9318a595a728a54" />
+            android:value="c1d1ebaa7eec0643c4bae854a7137189" />
 
         <activity
             android:name="com.collcloud.yaohe.activity.splash.SplashActivity"
