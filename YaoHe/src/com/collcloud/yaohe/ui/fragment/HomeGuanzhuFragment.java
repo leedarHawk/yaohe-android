@@ -91,7 +91,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	/**
 	 * 列表内容为空，显示提示内容
 	 */
-	private LinearLayout mLlEmpty = null;
+	//private LinearLayout mLlEmpty = null;
 	/**
 	 * 提示文字
 	 */
@@ -135,8 +135,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		mLvPullToRefreshView = (XListView) v
 				.findViewById(R.id.lv_home_guanzhu_shop);
 
-		mLlEmpty = (LinearLayout) v
-				.findViewById(R.id.ll_home_guanzhu_shop_empty);
+//		mLlEmpty = (LinearLayout) v
+//				.findViewById(R.id.ll_home_guanzhu_shop_empty);
 		ApiAccess.showProgressDialog(getActivity(), "数据加载中..",
 				R.style.progress_dialog);
 		// 获取首页关注吆喝内容列表
@@ -205,11 +205,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			} else {
 				ApiAccess.dismissProgressDialog();
 				if (mLvPullToRefreshView != null) {
-					mLvPullToRefreshView.setVisibility(View.GONE);
+					mLvPullToRefreshView.setVisibility(View.VISIBLE);
 				}
-				if (mLlEmpty != null) {
-					mLlEmpty.setVisibility(View.VISIBLE);
-				}
+//				if (mLlEmpty != null) {
+//					mLlEmpty.setVisibility(View.VISIBLE);
+//				}
 			}
 		}
 	}
@@ -340,6 +340,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
+							onLoad();
 							CCLog.d(tag, "refresh data:"+refreshData);
 							CCLog.d(tag, "refresh data:"+responseInfo.toString());
 							if(refreshData) {
@@ -382,12 +383,12 @@ public class HomeGuanzhuFragment extends BaseFragment {
 																.get(0).id)
 														&& Utils.isStringEmpty(mHomeFollowShopInfo.data
 																.get(0).member_id)) {
-													mLlEmpty.setVisibility(View.VISIBLE);
+													//mLlEmpty.setVisibility(View.VISIBLE);
 													mLvPullToRefreshView
-															.setVisibility(View.GONE);
+															.setVisibility(View.VISIBLE);
 													return;
 												} else {
-													mLlEmpty.setVisibility(View.GONE);
+													//mLlEmpty.setVisibility(View.GONE);
 													mLvPullToRefreshView
 															.setVisibility(View.VISIBLE);
 												}
@@ -519,7 +520,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 													&& mFollowShops.size() > 0) {
 												mLvPullToRefreshView
 														.setVisibility(View.VISIBLE);
-												mLlEmpty.setVisibility(View.GONE);
+												//mLlEmpty.setVisibility(View.GONE);
 												// 设定首页吆喝内容
 												 refreshFollow(mFollowShops);
 //												if (mUiHandler != null) {
@@ -527,20 +528,20 @@ public class HomeGuanzhuFragment extends BaseFragment {
 //												}
 											}
 										} else {
-											mLlEmpty.setVisibility(View.VISIBLE);
+											//mLlEmpty.setVisibility(View.VISIBLE);
 											mLvPullToRefreshView
-													.setVisibility(View.GONE);
+													.setVisibility(View.VISIBLE);
 										}
 									}
 								} else {
 									mLvPullToRefreshView
-											.setVisibility(View.GONE);
-									mLlEmpty.setVisibility(View.VISIBLE);
+											.setVisibility(View.VISIBLE);
+									//mLlEmpty.setVisibility(View.VISIBLE);
 								}
 								onLoad();
 							} catch (JSONException e) {
-								mLvPullToRefreshView.setVisibility(View.GONE);
-								mLlEmpty.setVisibility(View.VISIBLE);
+								mLvPullToRefreshView.setVisibility(View.VISIBLE);
+								//mLlEmpty.setVisibility(View.VISIBLE);
 								onLoad();
 							}
 						}
@@ -549,18 +550,18 @@ public class HomeGuanzhuFragment extends BaseFragment {
 						public void onFailure(HttpException error, String msg) {
 							onLoad();
 							ApiAccess.dismissProgressDialog();
-							mLvPullToRefreshView.setVisibility(View.GONE);
-							mLlEmpty.setVisibility(View.VISIBLE);
+							mLvPullToRefreshView.setVisibility(View.VISIBLE);
+							//mLlEmpty.setVisibility(View.VISIBLE);
 						}
 					});
 		} else {
 			ApiAccess.dismissProgressDialog();
 			if (mLvPullToRefreshView != null) {
-				mLvPullToRefreshView.setVisibility(View.GONE);
+				mLvPullToRefreshView.setVisibility(View.VISIBLE);
 			}
-			if (mLlEmpty != null) {
-				mLlEmpty.setVisibility(View.VISIBLE);
-			}
+//			if (mLlEmpty != null) {
+//				mLlEmpty.setVisibility(View.VISIBLE);
+//			}
 
 		}
 
@@ -1043,8 +1044,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		CCLog.i("关注商家Fragment", "resetLayout");
 
 		// 空内容提示
-		mLlEmpty = (LinearLayout) view
-				.findViewById(R.id.ll_home_guanzhu_shop_empty);
+//		mLlEmpty = (LinearLayout) view
+//				.findViewById(R.id.ll_home_guanzhu_shop_empty);
 		mTvTips = (TextView) view
 				.findViewById(R.id.tv_fragment_extra_text_link);
 		mTvNetError = (TextView) view
