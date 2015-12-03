@@ -43,6 +43,7 @@ public class DetailsCallInfo implements Serializable {
 		public String shop_subscribe_tel;
 		public String shop_address;
 		public String shop_fans_num;
+		public String shop_face;
 		
 	}
 

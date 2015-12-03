@@ -34,7 +34,6 @@ import com.collcloud.yaohe.activity.details.xinpin.XinPinDetailsActivity;
 import com.collcloud.yaohe.activity.details.youhui.YouHuiDetailsActivity;
 import com.collcloud.yaohe.activity.jubao.JuBaoActivity;
 import com.collcloud.yaohe.activity.map.ShowGeocoderActivity;
-import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.ApiAccessErrorManager;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.DetailsCallInfo;
@@ -60,6 +59,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.meg7.widget.CustomShapeImageView;
 
 /**
  * 首页-吆喝啦详情页面
@@ -70,6 +70,8 @@ import com.lidroid.xutils.http.client.HttpRequest;
 public class YaoHeLaDetailsActivity extends BaseActivity implements
 		OnItemClickListener, OnClickListener {
 
+	
+	private String tag = YaoHeLaDetailsActivity.class.getSimpleName();
 	/** 活动相关图片 */
 	private LinearLayout mLlImgsLayout;
 	private MyGridView mGvList;
@@ -82,6 +84,10 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 	 */
 	private TextView mTvTuiJianName = null;
 	private RelativeLayout mRlTuiJianName = null;
+	/**
+	 * 店铺头像
+	 */
+	private CustomShapeImageView iv_details_huodong_tuijian_img;
 	/**
 	 * 推荐商家的地址
 	 */
@@ -509,7 +515,8 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 		RequestParams params = new RequestParams();
 		params.addBodyParameter("id", mStrCallId);
 		
-		String url = ContantsValues.DETAILS_GET_CALL_INFO+"&id="+mStrCallId;
+		String url = ContantsValues.DETAILS_GET_CALL_INFO+"&id="+mStrCallId+"&member_id="+mLoginDataManager.getMemberId();
+		CCLog.d(tag, "url:"+url);
 
 		http.send(HttpRequest.HttpMethod.POST,
 				url, params,
@@ -569,6 +576,7 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 										mTvBaseBottomShouCang
 												.setText(mCallInfo.collection_num);
 									}
+									
 
 									// 新品发布的时候没有标题，所以服务器返回的content这个字段只适用于优惠券，会员卡，活动
 									// 新品的时候，字段里多了一个title，所以用这个显示。
@@ -616,17 +624,31 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 										String url = URLs.IMG_PRE
 												+ mCallInfo.s_img;
 
-										RequestQueue mQueue = Volley
-												.newRequestQueue(YaoHeLaDetailsActivity.this);
-										ImageLoader imageLoader = new ImageLoader(
-												mQueue, new BitmapCache());
+										ImageLoader mImageLoader = new ImageLoader(AppApplacation.requestQueue,
+												new BitmapCache());
 										ImageListener listener = ImageLoader
 												.getImageListener(
 														mIvServiceImg,
 														R.drawable.icon_yaohe_loading_default,
 														R.drawable.icon_yaohe_loading_default);
-										imageLoader.get(url, listener,getResources().getDimensionPixelSize(R.dimen.max_list_width),getResources().getDimensionPixelSize(R.dimen.max_list_height));
+										mImageLoader.get(url, listener,getResources().getDimensionPixelSize(R.dimen.max_list_width),getResources().getDimensionPixelSize(R.dimen.max_list_height));
 									}
+									
+									//商家头像
+									if (!Utils.isStringEmpty(mCallInfo.shop_face)) {
+										String url = URLs.IMG_PRE
+												+ mCallInfo.shop_face;
+
+										ImageLoader mImageLoader = new ImageLoader(AppApplacation.requestQueue,
+												new BitmapCache());
+										ImageListener listener = ImageLoader
+												.getImageListener(
+														iv_details_huodong_tuijian_img,
+														R.drawable.icon_yaohe_loading_default,
+														R.drawable.icon_yaohe_loading_default);
+										mImageLoader.get(url, listener,getResources().getDimensionPixelSize(R.dimen.max_list_width),getResources().getDimensionPixelSize(R.dimen.max_list_height));
+									} 
+									
 									// ****** 引用服务标题和图片 end *******//
 									// 详情图片
 									if (!Utils.isStringEmpty(mCallInfo.img1)) {
@@ -711,6 +733,8 @@ public class YaoHeLaDetailsActivity extends BaseActivity implements
 		// 店铺地址
 		mTvTuiJianAddress = (TextView) findViewById(R.id.tv_details_tuijian_dizhi);
 		mTvTuiJianAddress.setOnClickListener(this);
+		//店铺头像：
+		iv_details_huodong_tuijian_img = (CustomShapeImageView)findViewById(R.id.iv_details_huodong_tuijian_img);
 		// 店铺电话
 		mRlTuiJianTel = (RelativeLayout) findViewById(R.id.rl_details_tuijian_dianhua);
 		mRlTuiJianTel.setOnClickListener(this);
