@@ -289,7 +289,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 					@Override
 					public void onSuccess(ResponseInfo<String> responseInfo) {
-						
+						ApiAccess.dismissProgressDialog();
 						JSONObject jsonObject;
 						try {
 							jsonObject = new JSONObject(responseInfo.result);
@@ -364,6 +364,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 								//mLvPullToRefreshView.removeHeaderView(mRlRotate);
 							}
 						} catch (JSONException e) {
+							ApiAccess.dismissProgressDialog();
 							e.printStackTrace();
 						}
 					}
@@ -371,6 +372,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 					@Override
 					public void onFailure(HttpException error, String msg) {
 						mRlRotate.setVisibility(View.GONE);
+						ApiAccess.dismissProgressDialog();
 						//mLvPullToRefreshView.removeHeaderView(mRlRotate);
 					}
 				});
@@ -755,6 +757,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 								mRlRotate.setVisibility(View.GONE);
 							}
 						} catch (JSONException e) {
+							ApiAccess.dismissProgressDialog();
 							e.printStackTrace();
 							mLvPullToRefreshView.setVisibility(View.GONE);
 							mLlEmpty.setVisibility(View.VISIBLE);
@@ -765,6 +768,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 
 					@Override
 					public void onFailure(HttpException error, String msg) {
+						ApiAccess.dismissProgressDialog();
 						mLvPullToRefreshView.setVisibility(View.GONE);
 						mLlEmpty.setVisibility(View.VISIBLE);
 						mRlRotate.setVisibility(View.GONE);
@@ -844,16 +848,20 @@ public class HomeTuijianFragment extends BaseFragment  {
 		mTvTips = (TextView) view
 				.findViewById(R.id.tv_fragment_extra_text_link);
 		mTvTips.setText(Html
-				.fromHtml("<font size=\"14\" color=\"#23a3fc\">还没有商家发布吆喝</font>"
+				.fromHtml("<font size=\"14\" color=\"#23a3fc\">重新加载数据</font>"
 						+ ""));
 		// 提示文字监听事件
 		mTvTips.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				ApiAccess.showProgressDialog(getActivity(), "数据加载中..",
+						R.style.progress_dialog);
 				// Intent fujinIntent = new Intent();
 				// fujinIntent.setClass(getActivity(), FuJinActivity.class);
 				// mBaseActivity.baseStartActivity(fujinIntent);
+				getHomeRotateListInfo(mStrCityId);
+				getHomeCallList(mStrCityId, mLoginDataManager.getMemberId(),true);
 			}
 		});
 		// 首页轮换图视图
