@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.collcloud.yaohe.activity.my.MineActivity;
 import com.collcloud.yaohe.api.BaseResponseInfo;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.ResponseCityInfo;
@@ -116,6 +117,7 @@ public class MainActivity extends BaseActivity implements
 //			}
 //		}
 		
+		
 		super.onResume();
 	}
 
@@ -145,13 +147,12 @@ public class MainActivity extends BaseActivity implements
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		CCLog.d(tag, "onNewIntent.......");
+		CCLog.d(tag, "onNewIntent......................");
 		onNewIntent = intent;
 		super.onNewIntent(intent);
 		intent.putExtra("refreshData", true);
 		setIntent(intent);
 		mHomeFragment.doResetData();
-		
 		
 	}
 

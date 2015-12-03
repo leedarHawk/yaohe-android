@@ -5,8 +5,11 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +27,6 @@ import com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity;
 import com.collcloud.yaohe.activity.business.myservicemanager.BusinessServiceManagerActivity;
 import com.collcloud.yaohe.activity.business.myyaohe.MyYaoHeActivity;
 import com.collcloud.yaohe.activity.businessinfo.BusinessInfoActivity;
-import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.activity.login.LoginActivity;
 import com.collcloud.yaohe.activity.my.QRCodeActivity;
 import com.collcloud.yaohe.activity.person.feedback.UserFeedBackActivity;
@@ -36,6 +38,7 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.CommonActivity;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.Utils;
@@ -54,7 +57,7 @@ import com.meg7.widget.CustomShapeImageView;
  * @version 创建时间：2015年7月12日 下午3:02:18
  */
 public class BusinessActivity extends CommonActivity implements OnClickListener {
-
+	private String tag = BusinessActivity.class.getSimpleName();
 	/** 头部—我的吆喝 */
 	private RelativeLayout rela_business_myyaohe;
 	/** 头部—我的粉丝 */
@@ -109,6 +112,7 @@ public class BusinessActivity extends CommonActivity implements OnClickListener 
 		// 配置分享
 		initSharePlatforms();
 		//getShopBaseInfo();
+		registLoginOutBroadCast();
 	}
 
 	private void setLoginPattern() {
@@ -479,5 +483,39 @@ public class BusinessActivity extends CommonActivity implements OnClickListener 
 					}
 				});
 		builder.create().show();
+	}
+	LoginOutBroadCastReceiver  bc = null;
+	private void registLoginOutBroadCast() {
+		//生成广播处理   
+		  bc = new LoginOutBroadCastReceiver();   
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(CommonConstant.BUSINESS_LOGINOUT_BROADCAST_ACTION);
+		registerReceiver(bc, intentFilter);
+	}
+	
+	 class LoginOutBroadCastReceiver extends BroadcastReceiver {   
+		    @Override  
+		    public void onReceive(Context context, Intent intent) {
+		    	if(intent.getBooleanExtra("exit", false)) {
+		    		CCLog.d(tag, "LoginOutBroadCastReceiver............");
+			    	finish();
+		    	}
+		    	
+		    }
+	 }
+	 @Override
+	protected void onDestroy() {
+		 try {
+			 if(bc != null) {
+				 CCLog.d(tag, "onDestroy.......");
+				 this.unregisterReceiver(bc); 
+			 }
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+		 
+		super.onDestroy();
+		
 	}
 }

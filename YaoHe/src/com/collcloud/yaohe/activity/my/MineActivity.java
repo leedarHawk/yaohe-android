@@ -5,13 +5,15 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +36,7 @@ import com.collcloud.yaohe.api.info.UseBaseInfo.UseBase;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.CommonActivity;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.Utils;
@@ -55,7 +58,7 @@ import com.tencent.open.utils.Util;
  * @version 创建时间：2015年7月12日 下午5:02:18
  */
 public class MineActivity extends CommonActivity implements OnClickListener,OnBorderListener {
-
+	private String tag = MineActivity.class.getSimpleName();
 	/** 登录按钮 */
 	private Button mine_btn_login;
 	/** 注册按钮 */
@@ -101,6 +104,7 @@ public class MineActivity extends CommonActivity implements OnClickListener,OnBo
 		initSharePlatforms();
 
 		setLoginInfo();
+		registLoginOutBroadCast();
 	}
 
 	/**
@@ -453,5 +457,25 @@ public class MineActivity extends CommonActivity implements OnClickListener,OnBo
 	public void onTop() {
 		// TODO Auto-generated method stub
 	}
+	
+	LoginOutBroadCastReceiver  bc = null;
+	private void registLoginOutBroadCast() {
+		//生成广播处理   
+		  bc = new LoginOutBroadCastReceiver();   
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(CommonConstant.PERSON_LOGINOUT_BROADCAST_ACTION);
+		registerReceiver(bc, intentFilter);
+	}
+	
+	 class LoginOutBroadCastReceiver extends BroadcastReceiver {   
+		    @Override  
+		    public void onReceive(Context context, Intent intent) {
+		    	if(intent.getBooleanExtra("exit", false)) {
+		    		CCLog.d(tag, "LoginOutBroadCastReceiver............");
+			    	finish();
+		    	}
+		    	
+		    }
+	 }
 
 }

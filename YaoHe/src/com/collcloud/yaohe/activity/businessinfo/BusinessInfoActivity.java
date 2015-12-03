@@ -43,6 +43,7 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.Utils;
@@ -520,12 +521,15 @@ public class BusinessInfoActivity extends BaseActivity implements
 				mLoginDataManager.setUserType("0");
 				mLoginDataManager.setBusinessState("0");
 				mLoginDataManager.setMemberId("");
-
-				// mApplication.finishAll();
+				
+				Intent intentLoginOut = new Intent(CommonConstant.BUSINESS_LOGINOUT_BROADCAST_ACTION);
+				intentLoginOut.putExtra("exit", true);
+				sendBroadcast(intentLoginOut);
+				
 				Intent intent = new Intent();
 				intent.setClass(BusinessInfoActivity.this, MineActivity.class);
-				baseStartActivity(intent);
-				BusinessInfoActivity.this.finish();
+				startActivity(intent);
+				finish();
 
 			}
 		});

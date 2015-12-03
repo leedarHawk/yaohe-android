@@ -15,6 +15,14 @@ public class CommonConstant {
 	 */
 	public static final String STATUS_BROADCAST_ACTION="statusAction";
 	/**
+	 * 登出广播action
+	 */
+	public static final String BUSINESS_LOGINOUT_BROADCAST_ACTION="business_loginoutAction";
+	/**
+	 * 登出广播action
+	 */
+	public static final String PERSON_LOGINOUT_BROADCAST_ACTION="person_loginoutAction";
+	/**
 	 * 改变关注状态
 	 */
 	public static final int doWhat_change_followStatus=1;

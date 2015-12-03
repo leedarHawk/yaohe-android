@@ -5,6 +5,7 @@ import java.util.List;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.*;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +26,7 @@ import com.collcloud.yaohe.activity.register.RegisterActivity;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.BaseActivity;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.Utils;
 import com.collcloud.yaohe.url.ContantsValues;
@@ -314,12 +316,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 									baseStartActivity(new Intent(
 											LoginActivity.this,
 											BusinessActivity.class));
+									Intent intentLoginOut = new Intent(CommonConstant.PERSON_LOGINOUT_BROADCAST_ACTION);
+									intentLoginOut.putExtra("exit", true);
+									sendBroadcast(intentLoginOut);
+									sendBroadcast(intentLoginOut);
 									finish();
 								} else {
 									// 个人 跳转到个人主页面
 									baseStartActivity(new Intent(
 											LoginActivity.this,
 											MineActivity.class));
+									Intent intentLoginOut = new Intent(CommonConstant.BUSINESS_LOGINOUT_BROADCAST_ACTION);
+									intentLoginOut.putExtra("exit", true);
+									sendBroadcast(intentLoginOut);
+									sendBroadcast(intentLoginOut);
+									
 									finish();
 								}
 
