@@ -24,10 +24,12 @@ import com.collcloud.yaohe.api.info.DetailsBusinessShopInfo.BusinessCallInfo;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
+import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.Utils;
 
 public class HomeBusinessCallAdapter extends BaseAdapter {
 
+	private String tag = HomeBusinessCallAdapter.class.getSimpleName();
 	private Context mContext;
 	private LayoutInflater mLayoutInflater = null;
 
@@ -115,10 +117,7 @@ public class HomeBusinessCallAdapter extends BaseAdapter {
 			holder = (BusinessCallContent) convertView.getTag();
 		}
 
-		// 设定首页吆喝信息
-		ImageListener listener = ImageLoader.getImageListener(holder.mIvThum,
-				R.drawable.icon_yaohe_loading_default,
-				R.drawable.icon_yaohe_loading_default);
+		
 
 		if (callInfo != null && callInfo.content != null) {
 			holder.mTvContent.setText(callInfo.content);
@@ -139,11 +138,21 @@ public class HomeBusinessCallAdapter extends BaseAdapter {
 		} else {
 			holder.mTvDate.setVisibility(View.GONE);
 		}
-
+		
+		// 设定首页吆喝信息
+		ImageListener listener = ImageLoader.getImageListener(holder.mIvThum,
+						R.drawable.icon_yaohe_loading_default,
+						R.drawable.icon_yaohe_loading_default);
+		holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
+		CCLog.d(tag, "position:"+position+"--imgurl:"+callInfo.img);
 		if (!Utils.isStringEmpty(callInfo.img)) {
+			
 			mImageLoader.get(callInfo.img, listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
+		} else {
+			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
 		}
 
+		//holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
 		if (callInfo != null && callInfo.type != null) {
 			String type = callInfo.type;
 			if (type.equals(TYPE_YOUHUI)) {

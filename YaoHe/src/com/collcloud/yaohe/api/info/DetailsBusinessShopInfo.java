@@ -78,6 +78,8 @@ public class DetailsBusinessShopInfo implements Serializable {
 		public String cardnum; //会员卡数量
 		public String activitynum;//活动数量
 		public String newproductnum;//新品数量
+		//商铺头像
+		public String shop_face;
 
 	}
 

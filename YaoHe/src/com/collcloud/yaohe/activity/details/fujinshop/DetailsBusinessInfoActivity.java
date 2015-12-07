@@ -194,13 +194,11 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 		mImageLoader = new ImageLoader(AppApplacation.requestQueue,
 				new BitmapCache());
 		// 设定商家头像
-		ImageListener listener = ImageLoader.getImageListener(mIvShopImg,
-				R.drawable.icon_yaohe_default_logo,
-				R.drawable.icon_yaohe_default_logo);
 		
-		String faceUrl = getStringExtra("faceUrl");
-		CCLog.d(tag, "faceUrl:"+faceUrl);
-		mImageLoader.get(faceUrl, listener,getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width));
+		
+		//String faceUrl = getStringExtra("faceUrl");
+		//CCLog.d(tag, "faceUrl:"+faceUrl);
+		
 		mStrShopID = getStringExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID);
 		mStrMemberID = getStringExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID);
 		mStrFace = getStringExtra(IntentKeyNames.KEY_SHOP_MEMBER_FACE);
@@ -537,6 +535,20 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 			}
 		}
+		
+		//商家头像
+		if (!Utils.isStringEmpty(jsonObject.optString("shop_face"))) {
+			String faceUrl = URLs.IMG_PRE
+					+ jsonObject.optString("shop_face");
+			ImageListener listener = ImageLoader.getImageListener(mIvShopImg,
+					R.drawable.icon_yaohe_default_logo,
+					R.drawable.icon_yaohe_default_logo);
+			mImageLoader.get(faceUrl, listener,getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width));
+			
+		} else {
+			mIvShopImg.setImageResource(R.drawable.icon_yaohe_default_logo);
+		}
+		
 		//mTvShopGuanZhu.setText(GlobalConstant.INVALID_VALUE);
 
 	}
@@ -632,6 +644,11 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 					if (callObject.has("content")) {
 						callInfo.content = callObject.optString("content");
 					}
+
+					
+					
+					
+					
 					mListCalls.add(callInfo);
 				}
 			}
