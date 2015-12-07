@@ -73,8 +73,12 @@ public class BusinessServiceManagerActivity extends BaseActivity implements
 		mStrMemberID = getStringExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID);
 		CCLog.i("商家个人详情:", "member_id :" + mStrMemberID + "shop_id : "
 				+ mStrShopID);
-		// 获取详情
-		 getBusinessShopInfo();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onResume();
+		getBusinessShopInfo();
 	}
 
 	/**
