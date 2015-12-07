@@ -182,6 +182,16 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 				}
 			}
 		});
+		holder.scLy.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (mOnShouCangClickListener != null) {
+					mOnShouCangClickListener.onShouCangButtonClick(position,
+							holder.mTvShoucangImg, holder.mTvShoucang, callID);
+				}
+			}
+		});
 
 		// 点赞
 		holder.mTvZan.setOnClickListener(new OnClickListener() {
@@ -196,6 +206,17 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 			}
 		});
 		holder.mTvZanImg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (mOnZanClickListener != null) {
+					mOnZanClickListener.onZanButtonClick(position,
+							holder.mTvZanImg, holder.mTvZan, callID);
+				}
+
+			}
+		});
+		holder.zanLy.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -456,6 +477,9 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		holder.iv_item_hme_shop_image_yaohe = (ImageView)view.findViewById(R.id.iv_item_hme_shop_image_yaohe);
 		holder.tv_item_home_content_yaohe = (TextView)view.findViewById(R.id.tv_item_home_content_yaohe);
 		holder.ll_item_hoe_image_content_yaohe = view.findViewById(R.id.ll_item_hoe_image_content_yaohe);
+		
+		holder.zanLy = (LinearLayout) view.findViewById(R.id.zanLy);
+		holder.scLy = (LinearLayout) view.findViewById(R.id.scLy);
 
 	}
 
@@ -505,6 +529,10 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		TextView tv_item_home_content_yaohe;
 		
 		View ll_item_hoe_image_content_yaohe;
+		//点赞 布局
+		LinearLayout zanLy;
+		//收藏 布局
+		LinearLayout scLy;
 	}
 
 	public interface OnOtherListener {

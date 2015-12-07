@@ -162,6 +162,7 @@
                     android:id="@+id/iv_item_hme_shop_image_yaohe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:src="@drawable/icon_yaohe_loading_default"
                     android:layout_marginLeft="7px"
                     android:background="@drawable/icon_yaohe_loading_default"
                     android:contentDescription="@string/app_name"
@@ -206,6 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7px"
+                    android:src="@drawable/icon_yaohe_loading_default"
                     android:background="@drawable/icon_yaohe_loading_default"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitXY" />
@@ -266,6 +268,7 @@
             android:orientation="horizontal" >
 
             <LinearLayout
+                android:id="@+id/zanLy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -320,6 +323,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/scLy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
