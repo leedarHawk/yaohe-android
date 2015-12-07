@@ -38,5 +38,9 @@ public class CommonConstant {
 	 * 改变收藏个数
 	 */
 	public static final int doWhat_change_shoucang_count=4;
+	/**
+	 * 改变商铺星星个数
+	 */
+	public static final int doWhat_change_shop_start_count=5;
 
 }

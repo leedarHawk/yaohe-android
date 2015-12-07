@@ -7,9 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +24,6 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.collcloud.yaohe.R;
-import com.collcloud.yaohe.activity.business.BusinessActivity;
 import com.collcloud.yaohe.activity.business.myfans.BusinessMyFansActivity;
 import com.collcloud.yaohe.activity.business.myyaohe.MyYaoHeActivity;
 import com.collcloud.yaohe.activity.chat.ChattingActivity;
@@ -191,6 +192,7 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details_fujin_fuwu);
+		registBroadCast();
 		mImageLoader = new ImageLoader(AppApplacation.requestQueue,
 				new BitmapCache());
 		// 设定商家头像
@@ -1180,6 +1182,59 @@ public class DetailsBusinessInfoActivity extends BaseActivity implements
 
 			}
 		}
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @author LEE
+	 * 关注状态 收藏状态 关注广播
+	 *private List<TypeCall> mTypeCalls = new ArrayList<TypeCall>();
+	 */
+	 class StatusBroadCastReceiver extends BroadcastReceiver {   
+	    @Override  
+	    public void onReceive(Context context, Intent intent) {
+	    	try {
+	    		CCLog.d(tag, "broadcast..........");
+		    	int doWhat = intent.getIntExtra("doWhat",-1);
+		    	switch(doWhat) {
+			    	//星星个数改变
+			    	case CommonConstant.doWhat_change_shop_start_count:
+			    		String starCount = intent.getStringExtra("starCount");
+			    		String shopId_star = intent.getStringExtra("shopId");
+			    		if(mStrShopID.equals(shopId_star)) {
+			    			mStrStar = starCount;
+			    			setShopStar();
+			    		}
+			    		break;
+		    	}
+	    	} catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    }   
+	       
+	}
+	 StatusBroadCastReceiver  bc = null;
+	private void registBroadCast() {
+		//生成广播处理   
+		if(bc == null) {
+			bc = new StatusBroadCastReceiver();   
+			IntentFilter intentFilter = new IntentFilter();
+			intentFilter.addAction(CommonConstant.STATUS_BROADCAST_ACTION);
+			registerReceiver(bc, intentFilter);
+		}
+		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		if(bc != null) {
+			unregisterReceiver(bc);
+		}
+		super.onDestroy();
 	}
 	
 

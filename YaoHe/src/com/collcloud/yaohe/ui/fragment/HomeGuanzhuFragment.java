@@ -1618,6 +1618,18 @@ public class HomeGuanzhuFragment extends BaseFragment {
 				    		CCLog.d(tag, "change shoucang status... notify adapter");
 				    		refreshFollow(mFollowShops);
 				    		break;
+				    		//星星个数改变
+				    	case CommonConstant.doWhat_change_shop_start_count:
+				    		String starCount = intent.getStringExtra("starCount");
+				    		String shopId_star = intent.getStringExtra("shopId");
+				    		for(FollowShop callInfo : mFollowShops) {
+				    			if(callInfo.shop_id.equals(shopId_star)) {
+				    				callInfo.shop_star = starCount;
+				    			}
+				    		}
+				    		CCLog.d(tag, "change shop star count ... notify adapter");
+				    		refreshFollow(mFollowShops);
+				    		break;
 			    		
 			    		
 		    	}

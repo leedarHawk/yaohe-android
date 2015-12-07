@@ -208,6 +208,9 @@ public interface ContantsValues {
 	/** 我的sms消息详情接口url */
 	// http://www.17yaohe.com/?c=Api&a=getMySmsDetail&partent=ht&key=ht&member_id=213&amp;to_member_id=106
 	String PERSON_MY_SMS_LIST_MSG = "http://www.17yaohe.com/?c=Api&a=getMySmsDetail&partent=ht&key=ht";
+	/**获取店铺 星星数量*/
+	String SHOP_STARS_COUNT_URL = "http://www.17yaohe.com/?c=Api&a=getShopStar&partent=ht&key=ht";
+	
 	
 	
 

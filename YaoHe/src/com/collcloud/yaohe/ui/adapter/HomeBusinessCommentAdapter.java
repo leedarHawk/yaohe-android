@@ -32,7 +32,17 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 
 	private List<BusinessCommentInfo> mCallCommentList = new ArrayList<BusinessCommentInfo>();
 	private String mStrMemberId;
+	//星星个数
+	private String starCount;
 	
+	public String getStarCount() {
+		return starCount;
+	}
+
+	public void setStarCount(String starCount) {
+		this.starCount = starCount;
+	}
+
 	private CommentHuifuListener commentHuifuListener;
 	public interface CommentHuifuListener {
 		public void onCommentForHuifu(BusinessCommentInfo callCommentInfo);
@@ -268,8 +278,8 @@ public class HomeBusinessCommentAdapter extends BaseAdapter {
 			if (!Utils.isStringEmpty(callInfo.title)) {
 				holder.mTvShopName.setText(callInfo.title);
 			}
-			if (!Utils.isStringEmpty(GlobalVariable.sShopStar)) {
-				String shopStar = GlobalVariable.sShopStar;
+			if (!Utils.isStringEmpty(starCount)) {
+				String shopStar = starCount;
 				holder.mTvShopStar.setText(shopStar);
 				if (shopStar.equals("1")) {
 					holder.mTvShopStar1

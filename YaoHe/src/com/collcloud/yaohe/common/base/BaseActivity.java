@@ -45,6 +45,7 @@ import com.collcloud.yaohe.api.info.AreaListInfo.AreaList;
 import com.collcloud.yaohe.api.info.ClassifyListInfo;
 import com.collcloud.yaohe.api.info.ClassifyListInfo.Classify;
 import com.collcloud.yaohe.api.info.DistrictListInfo;
+import com.collcloud.yaohe.api.info.DetailBusinessCommentInfo.BusinessCommentInfo;
 import com.collcloud.yaohe.api.info.DistrictListInfo.DistrictList;
 import com.collcloud.yaohe.common.data.LoginDataManagerSPImpl;
 import com.collcloud.yaohe.constants.CommonConstant;
@@ -86,6 +87,7 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
  */
 public abstract class BaseActivity extends FragmentActivity {
 
+	private String tag = this.getClass().getSimpleName();
 	protected BaseActivity mBaseActivity = null;
 	public static boolean mIsRunFirst = false;
 
@@ -2249,5 +2251,96 @@ public abstract class BaseActivity extends FragmentActivity {
         intent.putExtra("isAddShoucang", isAddShoucang);
         sendBroadcast(intent);
 	}
+	
+	/**
+	 * 
+	 * @param shopId 商铺id
+	 * @param starCount 商铺星星个数
+	 */
+	public void sendBroadCastForShopStar(String shopId,String starCount) {
+		Intent intent = new Intent(CommonConstant.STATUS_BROADCAST_ACTION);
+		intent.putExtra("doWhat", CommonConstant.doWhat_change_shop_start_count);
+        intent.putExtra("starCount", starCount);
+        intent.putExtra("shopId", shopId);
+        sendBroadcast(intent);
+	}
+	
+	
+	
+	/**
+	 * LEE
+	 * 获取店铺星星数量
+	 * @param shopId 店铺id
+	 */
+	public void getShopStar(final String shopId) {
+		
+
+		String url = ContantsValues.SHOP_STARS_COUNT_URL+"&shop_id="+shopId;
+		CCLog.d(tag, "get shop start url :" +url);
+		
+		HttpUtils http = new HttpUtils();
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("shop_id", shopId);
+		http.send(HttpRequest.HttpMethod.POST, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						if (!Utils.isStringEmpty(responseInfo.result)) {
+							if (responseInfo.result.contains("status")) {
+								if (responseInfo.result != null) {
+								}
+								try {
+									// 数据处理
+									JSONObject errorJsonObject = new JSONObject(
+											responseInfo.result);
+									if (errorJsonObject.has("status")) {
+										JSONObject statusObject = errorJsonObject
+												.optJSONObject("status");
+										int code = statusObject.optInt("code");
+										if (code == 1) {
+											String strErrorMsg = statusObject
+													.getString("message");
+											UIHelper.ToastMessage(
+													mBaseActivity, strErrorMsg);
+										} else {
+											JSONObject dataObject = errorJsonObject
+													.optJSONObject("data");
+											String shop_Id = dataObject.optString("shop_id");
+											String starCount = dataObject.optString("star");
+											gainShopStarCount(shop_Id,starCount);
+
+										}
+									}
+								} catch (Exception e) {
+									String errorMsg = ApiAccessErrorManager
+											.getMessage(5, mBaseActivity);
+									UIHelper.ToastMessage(mBaseActivity,
+											errorMsg);
+								}
+
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						UIHelper.ToastMessage(mBaseActivity,
+								R.string.response_data_invalid);
+					}
+				});
+	}
+	
+	/**
+	 * 
+	 * @param shopId 店铺id
+	 * @param starCount 店铺星星数量
+	 */
+	public void gainShopStarCount(String shopId,String starCount) {
+		CCLog.d(tag, "gainShopStarCount-->shopId:"+shopId);
+		CCLog.d(tag, "gainShopStarCount-->starCount:"+starCount);
+	}
+	
+	
 	
 }

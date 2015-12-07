@@ -360,6 +360,7 @@ public class DetailsBusinessPinlunActivity extends BaseActivity implements
 			mAdapter.notifyDataSetChanged();
 		}
 		setTopOnlyBackTitle("评论详情"+"（"+mList.size()+"）");
+		this.getShopStar(mStrShopID);
 
 	}
 
@@ -639,5 +640,32 @@ public class DetailsBusinessPinlunActivity extends BaseActivity implements
 		// setResult(11, intent);
 		DetailsBusinessPinlunActivity.this.finish();
 	}
+	
+	/**
+	 * 
+	 * @param shopId 店铺id
+	 * @param starCount 店铺星星数量
+	 */
+	public void gainShopStarCount(String shopId,String starCount) {
+		CCLog.d(tag, "gainShopStarCount-->shopId:"+shopId);
+		CCLog.d(tag, "gainShopStarCount-->starCount:"+starCount);
+		if(mAdapter != null) {
+			CCLog.d(tag, "notifi adapter ");
+			mAdapter.setStarCount(starCount);
+			mAdapter.notifyDataSetChanged();
+		} else {
+			CCLog.d(tag, "adapter is null ");
+		}
+		
+		sendBroadCastForShopStar(shopId,starCount);
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		this.getShopStar(mStrShopID);
+		super.onResume();
+	}
+	
 
 }

@@ -8,7 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -27,7 +30,6 @@ import com.amap.api.location.AMapLocationListener;
 import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.activity.details.fujinshop.DetailsBusinessInfoActivity;
 import com.collcloud.yaohe.activity.map.ShowPoiSearchActivity;
-import com.collcloud.yaohe.api.ApiAccess;
 import com.collcloud.yaohe.api.URLs;
 import com.collcloud.yaohe.api.info.ClassifyListInfo;
 import com.collcloud.yaohe.api.info.ClassifyListInfo.Classify;
@@ -40,6 +42,7 @@ import com.collcloud.yaohe.common.base.CommonActivity;
 import com.collcloud.yaohe.common.base.GlobalVariable;
 import com.collcloud.yaohe.common.base.IntentKeyNames;
 import com.collcloud.yaohe.common.base.SupportDisplay;
+import com.collcloud.yaohe.constants.CommonConstant;
 import com.collcloud.yaohe.ui.adapter.FuJinShopAdapter;
 import com.collcloud.yaohe.ui.adapter.FuJinShopAdapter.OnNearItemClickListener;
 import com.collcloud.yaohe.ui.utils.CCLog;
@@ -154,6 +157,7 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_fujin);
+		registBroadCast();
 		setFooterType(2);
 		super.onCreate(savedInstanceState);
 		init();
@@ -445,11 +449,16 @@ public class FuJinActivity extends CommonActivity implements Callback,
 	 * 设定附近推荐商圈显示内容
 	 */
 	private void setShopNearByInfo() {
-		mAdapter = new FuJinShopAdapter(FuJinActivity.this, mNearList);
-		mLvPullToRefreshView.setAdapter(mAdapter);
-		Utils.resetListViewHeightBasedOnChildren(mLvPullToRefreshView);
+		if(mAdapter == null) {
+			mAdapter = new FuJinShopAdapter(FuJinActivity.this, mNearList);
+			mLvPullToRefreshView.setAdapter(mAdapter);
+			Utils.resetListViewHeightBasedOnChildren(mLvPullToRefreshView);
 
-		initListener();
+			initListener();
+		} else {
+			mAdapter.notifyDataSetChanged();
+		}
+		
 	}
 
 	@Override
@@ -1042,5 +1051,98 @@ public class FuJinActivity extends CommonActivity implements Callback,
 				});
 
 		return mOneClassfyInfos;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @author LEE
+	 * 关注状态 收藏状态 关注广播
+	 *
+	 */
+	 class StatusBroadCastReceiver extends BroadcastReceiver {   
+	    @Override  
+	    public void onReceive(Context context, Intent intent) {
+	    	try {
+	    		CCLog.d(tag, "broadcast..........");
+		    	int doWhat = intent.getIntExtra("doWhat",-1);
+		    	String shopId = intent.getStringExtra("shopId");
+		    	boolean isCanceFollow  =intent.getBooleanExtra("isCanceFollow",false);
+		    	switch(doWhat) {
+			    	case CommonConstant.doWhat_change_followStatus:
+			    		for(NearBy callInfo : mNearList) {
+			    			if(callInfo.id.equals(shopId)) {
+			    				if(isCanceFollow) {
+			    					
+			    					
+			    					int fansCount = 0;
+			    					try {
+			    						fansCount = Integer.parseInt(callInfo.fans_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						fansCount = 0;
+			    					}
+			    					fansCount = fansCount-1;
+			    					if(fansCount<0) {
+			    						fansCount =0;
+			    					}
+			    					callInfo.fans_num = String.valueOf(fansCount);
+			    				} else {
+			    					CCLog.d(tag, "add guanzhu.....");
+			    					int fansCount = 0;
+			    					try {
+			    						fansCount = Integer.parseInt(callInfo.fans_num);
+			    					} catch(Exception e) {
+			    						e.printStackTrace();
+			    						fansCount = 0;
+			    					}
+			    					fansCount = fansCount+1;
+			    					callInfo.fans_num = String.valueOf(fansCount);
+			    				}
+			    			}
+			    		}
+			    		CCLog.d(tag, "change guanzhu status... notify adapter");
+			    		setShopNearByInfo();
+			    		break;
+			    		//星星个数改变 List<NearBy> mNearList
+			    	case CommonConstant.doWhat_change_shop_start_count:
+			    		String starCount = intent.getStringExtra("starCount");
+			    		String shopId_star = intent.getStringExtra("shopId");
+			    		for(NearBy callInfo : mNearList) {
+			    			if(callInfo.id.equals(shopId_star)) {
+			    				callInfo.star = starCount;
+			    			}
+			    		}
+			    		CCLog.d(tag, "change shop star count ... notify adapter");
+			    		setShopNearByInfo();
+			    		break;
+		    	}
+	    	} catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    }   
+	       
+	}
+	 StatusBroadCastReceiver  bc = null;
+	private void registBroadCast() {
+		//生成广播处理   
+		if(bc == null) {
+			bc = new StatusBroadCastReceiver();   
+			IntentFilter intentFilter = new IntentFilter();
+			intentFilter.addAction(CommonConstant.STATUS_BROADCAST_ACTION);
+			registerReceiver(bc, intentFilter);
+		}
+		  
+	}
+	
+	@Override
+	protected void onDestroy() {
+		if(bc != null) {
+			unregisterReceiver(bc);
+		}
+		
+		super.onDestroy();
 	}
 }

@@ -2014,6 +2014,18 @@ public class HomeTuijianFragment extends BaseFragment  {
 			    		CCLog.d(tag, "change shoucang status... notify adapter");
 			    		setHomeRecommendInfo();
 			    		break;
+			    		//星星个数改变
+			    	case CommonConstant.doWhat_change_shop_start_count:
+			    		String starCount = intent.getStringExtra("starCount");
+			    		String shopId_star = intent.getStringExtra("shopId");
+			    		for(CallInfo callInfo : mCallInfos) {
+			    			if(callInfo.shop_id.equals(shopId_star)) {
+			    				callInfo.shop_star = starCount;
+			    			}
+			    		}
+			    		CCLog.d(tag, "change shop star count ... notify adapter");
+			    		setHomeRecommendInfo();
+			    		break;
 		    	}
 	    	} catch(Exception e) {
 	    		e.printStackTrace();
