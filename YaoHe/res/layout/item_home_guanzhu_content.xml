@@ -198,7 +198,7 @@
             <FrameLayout
                 android:id="@+id/fv_item_home_guanzhu_shop_image"
                 android:layout_width="200px"
-                android:layout_height="match_parent"
+                android:layout_height="160px"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true" >
 
