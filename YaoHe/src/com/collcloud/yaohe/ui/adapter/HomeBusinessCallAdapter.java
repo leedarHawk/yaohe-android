@@ -105,17 +105,14 @@ public class HomeBusinessCallAdapter extends BaseAdapter {
 		if (mBusinessCallList != null && mBusinessCallList.size() > 0) {
 			callInfo = mBusinessCallList.get(position);
 		}
-		if (convertView == null) {
 
-			convertView = mLayoutInflater.inflate(
-					R.layout.item_home_business_info_content, null);
+		
+		convertView = mLayoutInflater.inflate(
+				R.layout.item_home_business_info_content, null);
 
-			holder = new BusinessCallContent();
-			resetLayout(holder, convertView);
-			convertView.setTag(holder);
-		} else {
-			holder = (BusinessCallContent) convertView.getTag();
-		}
+		holder = new BusinessCallContent();
+		resetLayout(holder, convertView);
+		convertView.setTag(holder);
 
 		
 
@@ -143,10 +140,10 @@ public class HomeBusinessCallAdapter extends BaseAdapter {
 		ImageListener listener = ImageLoader.getImageListener(holder.mIvThum,
 						R.drawable.icon_yaohe_loading_default,
 						R.drawable.icon_yaohe_loading_default);
+		
 		holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
 		CCLog.d(tag, "position:"+position+"--imgurl:"+callInfo.img);
 		if (!Utils.isStringEmpty(callInfo.img)) {
-			
 			mImageLoader.get(callInfo.img, listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
 		} else {
 			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
