@@ -190,7 +190,7 @@
             android:background="@color/diliver_in_gray"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_item_hoe_image_content_yaohe"
-            android:layout_marginLeft="20px"
+            android:layout_marginLeft="20px"  
             android:layout_marginRight="20px"
             android:layout_marginTop="20px"
             android:gravity="center_vertical" >
