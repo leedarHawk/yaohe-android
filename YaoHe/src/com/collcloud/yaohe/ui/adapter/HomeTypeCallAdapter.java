@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -307,9 +308,11 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		
 		if (typeCall != null && !Utils.isStringEmpty(typeCall.s_img)) {
 			//mImageLoader.get(followShop.img1, listener);
+			holder.fv_item_home_guanzhu_shop_image.setVisibility(View.VISIBLE);
 			mImageLoader.get(typeCall.s_img, listener,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
 		} else {
 			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_loading_default);
+			holder.fv_item_home_guanzhu_shop_image.setVisibility(View.GONE);
 		}
 		
 		ImageListener listener2 = ImageLoader.getImageListener(holder.iv_item_hme_shop_image_yaohe,
@@ -317,9 +320,11 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 				R.drawable.icon_yaohe_loading_default);
 		if (typeCall != null && !Utils.isStringEmpty(typeCall.img)) {
 			CCLog.d(tag, "yaohe img url:"+typeCall.img);
+			holder.fv_item_home_shop_image_yaohe.setVisibility(View.VISIBLE);
 			mImageLoader.get(typeCall.img, listener2,mContext.getResources().getDimensionPixelSize(R.dimen.max_list_width),mContext.getResources().getDimensionPixelSize(R.dimen.max_list_height));
 		} else {
 			CCLog.d(tag, "yaohe img url:"+typeCall.img);
+			holder.fv_item_home_shop_image_yaohe.setVisibility(View.GONE);
 			holder.iv_item_hme_shop_image_yaohe.setImageResource(R.drawable.icon_yaohe_loading_default);
 		}
 		
@@ -333,19 +338,42 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		//吆喝本身内容
 		holder.tv_item_home_content_yaohe.setText(typeCall.content); 
 		
+		if("1".equals(typeCall.is_yinyong)) {
+			holder.mTvContent.setText(typeCall.s_content);
+		} else {
+			holder.mTvContent.setText(typeCall.title);
+		}
+		
 		//不是吆喝
-		if(typeCall != null &&  !TYPE_DEFAULT.equals(typeCall.type)) {
-			holder.ll_item_hoe_image_content_yaohe.setVisibility(View.GONE);
-			holder.mRlContent.setVisibility(View.VISIBLE);
-			holder.mRlContent.setBackgroundResource(R.color.transparent);
-		} else {//是吆喝
+//		if(typeCall != null &&  !TYPE_DEFAULT.equals(typeCall.type)) {
+//			holder.ll_item_hoe_image_content_yaohe.setVisibility(View.GONE);
+//			holder.mRlContent.setVisibility(View.VISIBLE);
+//			holder.mRlContent.setBackgroundResource(R.color.transparent);
+//		} else {//是吆喝
+//			holder.ll_item_hoe_image_content_yaohe.setVisibility(View.VISIBLE);
+//			if("0".equals(typeCall.c_id) || Utils.isStringEmpty(typeCall.c_id)) {//纯吆喝
+//				holder.mRlContent.setVisibility(View.GONE);
+//			} else {//有引用
+//				holder.mRlContent.setVisibility(View.VISIBLE);
+//				holder.mRlContent.setBackgroundResource(R.color.diliver_in_gray);
+//			}
+//		}
+		
+		//不纯吆喝 引用了某一个服务 则显示 两行
+		if(typeCall != null && "1".equals(typeCall.is_yinyong)) {
 			holder.ll_item_hoe_image_content_yaohe.setVisibility(View.VISIBLE);
-			if("0".equals(typeCall.c_id) || Utils.isStringEmpty(typeCall.c_id)) {//纯吆喝
-				holder.mRlContent.setVisibility(View.GONE);
-			} else {//有引用
+			holder.mRlContent.setVisibility(View.VISIBLE);
+			holder.mRlContent.setBackgroundResource(R.color.diliver_in_gray);
+		} else if(typeCall != null && !"1".equals(typeCall.is_yinyong)) {//不是引用 就显示一样
+			if(!TYPE_DEFAULT.equals(typeCall.type)) {//不是纯吆喝 也不是 发吆喝引用了服务 而是纯服务
+				holder.ll_item_hoe_image_content_yaohe.setVisibility(View.GONE);
 				holder.mRlContent.setVisibility(View.VISIBLE);
-				holder.mRlContent.setBackgroundResource(R.color.diliver_in_gray);
+				holder.mRlContent.setBackgroundResource(R.color.transparent);
+			} else {//纯吆喝
+				holder.ll_item_hoe_image_content_yaohe.setVisibility(View.VISIBLE);
+				holder.mRlContent.setVisibility(View.GONE);
 			}
+			
 		}
 		
 		
@@ -480,6 +508,9 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		
 		holder.zanLy = (LinearLayout) view.findViewById(R.id.zanLy);
 		holder.scLy = (LinearLayout) view.findViewById(R.id.scLy);
+		
+		holder.fv_item_home_guanzhu_shop_image = (FrameLayout)view.findViewById(R.id.fv_item_home_guanzhu_shop_image);
+		holder.fv_item_home_shop_image_yaohe = (FrameLayout)view.findViewById(R.id.fv_item_home_shop_image_yaohe);
 
 	}
 
@@ -533,6 +564,11 @@ public class HomeTypeCallAdapter extends BaseAdapter {
 		LinearLayout zanLy;
 		//收藏 布局
 		LinearLayout scLy;
+		
+		// 引用
+		FrameLayout fv_item_home_guanzhu_shop_image;
+		//吆喝本身 frameLayout
+		FrameLayout fv_item_home_shop_image_yaohe;
 	}
 
 	public interface OnOtherListener {

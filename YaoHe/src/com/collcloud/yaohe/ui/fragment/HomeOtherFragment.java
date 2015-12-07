@@ -472,7 +472,9 @@ public class HomeOtherFragment extends BaseFragment {
 										
 										typeCallInfo.c_id = mHomeTypeCallInfo.data
 												.get(j).c_id;
-																			
+																	
+										typeCallInfo.is_yinyong = mHomeTypeCallInfo.data
+												.get(j).is_yinyong;
 											mCallInfosTmp.add(typeCallInfo);
 										}
 										
