@@ -1325,6 +1325,11 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
 			}
 		}
 		
+		try {
+			refreshTypes(mTopTabs);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
