@@ -3,6 +3,7 @@ package com.collcloud.yaohe.common.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.*;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -23,13 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.collcloud.swipe.interfaces.ILoginDataManager;
 import com.collcloud.yaohe.MainActivity;

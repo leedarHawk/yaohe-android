@@ -554,7 +554,6 @@ public class BusinessFXPActivity extends BaseActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		noScrollgridview = (GridView) findViewById(R.id.xinpin_noScrollgridview);
 		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) noScrollgridview
 				.getLayoutParams();

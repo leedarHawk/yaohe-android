@@ -897,7 +897,43 @@ public class HomeTuijianFragment extends BaseFragment  {
 			mPager.setOnPageChangeListener(new ImageViewPagerChangeListener());
 		}
 		refreshRotateData();
-		
+
+		// 首页轮播图图片点击
+		if (mPagerAdapter != null) {
+			mPagerAdapter.setOnPagerItemClick(new OnPagerItemClickListener() {
+
+				@Override
+				public void onPagerItemClick(final int position) {
+					if (mRotates != null && mRotates.size() > 0) {
+						Rotate rotate = mRotates.get(position);
+						Intent intent = new Intent();
+						if (rotate.type.equals("5")) { // "type": 0商家 1优惠券 2会员卡 3活动 4新品 5网址
+							intent.setClass(mBaseActivity,
+									WebViewActivity.class);
+							if (mRotates != null && mRotates.size() > 0) {
+								intent.putExtra(WebViewActivity.URL_TAG,
+										rotate.link_url);
+							}
+							intent.putExtra(WebViewActivity.TITLE_TAG,
+									rotate.title);
+							mBaseActivity.baseStartActivity(intent);
+
+						}else if (rotate.type.equals("0")){  // 0 跳转到商家详情页
+							intent.setClass(getActivity(),DetailsBusinessInfoActivity.class);
+							intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID,rotate.content_id );
+//							intent.putExtra(IntentKeyNames.KEY_SHOP_MEMBER_ID, );
+							mBaseActivity.startActivity(intent);
+						}else {
+							 int tmpRotateType = Integer.parseInt(rotate.type)-1;
+							onItemSelectAction(rotate.service_id, rotate.content_id, rotate.content_id, "",
+									""+tmpRotateType);
+						}
+					}
+
+				}
+			});
+		}
+
 	}
 	
 	private void refreshRotateData() {
@@ -987,7 +1023,7 @@ public class HomeTuijianFragment extends BaseFragment  {
 		
 		
 		//商家
-//		if("0".equals(type)) {
+//		if("0".equals(type) ) {
 //			intent.setClass(getActivity(),
 //					DetailsBusinessInfoActivity.class);
 //			intent.putExtra(IntentKeyNames.KEY_DETAILS_SHOP_ID, shopId);
@@ -1388,36 +1424,6 @@ public class HomeTuijianFragment extends BaseFragment  {
 				@Override
 				public void onBusinessShopClick(int position, String shopId,
 						String memberId) {
-
-				}
-			});
-		}
-
-		// 首页轮播图图片点击
-		if (mPagerAdapter != null) {
-			mPagerAdapter.setOnPagerItemClick(new OnPagerItemClickListener() {
-
-				@Override
-				public void onPagerItemClick(final int position) {
-					if (mRotates != null && mRotates.size() > 0) {
-						Rotate rotate = mRotates.get(position);
-						Intent intent = new Intent();
-						if (rotate.type.equals("5")) {
-							intent.setClass(mBaseActivity,
-									WebViewActivity.class);
-							if (mRotates != null && mRotates.size() > 0) {
-								intent.putExtra(WebViewActivity.URL_TAG,
-										rotate.link_url);
-							}
-							intent.putExtra(WebViewActivity.TITLE_TAG,
-									rotate.title);
-							mBaseActivity.baseStartActivity(intent);
-
-						} else {
-							onItemSelectAction(rotate.service_id, rotate.content_id, rotate.content_id, "",
-									rotate.type);
-						}
-					}
 
 				}
 			});

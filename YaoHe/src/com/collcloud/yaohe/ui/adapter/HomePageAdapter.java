@@ -20,6 +20,7 @@ import com.collcloud.yaohe.R;
 import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.ui.adapter.HomeAdapter.OnButtonClickListener;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
+import com.collcloud.yaohe.ui.utils.CCLog;
 import com.collcloud.yaohe.ui.utils.Utils;
 
 public class HomePageAdapter extends PagerAdapter {
