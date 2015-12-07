@@ -45,5 +45,7 @@ public class HomeTypeCallInfo implements Serializable {
 		public String img;
 		//关注状态 0 1
 		public String guanzhu;
+		
+		public String is_yinyong;
 	}
 }

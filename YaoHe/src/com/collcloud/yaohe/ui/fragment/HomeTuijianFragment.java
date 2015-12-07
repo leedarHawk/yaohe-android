@@ -712,6 +712,8 @@ public class HomeTuijianFragment extends BaseFragment  {
 											
 											callInfo.c_id = mHomeCallInfo.data
 													.get(j).c_id;
+											callInfo.is_yinyong = mHomeCallInfo.data
+													.get(j).is_yinyong;
 											
 											if (mHomeCallInfo.data.get(j).collection_num != null) {
 												callInfo.collection_num = mHomeCallInfo.data

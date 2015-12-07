@@ -150,7 +150,7 @@
        <RelativeLayout
             android:id="@+id/ll_item_hoe_image_content_yaohe"
             android:layout_width="match_parent"
-            android:layout_height="190px"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/item_content_diviler"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
@@ -195,7 +195,7 @@
         <RelativeLayout
             android:id="@+id/ll_item_hoe_image_content"
             android:layout_width="match_parent"
-            android:layout_height="190px"
+            android:layout_height="wrap_content"
             android:background="@color/diliver_in_gray"
             android:layout_below="@+id/ll_item_hoe_image_content_yaohe"
             android:layout_marginLeft="20px"

@@ -503,6 +503,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 												
 												followShopInfo.c_id = mHomeFollowShopInfo.data
 														.get(j).c_id;
+												followShopInfo.is_yinyong = mHomeFollowShopInfo.data
+														.get(j).is_yinyong;
 												
 												
 												mFollowShopsTmp.add(followShopInfo);

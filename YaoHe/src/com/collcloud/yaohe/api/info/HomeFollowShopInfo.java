@@ -43,5 +43,7 @@ public class HomeFollowShopInfo implements Serializable {
 		// 为0的时候 标志 没有引用服务 ，而是纯吆喝
 		public String c_id;
 		public String img;
+		
+		public String is_yinyong;
 	}
 }
