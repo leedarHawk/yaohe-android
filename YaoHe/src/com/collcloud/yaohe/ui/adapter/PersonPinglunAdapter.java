@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +21,7 @@ import com.collcloud.yaohe.common.base.AppApplacation;
 import com.collcloud.yaohe.common.base.SupportDisplay;
 import com.collcloud.yaohe.ui.photoview.BitmapCache;
 import com.collcloud.yaohe.ui.utils.Utils;
+import com.meg7.widget.CustomShapeImageView;
 
 public class PersonPinglunAdapter extends BaseAdapter {
 
@@ -117,7 +117,9 @@ public class PersonPinglunAdapter extends BaseAdapter {
 		}
 
 		if (callInfo != null && callInfo.face != null) {
-			mImageLoader.get(callInfo.face, listener);
+			mImageLoader.get(callInfo.face, listener,mContext.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_width),mContext.getResources().getDimensionPixelSize(R.dimen.photo_max_middle_height));
+		} else {
+			holder.mIvThum.setImageResource(R.drawable.icon_yaohe_default_logo);
 		}
 
 		return convertView;
@@ -131,7 +133,7 @@ public class PersonPinglunAdapter extends BaseAdapter {
 		/** 日期时间 */
 		TextView mTvDate;
 		/** 列表简介图片 */
-		ImageView mIvThum;
+		CustomShapeImageView mIvThum;
 
 	}
 
@@ -149,7 +151,7 @@ public class PersonPinglunAdapter extends BaseAdapter {
 		holder.mTvDate = (TextView) view
 				.findViewById(R.id.tv_item_home_call_comment_time);
 
-		holder.mIvThum = (ImageView) view
+		holder.mIvThum = (CustomShapeImageView) view
 				.findViewById(R.id.iv_item_home_call_comment_img);
 	}
 
