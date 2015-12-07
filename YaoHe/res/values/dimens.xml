@@ -46,4 +46,8 @@
 	<dimen name="max_list_height">250px</dimen>
 	
 	<dimen name="common_textsize_middle">16sp</dimen>
+		<!-- 头像宽高 -->
+	<dimen name="photo_width_2">100px</dimen>
+	<dimen name="photo_height_2">100px</dimen>
+	
 </resources>
