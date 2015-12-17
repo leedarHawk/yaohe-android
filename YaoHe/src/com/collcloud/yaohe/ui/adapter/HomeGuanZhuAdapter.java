@@ -370,9 +370,6 @@ public class HomeGuanZhuAdapter extends BaseAdapter {
 				// 确保long型日期/时间值是正确的，比如检测长度，是否少了最后的毫秒数
 				if (followShop.addtime.length() == 10) {
 					followShop.addtime = followShop.addtime + "000";
-				} else {
-					holder.mTvDate.setText(followShop.addtime);
-					return;
 				}
 				SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
 				Date date = new Date(Long.valueOf(followShop.addtime));
