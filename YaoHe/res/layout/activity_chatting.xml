@@ -80,7 +80,8 @@
             android:minHeight="@dimen/ChattingFootEditMinHeigh"
             android:paddingLeft="6.0dip"
             android:singleLine="false"
-            android:textColorHint="@color/common_home_text_color_fans_time" />
+            android:textColorHint="@color/common_home_text_color_fans_time"
+            android:maxLength="140"/>
 
         <Button
             android:id="@+id/btn_send"
