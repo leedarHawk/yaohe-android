@@ -58,7 +58,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 吆喝APP 主页部分-关注商家
- * 
+ *
  * @ClassName HomeGuanzhuFragment
  * @Description 主页关注商家内容
  * @author CollCloud_小米
@@ -104,7 +104,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 	 * 城市id
 	 */
 	private String mStrCityID;
-	
+
 	//总页数
 	private int mTotalPage = 0;
 	//当前页
@@ -122,7 +122,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		this.mStrCityID = city_id;
 
 	}
-	
+
 	private static String tag = HomeGuanzhuFragment.class.getSimpleName();
 
 	@Override
@@ -147,7 +147,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		registBroadCast();
 		return v;
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -213,7 +213,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			}
 		}
 	}
-	
+
 	//临时保存城市id 为了与当前的进行比较 。如果一样 就不进行数据加载，如果不一致则进行加载
 	private String tmpStrCityId;
 	public void getData(String mStrCityId) {
@@ -235,7 +235,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 				CCLog.d(tag, "tmpStrCityId is not null but different old id so load data.......");
 				getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
 			}
-			
+
 		} else {
 			tmpStrCityId = mStrCityID;
 			CCLog.d(tag, "tmpStrCityId is null load data.......");
@@ -319,11 +319,11 @@ public class HomeGuanzhuFragment extends BaseFragment {
 //		}
 //	}
 
-	
+
 
 	/**
 	 * 获取首页吆喝列表
-	 * 
+	 *
 	 * @Title getFollowShopList
 	 */
 	private void getFollowShopList(String cityid, String memberID,final boolean refreshData) {
@@ -335,8 +335,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			CCLog.d(tag, "home guanzhu shangjia url:"+url);
 			http.send(HttpRequest.HttpMethod.GET, url, null,
 					new RequestCallBack<String>() {
-				
-				
+
+
 
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -347,7 +347,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 								currentPage = 1;
 								mFollowShops.clear();
 							}
-							
+
 							ApiAccess.dismissProgressDialog();
 							JSONObject jsonObject;
 							try {
@@ -367,14 +367,14 @@ public class HomeGuanzhuFragment extends BaseFragment {
 										if (mHomeFollowShopInfo.data != null
 												&& mHomeFollowShopInfo.data
 														.size() > 0) {
-											
+
 											try {
 												mTotalPage = jsonObject.optInt("pageNumber");
 											} catch(Exception e) {
 												e.printStackTrace();
 											}
 											CCLog.d(tag, "mTotalPage:"+mTotalPage);
-											
+
 											//mFollowShops.clear();
 //											currentPage = currentPage + 1;
 											if (mHomeFollowShopInfo.data.size() == 1) {
@@ -393,10 +393,10 @@ public class HomeGuanzhuFragment extends BaseFragment {
 															.setVisibility(View.VISIBLE);
 												}
 											}
-											
+
 											ArrayList<FollowShop> mFollowShopsTmp = new ArrayList<FollowShop>();
 											int dataSize = mHomeFollowShopInfo.data.size();
-											
+
 											for (int j = 0; j < dataSize; j++) {
 												FollowShop followShopInfo = new FollowShop();
 												if (mHomeFollowShopInfo.data
@@ -500,23 +500,23 @@ public class HomeGuanzhuFragment extends BaseFragment {
 															+ mHomeFollowShopInfo.data
 																	.get(j).img;
 												}
-												
+
 												followShopInfo.c_id = mHomeFollowShopInfo.data
 														.get(j).c_id;
 												followShopInfo.is_yinyong = mHomeFollowShopInfo.data
 														.get(j).is_yinyong;
-												
-												
+
+
 												mFollowShopsTmp.add(followShopInfo);
 											}
-											
+
 											//刷新数据
 											if(refreshData) {
 												mFollowShops.addAll(mFollowShopsTmp);
 											} else {//加载更多数据
 												mFollowShops.addAll(mFollowShopsTmp);
 											}
-											
+
 
 											if (mFollowShops != null
 													&& mFollowShops.size() > 0) {
@@ -592,7 +592,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 	/**
 	 * 关注，收藏，点评相关监听事件
-	 * 
+	 *
 	 * @Title initControlerListenner
 	 */
 	private void initControlerListenner() {
@@ -1006,7 +1006,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 	/**
 	 * 根据type类型，跳转至不同页面
-	 * 
+	 *
 	 * @Title onItemSelectAction
 	 * @Description
 	 * @param serviceId
@@ -1080,46 +1080,46 @@ public class HomeGuanzhuFragment extends BaseFragment {
 
 		mLvPullToRefreshView.setPullLoadEnable(true);
 		mLvPullToRefreshView.setPullRefreshEnable(true);
-		
+
 		mLvPullToRefreshView.setXListViewListener(new IXListViewListener() {
-			
+
 			@Override
 			public void onRefresh() {
 				refresh();
 			}
-			
+
 			@Override
 			public void onLoadMore() {
 				loadMore();
 			}
 		});
 		mLvPullToRefreshView.setOnSlidingDirectionListen(new OnSlidingDirectionListen() {
-			
+
 			@Override
 			public void onScrollUpWard(float value) {
 			}
-			
+
 			@Override
 			public void onScrollTop() {
 			}
-			
+
 			@Override
 			public void onScrollDownWard(float value) {
 			}
-			
+
 			@Override
 			public void onScrollBottom() {
-				
+
 			}
 		});
 
 	}
-	
+
 	public void refresh() {
 		currentPage = 1;
 		getFollowShopList(mStrCityID, mLoginDataManager.getMemberId(),true);
 	}
-	
+
 	public void loadMore() {
 		currentPage = currentPage + 1;
 		if (currentPage>mTotalPage) {
@@ -1130,20 +1130,20 @@ public class HomeGuanzhuFragment extends BaseFragment {
 		}
 
 	}
-	
+
 	private void onLoad() {
 		mLvPullToRefreshView.stopRefresh();
 		mLvPullToRefreshView.stopLoadMore();
 		mLvPullToRefreshView.setRefreshTime("");
 	}
-	
+
 
 	// 是否可以关注
 	private boolean mIsAllow = true;
 
 	/**
 	 * 吆喝收藏、吆喝点赞 共通API调用
-	 * 
+	 *
 	 * @Title shopActionApi
 	 * @Description 吆喝收藏、吆喝点赞 共通API调用
 	 * @param memberID
@@ -1341,8 +1341,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 											} else {
 												UIHelper.ToastMessage(
 														mBaseActivity, "取消关注成功");
-												
-												
+
+
 												if(mFollowShops !=null){
 													ArrayList<FollowShop> list = new ArrayList<FollowShop>();
 													for(FollowShop fs :mFollowShops) {
@@ -1499,15 +1499,15 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			CCLog.d(tag, "show guanzhu fragment.....");
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @author LEE
 	 * 关注状态 收藏状态 关注广播
 	 *
 	 */
-	 class StatusBroadCastReceiver extends BroadcastReceiver {   
-	    @Override  
+	 class StatusBroadCastReceiver extends BroadcastReceiver {
+	    @Override
 	    public void onReceive(Context context, Intent intent) {
 	    	try {
 	    		CCLog.d(tag, "broadcast..........");
@@ -1533,10 +1533,10 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			    			mFollowShops.removeAll(tmp);
 			    			refreshFollow(mFollowShops);
 			    		}
-			    		
+
 			    		CCLog.d(tag, "change guanzhu status... notify adapter");
 			    		break;
-			    		
+
 			    		//评论个数
 			    	case CommonConstant.doWhat_change_comment_count:
 			    		boolean isAddCommentCount=intent.getBooleanExtra("isAddCommentCount",false);
@@ -1544,8 +1544,8 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			    		for(FollowShop callInfo : mFollowShops) {
 			    			if(callInfo.id.equals(callId)) {
 			    				if(!isAddCommentCount) {//删除评论
-			    					
-			    					
+
+
 			    					int commentCount = 0;
 			    					try {
 			    						commentCount = Integer.parseInt(callInfo.comment_num);
@@ -1611,7 +1611,7 @@ public class HomeGuanzhuFragment extends BaseFragment {
 			    					} else {
 			    						shoucangCount = shoucangCount-1;
 			    					}
-			    					
+
 			    					callInfo.collection_num = String.valueOf(shoucangCount);
 				    			}
 				    		}
@@ -1630,22 +1630,22 @@ public class HomeGuanzhuFragment extends BaseFragment {
 				    		CCLog.d(tag, "change shop star count ... notify adapter");
 				    		refreshFollow(mFollowShops);
 				    		break;
-			    		
-			    		
+
+
 		    	}
 	    	} catch(Exception e) {
 	    		e.printStackTrace();
 	    	}
-	    	
-	    }   
-	       
+
+	    }
+
 	}
 	private void registBroadCast() {
-		//生成广播处理   
-		StatusBroadCastReceiver  bc = new StatusBroadCastReceiver();   
+		//生成广播处理
+		StatusBroadCastReceiver  bc = new StatusBroadCastReceiver();
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(CommonConstant.STATUS_BROADCAST_ACTION);
 		this.getActivity().registerReceiver(bc, intentFilter);
 	}
-	
+
 }

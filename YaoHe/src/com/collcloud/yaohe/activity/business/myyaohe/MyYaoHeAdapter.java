@@ -178,6 +178,8 @@ public class MyYaoHeAdapter extends BaseAdapter {
 				holder.mTvContent.setText(serviceInfo.content);
 				holder.mIvTag.setVisibility(View.GONE);
 			}
+			holder.diviler.setVisibility(View.GONE);
+			holder.ll_zan_pinlun.setVisibility(View.GONE);
 		}
 
 		final String type = serviceInfo.type;
@@ -215,7 +217,8 @@ public class MyYaoHeAdapter extends BaseAdapter {
 		TextView mTvZan;
 		TextView mTvCollection;
 		TextView mTvComment;
-
+		View diviler;
+		LinearLayout ll_zan_pinlun;
 	}
 
 	private void resetLayout(MyCallContent holder, View view) {
@@ -235,6 +238,8 @@ public class MyYaoHeAdapter extends BaseAdapter {
 				.findViewById(R.id.ll_item_myfwgl_image_content);
 		holder.mTvDate = (TextView) view
 				.findViewById(R.id.tv_item_myfwgl_shop_time);
+		holder.diviler = view.findViewById(R.id.item_myfwgl_content_diviler_2);
+		holder.ll_zan_pinlun = (LinearLayout)view.findViewById(R.id.ll_item_myfwgl_zan_pinlun);
 		holder.mTvZan = (TextView) view.findViewById(R.id.tv_item_myfwgl_zan);
 		holder.mTvComment = (TextView) view
 				.findViewById(R.id.tv_item_myfwgl_pinlun);
