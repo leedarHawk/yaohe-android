@@ -103,6 +103,12 @@ public class ShopCommentActivity extends BaseActivity implements
 		} else {
 			mRlRatingLayout.setVisibility(View.VISIBLE);
 		}
+		if ("1".equals(shopCommentType)) {
+			mRlRatingLayout.setVisibility(View.GONE);
+		} else {
+			mRlRatingLayout.setVisibility(View.VISIBLE);
+		}
+
 	}
 
 	@Override
